@@ -1,6 +1,6 @@
 require 'bundler/setup'
 require 'sinatra/asset_pipeline'
- 
+
 Bundler.require(:default)
 
 module Skirace
@@ -17,6 +17,10 @@ module Skirace
     require file
   end 
 
+  Dir["./lib/*.rb"].each do |file|
+    require file
+  end 
+
   class Application < Sinatra::Base
     
     set :assets_precompile, %w(application.js application.css *.png *.jpg)
@@ -28,13 +32,14 @@ module Skirace
     set :public_folder, File.join(root, "public")
     
     register Sinatra::AssetPipeline
-    
+       
     configure :development, :production do
       require 'uglifier'
       sprockets.js_compressor = Uglifier.new(mangle: true)
     end
 
-    include ApplicationHelper 
+    helpers ApplicationHelper 
+    helpers Forms
 
     get '/' do
       @cont = Contestant.new(:first_name => 'oskar', :last_name => 'kapusta', start_time_at: Time.now)

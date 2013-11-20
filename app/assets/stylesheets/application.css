@@ -1,3 +1,5 @@
 /*
+*= require bootstrap.min.css
+*= require app.css
 *= require_tree .
 */
