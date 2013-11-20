@@ -73,6 +73,7 @@ DEPENDENCIES
   sequel
   sinatra
   sinatra-asset-pipeline
+  sprockets
   sqlite3
   therubyracer
   thin

@@ -1,8 +1,12 @@
 !!!5
-%head
-  = stylesheet_tag("application")
-%body
-  = yield
+%html
+  %head
+    = stylesheet_tag("application")
+  %body
+    .container-fulid
+      .row
+        .span3.application-container{style: 'float: none; margin: 0 auto;'}
+          = yield
 
-  .footer
-  = javascript_tag("application")
+    .footer
+    = javascript_tag("application")
