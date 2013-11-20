@@ -1,5 +1,5 @@
 require 'sinatra/asset_pipeline/task.rb'
 require './application'
 
-Sinatra::AssetPipeline::Task.define! SkiRace
+Sinatra::AssetPipeline::Task.define! Skirace
 

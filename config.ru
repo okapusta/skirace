@@ -1,2 +1,2 @@
 require './application'
-run SkiRace
+run Skirace::Application
