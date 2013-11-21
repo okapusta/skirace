@@ -60,7 +60,6 @@ GEM
     uglifier (2.3.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    wiringpi (1.1.0)
 
 PLATFORMS
   ruby
@@ -70,6 +69,7 @@ DEPENDENCIES
   execjs
   haml
   haml_coffee_assets
+  sass
   sequel
   sinatra
   sinatra-asset-pipeline
@@ -78,4 +78,3 @@ DEPENDENCIES
   therubyracer
   thin
   uglifier
-  wiringpi

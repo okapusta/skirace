@@ -25,7 +25,8 @@ module Skirace
     
     set :assets_precompile, %w(application.js application.css *.png *.jpg)
     set :assets_prefix, %w(app/assets)
-    set :asstest_js_compressor, :uglifier
+    set :assets_js_compressor, :uglifier
+    set :assets_css_compressor, :sass
 
     set :static, :enable
     set :views, Proc.new { File.join(root, "app", "views") }

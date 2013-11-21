@@ -1,1 +1,5 @@
 = content_tag(:p, 'Nowy zawodnik')
+= form_tag("", class: 'form', style: 'color: red')
+= label_tag "Imię", :first_name
+= input_tag(:contestant, :first_name)
+= submit_tag "Dodaj"
