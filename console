@@ -1,0 +1,5 @@
+#!/bin/bash
+echo "Usage:"
+echo "Contestant.create(first_name: 'joe', last_name: 'doe')"
+
+irb -r ./application
