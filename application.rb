@@ -23,13 +23,6 @@ module Skirace
 
   class Application < Sinatra::Base
     
-    register Sinatra::AssetPipeline
-
-    configure :development, :production do
-      require 'uglifier'
-      sprockets.js_compressor = Uglifier.new(mangle: true)
-    end
-
     set :assets_precompile, %w(application.js application.css *.png *.jpg)
     set :assets_prefix, %w(app/assets)
     set :assets_js_compressor, :uglifier
@@ -38,10 +31,18 @@ module Skirace
     set :static, :enable
     set :views, Proc.new { File.join(root, "app", "views") }
     set :public_folder, File.join(root, "public")
+    
+    register Sinatra::AssetPipeline
        
+    configure :development, :production do
+      require 'uglifier'
+      sprockets.js_compressor = Uglifier.new(mangle: true)
+    end
+
     helpers ApplicationHelper 
-    helpers Forms
     helpers TimeHelper
+    helpers Forms
+
 
     get '/' do
       @cont = Contestant.all
