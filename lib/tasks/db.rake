@@ -3,4 +3,14 @@ namespace :db do
   task :seed do
     ruby Dir['./db/seeds.rb'].shift
   end
+
+  desc "Migrate database"
+  task :migrate do
+  	%x(bundle exec sequel -m db/migrations/ sqlite://db/database.sqlite)
+  end
+
+  desc "Drop database"
+  task :drop do 
+  	%(rm -f db/database.sqlite)
+  end
 end
