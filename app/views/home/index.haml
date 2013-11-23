@@ -1,5 +1,5 @@
 - @cont.each do |co|
-  = content_tag(:p, "#{co.first_name} #{co.last_name} - #{co.calculated_end_time}")
+  = content_tag(:p, "#{co.first_name} #{co.last_name} - #{result_time_human_readable(co.calculated_end_time)}")
 = content_tag(:p, 'Nowy zawodnik')
 = form_tag("", class: 'form', style: 'color: red')
 = label_tag "Imię", :first_name
