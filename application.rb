@@ -43,9 +43,7 @@ module Skirace
     helpers Forms
 
     get '/' do
-      @cont = Contestant.new(:first_name => 'oskar', :last_name => 'kapusta', start_time_at: Time.now)
-      @cont.save
-      @cont
+      @cont = Contestant.all
       haml "home/index".to_sym, layout: :website
     end
   end

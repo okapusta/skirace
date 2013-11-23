@@ -1,6 +1,6 @@
 module Forms
 
-  def form_for(resource, opts = {}, &block)
+  def form_for(action, resource, opts = {}, &block)
     return unless block_given?
   end
 
