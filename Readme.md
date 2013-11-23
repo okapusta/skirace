@@ -9,7 +9,7 @@ How to run
 1. Install Ruby
 2. Install gem Bundler ``gem install bundler``
 3. Install gems from Gemfile ``bundle`` (from application folder)
-4. Migrate DB ``bundle exec sequel -m db/migrations/ sqlite://db/database.sqlite``
+4. Migrate DB ``rake db:migrate``
 4b. (optional) Seed database ``rake db:seed``
 5. Compile assets ``rake assets:precompile``
 6. Start application ``rackup``
