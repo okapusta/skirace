@@ -11,6 +11,6 @@ namespace :db do
 
   desc "Drop database"
   task :drop do 
-  	%(rm -f db/database.sqlite)
+  	%x(rm -f db/database.sqlite)
   end
 end

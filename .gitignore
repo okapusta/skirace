@@ -1,4 +1,3 @@
-mongodb-*
-mongodb-*/
+db/database.sqlite
 public/assets/*
 skirace.rar
