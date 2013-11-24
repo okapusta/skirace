@@ -7,6 +7,9 @@ GEM
     coffee-script-source (1.6.3)
     daemons (1.1.9)
     dependor (1.0.1)
+    dependor-sinatra (0.0.2)
+      dependor
+      sinatra
     eventmachine (1.0.3)
     execjs (2.0.2)
     haml (4.0.3)
@@ -65,7 +68,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  dependor
+  dependor-sinatra
   execjs
   haml
   haml_coffee_assets

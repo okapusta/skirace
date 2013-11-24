@@ -1,9 +1,12 @@
-//= require jquery-1.10.2.min
-//= require bootstrap.min
-//= require backbone-min
+//=  require jquery-1.10.2.min
 
-//=  require_tree ./collections
+//=  require underscore-min
+//=  require backbone-min
+//=  require app
 //=  require_tree ./models
+//=  require_tree ./collections
+//=  require_tree ./templates
 //=  require_tree ./views
+//=  require_tree ./routers
 
-//= require app
+Skirace.init();

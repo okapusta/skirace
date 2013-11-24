@@ -1,25 +1,14 @@
 require 'bundler/setup'
+require 'dependor/shorty'
 require 'sinatra/asset_pipeline'
 
 Bundler.require(:default)
 
 module Skirace
 
-  Dir["./app/models/*.rb"].each do |file|
+  Dir[File.expand_path("../app/**/*.rb", __FILE__)].each do |file|
     require file
   end
-
-  Dir["./app/helpers/*.rb"].each do |file|
-    require file
-  end 
-
-  Dir["./app/controllers/*.rb"].each do |file|
-    require file
-  end 
-
-  Dir["./lib/*.rb"].each do |file|
-    require file
-  end 
 
   class Application < Sinatra::Base
     
@@ -39,14 +28,28 @@ module Skirace
       sprockets.js_compressor = Uglifier.new(mangle: true)
     end
 
+    if defined? ::HamlCoffeeAssets
+      HamlCoffeeAssets.config do |config|
+        config.hamlcoffee.awesome = true
+        config.hamlcoffee.placement = 'amd'
+        config.hamlcoffee.namespace = 'window.HAML'
+      end
+    end
+
     helpers ApplicationHelper 
     helpers TimeHelper
-    helpers Forms
+    helpers FormHelper
+
+    injector { |objects| Injector.new(objects) }
 
 
     get '/' do
-      @cont = Contestant.all
       haml "home/index".to_sym, layout: :website
+    end
+
+    get '/contestants' do |contestant_presenter, db_contestant|
+      content_type :json
+      contestant_presenter.as_json(db_contestant.all)
     end
   end
 end

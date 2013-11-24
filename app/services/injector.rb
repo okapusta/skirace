@@ -1,8 +1,16 @@
 class Injector
   include Dependor::AutoInject
+  include Dependor::Sinatra::Objects
 
-  look_in_modules Repositories
+  def initialize(objects)
+    sinatra_objects(objects)
+  end
 
-  def initialize(opts = {})
+  def db_contestant
+    Contestant
+  end
+
+  def contestant_presenter
+    ContestantPresenter.new
   end
 end

@@ -1,4 +1,4 @@
-module Forms
+module FormHelper
 
   def form_for(action, resource, opts = {}, &block)
     return unless block_given?
