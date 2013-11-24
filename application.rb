@@ -1,8 +1,7 @@
 require 'bundler/setup'
 require 'dependor/shorty'
-require 'sinatra/asset_pipeline'
 
-Bundler.require(:default)
+Bundler.require
 
 module Skirace
 
@@ -12,36 +11,38 @@ module Skirace
 
   class Application < Sinatra::Base
     
-    set :assets_precompile, %w(application.js application.css *.png *.jpg)
-    set :assets_prefix, %w(app/assets)
-    set :assets_js_compressor, :uglifier
-    set :assets_css_compressor, :sass
-
+    set :sprockets, Sprockets::Environment.new(root)
+    set :precompile, [ /\w+\.(?!js\.coffee).+/, /application\.js$/ ]
+    set :assets_prefix, '/assets'
+    set :digest_assets, true
+    set(:assets_path)   { File.join public_folder, assets_prefix }   
+    
     set :static, :enable
     set :views, Proc.new { File.join(root, "app", "views") }
     set :public_folder, File.join(root, "public")
-    
-    register Sinatra::AssetPipeline
-       
-    configure :development, :production do
-      require 'uglifier'
-      sprockets.js_compressor = Uglifier.new(mangle: true)
-    end
+   
+    helpers do
+      include ApplicationHelper
+      include TimeHelper
+      include FormHelper
+      include Sprockets::Helpers
+    end  
 
-    if defined? ::HamlCoffeeAssets
-      HamlCoffeeAssets.config do |config|
-        config.hamlcoffee.awesome = true
-        config.hamlcoffee.placement = 'amd'
-        config.hamlcoffee.namespace = 'window.HAML'
+    injector do |objects| 
+      Injector.new(objects) 
+    end
+    configure do
+      sprockets.append_path File.join(root, 'app', 'assets', 'javascripts')
+      sprockets.append_path File.join(root, 'app', 'assets', 'stylesheets')
+      sprockets.append_path File.dirname(HamlCoffeeAssets.helpers_path)
+
+      Sprockets::Helpers.configure do |config|
+        config.environment = sprockets
+        config.prefix      = assets_prefix
+        config.digest      = digest_assets
+        config.public_path = public_folder
       end
     end
-
-    helpers ApplicationHelper 
-    helpers TimeHelper
-    helpers FormHelper
-
-    injector { |objects| Injector.new(objects) }
-
 
     get '/' do
       haml "home/index".to_sym, layout: :website
