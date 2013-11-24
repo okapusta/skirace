@@ -13,4 +13,4 @@ class Skirace.Views.IndexView extends Backbone.View
     })
 
   render: (data) -> 
-    $(@el).html @template({contestants: data})
+    $(@el).html @template({contestants: data.models})
