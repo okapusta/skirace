@@ -56,5 +56,8 @@ module Skirace
       content_type :json
       contestant_presenter.as_json(db_contestant.all)
     end
+
+    post '/contestants' do
+    end
   end
 end
