@@ -8,7 +8,6 @@ class Skirace.Views.IndexView extends Backbone.View
     _.bindAll(this, 'render')
     contestants.collection.fetch({
       success: (data) ->
-        console.log(data)
         IndexView.prototype.render(data) 
     })
 
