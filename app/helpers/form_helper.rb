@@ -2,6 +2,7 @@ module FormHelper
 
   def form_for(action, resource, opts = {}, &block)
     return unless block_given?
+    form_tag(capture_block(block))
   end
 
   def input_tag(resource, attribute, opts = {})
@@ -22,6 +23,10 @@ module FormHelper
 
   def tag_options(options, escape)
     options.map{ |k,v| " #{k}='#{v}'" }.join
+  end
+
+  def capture_block(block)
+    IO.sysopen('./tmp/bufferstream') << block.call
   end
 
   ## Ruby on Rails latest stable (v3.2.13)

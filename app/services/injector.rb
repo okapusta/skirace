@@ -2,7 +2,7 @@ class Injector
   include Dependor::AutoInject
   include Dependor::Sinatra::Objects
 
-  def initialize(objects)
+  def initialize(objects = nil)
     sinatra_objects(objects)
   end
 

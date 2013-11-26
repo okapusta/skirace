@@ -4,11 +4,15 @@ require 'dependor/shorty'
 Bundler.require
 
 module Skirace
-
-  Dir[File.expand_path("../app/**/*.rb", __FILE__)].each do |file|
-    require file
+  
+  auto_load_paths = %w(../app/**/*.rb ../lib/**/*.rb).each do |path|
+    Dir[File.expand_path(path, __FILE__)].each do |file|
+      require file
+    end
   end
-
+  
+  Object.const_set "Zawodnik", Contestant
+  
   class Application < Sinatra::Base
     
     set :sprockets, Sprockets::Environment.new(root)
@@ -31,6 +35,7 @@ module Skirace
     injector do |objects| 
       Injector.new(objects) 
     end
+
     configure do
       sprockets.append_path File.join(root, 'app', 'assets', 'javascripts')
       sprockets.append_path File.join(root, 'app', 'assets', 'stylesheets')
@@ -51,6 +56,11 @@ module Skirace
     get '/contestants' do |contestant_presenter, db_contestant|
       content_type :json
       contestant_presenter.as_json(db_contestant.all)
+    end
+
+    get '/contestants/new' do |db_contestant|
+      @contestant = db_contestant.new
+      haml "contestant/new".to_sym
     end
   end
 end

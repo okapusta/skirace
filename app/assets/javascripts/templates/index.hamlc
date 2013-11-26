@@ -1,5 +1,6 @@
 %h3 SkiRace - Zawodnicy
-  - for contestant in @contestants
-    %p
-      = contestant.get('first_name')
-      = contestant.get('last_name')
+!= JST['new']()
+- for contestant in @contestants
+  %p
+    = contestant.get('first_name')
+    = contestant.get('last_name')
