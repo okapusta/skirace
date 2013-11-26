@@ -1,4 +1,4 @@
-class Skirace.Routers.ApplicationRouter extends Backbone.Router
+class Skirace.Routers.Application extends Backbone.Router
 
   initialize: -> 
     @contestants = new Skirace.Collections.Contestants()

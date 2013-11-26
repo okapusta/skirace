@@ -1,10 +1,10 @@
 class I18n
   
-  alias_method :t, :translate
+  define_singleton_method(:t){ :translate }
 
   class << self
     def translate word, locale = nil
-
+      
     end
 
     private
