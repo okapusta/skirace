@@ -6,4 +6,21 @@
   padding: 1em;
 }
 
+#new-contestant {
+  display: block;
+  margin-bottom: 3em;
+}
 
+form label, form input {
+  display: inline !important;
+}
+
+#new-contestant-form {
+  border: 1px #888 solid;
+  padding: 1em;
+}
+
+h3 {
+  border-bottom: 1px #aaa solid;
+  width: 55%;
+}

@@ -8,10 +8,12 @@
     });
 
 %a{id: 'new-contestant'} Nowy zawodnik
+
 %form{id: 'new-contestant-form', name: 'contestant', action: '/contestants', method: 'post'}
   %fieldset
     %label{for: 'first_name'} Imie
     %input{type: 'text', name: 'first_name'}
+    %br
     %label{for: 'last_name'} Nazwisko
     %input{type: 'text', name: 'last_name'}
-    %input{type: 'submit', value: 'Dodaj'}
+    %input{type: 'submit', value: 'Dodaj', class: 'btn btn-primary'}
