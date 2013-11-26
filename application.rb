@@ -56,10 +56,5 @@ module Skirace
       content_type :json
       contestant_presenter.as_json(db_contestant.all)
     end
-
-    get '/contestants/new' do |db_contestant|
-      @contestant = db_contestant.new
-      haml "contestant/new".to_sym
-    end
   end
 end
