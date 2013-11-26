@@ -28,7 +28,6 @@ module Skirace
     helpers do
       include ApplicationHelper
       include TimeHelper
-      include FormHelper
       include Sprockets::Helpers
     end  
 
