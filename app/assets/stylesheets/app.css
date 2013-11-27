@@ -1,9 +1,13 @@
+html, body {
+  background-color: #2cabe2;
+}
+
 .application-container {
   float: none; 
   margin: 0 auto;
-  background: #ccc;
+  background: #fff;
+  border: 1px #ccc solid;
   width: 75%;
-  padding: 1em;
 }
 
 #new-contestant {
@@ -16,11 +20,45 @@ form label, form input {
 }
 
 #new-contestant-form {
-  border: 1px #888 solid;
-  padding: 1em;
+  position: relative;
+  margin-bottom: 3em;
+  border-bottom: 1px #ccc solid;
+  left: 12.5%;
+  width: 75%;
 }
 
 h3 {
   border-bottom: 1px #aaa solid;
   width: 55%;
+}
+
+.navbar-inner {
+  height: 40px !important;
+}
+
+.contestants {
+  margin: 4em;
+}
+
+a.brand {
+  color: #c0362c!important;
+  font-weight: bold!important;
+}
+
+.footer {
+  margin-top: 2em;
+  position: absolute;
+  left: 43%;
+}
+
+.navbar-inner {
+  border-left: none;
+  border-right: none;
+}
+
+.table {
+  width: 100%!important;
+}
+.table tr td {
+  padding-left: 5em;
 }

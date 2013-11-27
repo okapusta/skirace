@@ -1,6 +1,49 @@
-%h3 SkiRace - Zawodnicy
+%script{type: 'text/javascript'}
+  $('#new-contestant-form').hide() 
+  $('#new-contestant').click(function() {
+    if(!($('#new-contestant-form').is(':visible')))
+      $('#new-contestant-form').show()
+    else 
+      $('#new-contestant-form').hide()
+    });
+
+.navbar
+  .navbar-inner
+    %a.brand{href: '#'}
+      SkiRace
+    %ul.nav
+      %li
+        %a#new-race{href: '#new-race'} 
+          Nowe zawody
+          %i.fa.fa-users{style: 'margin-left:1em'}
+      %li
+        %a#new-contestant{href: '#new'} 
+          Nowy zawodnik
+          %i.fa.fa-user{style: 'margin-left:1em'}
+      %li
+        %a#data-import{href: '#import'} 
+          Import zawodnikow
+          %i.fa.fa-arrow-circle-up{style: 'margin-left:1em'}
+      %li
+        %a#data-export{href: '#export'} 
+          Eksport wyników
+          %i.fa.fa-arrow-circle-down{style: 'margin-left:1em'}
+      %li.settings
+        %a#settings{href: '#settings'}
+          Ustawienia
+          %i.fa.fa-cog{style: 'margin-left:1em'}
+
 != JST['contestants/new']()
-- for contestant in @contestants
-  %p
-    = contestant.get('first_name')
-    = contestant.get('last_name')
+
+%table.contestants
+  %thead
+    %tr
+      %th Imię
+      %th Nazwisko
+      %th Czas końcowy
+  %tbody.table
+    - for contestant in @contestants
+      %tr
+        %td= contestant.get 'first_name'
+        %td= contestant.get 'last_name'
+        %td= contestant.get 'end_time'
