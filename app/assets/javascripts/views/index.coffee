@@ -2,7 +2,7 @@ class Skirace.Views.IndexView extends Backbone.View
 
   el: $ '.application-container'
 
-  template: JST['contestants/index']
+  template: JST['index']
 
   initialize: (contestants) ->
     _.bindAll(this, 'render')

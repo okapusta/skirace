@@ -1,0 +1,44 @@
+.navbar
+  .navbar-inner
+    %a.brand{href: '#'}
+      SkiRace
+    %ul.nav
+      %li
+        %a#new-race{href: '#new-race'} 
+          Nowe zawody
+          %i.fa.fa-users
+      %li
+        %a#new-contestant{href: '#new'} 
+          Nowy zawodnik
+          %i.fa.fa-user
+      %li
+        %a#data-import{href: '#import'} 
+          Import zawodnikow
+          %i.fa.fa-arrow-circle-up
+      %li
+        %a#data-export{href: '#export'} 
+          Eksport wyników
+          %i.fa.fa-arrow-circle-down
+      %li.settings
+        %a#settings{href: '#settings'}
+          Ustawienia
+          %i.fa.fa-cog
+
+%script{type: 'text/javascript'}
+  new Skirace.Views.Contestants.New()
+
+
+.new-contestant
+
+%table.contestants
+  %thead
+    %tr
+      %th Imię
+      %th Nazwisko
+      %th Czas końcowy
+  %tbody.table
+    - for contestant in @contestants
+      %tr
+        %td= contestant.get 'first_name'
+        %td= contestant.get 'last_name'
+        %td= contestant.get 'end_time'
