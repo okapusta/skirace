@@ -53,7 +53,6 @@ module Skirace
     end
 
     get '/contestants' do |contestant_presenter, db_contestant|
-      content_type :json
       contestant_presenter.as_json(db_contestant.all)
     end
 

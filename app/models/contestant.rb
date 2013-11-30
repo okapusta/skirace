@@ -19,10 +19,4 @@ class Contestant < Sequel::Model(Sequel.sqlite('db/database.sqlite')[:contestant
       new(args)
     end
   end
-
-  private
-
-    def injector
-      @injector ||= Injector.new
-    end
 end

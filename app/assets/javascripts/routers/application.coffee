@@ -5,9 +5,8 @@ class Skirace.Routers.Application extends Backbone.Router
 
 
   routes:
-    "": "index"
-    "index": "index"
+    "" : "index"
+    "index" : "index"
 
   index: ->
-    view = new Skirace.Views.IndexView(collection: @contestants)
-    view.render()
+    new Skirace.Views.IndexView(collection: @contestants)

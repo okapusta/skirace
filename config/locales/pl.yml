@@ -1,0 +1,9 @@
+skirace:
+  application:
+    locale:
+      default_locale: pl
+      pl:
+        error_messages:
+          attributes:
+            first_name: Imie
+            last_name: Nazwisko
