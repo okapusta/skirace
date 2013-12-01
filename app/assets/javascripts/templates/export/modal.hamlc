@@ -1,6 +1,6 @@
 .modal.show.export-modal
   .modal-header
-    %button{type: 'button', class: 'close', data-dismiss: 'modal', aria-hidden: 'true'} &times;
+    %button.close.modal-close{type: 'button', data-dismiss: 'modal', aria-hidden: 'true'} &times;
     %h3 Export wynikow
   .modal-body
     %form#export-form{name: 'export', action: '/export', method: '/get'}
@@ -10,4 +10,4 @@
         %input{type: 'radio', name: 'format', value: 'json'} JSON
   .modal-footer
     %a.btn.btn-primary#export{ href: '#'} Export
-    %a.btn{ href: '#'} Close
+    %a.btn.modal-close{ href: '#'} Close

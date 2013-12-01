@@ -6,6 +6,7 @@ class Skirace.Views.Export.Modal extends Backbone.View
 
   events:
     'click #export' : 'export'
+    'click .modal-close' : 'close'
 
   initialize: ->
     @render()
@@ -15,3 +16,6 @@ class Skirace.Views.Export.Modal extends Backbone.View
 
   export: ->
     $('#export-form').submit()
+
+  close: ->
+    $('.export-modal').remove()
