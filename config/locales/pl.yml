@@ -1,9 +1,8 @@
 skirace:
   application:
     locale:
-      default_locale: pl
       pl:
         error_messages:
           attributes:
-            first_name: Imie
-            last_name: Nazwisko
+            first_name: Imie nie moze byc puste
+            last_name: Nazwisko nie moze byc puste

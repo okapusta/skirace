@@ -1,5 +1,10 @@
 skirace:
   application:
+    locale:
+      default_locale: pl
+
     config:
       dupa: asaddsa
       dupa2: asdasd
+  raspberry:
+    gpio:

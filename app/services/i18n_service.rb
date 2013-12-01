@@ -1,14 +1,22 @@
 class I18nService
 
+  class TranslationNotFoundError < StandardError; end
+  
   takes :configuration_service
 
-  def translate word, file, locale = default_locale
-    
+  def translate
+    configuration_service.get[:skirace][:application][:locale][default_locale]
+  rescue
+    raise TranslationNotFoundError, 'translation not found'
+  end
+
+  def error_messages
+    [:error_messages]
   end
   
   private
 
     def default_locale
-      configuration_service.get['skirace']['application']['default_locale']
+      configuration_service.get[:skirace][:application][:locale][:default_locale]
     end
 end
