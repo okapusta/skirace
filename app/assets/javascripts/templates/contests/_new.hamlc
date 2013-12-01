@@ -1,4 +1,5 @@
 %form{id: 'new-contest-form', name: 'contest', action: '/contest', method: 'post'}
   %fieldset
-    %label{for: 'name'} Imie
+    %label{for: 'name'} Nazwa
     %input{type: 'text', name: 'name'}
+    %input{type: 'submit', value: 'Stworz', class: 'btn btn-primary'}

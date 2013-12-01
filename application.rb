@@ -69,5 +69,16 @@ module Skirace
         status 422
       end
     end
+
+    post '/contests' do |json_parser, contest_repository|
+      content_type :json
+      params = json_parser.parse(request.body.read)
+      contest = contest_repository.build(params)
+      if contest_repository.save(contest)
+        status 200
+      else
+        status 422
+      end
+    end
   end
 end
