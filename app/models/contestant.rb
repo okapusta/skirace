@@ -6,8 +6,8 @@ class Contestant < Sequel::Model(Sequel.sqlite('db/database.sqlite')[:contestant
 
   def validate
     super
-    validates_presence :first_name#, message: "Imie nie moze byc puste"
-    validates_presence :last_name#, message: "Nazwisko nie moze byc puste"
+    validates_presence :first_name
+    validates_presence :last_name
   end
 
   def calculated_end_time

@@ -3,6 +3,7 @@ require 'dependor/shorty'
 
 Bundler.require
 
+module Repositories; end
 module Skirace
   
   auto_load_paths = %w(../app/**/*.rb ../lib/**/*.rb).each do |path|
@@ -54,7 +55,15 @@ module Skirace
       contestant_presenter.as_json(db_contestant.all)
     end
 
-    post '/contestants' do
+    post '/contestants' do |json_parser, contestant_repository|
+      content_type :json
+      params = json_parser.parse(request.body.read)
+      contestant = contestant_repository.build(params)
+      if contestant_repository.save(contestant)
+        status 200
+      else
+        status 422
+      end
     end
   end
 end

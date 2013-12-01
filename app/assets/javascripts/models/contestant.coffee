@@ -4,5 +4,7 @@ class Skirace.Models.Contestant extends Backbone.Model
   paramRoot: 'contestant'
 
   validate: (attrs, options) ->
-    if ((attrs.first_name == '') || (attrs.last_name == ''))
-      return 'Zawodnik musi miec imie'
+    if (attrs.first_name == '')
+      Window alert 'Zawodnik musi miec imie'
+    if (attrs.last_name == '')
+      Window alert 'Zawodnik musi miec nazwisko'

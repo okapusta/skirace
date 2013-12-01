@@ -6,5 +6,6 @@ skirace:
     config:
       dupa: asaddsa
       dupa2: asdasd
-  raspberry:
-    gpio:
+  raspberry_pi:
+    config:
+      gpio:
