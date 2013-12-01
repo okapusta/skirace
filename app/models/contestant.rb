@@ -13,10 +13,4 @@ class Contestant < Sequel::Model(Sequel.sqlite('db/database.sqlite')[:contestant
   def calculated_end_time
     self.end_time_at - self.start_time_at if self.end_time_at
   end
-
-  class << self
-    def nowy(*args)
-      new(args)
-    end
-  end
 end

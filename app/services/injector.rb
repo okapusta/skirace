@@ -14,10 +14,6 @@ class Injector
     ContestantPresenter.new
   end
 
-  def configuration_hash
-    Configuration::ConfigurationHash
-  end
-
   def yaml
     YAML
   end
@@ -30,7 +26,7 @@ class Injector
     Dir
   end
 
-  def configuration_hash
-    Configuration::ConfigurationHash.new
+  def hash
+    Skirace::Hash.new
   end
 end

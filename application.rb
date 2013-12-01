@@ -10,9 +10,7 @@ module Skirace
       require file
     end
   end
-  
-  Object.const_set "Zawodnik", Contestant
-  
+    
   class Application < Sinatra::Base
     
     set :sprockets, Sprockets::Environment.new(root)
