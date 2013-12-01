@@ -59,6 +59,16 @@ module Skirace
       contest_presenter.as_json(contest_repository.all)
     end
 
+    get '/export' do |contestant_repository, contestant_presenter, db_contestant|
+      case params[:format]
+      when 'json'
+        content_type 'application/json'
+        attachment 'export.json'
+        contestant_presenter.as_json(db_contestant.all)
+      when 'csv'
+      end
+    end
+
     post '/contestants' do |json_parser, contestant_repository|
       content_type :json
       params = json_parser.parse(request.body.read)

@@ -1,0 +1,13 @@
+.modal.show.export-modal
+  .modal-header
+    %button{type: 'button', class: 'close', data-dismiss: 'modal', aria-hidden: 'true'} &times;
+    %h3 Export wynikow
+  .modal-body
+    %form#export-form{name: 'export', action: '/export', method: '/get'}
+      %fieldset
+        %p Format
+        %input{type: 'radio', name: 'format', value: 'csv'} CSV
+        %input{type: 'radio', name: 'format', value: 'json'} JSON
+  .modal-footer
+    %a.btn.btn-primary#export{ href: '#'} Export
+    %a.btn{ href: '#'} Close

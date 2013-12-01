@@ -5,6 +5,7 @@ window.Skirace =
   Views:
     Contests: {}
     Contestants: {}
+    Export: {}
   init: ->
     app = new Skirace.Routers.Application()
     Backbone.history.start()
