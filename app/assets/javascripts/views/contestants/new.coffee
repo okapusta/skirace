@@ -20,5 +20,5 @@ class Skirace.Views.Contestants.New extends Backbone.View
       contestant = 
         first_name: $('input[name=first_name]').val()
         last_name: $('input[name=last_name]').val()
-    console.log params
     @contestant.save(params)
+    new Skirace.Views.IndexView({collection: new Skirace.Collections.Contestants()})
