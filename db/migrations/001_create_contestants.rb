@@ -2,6 +2,7 @@ Sequel.migration do
   up do
     create_table(:contestants) do
       primary_key :id
+      Integer :contest_id
       String :first_name, null: false
       String :last_name, null: false
       DateTime :start_time_at

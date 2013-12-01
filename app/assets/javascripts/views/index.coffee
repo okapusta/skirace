@@ -8,15 +8,21 @@ class Skirace.Views.IndexView extends Backbone.View
     "click #new-race" : "newRace"
     "click #new-contestant" : "newContestant"
 
-  initialize: (contestants) ->
+  initialize: (args) ->
     _.bindAll(this, 'render')
-    contestants.collection.fetch({
+    IndexView.prototype.render()
+    args.contestants.fetch({
       success: (data) ->
-        IndexView.prototype.render(data) 
+        new Skirace.Views.Contestants.Index({contestants: data.models})
+    })
+    
+    args.contests.fetch({
+      success: (data) ->
+        new Skirace.Views.Contests.Index({contests: data.models})
     })
 
-  render: (data) -> 
-    $(@el).html @template({contestants: data.models})
+  render: -> 
+    $(@el).html @template
 
   newContestant: ->
     unless $('#new-contestant-form').is(":visible")

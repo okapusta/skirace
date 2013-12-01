@@ -1,6 +1,6 @@
 class Skirace.Models.Contest extends Backbone.Model
 
-  urlRoot: '/contest'
+  urlRoot: '/contests'
   paramRoot: 'contest'
 
   validate: (attrs, options) ->

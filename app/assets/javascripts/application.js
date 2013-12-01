@@ -1,4 +1,5 @@
-//=  require jquery-1.10.2.min
+//= require jquery-1.10.2.min
+//= require bootstrap.min
 //= require underscore-min
 //= require backbone-min
 //= require hamlcoffee

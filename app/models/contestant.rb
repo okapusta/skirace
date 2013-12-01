@@ -1,5 +1,3 @@
-require 'sequel'
-
 class Contestant < Sequel::Model(Sequel.sqlite('db/database.sqlite')[:contestants])
 
   plugin :validation_helpers

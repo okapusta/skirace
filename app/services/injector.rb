@@ -12,8 +12,16 @@ class Injector
     Contestant
   end
 
+  def db_contest
+    Contest
+  end
+
   def contestant_presenter
     ContestantPresenter.new
+  end
+
+  def contest_presenter
+    ContestPresenter.new
   end
   
   def json_parser

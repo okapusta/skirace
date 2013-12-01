@@ -26,15 +26,4 @@
 
 .form-wrapper
 
-%table.contestants
-  %thead
-    %tr
-      %th Imię
-      %th Nazwisko
-      %th Czas końcowy
-  %tbody.table
-    - for contestant in @contestants
-      %tr
-        %td= contestant.get 'first_name'
-        %td= contestant.get 'last_name'
-        %td= contestant.get 'end_time'
+#contestant-list

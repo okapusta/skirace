@@ -55,6 +55,10 @@ module Skirace
       contestant_presenter.as_json(db_contestant.all)
     end
 
+    get '/contests' do |contest_presenter, contest_repository|
+      contest_presenter.as_json(contest_repository.all)
+    end
+
     post '/contestants' do |json_parser, contestant_repository|
       content_type :json
       params = json_parser.parse(request.body.read)

@@ -1,0 +1,14 @@
+%li.dropdown
+  %a.dropdown-toggle#contest-dropdown{role: 'button', data-toggle: 'dropdown', href: '#'}
+    = @contests[0].get('name')
+    %b.caret
+  %ul.dropdown-menu{role: 'menu', aria-labelledby: 'contest-dropdown'} 
+    - for contest in @contests
+      %li{role: 'presentation'}
+        %a{role: 'menuitem', value: contest.get('id')} #{contest.get('name')} 
+          
+    %li.divider{role: 'presentation'}
+    %li{role: 'presentation'}
+      %a#new-race{role: 'menuitem'}
+        Nowe zawody
+        %i.fa.fa-users
