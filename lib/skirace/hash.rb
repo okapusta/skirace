@@ -3,6 +3,7 @@ module Skirace
 
     def deep_merge!(hash)
       target = self
+      
       hash.keys.each do |key|
         if hash[key].is_a?(::Hash) and target[key].is_a?(::Hash)
           target[key] = target.class[target[key]].deep_merge!(hash[key])
@@ -13,7 +14,7 @@ module Skirace
       target
     end
 
-    def with_indifferent_access(hash = nil) 
+    def with_indifferent_access(hash) 
       return unless hash.respond_to?(:each_value)
 
       hash.default_proc = proc { |h, k| h.key?(k) ? h[k] : h[k.to_s] }
@@ -22,5 +23,17 @@ module Skirace
       end
     end
 
-  end
+    def search(hash = nil, key)
+      hash = hash || self 
+      
+      hash.each_pair do |key, value|
+        return  hash[key] if hash[key]
+        
+        if value.is_a?(::Hash)
+          value.search(hash, key)
+        end 
+      end
+    end
+
+  end 
 end
