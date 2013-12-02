@@ -5,5 +5,6 @@ map Skirace::Application.assets_prefix do
 end
 
 map '/' do
+  Skirace::Application.set :environment, ENV['RAKE_ENV']
   run Skirace::Application
 end

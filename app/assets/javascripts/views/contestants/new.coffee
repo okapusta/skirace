@@ -13,6 +13,8 @@ class Skirace.Views.Contestants.New extends Backbone.View
 
   render: (el) ->
     $(el).html @template
+    debugger
+    $(el).append JST['shared/close']()
 
   create: (event) ->
     event.preventDefault()
