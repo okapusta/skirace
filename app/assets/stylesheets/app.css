@@ -74,3 +74,7 @@ a.brand {
 .fa {
   margin-left:1em;
 }
+a.contest {
+  color: #777;
+  text-decoration: none;
+}

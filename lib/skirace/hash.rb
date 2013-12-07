@@ -26,13 +26,15 @@ module Skirace
     def search(hash = nil, key)
       hash = hash || self 
       
-      hash.each_pair do |key, value|
-        return  hash[key] if hash[key]
+      hash.each_pair do |_key, value|
+        binding.pry
+        next if hash[key]
         
         if value.is_a?(::Hash)
-          value.search(hash, key)
+          hash.class[value].search(value, key)
         end 
       end
+      hash[key]
     end
 
   end 

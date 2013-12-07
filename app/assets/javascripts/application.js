@@ -9,5 +9,6 @@
 //= require_tree ./templates
 //= require_tree ./views
 //= require_tree ./routers
+//= require_tree ./services
 
 Skirace.init();

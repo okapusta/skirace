@@ -6,11 +6,11 @@ class Repositories::ContestRepository
   end
 
   def all
-    db_contest.all || create_default
+    db_contest.any? ? db_contest.all : create_default
   end
 
   def get(id)
-
+    db_contest.find(id: id)
   end
 
   def save(contest)
@@ -20,6 +20,6 @@ class Repositories::ContestRepository
   private
 
     def create_default
-      db_contest.create(name: 'default')
+      [ OpenStruct.new(db_contest.create(name: 'Default').values) ]
     end
 end

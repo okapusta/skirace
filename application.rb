@@ -14,15 +14,15 @@ module Skirace
     
   class Application < Sinatra::Base
     
+    set :static, :enable
+    set :views, Proc.new { File.join(root, "app", "views") }
+    set :public_folder, File.join(root, "public")
+
     set :sprockets, Sprockets::Environment.new(root)
     set :precompile, [ /\w+\.(?!js\.coffee).+/, /application\.js$/ ]
     set :assets_prefix, '/assets'
     set :digest_assets, true
     set(:assets_path)   { File.join public_folder, assets_prefix }   
-    
-    set :static, :enable
-    set :views, Proc.new { File.join(root, "app", "views") }
-    set :public_folder, File.join(root, "public")
    
     helpers do
       include ApplicationHelper
@@ -51,12 +51,21 @@ module Skirace
       haml "home/index".to_sym, layout: :website
     end
 
-    get '/contestants' do |contestant_presenter, db_contestant|
-      contestant_presenter.as_json(db_contestant.all)
+    get '/contestants' do |contestant_presenter, contestant_repository|
+      contestant_presenter.as_json(contestant_repository.all)
+    end
+
+    get '/contestants/:id' do |contestant_presenter, contestant_repository|
+      contestant_presenter.as_json(contestant_repository.get(params[:id]))
     end
 
     get '/contests' do |contest_presenter, contest_repository|
       contest_presenter.as_json(contest_repository.all)
+    end
+
+    get '/contests/:id/contestants' do |contestant_presenter, contest_repository|
+      contestants = contest_repository.get(params[:id]).contestants
+      contestant_presenter.as_json(contestants)
     end
 
     get '/export' do |contestant_repository, contestant_presenter, db_contestant|
@@ -66,12 +75,17 @@ module Skirace
         attachment 'export.json'
         contestant_presenter.as_json(db_contestant.all)
       when 'csv'
+        contestant_presenter.as_csv(db_contestants.all)
+      when 'xml'
+        contestant_presenter.as_xml(db_contestants.all)
+      else
+        status 404
       end
     end
 
-    post '/contestants' do |json_parser, contestant_repository|
+    post '/contestants' do |hash, json_parser, contestant_repository|
       content_type :json
-      params = json_parser.parse(request.body.read)
+      params = hash.with_indifferent_access(json_parser.parse(request.body.read))
       contestant = contestant_repository.build(params)
       if contestant_repository.save(contestant)
         status 200

@@ -13,15 +13,13 @@ class Skirace.Views.IndexView extends Backbone.View
   initialize: (args) ->
     _.bindAll(this, 'render')
     IndexView.prototype.render()
-    args.contestants.fetch({
-      success: (data) ->
-        new Skirace.Views.Contestants.Index({contestants: data.models})
-    })
-    
+
     args.contests.fetch({
       success: (data) ->
         new Skirace.Views.Contests.Index({contests: data.models})
-    })
+        new Skirace.Views.Contestants.Index({contestants: args.contestants.fetch()})
+      })
+
 
   render: -> 
     $(@el).html @template

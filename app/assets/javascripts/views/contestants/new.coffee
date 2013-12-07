@@ -13,14 +13,12 @@ class Skirace.Views.Contestants.New extends Backbone.View
 
   render: (el) ->
     $(el).html @template
-    debugger
     $(el).append JST['shared/close']()
 
   create: (event) ->
     event.preventDefault()
     params =
-      contestant = 
-        first_name: $('input[name=first_name]').val()
-        last_name: $('input[name=last_name]').val()
+      first_name: $('input[name=first_name]').val()
+      last_name: $('input[name=last_name]').val()
     @contestant.save(params)
     window.location.reload()
