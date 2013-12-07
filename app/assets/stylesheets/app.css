@@ -45,7 +45,9 @@ h3 {
 }
 
 .contestants {
-  margin: 4em;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
 }
 
 a.brand {
@@ -62,13 +64,6 @@ a.brand {
 .navbar-inner {
   border-left: none;
   border-right: none;
-}
-
-.table {
-  width: 100%!important;
-}
-.table tr td {
-  padding-left: 5em;
 }
 
 .fa {
