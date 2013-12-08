@@ -10,4 +10,5 @@
       %tr
         %td= contestant.get 'first_name'
         %td= contestant.get 'last_name'
-        %td= contestant.get 'end_time'
+        - end_time = contestant.get('end_time') || '---'
+        %td= end_time 

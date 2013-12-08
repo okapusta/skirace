@@ -73,3 +73,18 @@ a.contest {
   color: #777;
   text-decoration: none;
 }
+
+label {
+  display: inline-block;
+  float: left;
+  padding: 2px 1em 0 0;
+}
+
+.format {
+  float: left;
+  width: 100px;
+}
+
+input[type=radio] {
+  margin: 2px 0 0 2px ;
+}

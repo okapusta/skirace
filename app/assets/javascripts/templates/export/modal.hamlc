@@ -6,9 +6,15 @@
     %form#export-form{name: 'export', action: '/export', method: '/get'}
       %fieldset
         %p Format
-        %input{type: 'radio', name: 'format', value: 'xml'} XML
-        %input{type: 'radio', name: 'format', value: 'csv'} CSV
-        %input{type: 'radio', name: 'format', value: 'json'} JSON
+        .format
+          %label{for: 'xml'}XML
+          %input#xml{type: 'radio', name: 'format', value: 'xml'}
+        .format
+          %label{for: 'csv'}CSV
+          %input#csv{type: 'radio', name: 'format', value: 'csv'}
+        .format
+          %label{for: 'json'}JSON
+          %input#JSON{type: 'radio', name: 'format', value: 'json'}
   .modal-footer
     %a.btn.btn-primary#export{ href: '#'} Export
     %a.btn.modal-close{ href: '#'} Close
