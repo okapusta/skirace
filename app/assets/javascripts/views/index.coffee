@@ -30,8 +30,10 @@ class Skirace.Views.IndexView extends Backbone.View
         new Skirace.Views.Contestants.New({el: $('.form-wrapper')})
       else
         $('#new-contestant-form').show()
+        $('.close-form').show()
     else
       $('#new-contestant-form').hide()
+      $('.close-form').hide()
 
   newRace: ->
     unless $('#new-contest-form').is(":visible")
@@ -39,8 +41,10 @@ class Skirace.Views.IndexView extends Backbone.View
         new Skirace.Views.Contests.New({el: $('.form-wrapper')})
       else
         $('#new-contest-form').show()
+        $('.close-form').show()
     else
       $('#new-contest-form').hide()
+      $('.close-form').hide()
 
   dataExport: ->
     new Skirace.Views.Export.Modal()
@@ -48,4 +52,4 @@ class Skirace.Views.IndexView extends Backbone.View
   closeForm: ->
     $('#new-contest-form').hide()
     $('#new-contestant-form').hide()
-    $('.close-form').remove()
+    $('.close-form').hide()
