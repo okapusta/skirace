@@ -74,20 +74,21 @@ module Skirace
       contestant_presenter.as_json(contestants)
     end
 
-    get '/export' do |contestant_repository, contestant_presenter|
+    get '/export' do |contestant_presenter, contest_repository|
+      contestants = contest_repository.get(params[:contest]).contestants
       case params[:format]
       when 'json'
         content_type 'application/json'
         attachment 'export.json'
-        contestant_presenter.as_json(contestant_repository.all)
+        contestant_presenter.as_json(contestants)
       when 'csv'
         content_type 'text/csv'
         attachment 'export.csv'
-        contestant_presenter.as_csv(contestant_repository.all)
+        contestant_presenter.as_csv(contestants)
       when 'xml'
         content_type 'text/xml'
         attachment 'export.xml'
-        contestant_presenter.as_xml(contestant_repository.all)
+        contestant_presenter.as_xml(contestants)
       else
         status 404
       end

@@ -1,7 +1,8 @@
 class Skirace.Views.Export.Modal extends Backbone.View
 
   template: JST['export/modal']
-
+  
+  exportForm: '#export-form' 
   el: $ '.application-container'
 
   events:
@@ -9,13 +10,16 @@ class Skirace.Views.Export.Modal extends Backbone.View
     'click .modal-close' : 'close'
 
   initialize: ->
+    @current_contest = new Skirace.Services.CurrentContest()
     @render()
 
   render: ->
     $(@el).append @template
 
   export: ->
-    $('#export-form').submit()
+    $(@exportForm).prepend($("<input name='contest' type='hidden' value='#{@current_contest.id()}' />"))
+
+    .submit()
 
   close: ->
     $('.export-modal').remove()
