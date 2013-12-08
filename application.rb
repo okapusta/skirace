@@ -34,7 +34,13 @@ module Skirace
       Injector.new(objects) 
     end
 
-    configure do
+    configure :development, :production do
+      enable :logging
+      log_file = File.new('./log/application.log', 'a+')
+      log_file.sync = true
+      
+      use Rack::CommonLogger, log_file
+
       sprockets.append_path File.join(root, 'app', 'assets', 'javascripts')
       sprockets.append_path File.join(root, 'app', 'assets', 'stylesheets')
       sprockets.append_path File.dirname(HamlCoffeeAssets.helpers_path)
