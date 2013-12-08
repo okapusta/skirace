@@ -1,0 +1,8 @@
+!!! XML
+
+%contestants{contest_id: contestants.first.contest_id}
+  - contestants.each do |contestant|
+    %contestant{id: contestant.id}
+      %first_name= contestant.first_name
+      %last_name= contestant.last_name
+      %end_time= contestant.end_time
