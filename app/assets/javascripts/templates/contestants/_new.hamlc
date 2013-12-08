@@ -1,7 +1,10 @@
 %form{id: 'new-contestant-form', name: 'contestant', action: '/contestants', method: 'post'}
   %fieldset
-    %label{for: 'first_name'} Imie
-    %input{type: 'text', name: 'first_name'}
-    %label{for: 'last_name'} Nazwisko
-    %input{type: 'text', name: 'last_name'}
-    %input{type: 'submit', value: 'Dodaj', class: 'btn btn-primary'}
+    .contestant
+      %label{for: 'first_name'} Imie
+      %input#first_name{type: 'text', name: 'first_name'}
+    .contestant
+      %label{for: 'last_name'} Nazwisko
+      %input#last_name{type: 'text', name: 'last_name'}
+    .contestant
+      %input{type: 'submit', value: 'Dodaj', class: 'btn btn-primary'}

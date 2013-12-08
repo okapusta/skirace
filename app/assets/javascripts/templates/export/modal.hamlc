@@ -16,5 +16,5 @@
           %label{for: 'json'}JSON
           %input#JSON{type: 'radio', name: 'format', value: 'json'}
   .modal-footer
-    %a.btn.btn-primary#export{ href: '#'} Export
-    %a.btn.modal-close{ href: '#'} Close
+    %a.btn.btn-primary#export{ href: '#'} Eksportuj
+    %a.btn.modal-close{ href: '#'} Zamknij
