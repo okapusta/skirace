@@ -4,6 +4,7 @@ require 'dependor/shorty'
 Bundler.require
 
 module Repositories; end
+
 module Skirace
   
   auto_load_paths = %w(../app/**/*.rb ../lib/**/*.rb).each do |path|

@@ -1,0 +1,1 @@
+class Skirace.Models.User extends Backbone.Model

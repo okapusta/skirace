@@ -1,3 +1,5 @@
+require 'bcrypt'
+
 class Injector
   include Dependor::AutoInject
   include Dependor::Sinatra::Objects
@@ -16,6 +18,10 @@ class Injector
     Contest
   end
 
+  def db_user
+    User
+  end
+  
   def contestant_presenter
     ContestantPresenter.new
   end
@@ -42,5 +48,13 @@ class Injector
 
   def hash
     Skirace::Hash.new
+  end
+
+  def secure_random
+    SecureRandom
+  end
+
+  def bcrypt_password
+    BCrypt::Password
   end
 end

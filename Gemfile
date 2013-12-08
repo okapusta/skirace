@@ -1,3 +1,4 @@
+source 'http://gems.github.com'
 source 'https://rubygems.org'
 
 gem 'execjs'
@@ -16,3 +17,5 @@ gem 'sqlite3'
 gem 'sass'
 gem 'binding_of_caller'
 gem 'pry'
+gem 'warden'
+gem 'bcrypt-ruby'

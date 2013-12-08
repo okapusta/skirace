@@ -1,6 +1,8 @@
 GEM
+  remote: http://gems.github.com/
   remote: https://rubygems.org/
   specs:
+    bcrypt-ruby (3.1.2)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     coderay (1.1.0)
@@ -61,12 +63,15 @@ GEM
     uglifier (2.3.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    warden (1.2.3)
+      rack (>= 1.0)
     wiringpi (1.1.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt-ruby
   binding_of_caller
   dependor-sinatra
   execjs
@@ -82,4 +87,5 @@ DEPENDENCIES
   therubyracer
   thin
   uglifier
+  warden
   wiringpi
