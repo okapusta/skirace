@@ -8,12 +8,18 @@ How to run
 
 1. Install Ruby
 2. Install Memcached
-  ```wget http://www.memcached.org/files/memcached-1.4.16.tar.gz```
-  ```tar -xzf memcached-1.4.16.tar.gz```
-  ```cd memcached-1.4.16```
-  ```./configure```
-  ```make & sudo make install
 
+  ```wget http://www.memcached.org/files/memcached-1.4.16.tar.gz```
+
+  ```tar -xzf memcached-1.4.16.tar.gz```
+
+  ```cd memcached-1.4.16```
+
+  ```./configure```
+
+  ```make & sudo make install```
+
+  ```memcached &```
 3. Install gem Bundler ``gem install bundler``
 4. Install gems from Gemfile ``bundle install``
 5. Migrate DB ``rake db:migrate``
