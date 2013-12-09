@@ -41,6 +41,20 @@ module Skirace
       log_file.sync = true
       
       use Rack::CommonLogger, log_file
+      use Rack::Session::Memcache, memcache_server: 'localhost:11211', namespace: 'skirace' 
+
+      use Warden::Manager do |config|
+        
+        config.serialize_into_session do |user|
+          user.auth_token
+        end
+
+        config.serialize_from_session do |user|
+          user.auth_token
+        end
+
+        config.scope_defaults :default, strategies: [:password], action: '/forbidden'
+      end
 
       sprockets.append_path File.join(root, 'app', 'assets', 'javascripts')
       sprockets.append_path File.join(root, 'app', 'assets', 'stylesheets')
