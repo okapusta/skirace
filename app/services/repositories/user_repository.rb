@@ -15,4 +15,12 @@ class Repositories::UserRepository
   def get(id)
     db_user.find(id: id)
   end
+
+  def get_by_username(username)
+    db_user.find(username: username)
+  end
+
+  def get_by_auth_token(auth_token)
+    db_user.find(auth_token: auth_token)
+  end
 end

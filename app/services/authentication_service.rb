@@ -12,6 +12,6 @@ class AuthenticationService
   private
 
     def authentication_result(success, auth_token = nil)
-      OpenStruct.new({authenticated: success, auth_token: auth_token})
+      OpenStruct.new({success: success, auth_token: auth_token})
     end
 end

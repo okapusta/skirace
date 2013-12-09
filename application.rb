@@ -18,12 +18,13 @@ module Skirace
     set :static, :enable
     set :views, Proc.new { File.join(root, "app", "views") }
     set :public_folder, File.join(root, "public")
-
+    set :assets_prefix, '/assets'
+    set :assets_path, File.join(public_folder, assets_prefix)
+    
     set :sprockets, Sprockets::Environment.new(root)
     set :precompile, [ /\w+\.(?!js\.coffee).+/, /application\.js$/ ]
-    set :assets_prefix, '/assets'
     set :digest_assets, true
-    set(:assets_path)   { File.join public_folder, assets_prefix }   
+       
    
     helpers do
       include ApplicationHelper
@@ -49,11 +50,35 @@ module Skirace
           user.auth_token
         end
 
-        config.serialize_from_session do |user|
-          user.auth_token
+        config.serialize_from_session do |auth_token, user_repository|
+          user_repository.get_by_auth_token(auth_token)
         end
 
         config.scope_defaults :default, strategies: [:password], action: '/forbidden'
+        config.failure_app = self
+      end
+
+      Warden::Strategies.add(:password) do
+        def valid?
+          params['username'] && params['password']
+        end
+
+        def authenticate!
+          user = injector.user_repository.get_by_username(params['username'])
+          if injector.authentication_service.authenticate(user, params['password']).success
+            success!(user)
+            puts "success"
+          else
+            fail!
+          end
+        end
+
+        private
+
+          def injector
+            @injector ||= Injector.new(OpenStruct.new(params: params))
+          end
+
       end
 
       sprockets.append_path File.join(root, 'app', 'assets', 'javascripts')
@@ -72,7 +97,17 @@ module Skirace
       haml "home/index".to_sym, layout: :website
     end
 
+    get '/login' do
+      haml :login
+    end
+
+    post '/login' do
+      env['warden'].authenticate!
+      redirect '/'
+    end
+
     get '/contestants' do |contestant_presenter, contestant_repository|
+      env['warden'].authenticate!
       contestant_presenter.as_json(contestant_repository.all)
     end
 
@@ -107,6 +142,10 @@ module Skirace
       else
         status 404
       end
+    end
+
+    get '/forbidden' do
+      haml :forbidden 
     end
 
     post '/contestants' do |hash, json_parser, contestant_repository|
