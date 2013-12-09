@@ -10,7 +10,7 @@ How to run
 2. Install Memcached
 
   ```wget http://www.memcached.org/files/memcached-1.4.16.tar.gz
-  tar -xzf memcached-1.4.16.tar.gz```
+  tar -xzf memcached-1.4.16.tar.gz
   cd memcached-1.4.16
   ./configure
   make & sudo make install
