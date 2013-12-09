@@ -50,8 +50,8 @@ module Skirace
           user.auth_token
         end
 
-        config.serialize_from_session do |auth_token, user_repository|
-          user_repository.get_by_auth_token(auth_token)
+        config.serialize_from_session do |auth_token|
+          User.find(auth_token: auth_token)
         end
 
         config.scope_defaults :default, strategies: [:password], action: '/forbidden'
@@ -67,7 +67,6 @@ module Skirace
           user = injector.user_repository.get_by_username(params['username'])
           if injector.authentication_service.authenticate(user, params['password']).success
             success!(user)
-            puts "success"
           else
             fail!
           end
