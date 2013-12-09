@@ -9,17 +9,17 @@ How to run
 1. Install Ruby
 2. Install Memcached
 
-  ```wget http://www.memcached.org/files/memcached-1.4.16.tar.gz
+  ```wget http://www.memcached.org/files/memcached-1.4.16.tar.gz```
 
-  tar -xzf memcached-1.4.16.tar.gz
+  ```tar -xzf memcached-1.4.16.tar.gz```
   
-  cd memcached-1.4.16
+  ```cd memcached-1.4.16```
   
-  ./configure
+  ```./configure```
   
-  make & sudo make install
+  ```make & sudo make install```
   
-  memcached &```
+  ```memcached &```
 
 3. Install gem Bundler ``gem install bundler``
 4. Install gems from Gemfile ``bundle install``
