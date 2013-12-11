@@ -12,13 +12,13 @@ class Skirace.Views.IndexView extends Backbone.View
 
   initialize: (args) ->
     _.bindAll(this, 'render')
-
     @current_user = new Skirace.Services.CurrentUser()
     @render()
 
     args.contests.fetch({
       success: (data) ->
-        if @current_user 
+        @current_user = new Skirace.Services.CurrentUser()
+        if @current_user.authenticated()
           new Skirace.Views.Contests.Index({contests: data.models})
           new Skirace.Views.Contestants.Index({contestants: args.contestants.fetch()})
       })
