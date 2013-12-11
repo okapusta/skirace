@@ -2,27 +2,35 @@
   .navbar-inner
     %a.brand{href: '/'}
       SkiRace
-    %ul.nav
-      %li
-        %a#new-race{href: 'javascript:void(0)'} 
-          Nowe zawody
-          %i.fa.fa-users
-      %li
-        %a#new-contestant{href: 'javascript:void(0)'} 
-          Nowy zawodnik
-          %i.fa.fa-user
-      %li
-        %a#data-import{href: 'javascript:void(0)'} 
-          Import zawodnikow
-          %i.fa.fa-arrow-circle-up
-      %li
-        %a#data-export{href: 'javascript:void(0)'} 
-          Eksport wyników
-          %i.fa.fa-arrow-circle-down
-      %li.settings
-        %a#settings{href: 'javascript:void(0)'}
-          Ustawienia
-          %i.fa.fa-cog
+    - if @current_user.authenticated()
+      %ul.nav
+      
+        %li
+          %a#new-race{href: 'javascript:void(0)'} 
+            Nowe zawody
+            %i.fa.fa-users
+        %li
+          %a#new-contestant{href: 'javascript:void(0)'} 
+            Nowy zawodnik
+            %i.fa.fa-user
+        %li
+          %a#data-import{href: 'javascript:void(0)'} 
+            Import zawodnikow
+            %i.fa.fa-arrow-circle-up
+        %li
+          %a#data-export{href: 'javascript:void(0)'} 
+            Eksport wyników
+            %i.fa.fa-arrow-circle-down
+        %li.settings
+          %a#settings{href: 'javascript:void(0)'}
+            Ustawienia
+            %i.fa.fa-cog
+    - else
+      %ul.nav.pull-right
+        %li.login
+          %a#login{href: '/#login'}
+            %i.fa.fa-lock
+
 
   .form-wrapper
 

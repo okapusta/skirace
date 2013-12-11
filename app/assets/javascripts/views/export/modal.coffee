@@ -7,7 +7,7 @@ class Skirace.Views.Export.Modal extends Backbone.View
 
   events:
     'click #export' : 'export'
-    'click .modal-close' : 'close'
+    'click .modal-close' : 'exportClose'
 
   initialize: ->
     @current_contest = new Skirace.Services.CurrentContest()
@@ -21,5 +21,5 @@ class Skirace.Views.Export.Modal extends Backbone.View
 
     .submit()
 
-  close: ->
+  exportClose: ->
     $('.export-modal').remove()

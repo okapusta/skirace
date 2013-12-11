@@ -12,17 +12,19 @@ class Skirace.Views.IndexView extends Backbone.View
 
   initialize: (args) ->
     _.bindAll(this, 'render')
-    IndexView.prototype.render()
+
+    @current_user = new Skirace.Services.CurrentUser()
+    @render()
 
     args.contests.fetch({
       success: (data) ->
-        new Skirace.Views.Contests.Index({contests: data.models})
-        new Skirace.Views.Contestants.Index({contestants: args.contestants.fetch()})
+        if @current_user 
+          new Skirace.Views.Contests.Index({contests: data.models})
+          new Skirace.Views.Contestants.Index({contestants: args.contestants.fetch()})
       })
 
-
   render: -> 
-    $(@el).html @template
+    $(@el).html @template({current_user: @current_user})
 
   newContestant: ->
     unless $('#new-contestant-form').is(":visible")

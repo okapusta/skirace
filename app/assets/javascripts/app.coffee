@@ -5,6 +5,7 @@ window.Skirace =
   Views:
     Contests: {}
     Contestants: {}
+    Users: {}
     Export: {}
   Services:
     Contestant: {}

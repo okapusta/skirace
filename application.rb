@@ -60,12 +60,14 @@ module Skirace
 
       Warden::Strategies.add(:password) do
         def valid?
-          params['username'] && params['password']
+          parse_params
+          @params['username'] && @params['password']
+          true
         end
 
         def authenticate!
-          user = injector.user_repository.get_by_username(params['username'])
-          if injector.authentication_service.authenticate(user, params['password']).success
+          user = injector.user_repository.get_by_username(@params['username'])
+          if injector.authentication_service.authenticate(user, @params['password']).success
             success!(user)
           else
             fail!
@@ -76,6 +78,10 @@ module Skirace
 
           def injector
             @injector ||= Injector.new(OpenStruct.new(params: params))
+          end
+
+          def parse_params
+            @params = injector.json_parser.parse(request.body.read)
           end
 
       end
@@ -100,14 +106,13 @@ module Skirace
       haml :login
     end
 
-    post '/login' do
+    post '/login' do |user_repository, json_parser|
+      content_type :json
       env['warden'].authenticate!
-      redirect '/'
-    end
-
-    get '/contestants' do |contestant_presenter, contestant_repository|
-      env['warden'].authenticate!
-      contestant_presenter.as_json(contestant_repository.all)
+      
+      redirect '/forbidden' unless token = session['warden.user.default.key']
+  
+      {user: {authenticated: true, auth_token: token}}.to_json
     end
 
     get '/contestants/:id' do |contestant_presenter, contestant_repository|

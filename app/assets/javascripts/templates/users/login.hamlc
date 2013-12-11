@@ -1,0 +1,17 @@
+.modal.show.login-modal
+  .modal-header
+    %button.close.login-close{type: 'button', data-dismiss: 'modal', aria-hidden: 'true'} &times;
+    %h3 Logowanie w systemie SkiRace
+  .modal-body
+
+
+    %form#login-form{action: '/login', method: 'post'}
+      %fieldset
+        %label{for: 'username'}Login
+        %input#username{type:'text', name:'username'}
+      %fieldset
+        %label{for: 'password'}Hasło
+        %input#password{type:'text', name:'password'}
+  .modal-footer
+    %a.btn.btn-primary#login{ href: '#'} Zaloguj
+    %a.btn.login-close{ href: '#'} Zamknij
