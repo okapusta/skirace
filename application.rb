@@ -76,6 +76,10 @@ module Skirace
 
         private
 
+          def injector
+            @injector ||= Injector.new(OpenStruct.new(params: @params))
+          end
+
           def parse_params
             @params = injector.json_parser.parse(request.body.read)
           end
