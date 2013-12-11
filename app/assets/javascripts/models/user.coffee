@@ -2,10 +2,8 @@ class Skirace.Models.User extends Backbone.Model
 
   urlRoot: '/login'
 
-  initialize: ->
-    @client_storage = new Skirace.Services.ClientStorage()  
-
   login: (username, password) ->
+    client_storage = new Skirace.Services.ClientStorage() 
     @data =
       username: username 
       password: password
@@ -15,5 +13,5 @@ class Skirace.Models.User extends Backbone.Model
       dataType: 'json'
       data: JSON.stringify(@data)
       success: (data) ->
-        @client_storage.set('current_user', data)
+        client_storage.set('current_user', JSON.stringify(data.user))
   

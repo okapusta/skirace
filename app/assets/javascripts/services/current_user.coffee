@@ -4,7 +4,7 @@ class Skirace.Services.CurrentUser
     @client_storage = new Skirace.Services.ClientStorage()
 
   authenticated: ->
-    return false unless typeof(@get()) == 'object'
+    return unless @get()
     
     user = JSON.parse(@get())
     if user.authenticated

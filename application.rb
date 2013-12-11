@@ -76,10 +76,6 @@ module Skirace
 
         private
 
-          def injector
-            @injector ||= Injector.new(OpenStruct.new(params: params))
-          end
-
           def parse_params
             @params = injector.json_parser.parse(request.body.read)
           end
@@ -106,9 +102,13 @@ module Skirace
       haml :login
     end
 
+    get '/forbidden' do
+      haml :forbidden 
+    end
+
     post '/login' do |user_repository, json_parser|
-      content_type :json
       env['warden'].authenticate!
+      content_type :json
       
       redirect '/forbidden' unless token = session['warden.user.default.key']
   
@@ -116,6 +116,8 @@ module Skirace
     end
 
     get '/contestants/:id' do |contestant_presenter, contestant_repository|
+      env['warden'].authenticate!
+
       contestant_presenter.as_json(contestant_repository.get(params[:id]))
     end
 
@@ -123,12 +125,14 @@ module Skirace
       contest_presenter.as_json(contest_repository.all)
     end
 
-    get '/contests/:id/contestants' do |contestant_presenter, contest_repository|
+    get '/contests/:id/contestants' do |contestant_presenter, contest_repository|      
       contestants = contest_repository.get(params[:id]).contestants
       contestant_presenter.as_json(contestants)
     end
 
     get '/export' do |contestant_presenter, contest_repository|
+      env['warden'].authenticate!
+
       contestants = contest_repository.get(params[:contest]).contestants
       case params[:format]
       when 'json'
@@ -148,11 +152,9 @@ module Skirace
       end
     end
 
-    get '/forbidden' do
-      haml :forbidden 
-    end
-
     post '/contestants' do |hash, json_parser, contestant_repository|
+      env['warden'].authenticate!
+
       content_type :json
       params = hash.with_indifferent_access(json_parser.parse(request.body.read))
       contestant = contestant_repository.build(params)
@@ -164,6 +166,8 @@ module Skirace
     end
 
     post '/contests' do |json_parser, contest_repository|
+      env['warden'].authenticate!
+
       content_type :json
       params = json_parser.parse(request.body.read)
       contest = contest_repository.build(params)
