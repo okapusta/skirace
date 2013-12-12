@@ -11,7 +11,7 @@
         %input#username{type:'text', name:'username'}
       %fieldset
         %label{for: 'password'}Hasło
-        %input#password{type:'text', name:'password'}
+        %input#password{type:'password', name:'password'}
   .modal-footer
     %a.btn.btn-primary#login{ href: '#'} Zaloguj
     %a.btn.login-close{ href: '#'} Zamknij

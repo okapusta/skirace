@@ -100,3 +100,7 @@ input[type=submit].btn {
 input[type=radio] {
   margin: 2px 0 0 2px ;
 }
+
+.navbar .nav {
+  margin-right: -15px !important;
+}
