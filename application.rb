@@ -120,7 +120,7 @@ module Skirace
     end
 
     get '/contestants/:id' do |contestant_presenter, contestant_repository|
-      env['warden'].authenticate!
+      env['warden'].authenticated?
 
       contestant_presenter.as_json(contestant_repository.get(params[:id]))
     end
@@ -130,12 +130,14 @@ module Skirace
     end
 
     get '/contests/:id/contestants' do |contestant_presenter, contest_repository|      
+      env['warden'].authenticated?
+            
       contestants = contest_repository.get(params[:id]).contestants
       contestant_presenter.as_json(contestants)
     end
 
     get '/export' do |contestant_presenter, contest_repository|
-      env['warden'].authenticate!
+      env['warden'].authenticated?
 
       contestants = contest_repository.get(params[:contest]).contestants
       case params[:format]
@@ -157,7 +159,7 @@ module Skirace
     end
 
     post '/contestants' do |hash, json_parser, contestant_repository|
-      env['warden'].authenticate!
+      env['warden'].authenticated?
 
       content_type :json
       params = hash.with_indifferent_access(json_parser.parse(request.body.read))
@@ -170,7 +172,7 @@ module Skirace
     end
 
     post '/contests' do |json_parser, contest_repository|
-      env['warden'].authenticate!
+      env['warden'].authenticated?
 
       content_type :json
       params = json_parser.parse(request.body.read)
