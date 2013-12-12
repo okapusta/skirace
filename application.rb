@@ -50,8 +50,8 @@ module Skirace
           user.auth_token
         end
 
-        config.serialize_from_session do |auth_token|
-          User.find(auth_token: auth_token)
+        config.serialize_from_session do |token|
+          User.find(auth_token: token)
         end
 
         config.scope_defaults :default, strategies: [:password], action: '/forbidden'
@@ -131,7 +131,7 @@ module Skirace
 
     get '/contests/:id/contestants' do |contestant_presenter, contest_repository|      
       env['warden'].authenticated?
-            
+
       contestants = contest_repository.get(params[:id]).contestants
       contestant_presenter.as_json(contestants)
     end
