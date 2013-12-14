@@ -1,0 +1,45 @@
+.modal.show.settings-modal
+  .modal-header
+    %button.close.modal-close{type: 'button', data-dismiss: 'modal', aria-hidden: 'true'} &times;
+    %h3 Ustawienia
+  .modal-body
+    .tabbable
+      %ul.nav.nav-tabs
+        %li.active
+          %a{href: '#contest-settings', data-toggle: 'tab'} Zawody
+        %li
+          %a{href: '#user-settings', data-toggle: 'tab'} Użytkownicy
+      .tab-content
+        .tab-pane.active#contest-settings 
+          %p Ustawienia zawodów
+          %hr
+          %form
+            %fieldset
+              %p
+                %label{for: 'public-contest'} Publiczne udostępnienie zawodów
+                %input#public-contest{type: 'checkbox'}
+              %p
+                %select#public-contest-dropdown-select.hide
+                  %option Default
+        .tab-pane#user-settings
+          %p Ustawienia użytkowników
+          %hr
+
+  .modal-footer
+    %a.btn.btn-primary#save-settings{ href: '#'} Zapisz
+    %a.btn.modal-close{ href: '#'} Anuluj
+
+:javascript
+  $(document).ready(function() {
+    $("a[data-toggle='tab']").on('click', function(e) {
+      e.preventDefault();
+      $(this).tab('show');
+    });
+
+    $('#public-contest').click( function() {
+      $('#public-contest-dropdown-select').toggle(this.checked)
+    }); 
+  });
+
+
+   

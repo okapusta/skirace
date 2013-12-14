@@ -8,6 +8,7 @@ skirace:
       memcache_options:
         namespace: skirace
         compress: true
+        expires_in: 300
   raspberry_pi:
     config:
       gpio:

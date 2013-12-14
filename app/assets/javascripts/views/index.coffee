@@ -8,6 +8,7 @@ class Skirace.Views.IndexView extends Backbone.View
     "click #new-race" : "newRace"
     "click #new-contestant" : "newContestant"
     "click #data-export" : "dataExport"
+    "click #settings" : "settings"
     "click .close-form" : "closeForm"
 
   initialize: (args) ->
@@ -55,3 +56,6 @@ class Skirace.Views.IndexView extends Backbone.View
     $('#new-contest-form').hide()
     $('#new-contestant-form').hide()
     $('.close-form').hide()
+
+  settings: ->
+    new Skirace.Views.Settings.Modal()

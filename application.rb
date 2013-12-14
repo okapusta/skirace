@@ -5,6 +5,8 @@ Bundler.require
 
 module Repositories; end
 module Connections; end
+module Presenters; end 
+module Parsers; end
 module Skirace
   
   auto_load_paths = %w(../app/**/*.rb ../lib/**/*.rb).each do |path|
@@ -107,6 +109,13 @@ module Skirace
 
     get '/forbidden' do
       haml :forbidden 
+    end
+
+    delete '/logout' do
+      content_type :json
+
+      env['warden'].logout
+      {return_to: '/'}.to_json
     end
 
     post '/login' do |user_repository, json_parser|

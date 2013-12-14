@@ -4,7 +4,7 @@ class Injector
   include Dependor::AutoInject
   include Dependor::Sinatra::Objects
 
-  look_in_modules ::Repositories, ::Connections
+  look_in_modules ::Repositories, ::Connections, ::Presenters, ::Parsers
 
   def initialize(objects = nil)
     sinatra_objects(objects)
@@ -21,15 +21,7 @@ class Injector
   def db_user
     User
   end
-  
-  def contestant_presenter
-    ContestantPresenter.new
-  end
-
-  def contest_presenter
-    ContestPresenter.new
-  end
-  
+    
   def json_parser
     JSON
   end

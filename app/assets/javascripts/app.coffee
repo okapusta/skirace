@@ -7,6 +7,7 @@ window.Skirace =
     Contestants: {}
     Users: {}
     Export: {}
+    Settings: {}
   Services:
     Contestant: {}
   init: ->
@@ -16,6 +17,4 @@ window.Skirace =
       return
     app = new Skirace.Routers.Application()
     Backbone.history.start()
-
-
-   
+  
