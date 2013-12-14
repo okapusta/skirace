@@ -9,7 +9,8 @@ How to run
 1. Install Ruby
 2. Install Memcached
 
-  ``wget http://www.memcached.org/files/memcached-1.4.16.tar.gz
+  ```
+  wget http://www.memcached.org/files/memcached-1.4.16.tar.gz
     
    tar -xzf memcached-1.4.16.tar.gz
   
@@ -19,7 +20,8 @@ How to run
     
    make & sudo make install
   
-  memcached &``
+  memcached &
+  ```
 
 3. Install gem Bundler 
 
