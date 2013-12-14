@@ -11,6 +11,7 @@ GEM
       execjs
     coffee-script-source (1.6.3)
     daemons (1.1.9)
+    dalli (2.6.4)
     debug_inspector (0.0.2)
     dependor (1.0.1)
     dependor-sinatra (0.0.2)
@@ -74,6 +75,7 @@ PLATFORMS
 DEPENDENCIES
   bcrypt-ruby
   binding_of_caller
+  dalli
   dependor-sinatra
   execjs
   haml

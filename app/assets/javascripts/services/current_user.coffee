@@ -1,7 +1,7 @@
 class Skirace.Services.CurrentUser
 
   constructor: ->
-    @client_storage = new Skirace.Services.ClientStorage()
+    @session_storage = new Skirace.Services.SessionStorage()
 
   authenticated: ->
     return unless @get()
@@ -14,4 +14,4 @@ class Skirace.Services.CurrentUser
     end
 
   get: ->
-    @client_storage.get('current_user')
+    @session_storage.get('current_user')

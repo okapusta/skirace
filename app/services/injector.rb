@@ -4,7 +4,7 @@ class Injector
   include Dependor::AutoInject
   include Dependor::Sinatra::Objects
 
-  look_in_modules ::Repositories
+  look_in_modules ::Repositories, ::Connections
 
   def initialize(objects = nil)
     sinatra_objects(objects)
@@ -56,5 +56,9 @@ class Injector
 
   def bcrypt_password
     BCrypt::Password
+  end
+
+  def dalli_client
+    Dalli::Client
   end
 end

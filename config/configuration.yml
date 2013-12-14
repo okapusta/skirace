@@ -4,8 +4,10 @@ skirace:
       default_locale: pl
 
     config:
-      dupa: asaddsa
-      dupa2: asdasd
+      memcache_server: localhost:11211
+      memcache_options:
+        namespace: skirace
+        compress: true
   raspberry_pi:
     config:
       gpio:

@@ -1,13 +1,14 @@
 class Options
-  def application_root
-    './'
+
+  takes :configuration_service, :hash
+
+  def memcache_server
+    configuration_service.get_config[:memcache_server]
   end
 
-  def application_config
-    '../../../config/**/*.yml'
-  end
-
-  def password_cost
-    10
+  def memcache_client
+    hash.symbolize_keys!(
+      configuration_service.get_config[:memcache_options]
+      )
   end
 end

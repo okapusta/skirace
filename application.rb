@@ -4,7 +4,7 @@ require 'dependor/shorty'
 Bundler.require
 
 module Repositories; end
-
+module Connections; end
 module Skirace
   
   auto_load_paths = %w(../app/**/*.rb ../lib/**/*.rb).each do |path|
@@ -28,7 +28,6 @@ module Skirace
    
     helpers do
       include ApplicationHelper
-      include TimeHelper
       include Sprockets::Helpers
     end  
 
