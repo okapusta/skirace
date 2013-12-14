@@ -8,4 +8,11 @@ class CachingService
   def set(key, value)
     memcache_connection.client.set(key, value)
   end
+
+  def fetch(key, &block)
+    result = get(key)
+    return result if result
+    
+    set(key, yield)
+  end
 end
