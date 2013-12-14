@@ -14,4 +14,5 @@ class Skirace.Models.User extends Backbone.Model
       data: JSON.stringify(@data)
       success: (data) ->
         session_storage.set('current_user', JSON.stringify(data.user))
+        window.location.reload()
   
