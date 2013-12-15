@@ -9,6 +9,8 @@
           %a{href: '#contest-settings', data-toggle: 'tab'} Zawody
         %li
           %a{href: '#user-settings', data-toggle: 'tab'} Użytkownicy
+        %li
+          %a{href: '#self-settings', data-toggle: 'tab'} Ustawienia konta
       .tab-content
         .tab-pane.active#contest-settings 
           %p Ustawienia zawodów
@@ -21,10 +23,52 @@
               %p
                 %select#public-contest-dropdown-select.hide
                   %option Default
+
+          %form
+            %fieldset
+              %p
+                %label{for: 'multi-contest-lbl'} Dwóch zawodników
+                %input#multi-contest-lbl{type: 'checkbox'}
+              %p
+                %input#multi-contest.btn.btn-info.hide{value: 'Rozpocznij przejazd testowy'}
         .tab-pane#user-settings
           %p Ustawienia użytkowników
           %hr
+                
+          %table.table#user-table
+            %thead
+              %tr
+                %th Login
+                %th Admin
+            %tbody.table
+              - for user in @users
+                %tr
+                  %td= user.get 'login'
+                  %td
+                    - if user.get('role') == 1
+                      %i.fa.fa-check-circle  
+          %form#user-form{action: '/users'}
+            %fieldset
+              %p
+                %label{for: 'username'} Login
+                %input#username{type: 'text', name: 'username'}
+              %p
+                %label{for: 'password'} Hasło
+                %input#password{type: 'password', name: 'password'}
+              %p
+                %label{for: 'admin'} Admin
+                %input#admin{type: 'checkbox', name: 'admin'}
+              %br
+              %p
+                %input#user-add.btn{type: 'submit', value: 'Dodaj'}
+        .tab-pane#self-settings
+          %p Ustawienia konta
+          %hr
 
+          %for
+            %p
+              %label{for: 'new-password'} Nowe hasło
+              %input#new-password{type: 'password'}            
   .modal-footer
     %a.btn.btn-primary#save-settings{ href: '#'} Zapisz
     %a.btn.modal-close{ href: '#'} Anuluj
@@ -38,6 +82,10 @@
 
     $('#public-contest').click( function() {
       $('#public-contest-dropdown-select').toggle(this.checked)
+    }); 
+
+    $('#multi-contest-lbl').click( function() {
+      $('#multi-contest').toggle(this.checked)
     }); 
   });
 

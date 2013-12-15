@@ -61,9 +61,8 @@ module Skirace
 
       Warden::Strategies.add(:password) do
         def valid?
-          parse_params
+          @params = parse_params
           @params['username'] && @params['password']
-          true
         end
 
         def authenticate!
@@ -82,7 +81,9 @@ module Skirace
           end
 
           def parse_params
-            @params = injector.json_parser.parse(request.body.read)
+            injector.json_parser.parse(request.body.read)
+          rescue
+            {}
           end
 
       end
@@ -128,7 +129,7 @@ module Skirace
     end
 
     get '/contestants/:id' do |contestant_presenter, contestant_repository|
-      env['warden'].authenticated?
+      env['warden'].authenticate!
 
       contestant_presenter.as_json(contestant_repository.get(params[:id]))
     end
@@ -137,15 +138,25 @@ module Skirace
       contest_presenter.as_json(contest_repository.all)
     end
 
+    get '/public/contest' do |contestant_presenter, contest_repository|
+      contestant_presenter.as_json(contest_repository.public_contest.contestants)
+    end
+
     get '/contests/:id/contestants' do |contestant_presenter, contest_repository|      
-      env['warden'].authenticated?
+      env['warden'].authenticate!
 
       contestants = contest_repository.get(params[:id]).contestants
       contestant_presenter.as_json(contestants)
     end
 
+    get '/users' do |user_presenter, user_repository|
+      env['warden'].authenticate!
+
+      user_presenter.as_json(user_repository.all)
+    end
+
     get '/export' do |contestant_presenter, contest_repository|
-      env['warden'].authenticated?
+      env['warden'].authenticate!
 
       contestants = contest_repository.get(params[:contest]).contestants
       case params[:format]
@@ -167,7 +178,7 @@ module Skirace
     end
 
     post '/contestants' do |hash, json_parser, contestant_repository|
-      env['warden'].authenticated?
+      env['warden'].authenticate!
 
       content_type :json
       params = hash.with_indifferent_access(json_parser.parse(request.body.read))
@@ -180,13 +191,26 @@ module Skirace
     end
 
     post '/contests' do |json_parser, contest_repository|
-      env['warden'].authenticated?
+      env['warden'].authenticate!
 
       content_type :json
       params = json_parser.parse(request.body.read)
       contest = contest_repository.build(params)
       if contest_repository.save(contest)
         status 200
+      else
+        status 422
+      end
+    end
+
+    post '/users' do |json_parser, user_repository, hash|
+      env['warden'].authenticate!
+      content_type :json
+
+      params = json_parser.parse(request.body.read)
+      user = user_repository.build(params)
+      if user_repository.save(user)
+        {success: true}.to_json
       else
         status 422
       end

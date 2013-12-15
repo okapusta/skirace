@@ -8,7 +8,4 @@ class Contestant < Sequel::Model(Sequel.sqlite('db/database.sqlite')[:contestant
     validates_presence :last_name
   end
 
-  def calculated_end_time
-    self.end_time_at - self.start_time_at if self.end_time_at
-  end
 end

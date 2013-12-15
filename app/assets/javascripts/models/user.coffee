@@ -1,6 +1,7 @@
 class Skirace.Models.User extends Backbone.Model
 
-  urlRoot: '/login'
+  loginUrl: '/login'
+  urlRoot: '/users'
 
   login: (username, password) ->
     session_storage = new Skirace.Services.SessionStorage() 
@@ -8,7 +9,7 @@ class Skirace.Models.User extends Backbone.Model
       username: username 
       password: password
 
-    $.ajax @urlRoot,
+    $.ajax @loginUrl,
       type: 'POST',
       dataType: 'json'
       data: JSON.stringify(@data)

@@ -27,7 +27,6 @@ module Skirace
       hash = hash || self 
       
       hash.each_pair do |_key, value|
-        binding.pry
         next if hash[key]
         
         if value.is_a?(::Hash)
