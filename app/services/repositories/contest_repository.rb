@@ -17,6 +17,19 @@ class Repositories::ContestRepository
     contest.save
   end
 
+  def get_public
+    db_contest.where(public: true).first
+  end
+
+  def set_public(id)
+    db_contest.update_all({public: true}, {public: false})
+
+    new_public_contest = get(id)
+    new_public_contest.public = true
+
+    save(new_public_contest) 
+  end
+
   private
 
     def create_default

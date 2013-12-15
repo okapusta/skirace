@@ -14,6 +14,17 @@ class Presenters::ContestantPresenter
     end.to_json
   end
 
+  def as_hash(collection)
+    collection.map do |contestant| 
+      {
+        contest_id: contestant.contest_id,
+        first_name: contestant.first_name,
+        last_name: contestant.last_name,
+        end_time: contestant.end_time
+      }
+    end
+  end
+
   def as_csv(collection)
     csv_string = ::CSV.generate do |csv|
       csv << ['contest_id', 'first_name', 'last_name', 'end_time']
