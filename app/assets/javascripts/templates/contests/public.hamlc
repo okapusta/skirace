@@ -1,0 +1,17 @@
+- unless @contest.get('status') == 404
+  %table.contestants.table
+    %thead
+      %tr
+        %th Imię
+        %th Nazwisko
+
+        %th Czas końcowy
+    %tbody.table
+      - for contestant in @contestants
+        %tr
+          %td= contestant.get 'first_name'
+          %td= contestant.get 'last_name'
+          - end_time = contestant.get('end_time') || '---'
+          %td= end_time 
+- else 
+  %h2.no-public-contests= @contest.get('response').split('-').join(' ').capitalize()

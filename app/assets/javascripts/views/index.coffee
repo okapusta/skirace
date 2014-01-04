@@ -16,16 +16,28 @@ class Skirace.Views.IndexView extends Backbone.View
     @current_user = new Skirace.Services.CurrentUser()
     @render()
 
-    args.contests.fetch({
-      success: (data) ->
-        @current_user = new Skirace.Services.CurrentUser()
-        if @current_user.authenticated()
-          new Skirace.Views.Contests.Index({contests: data.models})
-          new Skirace.Views.Contestants.Index({contestants: args.contestants.fetch()})
-      })
+
+    @current_user = new Skirace.Services.CurrentUser()
+    if @current_user.authenticated()
+      args.contests.fetch({
+        success: (data) ->
+            (exports ? this ).contests = -> data.models
+            
+            new Skirace.Views.Contests.Index({contests: contests()})
+            new Skirace.Views.Contestants.Index({contestants: args.contestants.fetch()})
+        })
+    else
+      @public_contest = new Skirace.Collections.PublicContests()
+      @render_public_contest()
 
   render: -> 
     $(@el).html @template({current_user: @current_user})
+
+  render_public_contest: ->
+    @public_contest.fetch({
+      success: (data) ->
+        new Skirace.Views.Contests.Public(data)
+    })
 
   newContestant: ->
     unless $('#new-contestant-form').is(":visible")

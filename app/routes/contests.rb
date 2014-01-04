@@ -3,7 +3,7 @@ class Skirace::Application < Sinatra::Base
     contest_presenter.as_json(contest_repository.all)
   end
 
-  get '/contests/public/contestants' do |public_contest_presenter, contest_repository|
+  get '/contests/public' do |public_contest_presenter, contest_repository|
     begin 
       public_contest_presenter.as_json(contest_repository.get_public)
     rescue

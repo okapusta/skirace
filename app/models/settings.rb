@@ -1,0 +1,1 @@
+class Settings < Sequel::Model(Sequel.sqlite('db/database.sqlite')[:settings]); end

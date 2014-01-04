@@ -9,7 +9,7 @@ class Skirace.Views.Settings.Modal extends Backbone.View
   events:
     'click .modal-close' : 'settingsClose'
     'click #user-add' : 'addUser'
-
+    'click #save-settings' : 'saveSettings'
   initialize: ->
     @collection = new Skirace.Collections.Users()
     @collection.fetch({
@@ -18,7 +18,7 @@ class Skirace.Views.Settings.Modal extends Backbone.View
     })  
 
   render: (users) ->
-    $(@el).append @template({users: users})
+    $(@el).append @template({users: users, contests: contests()})
 
   settingsClose: ->
     $('.settings-modal').remove()
@@ -39,3 +39,8 @@ class Skirace.Views.Settings.Modal extends Backbone.View
       error: (model, response, opts) ->
     )
     return
+
+  saveSettings: ->
+    data = $('#contest-form').serialize()
+    console.log(data)
+    @settingsClose()

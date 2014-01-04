@@ -9,28 +9,29 @@
           %a{href: '#contest-settings', data-toggle: 'tab'} Zawody
         %li
           %a{href: '#user-settings', data-toggle: 'tab'} Użytkownicy
-        %li
-          %a{href: '#self-settings', data-toggle: 'tab'} Ustawienia konta
       .tab-content
         .tab-pane.active#contest-settings 
           %p Ustawienia zawodów
           %hr
-          %form
+          %form#contest-form{method: 'post'}
             %fieldset
               %p
                 %label{for: 'public-contest'} Publiczne udostępnienie zawodów
-                %input#public-contest{type: 'checkbox'}
+                %input#public-contest{type: 'checkbox', name: 'public_contest'}
               %p
-                %select#public-contest-dropdown-select.hide
-                  %option Default
+                %select#public-contest-dropdown-select.hide{name: 'public_contest_id'}
+                  - for contest in @contests
+                    %option{value: contest.get('id')}= contest.get 'name'
 
-          %form
             %fieldset
               %p
                 %label{for: 'multi-contest-lbl'} Dwóch zawodników
                 %input#multi-contest-lbl{type: 'checkbox'}
-              %p
-                %input#multi-contest.btn.btn-info.hide{value: 'Rozpocznij przejazd testowy'}
+              %p#multi-contest.hide
+                Wprowadz odstęp czsasowy 
+                %input{type: 'text', name: 'time-interval'}
+                lub
+                %input.btn.btn-info{value: 'Rozpocznij przejazd testowy'}
         .tab-pane#user-settings
           %p Ustawienia użytkowników
           %hr
@@ -60,15 +61,7 @@
                 %input#admin{type: 'checkbox', name: 'admin'}
               %br
               %p
-                %input#user-add.btn{type: 'submit', value: 'Dodaj'}
-        .tab-pane#self-settings
-          %p Ustawienia konta
-          %hr
-
-          %for
-            %p
-              %label{for: 'new-password'} Nowe hasło
-              %input#new-password{type: 'password'}            
+                %input#user-add.btn{type: 'submit', value: 'Dodaj'}            
   .modal-footer
     %a.btn.btn-primary#save-settings{ href: '#'} Zapisz
     %a.btn.modal-close{ href: '#'} Anuluj
