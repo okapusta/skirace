@@ -8,5 +8,12 @@
         %th Nazwisko
 
         %th Czas końcowy
+
+      - for contestant in @contest.get('contestants')
+        %tr
+          %td= contestant.first_name
+          %td= contestant.last_name
+          - end_time = contestant.end_time || '---'
+          %td= end_time 
 - else 
   %h2.no-public-contests= @contest.get('response').split('-').join(' ').capitalize()
