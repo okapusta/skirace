@@ -10,6 +10,7 @@ class Skirace.Views.Settings.Modal extends Backbone.View
     'click .modal-close' : 'settingsClose'
     'click #user-add' : 'addUser'
     'click #save-settings' : 'saveSettings'
+
   initialize: ->
     @collection = new Skirace.Collections.Users()
     @collection.fetch({
@@ -19,6 +20,7 @@ class Skirace.Views.Settings.Modal extends Backbone.View
 
   render: (users) ->
     $(@el).append @template({users: users, contests: contests()})
+    @populateForm()
 
   settingsClose: ->
     $('.settings-modal').remove()
@@ -40,6 +42,39 @@ class Skirace.Views.Settings.Modal extends Backbone.View
     )
     return
 
-  saveSettings: ->
-    $('#contest-form').submit()
-    @settingsClose()
+  saveSettings: (event) ->
+    $.ajax(
+      type: 'POST',
+      url: '/settings',
+      data: $("#contest-form").serialize(), 
+      success: ->
+        Modal.prototype.settingsClose();
+    )
+    event.preventDefault() 
+  
+  populateForm: ->
+    $.ajax(
+      type: 'GET',
+      url: '/settings',
+      success: (data) ->
+        $.each JSON.parse(data), (k, v) ->
+          element = $('[name='+k+']', $("#contest-form"))
+          switch element.attr('type')
+          
+            when 'text'
+              element.val(v);
+            when 'checkbox' 
+              if v
+                
+                element.prop('checked', true) 
+                
+                if k == 'public_contest' 
+                  select = $('#public-contest-dropdown-select')
+                  select.show()
+                  select[0].selectedIndex = v;
+                
+                else if k == 'multi_contest'
+                  $('p#multi-contest').show()
+              else 
+                element.prop('checked', false)
+    )    

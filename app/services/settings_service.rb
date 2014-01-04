@@ -6,12 +6,15 @@ class SettingsService
   end
 
   def set(params)
-    db_settings.last.update(params)
     if params['public_contest'] == 'on' 
       contest_repository.set_public(params['public_contest_id']) 
     else
-     contest_repository.disable_public 
-   end
+      params.merge!(public_contest: false)
+      contest_repository.disable_public 
+    end
+
+    params.merge!(multi_contest: false) if params['multi_contest'].nil?   
+    db_settings.last.update(params)
   end
 
   private

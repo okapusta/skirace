@@ -26,7 +26,7 @@
             %fieldset
               %p
                 %label{for: 'multi-contest-lbl'} Dwóch zawodników
-                %input#multi-contest-lbl{type: 'checkbox'}
+                %input#multi-contest-lbl{type: 'checkbox', name: 'multi_contest'}
               %p#multi-contest.hide
                 Wprowadz odstęp czsasowy 
                 %input{type: 'text', name: 'time_interval'}
