@@ -41,6 +41,5 @@ class Skirace.Views.Settings.Modal extends Backbone.View
     return
 
   saveSettings: ->
-    data = $('#contest-form').serialize()
-    console.log(data)
+    $('#contest-form').submit()
     @settingsClose()

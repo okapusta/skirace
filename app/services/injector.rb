@@ -21,6 +21,10 @@ class Injector
   def db_user
     User
   end
+
+  def db_settings
+    Settings
+  end
     
   def json_parser
     JSON

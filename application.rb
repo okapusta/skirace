@@ -114,6 +114,7 @@ end
 
 require_relative 'app/routes/login'
 require_relative 'app/routes/users'
+require_relative 'app/routes/export'
+require_relative 'app/routes/settings'
 require_relative 'app/routes/contests'
 require_relative 'app/routes/contestants'
-require_relative 'app/routes/export'

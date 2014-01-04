@@ -13,7 +13,7 @@
         .tab-pane.active#contest-settings 
           %p Ustawienia zawodów
           %hr
-          %form#contest-form{method: 'post'}
+          %form#contest-form{method: 'post', action: '/settings'}
             %fieldset
               %p
                 %label{for: 'public-contest'} Publiczne udostępnienie zawodów
@@ -29,7 +29,7 @@
                 %input#multi-contest-lbl{type: 'checkbox'}
               %p#multi-contest.hide
                 Wprowadz odstęp czsasowy 
-                %input{type: 'text', name: 'time-interval'}
+                %input{type: 'text', name: 'time_interval'}
                 lub
                 %input.btn.btn-info{value: 'Rozpocznij przejazd testowy'}
         .tab-pane#user-settings

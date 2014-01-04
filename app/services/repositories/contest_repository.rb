@@ -22,12 +22,16 @@ class Repositories::ContestRepository
   end
 
   def set_public(id)
-    db_contest.update_all({public: true}, {public: false})
+    disable_public
 
     new_public_contest = get(id)
     new_public_contest.public = true
 
     save(new_public_contest) 
+  end
+
+  def disable_public
+    db_contest.update_all({public: true}, {public: false})
   end
 
   private
