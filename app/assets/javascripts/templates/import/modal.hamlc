@@ -3,9 +3,41 @@
     %button.close.modal-close{type: 'button', data-dismiss: 'modal', aria-hidden: 'true'} &times;
     %h3 Import zawodników
   .modal-body
-
-    %form#import-form.form-inline{action: '/import', method: 'post', enctype: 'multipart/form-data'}
-      %input{type: 'file', name: 'datafile'}
+    .input-append
+      %input#fileupload.hide{type: 'file', name: 'datafile'}
+      
+      %input#fileupload-dummy.input-large{type: 'text', name: 'datafile'}
+      %a.btn{onclick: "$('#fileupload').click()"} Wybierz plik
+  
   .modal-footer
     %a.btn.btn-primary#import{ href: '#'} Importuj
     %a.btn.modal-close{ href: '#'} Zamknij
+
+:javascript
+  $(function () { 
+      $('#fileupload').fileupload({
+          dataType: 'json',
+          replaceFileInput: false,
+          url: '/import',
+          add: function (e, data) {
+            $('#import').click(function () {
+              data.formData = 
+                {
+                  current_contest: $('a.dropdown-toggle#contest-dropdown :first-child')
+                    .attr('value')
+                }
+              data.submit();
+            });
+          },
+          done: function (e, data) {
+            $('.import-modal').remove()
+          },
+          error: function(e, data) {
+            alert('Zły format pliku')
+          }
+      });
+    
+    $('#fileupload').change(function() {
+      $('#fileupload-dummy').val($(this).val().split('\\\\').last());
+    });
+  });

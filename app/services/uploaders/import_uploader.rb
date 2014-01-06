@@ -10,7 +10,7 @@ class Uploaders::ImportUploader
     self  
   end
 
-  def process
+  def process(current_contest)
     contestants = case format
       when 'json'
         json_parser.parse(tempfile.read)
@@ -23,7 +23,10 @@ class Uploaders::ImportUploader
       end
     
     contestants.each do |contestant|
-      contestant_repository.build(contestant)
+      success = contestant_repository.save(
+        contestant_repository.build(params(contestant, current_contest))
+      )
+      return false unless success
     end
   end
 
@@ -31,5 +34,17 @@ class Uploaders::ImportUploader
 
     def format
       filename.split('.').last
+    end
+
+    def params(contestant, current_contest)
+      {
+        contestant: {
+          first_name: contestant['first_name'], 
+          last_name: contestant['last_name'],
+        },
+        contest: {
+            id: current_contest
+          }  
+      }
     end
 end

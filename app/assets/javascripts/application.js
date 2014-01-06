@@ -1,4 +1,6 @@
 //= require jquery-1.10.2.min
+//= require jquery.ui.widget
+//= require jquery.fileupload
 //= require jquery.cookie
 //= require bootstrap.min
 //= require underscore-min
