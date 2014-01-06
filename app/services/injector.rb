@@ -4,7 +4,11 @@ class Injector
   include Dependor::AutoInject
   include Dependor::Sinatra::Objects
 
-  look_in_modules ::Repositories, ::Connections, ::Presenters, ::Parsers
+  look_in_modules ::Repositories, 
+                  ::Connections, 
+                  ::Presenters,
+                  ::Uploaders, 
+                  ::Parsers
 
   def initialize(objects = nil)
     sinatra_objects(objects)
@@ -28,6 +32,14 @@ class Injector
     
   def json_parser
     JSON
+  end
+
+  def xml_parser
+    Nokogiri::XML
+  end
+
+  def csv_parser
+    CSV
   end
 
   def yaml

@@ -7,6 +7,7 @@ window.Skirace =
     Contestants: {}
     Users: {}
     Export: {}
+    Import: {}
     Settings: {}
   Services:
     Contestant: {}

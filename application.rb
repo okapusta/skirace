@@ -6,6 +6,7 @@ Bundler.require
 module Repositories; end
 module Connections; end
 module Presenters; end 
+module Uploaders; end
 module Parsers; end
 module Skirace; end
   
@@ -115,6 +116,7 @@ end
 require_relative 'app/routes/login'
 require_relative 'app/routes/users'
 require_relative 'app/routes/export'
+require_relative 'app/routes/import'
 require_relative 'app/routes/settings'
 require_relative 'app/routes/contests'
 require_relative 'app/routes/contestants'

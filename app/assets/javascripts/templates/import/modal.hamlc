@@ -1,0 +1,11 @@
+.modal.show.import-modal
+  .modal-header
+    %button.close.modal-close{type: 'button', data-dismiss: 'modal', aria-hidden: 'true'} &times;
+    %h3 Import zawodników
+  .modal-body
+
+    %form#import-form.form-inline{action: '/import', method: 'post', enctype: 'multipart/form-data'}
+      %input{type: 'file', name: 'datafile'}
+  .modal-footer
+    %a.btn.btn-primary#import{ href: '#'} Importuj
+    %a.btn.modal-close{ href: '#'} Zamknij

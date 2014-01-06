@@ -10,6 +10,7 @@ class Skirace.Views.IndexView extends Backbone.View
     "click #data-export" : "dataExport"
     "click #settings" : "settings"
     "click .close-form" : "closeForm"
+    "click #data-import" : "dataImport"
 
   initialize: (args) ->
     _.bindAll(this, 'render')
@@ -71,3 +72,6 @@ class Skirace.Views.IndexView extends Backbone.View
 
   settings: ->
     new Skirace.Views.Settings.Modal()
+
+  dataImport: ->
+    new Skirace.Views.Import.Modal()
