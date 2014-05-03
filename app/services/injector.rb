@@ -14,6 +14,8 @@ class Injector
 
   def initialize(objects = nil)
     sinatra_objects(objects)
+
+    io.wiringPiSetup
   end
 
   def db_contestant
