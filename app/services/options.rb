@@ -2,6 +2,10 @@ class Options
 
   takes :configuration_service, :hash
 
+  def capacitor
+    OpenStruct.new(pin: 7)
+  end
+
   def memcache_server
     configuration_service.get_config[:memcache_server]
   end
@@ -14,5 +18,9 @@ class Options
 
   def password_cost
     10
+  end
+
+  def activation_threshold
+    200
   end
 end
