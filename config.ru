@@ -1,7 +1,8 @@
+require 'ostruct'
 require './application'
 require './app/services/injector'
 
-Thread.new(Injector.new) do |injector|
+Thread.new(Injector.new(OpenStruct.new({}))) do |injector|
   while true
     injector.capacitor.discharge(injector.options.capacitor.pin)      
     sleep 0.01; reading = 0;
