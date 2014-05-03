@@ -6,6 +6,7 @@ Bundler.require
 module Repositories; end
 module Connections; end
 module Presenters; end 
+module Components; end
 module Uploaders; end
 module Parsers; end
 module Skirace; end

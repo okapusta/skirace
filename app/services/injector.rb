@@ -8,7 +8,8 @@ class Injector
                   ::Connections, 
                   ::Presenters,
                   ::Uploaders, 
-                  ::Parsers
+                  ::Parsers,
+                  ::Components
 
   def initialize(objects = nil)
     sinatra_objects(objects)
@@ -52,6 +53,10 @@ class Injector
 
   def dir
     Dir
+  end
+
+  def io
+    Wiringpi
   end
 
   def hash
