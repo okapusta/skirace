@@ -21,6 +21,6 @@ class Options
   end
 
   def activation_threshold
-    200
+    2
   end
 end
