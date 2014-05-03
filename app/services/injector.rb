@@ -6,8 +6,9 @@ class Injector
 
   look_in_modules ::Repositories, 
                   ::Connections, 
+                  ::RaspberryPi,
                   ::Presenters,
-                  ::Uploaders, 
+                  ::Uploaders,
                   ::Parsers,
                   ::Components
 
