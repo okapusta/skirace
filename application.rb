@@ -100,6 +100,9 @@ class Skirace::Application < Sinatra::Base
 
     Sprockets::Helpers.configure do |config|
       config.environment = sprockets
+      config.environment.js_compressor = :uglify
+      config.environment.css_compressor = :scss
+      
       config.prefix      = assets_prefix
       config.digest      = digest_assets
       config.public_path = public_folder

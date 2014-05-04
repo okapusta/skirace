@@ -1,7 +1,4 @@
-require 'ostruct'
 require './application'
-require './app/services/injector'
-require 'pry'
 
 t = Thread.new(Injector.new(OpenStruct.new({}))) do |injector|
   while true
