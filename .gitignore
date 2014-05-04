@@ -1,5 +1,4 @@
 db/database.sqlite
-public/assets/*
 skirace.rar
 tmp/*
 log/*.log
