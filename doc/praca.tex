@@ -24,15 +24,15 @@ Przedmiotem niniejszej pracy jest budowa mobilnego systemu pomiaru czasu dla zaw
 \section{Wstęp}
 Obecnie na rynku istnieją podobne systemy do tego, którego budowę ta praca przedstawia, jednak często kosztują tysiące złotych. Praca ta jest próbą stowrzenia rozwiązania spełniającego podobne zadanie do ww. systemów korzystając z ogólnie dostępnych podzespołów za nie wielkie pieniądze.
 
-Jako szkielet systemu zostało wybrane Raspberry Pi - platforma komputerowa stworzona przez Raspberry Fundation. W momencie premiery (29 luty 2012) model B użyty w tej pracy miał cenę początkową US\$ 35. Raspberry Pi oparte jest o chip BCM2835 zawierający procesor ARMv6. Urządzenie działa pod kontrolą dystrybucji systemu Linux Raspbian będącą portem Debiana Wheezy koniecznym z powodu niekompatybilności (oficjalne wydanie Debiana Wheezy na platformę armhf jest działa jedynie z procesorami ARMv7 lub nowszymi).
+Jako szkielet systemu zostało wybrane Raspberry Pi - platforma komputerowa stworzona przez Raspberry Fundation. W momencie premiery (29 luty 2012) model B użyty w tej pracy miał cenę początkową US\$ 35. Raspberry Pi oparte jest o chip BCM2835 zawierający procesor ARMv6. Urządzenie działa pod kontrolą dystrybucji systemu Linux Raspbian będącą portem Debiana Wheezy koniecznym z powodu niekompatybilności (oficjalne wydanie Debiana Wheezy na platformę armhf działa jedynie z procesorami ARMv7 lub nowszymi).
 
-Obie aplikacjie (startowa i końcowa) zostały napistane przy użyciu języka Ruby 2.1.0 oraz dla aplikacji startowej stworzony został interface web umożliwiający wprowadzanie zawodników oraz podgląd wynikow, jak równiez import oraz eksport. Napisany został przy użyciu CoffeeScript oraz biblioteki JavaScript Backbone.js. 
+Obie aplikacjie (startowa i końcowa) zostały napistane przy użyciu języka Ruby 2.1.0 oraz dla aplikacji startowej stworzony został interface web umożliwiający wprowadzanie zawodników oraz podgląd wynikow, jak równiez import oraz eksport. Napisany został on przy użyciu CoffeeScript oraz biblioteki JavaScript Backbone.js. 
 CoffeeScript jest językiem inspirowanym elegancką składnią Ruby i Pythona, który kompiluje się do JavaScriptu. Backbone.js natomiast zapewnia strukturę aplikacji.
 
 W momencie pisania kodu aplikacji autor nie zdawał sobie jeszcze sprawy z pewnych dobrych pratyk pisania kodu JavaScript, zatem w kodzie znajdują się błędy, których należy unikać. Z tego powodu ta praca będzie się też starać je pokazać, na czym one polegają i jakie trudności w późniejszym utrzymaniu kodu podowują tak aby czytelnik był ich świadom i sam ich nie popełniał.
 \newpage
 \noindent
-W pracy zostały użyte różne \em{gem-y}~-~programy i biblioteki managera paczek \emph{RubyGems}, których lista w raz z licencjami zostanie przedstawiona na końcu tej pracy.
+W pracy zostały użyte różne \em{gemy}~-~programy i biblioteki managera paczek \emph{RubyGems}, których lista w raz z licencjami zostanie przedstawiona na końcu tej pracy.
 \newline
 \noindent
 \newline
@@ -46,7 +46,7 @@ Kompletny kod źródłowy pracy można znaleść pod adresami:
 \noindent
 \section{Realizacja tematu}
 \subsection{Architektura}
-System, którego ta praca dotyczy został zbudowany w myśl modelu master/slave gdzie mastertem jest aplikacja początkowa. To tam znajduje się interface, baza danych oraz serwer Memcached. W momencie uruchomienia aplikacji, oprócz startu serwera serwującego aplikację WEB tworzony jest nowy wątek zawierający event-loop, który rejestruje przecięcie wiązki lasera, a kiedy to sie stanie ustawia godzinę tego zdarzenia w cache.
+System, którego ta praca dotyczy, został zbudowany w myśl modelu master/slave gdzie mastertem jest aplikacja początkowa. To tam znajduje się interface, baza danych oraz serwer Memcached. W momencie uruchomienia aplikacji, oprócz startu serwera serwującego aplikację WEB tworzony jest nowy wątek zawierający event-loop, który rejestruje przecięcie wiązki lasera, a kiedy to sie stanie ustawia godzinę tego zdarzenia w cache.
 
 Zadaniem slavea~-~workera~-~jest jedynie pobranie czasu startu z Memcached, obliczenie czasu końcowego oraz wypisanie go na ekranie LCD linii końcowej w momencie finishu.
 \newline
@@ -56,6 +56,7 @@ Zadaniem slavea~-~workera~-~jest jedynie pobranie czasu startu z Memcached, obli
 \end{figure}
 \noindent
 Komunikacjia pomiędzy dwiema bramkami odbywa się poprzez WiFi.
+\subsection{Wybrane technologie}
 \paragraph{Memcached} ~\\
 \newline
 Memcached jest to rozproszony system buforowania pamięci podręczniej oryginalnie zaprojektowany na potrzeby serwisu  LiveJournal. Pozwala on na przechowywanie obiektów w pamięci RAM przy pomocy kluczy. W aplikacji wykorzystany został w celu przechowania czasów startu i finishu. Serwer Memcached jest uruchomiony tylko na jednej (startowej) bramce, worker natomiast łączy się z cache przy pomocy klienta i może pobierać lub pisać dane do pamięci drugiego urządzenia.
@@ -89,7 +90,6 @@ Chociaż Dependency Injection przy użyciu gemu Dependor wydaje się wygodne w a
 Do kompilacji CoffeeScript oraz szablonów \emph{.hamlc} (\emph{Haml Coffee Assets}) został użyty gem \emph{Sprockets} zawierający preprocessory dla języków takich jak CoffeeScript czy SCSS. Sprockets w środowisku developerskim pozwala na kompilacje assetów (JavaScriptów i CSSów) 'w locie', natomiast w środowisku produkcyjnym assety są prekompilowane. Sprockets pozwala również na minifikacje zasobów to jest zastąpienie nazw funkcji pojedyńczymi zakami w celu zmiejszenia rozmiaru kodu, który musi zostać pobrany przez przeglądarkę. 
 
 Sprockets działa w kontekście Rack - minimalnego interfejsu dla aplikacji Ruby do komunikacji z popularnymi serwerami WWW. Zasoby serwowane przez sprockets są montowane w pliku \emph{config.ru}, będącym plikiem konfiguracyjnym dla interfaceu Rack poprzez który aplikacja jest uruchamiana. To tutaj tworzony jest wątek rejestrujący przejechanie linii startu oraz tutaj montowana jest ścieżka serwera WWW '/' tak aby pokazywała na aplikację Sinatra. 
-\newpage
 \noindent
 Samo sprockets jest montowane w następujący sposób:
 \begin{listing}[H]
