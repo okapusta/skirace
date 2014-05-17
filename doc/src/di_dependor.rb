@@ -1,8 +1,8 @@
 class A
-  takes :obj
+  takes :b
 
   def do_b
-    obj.do_sth
+    b.do_sth
   end
 end
 

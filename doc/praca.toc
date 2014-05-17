@@ -5,8 +5,9 @@
 \contentsline {paragraph}{Memcached}{6}{section*.3}
 \contentsline {paragraph}{Dependency Injection}{6}{section*.4}
 \contentsline {paragraph}{Sprockets}{7}{section*.6}
-\contentsline {subsection}{\numberline {3.2}Implementacja}{7}{subsection.3.2}
-\contentsline {subsubsection}{\numberline {3.2.1}Aplikacja}{7}{subsubsection.3.2.1}
-\contentsline {subsubsection}{\numberline {3.2.2}Worker}{7}{subsubsection.3.2.2}
-\contentsline {subsection}{\numberline {3.3}Obudowa ochronna}{7}{subsection.3.3}
-\contentsline {section}{\numberline {4}Wnioski}{7}{section.4}
+\contentsline {paragraph}{HAML}{9}{section*.7}
+\contentsline {subsection}{\numberline {3.2}Implementacja}{10}{subsection.3.2}
+\contentsline {subsubsection}{\numberline {3.2.1}Aplikacja}{10}{subsubsection.3.2.1}
+\contentsline {subsubsection}{\numberline {3.2.2}Worker}{10}{subsubsection.3.2.2}
+\contentsline {subsection}{\numberline {3.3}Obudowa ochronna}{10}{subsection.3.3}
+\contentsline {section}{\numberline {4}Wnioski}{10}{section.4}

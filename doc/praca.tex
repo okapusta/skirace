@@ -29,8 +29,9 @@ Jako szkielet systemu zostało wybrane Raspberry Pi - platforma komputerowa stwo
 Obie aplikacjie (startowa i końcowa) zostały napistane przy użyciu języka Ruby 2.1.0 oraz dla aplikacji startowej stworzony został interface web umożliwiający wprowadzanie zawodników oraz podgląd wynikow, jak równiez import oraz eksport. Napisany został przy użyciu CoffeeScript oraz biblioteki JavaScript Backbone.js. 
 CoffeeScript jest językiem inspirowanym elegancką składnią Ruby i Pythona, który kompiluje się do JavaScriptu. Backbone.js natomiast zapewnia strukturę aplikacji.
 
-W momencie pisania kodu obu aplikacji autor nie zdawał sobie jeszcze sprawy z pewnych dobrych pratyk pisania kodu, zatem w kodzie znajdują się błędy (złe praktyki), których należy unikać. Z tego powodu ta praca będzie się też starać je pokazać, na czym one polegają i jakie trudności w późniejszym utrzymaniu kodu podowują tak aby czytelnik był ich świadom i sam ich nie popełniał.
+W momencie pisania kodu aplikacji autor nie zdawał sobie jeszcze sprawy z pewnych dobrych pratyk pisania kodu JavaScript, zatem w kodzie znajdują się błędy, których należy unikać. Z tego powodu ta praca będzie się też starać je pokazać, na czym one polegają i jakie trudności w późniejszym utrzymaniu kodu podowują tak aby czytelnik był ich świadom i sam ich nie popełniał.
 \newpage
+\noindent
 W pracy zostały użyte różne \em{gem-y}~-~programy i biblioteki managera paczek \emph{RubyGems}, których lista w raz z licencjami zostanie przedstawiona na końcu tej pracy.
 \newline
 \noindent
@@ -81,10 +82,55 @@ Poniżej zamieszczone są listingi przedstawiające normlne wstrzykiwanie zależ
 \end{listing}
 \end{subfigure}
 \end{figure}
-
+\noindent
+Chociaż Dependency Injection przy użyciu gemu Dependor wydaje się wygodne w aplikacjach ten gem należy raczej taktować jako \emph{proof of concept}.
 \paragraph{Sprockets} ~\\
 \newline
 Do kompilacji CoffeeScript oraz szablonów \emph{.hamlc} (\emph{Haml Coffee Assets}) został użyty gem \emph{Sprockets} zawierający preprocessory dla języków takich jak CoffeeScript czy SCSS. Sprockets w środowisku developerskim pozwala na kompilacje assetów (JavaScriptów i CSSów) 'w locie', natomiast w środowisku produkcyjnym assety są prekompilowane. Sprockets pozwala również na minifikacje zasobów to jest zastąpienie nazw funkcji pojedyńczymi zakami w celu zmiejszenia rozmiaru kodu, który musi zostać pobrany przez przeglądarkę. 
+
+Sprockets działa w kontekście Rack - minimalnego interfejsu dla aplikacji Ruby do komunikacji z popularnymi serwerami WWW. Zasoby serwowane przez sprockets są montowane w pliku \emph{config.ru}, będącym plikiem konfiguracyjnym dla interfaceu Rack poprzez który aplikacja jest uruchamiana. To tutaj tworzony jest wątek rejestrujący przejechanie linii startu oraz tutaj montowana jest ścieżka serwera WWW '/' tak aby pokazywała na aplikację Sinatra. 
+\newpage
+\noindent
+Samo sprockets jest montowane w następujący sposób:
+\begin{listing}[H]
+\inputminted[linenos=true]{ruby}{./src/sprockets_mount.rb}
+\caption{config.ru}
+\end{listing}
+\noindent
+Wykorzystane tutaj zmienne klasowe (\emph{assets\_prefix}, \emph{sprockets}) aplikacji są definiowane w pliku \emph{application.rb} zawierającym klasę z konfiguracją.
+\begin{listing}[H]
+\inputminted[linenos=true]{ruby}{./src/sprockets_config.rb}
+\caption{Ustawienie zmiennych Sprockets}
+\end{listing}
+\noindent
+\begin{listing}[H]
+\inputminted[linenos=true]{ruby}{./src/sprockets_asset_paths.rb}
+\caption{Przeszukiwane foldery}
+\end{listing}
+\noindent
+Powyższe listingi umieszają skompilowane pliki z wyznaczonych ścieżek w folderze \emph{public/assets} pod nazwami \emph{application.js} oraz \emph{application.css}. Pliki te zawierają jedynie assety załączone poleceniem \emph{require} w pliku app/assets\newline /application.js.
+\begin{listing}[H]
+\inputminted[linenos=true]{javascript}{./src/application.js}
+\caption{app/assets/javascripts/application.js}
+\end{listing}
+\paragraph{HAML} ~\\
+\newline
+W projekcie został użyty HAML (HTML Abstraction Markup Language), który sprawia że kod jest przyjemniejszy do pisania i czytania. W HAML używa się jedynie tagów otwierających a o tym jak osadzone są elelemny decyduje indentacja. HAML posiada też skróty na sekcje div o podanym id lub klasie.
+\begin{figure}[h]
+\centering
+\begin{subfigure}[t]{0.45\textwidth}
+\caption{HAML}
+\begin{listing}[H]
+\inputminted[linenos=true]{haml}{./src/example.haml}
+\end{listing}
+\end{subfigure}
+\begin{subfigure}[t]{0.45\textwidth}
+\caption{HTML}
+\begin{listing}[H]
+\inputminted{html}{./src/example.html}
+\end{listing}
+\end{subfigure}
+\end{figure}
 \subsection{Implementacja}
 \subsubsection{Aplikacja}
 \subsubsection{Worker}
