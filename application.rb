@@ -29,7 +29,11 @@ class Skirace::Application < Sinatra::Base
   set :assets_path, File.join(public_folder, assets_prefix)
   
   set :sprockets, Sprockets::Environment.new(root)
-  set :precompile, [ /\w+\.(?!js\.coffee).+/, /application\.js$/ ]
+  
+  unless  Dir[File.expand_path('../public/assets/*', __FILE__)].first.match(/application/)
+    set :precompile, [ /\w+\.(?!js\.coffee).+/, /application\.js$/ ]
+  end
+
   set :digest_assets, true
      
  
