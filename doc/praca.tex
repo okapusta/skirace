@@ -59,12 +59,13 @@ Komunikacjia pomiędzy dwiema bramkami odbywa się poprzez WiFi.
 \subsection{Wybrane technologie}
 \paragraph{Memcached} ~\\
 \newline
-Memcached jest to rozproszony system buforowania pamięci podręczniej oryginalnie zaprojektowany na potrzeby serwisu  LiveJournal. Pozwala on na przechowywanie obiektów w pamięci RAM przy pomocy kluczy. W aplikacji wykorzystany został w celu przechowania czasów startu i finishu. Serwer Memcached jest uruchomiony tylko na jednej (startowej) bramce, worker natomiast łączy się z cache przy pomocy klienta i może pobierać lub pisać dane do pamięci drugiego urządzenia.
+Memcached jest to rozproszony system buforowania pamięci podręczniej oryginalnie zaprojektowany na potrzeby serwisu  LiveJournal. Pozwala on na przechowywanie obiektów w pamięci RAM przy pomocy kluczy (key-value store). W aplikacji wykorzystany został w celu przechowania czasów startu i finishu. Serwer Memcached jest uruchomiony tylko na jednej (startowej) bramce, worker natomiast łączy się z cache przy pomocy klienta i może pobierać lub pisać dane do pamięci drugiego urządzenia.
+\newpage
 \paragraph{Dependency Injection} ~\\
 \newline
 W ninejszej pracy został wykorzystany wzorzec projektowy \emph{Dependency Injection (DI)} polegający na usuwaniu bespośrednich zależności klas na rzecz \emph{wstrzykiwania} ich w czasie konstruowania obiektu. Do osiągnięcia tego celu i uproszczenia  DI użyty został gem Dependor, udostępniający prosty DSL (\emph{eng. Domain Specific Language}) przeznaczony do tego celu.
 
-Poniżej zamieszczone są listingi przedstawiające normlne wstrzykiwanie zależności w Ruby oraz z wykorzystaniem gem-u Dependor.
+Poniżej zamieszczone są listingi przedstawiające normlne wstrzykiwanie zależności w Ruby oraz z wykorzystaniem gemu Dependor.
 \newline
 
 
@@ -84,12 +85,12 @@ Poniżej zamieszczone są listingi przedstawiające normlne wstrzykiwanie zależ
 \end{subfigure}
 \end{figure}
 \noindent
-Chociaż Dependency Injection przy użyciu gemu Dependor wydaje się wygodne w aplikacjach ten gem należy raczej taktować jako \emph{proof of concept}.
+Chociaż Dependency Injection przy użyciu gemu Dependor wydaje się wygodne ten gem należy raczej taktować jako \emph{proof of concept}.
 \paragraph{Sprockets} ~\\
 \newline
-Do kompilacji CoffeeScript oraz szablonów \emph{.hamlc} (\emph{Haml Coffee Assets}) został użyty gem \emph{Sprockets} zawierający preprocessory dla języków takich jak CoffeeScript czy SCSS. Sprockets w środowisku developerskim pozwala na kompilacje assetów (JavaScriptów i CSSów) 'w locie', natomiast w środowisku produkcyjnym assety są prekompilowane. Sprockets pozwala również na minifikacje zasobów to jest zastąpienie nazw funkcji pojedyńczymi zakami w celu zmiejszenia rozmiaru kodu, który musi zostać pobrany przez przeglądarkę. 
+Do kompilacji CoffeeScript oraz szablonów \emph{.hamlc} (\emph{Haml Coffee Assets}) został użyty gem \emph{Sprockets} zawierający preprocessory dla języków takich jak CoffeeScript czy SCSS. Sprockets w środowisku developerskim pozwala na kompilacje assetów (JavaScriptów i CSSów) 'w locie', natomiast w środowisku produkcyjnym assety są prekompilowane. Sprockets pozwala również na minifikacje zasobów to jest zastąpienie nazw funkcji czy zmiennych pojedyńczymi znakami w celu zmiejszenia rozmiaru kodu, który musi zostać pobrany przez przeglądarkę. 
 
-Sprockets działa w kontekście Rack - minimalnego interfejsu dla aplikacji Ruby do komunikacji z popularnymi serwerami WWW. Zasoby serwowane przez sprockets są montowane w pliku \emph{config.ru}, będącym plikiem konfiguracyjnym dla interfaceu Rack poprzez który aplikacja jest uruchamiana. To tutaj tworzony jest wątek rejestrujący przejechanie linii startu oraz tutaj montowana jest ścieżka serwera WWW '/' tak aby pokazywała na aplikację Sinatra. 
+Sprockets działa w kontekście Rack - minimalnego interfejsu dla aplikacji Ruby do komunikacji z popularnymi serwerami WWW. Zasoby serwowane przez sprockets są montowane w pliku \emph{config.ru}, będącym plikiem konfiguracyjnym dla interfejsu Rack poprzez który aplikacja jest uruchamiana. To tutaj tworzony jest wątek rejestrujący przejechanie linii startu oraz tutaj montowana jest ścieżka serwera WWW '/' tak aby pokazywała na aplikację Sinatra. 
 \noindent
 Samo sprockets jest montowane w następujący sposób:
 \begin{listing}[H]
@@ -108,11 +109,18 @@ Wykorzystane tutaj zmienne klasowe (\emph{assets\_prefix}, \emph{sprockets}) apl
 \caption{Przeszukiwane foldery}
 \end{listing}
 \noindent
-Powyższe listingi umieszają skompilowane pliki z wyznaczonych ścieżek w folderze \emph{public/assets} pod nazwami \emph{application.js} oraz \emph{application.css}. Pliki te zawierają jedynie assety załączone poleceniem \emph{require} w pliku app/assets\newline /application.js.
+Powyższe listingi umieszczają skompilowane pliki z wyznaczonych ścieżek w folderze \emph{public/assets} pod nazwami \emph{application.js} oraz \emph{application.css}. Pliki te zawierają jedynie assety załączone poleceniem \emph{require} w plikach app/assets/javascripts/application.js i app/assets/stylesheets/application.css.
 \begin{listing}[H]
 \inputminted[linenos=true]{javascript}{./src/application.js}
 \caption{app/assets/javascripts/application.js}
 \end{listing}
+\begin{listing}[H]
+\inputminted[linenos=true]{javascript}{./src/application.css}
+\caption{app/assets/stylesheets/application.css}
+\end{listing}
+\paragraph{Twitter Bootstrap} ~\\
+\newline
+Twitter Bootstrap jest frameworkiem front-end dostarczającym style CSS oraz kod JavaScript przyśpieszające budowę frontu aplikacji. Bootstrap dostarcza zestaw klas HTML, które posiadają określone style. W tej pracy wykorzystany został Twitter Bootstrap w wersji drugiej. Aktualna wersja Bootstrapa to 3.1.1.
 \paragraph{HAML} ~\\
 \newline
 W projekcie został użyty HAML (HTML Abstraction Markup Language), który sprawia że kod jest przyjemniejszy do pisania i czytania. W HAML używa się jedynie tagów otwierających a o tym jak osadzone są elelemny decyduje indentacja. HAML posiada też skróty na sekcje div o podanym id lub klasie.
@@ -131,6 +139,7 @@ W projekcie został użyty HAML (HTML Abstraction Markup Language), który spraw
 \end{listing}
 \end{subfigure}
 \end{figure}
+\newpage
 \subsection{Implementacja}
 \subsubsection{Aplikacja}
 \subsubsection{Worker}

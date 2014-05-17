@@ -4,11 +4,12 @@
 \contentsline {subsection}{\numberline {3.1}Architektura}{6}{subsection.3.1}
 \contentsline {subsection}{\numberline {3.2}Wybrane technologie}{6}{subsection.3.2}
 \contentsline {paragraph}{Memcached}{6}{section*.3}
-\contentsline {paragraph}{Dependency Injection}{6}{section*.4}
+\contentsline {paragraph}{Dependency Injection}{7}{section*.4}
 \contentsline {paragraph}{Sprockets}{7}{section*.6}
-\contentsline {paragraph}{HAML}{9}{section*.7}
-\contentsline {subsection}{\numberline {3.3}Implementacja}{10}{subsection.3.3}
-\contentsline {subsubsection}{\numberline {3.3.1}Aplikacja}{10}{subsubsection.3.3.1}
-\contentsline {subsubsection}{\numberline {3.3.2}Worker}{10}{subsubsection.3.3.2}
-\contentsline {subsection}{\numberline {3.4}Obudowa ochronna}{10}{subsection.3.4}
-\contentsline {section}{\numberline {4}Wnioski}{10}{section.4}
+\contentsline {paragraph}{Twitter Bootstrap}{9}{section*.7}
+\contentsline {paragraph}{HAML}{9}{section*.8}
+\contentsline {subsection}{\numberline {3.3}Implementacja}{11}{subsection.3.3}
+\contentsline {subsubsection}{\numberline {3.3.1}Aplikacja}{11}{subsubsection.3.3.1}
+\contentsline {subsubsection}{\numberline {3.3.2}Worker}{11}{subsubsection.3.3.2}
+\contentsline {subsection}{\numberline {3.4}Obudowa ochronna}{11}{subsection.3.4}
+\contentsline {section}{\numberline {4}Wnioski}{11}{section.4}
