@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.6.24)  17 MAY 2014 19:48
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.6.24)  17 MAY 2014 21:38
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -851,29 +851,34 @@ Underfull \hbox (badness 10000) in paragraph at lines 124--142
 
  []
 
-[9] [10]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 149.
+[9]
+Underfull \hbox (badness 10000) in paragraph at lines 142--145
+
+ []
+
+[10]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 156.
  [11]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 149.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 156.
  (./praca.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 149.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 149.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 156.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 156.
 Package rerunfilecheck Info: File `praca.out' has not changed.
 (rerunfilecheck)             Checksum: D5312E3AF39A0D72691F3E9C0A192243;577.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 149.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 156.
  ) 
 Here is how much of TeX's memory you used:
- 8469 strings out of 495024
- 127485 string characters out of 3181154
+ 8470 strings out of 495024
+ 127496 string characters out of 3181154
  223669 words of memory out of 3000000
  11453 multiletter control sequences out of 15000+200000
  10214 words of font info for 31 fonts, out of 3000000 for 9000
  34 hyphenation exceptions out of 8191
- 42i,18n,46p,690b,660s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 42i,18n,46p,840b,660s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/pltt.enc}{/usr/share/texliv
 e/texmf-dist/fonts/enc/dvips/pl/plrm.enc}{/usr/share/texlive/texmf-dist/fonts/e
 nc/dvips/pl/plitt.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/pl/plbx
@@ -882,10 +887,10 @@ hare/texlive/texmf-dist/fonts/type1/public/pl/plr10.pfb></usr/share/texlive/tex
 mf-dist/fonts/type1/public/pl/plr12.pfb></usr/share/texlive/texmf-dist/fonts/ty
 pe1/public/pl/plr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plt
 t10.pfb>
-Output written on praca.pdf (11 pages, 480524 bytes).
+Output written on praca.pdf (11 pages, 482334 bytes).
 PDF statistics:
- 206 PDF objects out of 1000 (max. 8388607)
- 161 compressed objects within 2 object streams
- 36 named destinations out of 1000 (max. 500000)
+ 210 PDF objects out of 1000 (max. 8388607)
+ 165 compressed objects within 2 object streams
+ 37 named destinations out of 1000 (max. 500000)
  111 words of extra memory for PDF output out of 10000 (max. 10000000)
 

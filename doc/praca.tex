@@ -24,7 +24,7 @@ Przedmiotem niniejszej pracy jest budowa mobilnego systemu pomiaru czasu dla zaw
 \section{Wstęp}
 Obecnie na rynku istnieją podobne systemy do tego, którego budowę ta praca przedstawia, jednak często kosztują tysiące złotych. Praca ta jest próbą stowrzenia rozwiązania spełniającego podobne zadanie do ww. systemów korzystając z ogólnie dostępnych podzespołów za nie wielkie pieniądze.
 
-Jako szkielet systemu zostało wybrane Raspberry Pi - platforma komputerowa stworzona przez Raspberry Fundation. W momencie premiery (29 luty 2012) model B użyty w tej pracy miał cenę początkową US\$ 35. Raspberry Pi oparte jest o chip BCM2835 zawierający procesor ARMv6. Urządzenie działa pod kontrolą dystrybucji systemu Linux Raspbian będącą portem Debiana Wheezy koniecznym z powodu niekompatybilności (oficjalne wydanie Debiana Wheezy na platformę armhf działa jedynie z procesorami ARMv7 lub nowszymi).
+Jako szkielet systemu zostało wybrane Raspberry Pi - platforma komputerowa stworzona przez Raspberry Fundation. W momencie premiery (29 luty 2012) model B użyty w tej pracy miał cenę początkową US\$ 35. Raspberry Pi oparte jest o chip BCM2835 zawierający procesor ARMv6. Urządzenie działa pod kontrolą dystrybucji systemu Linux Raspbian będącą portem Debiana Wheezy koniecznym z powodu braku kompatybilności (oficjalne wydanie Debiana Wheezy na platformę armhf działa jedynie z procesorami ARMv7 lub nowszymi).
 
 Obie aplikacjie (startowa i końcowa) zostały napistane przy użyciu języka Ruby 2.1.0 oraz dla aplikacji startowej stworzony został interface web umożliwiający wprowadzanie zawodników oraz podgląd wynikow, jak równiez import oraz eksport. Napisany został on przy użyciu CoffeeScript oraz biblioteki JavaScript Backbone.js. 
 CoffeeScript jest językiem inspirowanym elegancką składnią Ruby i Pythona, który kompiluje się do JavaScriptu. Backbone.js natomiast zapewnia strukturę aplikacji.
@@ -46,7 +46,7 @@ Kompletny kod źródłowy pracy można znaleść pod adresami:
 \noindent
 \section{Realizacja tematu}
 \subsection{Architektura}
-System, którego ta praca dotyczy, został zbudowany w myśl modelu master/slave gdzie mastertem jest aplikacja początkowa. To tam znajduje się interface, baza danych oraz serwer Memcached. W momencie uruchomienia aplikacji, oprócz startu serwera serwującego aplikację WEB tworzony jest nowy wątek zawierający event-loop, który rejestruje przecięcie wiązki lasera, a kiedy to sie stanie ustawia godzinę tego zdarzenia w cache.
+System, którego ta praca dotyczy, został zbudowany w myśl modelu master/slave gdzie mastertem jest aplikacja początkowa. To tam znajduje się interface, baza danych oraz serwer Memcached. W momencie uruchomienia aplikacji, oprócz startu serwera serwującego aplikację WEB tworzony jest nowy wątek zawierający event loop, który rejestruje przecięcie wiązki lasera, a kiedy to sie stanie ustawia godzinę tego zdarzenia w cache.
 
 Zadaniem slavea~-~workera~-~jest jedynie pobranie czasu startu z Memcached, obliczenie czasu końcowego oraz wypisanie go na ekranie LCD linii końcowej w momencie finishu.
 \newline
@@ -78,7 +78,7 @@ Poniżej zamieszczone są listingi przedstawiające normlne wstrzykiwanie zależ
 \end{listing}
 \end{subfigure}
 \begin{subfigure}[t]{0.45\textwidth}
-\caption{Dependor}
+\caption{Ruby + Dependor}
 \begin{listing}[H]
 \inputminted{ruby}{./src/di_dependor.rb}
 \end{listing}
@@ -120,7 +120,7 @@ Powyższe listingi umieszczają skompilowane pliki z wyznaczonych ścieżek w fo
 \end{listing}
 \paragraph{Twitter Bootstrap} ~\\
 \newline
-Twitter Bootstrap jest frameworkiem front-end dostarczającym style CSS oraz kod JavaScript przyśpieszające budowę frontu aplikacji. Bootstrap dostarcza zestaw klas HTML, które posiadają określone style. W tej pracy wykorzystany został Twitter Bootstrap w wersji drugiej. Aktualna wersja Bootstrapa to 3.1.1.
+Twitter Bootstrap jest frameworkiem front-end dostarczającym style CSS oraz kod JavaScript, który za zadanie ma przyśpieszenie front-endu aplikacji. Bootstrap dostarcza zestaw klas HTML, które posiadają określone style. W tej pracy wykorzystany został Twitter Bootstrap w wersji drugiej. Aktualna wersja Bootstrapa to 3.1.1.
 \paragraph{HAML} ~\\
 \newline
 W projekcie został użyty HAML (HTML Abstraction Markup Language), który sprawia że kod jest przyjemniejszy do pisania i czytania. W HAML używa się jedynie tagów otwierających a o tym jak osadzone są elelemny decyduje indentacja. HAML posiada też skróty na sekcje div o podanym id lub klasie.
@@ -139,6 +139,13 @@ W projekcie został użyty HAML (HTML Abstraction Markup Language), który spraw
 \end{listing}
 \end{subfigure}
 \end{figure}
+\paragraph{Backbone.js} ~\\
+\newline
+Backbone.js jest lekką biblioteką JavaScript nadającą strukturę aplikacją JavaScript. Typowe użycie tej biblioteki jest to zazwyczaj trio pomiędzy samym backbonem a jQuery i underscore.js.
+
+W tej pracy został też użyty gem haml\_coffee\_assets pozwalający na pisanie szablonów Backbone w języku HAML z osadzonym CoffeeScriptem (podobnie jak w eRuby). 
+
+Biblioteka Backbone.js stara się odtworzyć to co jest po stronie serwera w modelu MVC na stronę klienta (przeglądarki) i JavaScriptu. Model odzwierciedla zasób na serwerze i jest odpowiednikiem modelu po stronie serwera. Kolekcja jest grupą modeli pobieraną z serwera, na kolekcji zdefiniowane są zdarzenia (eng. \emph{events}), które ponownie renderują widok np. kiedy element zostanie dodany do kolekcji. W Backbone Router odpowiedzialny jest za tłumaczenie adresów URL na widoki oraz za obsługę historii przeglądarki. Widok jest odpowiednikiem kontrolera znanego z Rails. Odpowiada na zdarzenia w oknie przeglądarki takie jak kliknięcie myszką i podejmuje odpowiednie akcje. Szablony natomiast są, w przypadku tej pracy, kodem HAML używanym przez widoki do rendowania treści aplikacji.
 \newpage
 \subsection{Implementacja}
 \subsubsection{Aplikacja}
