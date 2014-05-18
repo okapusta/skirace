@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.6.24)  18 MAY 2014 17:10
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.6.24)  18 MAY 2014 17:32
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -890,82 +890,87 @@ Overfull \vbox (40.22583pt too high) has occurred while \output is active []
 
 
 [11]
+Underfull \hbox (badness 10000) in paragraph at lines 187--192
+
+ []
+
 runsystem(pygmentize -l ruby -f latex -F tokenmerge            -P linenos -P "v
 erboptions= " -o praca.out.pyg ./src/injector.rb)...executed.
 
- (./praca.out.pyg)
+(./praca.out.pyg)
 runsystem(rm praca.out.pyg)...executed.
 
+ [12]
 runsystem(pygmentize -l ruby -f latex -F tokenmerge            -P linenos -P "v
 erboptions= " -o praca.out.pyg ./src/io.rb)...executed.
 
  (./praca.out.pyg)
 runsystem(rm praca.out.pyg)...executed.
 
- [12] [13] [14]
-Underfull \hbox (badness 10000) in paragraph at lines 207--216
+ [13] [14]
+Underfull \hbox (badness 10000) in paragraph at lines 218--227
 
  []
 
 [15]
-Underfull \hbox (badness 10000) in paragraph at lines 228--231
+Underfull \hbox (badness 10000) in paragraph at lines 239--242
 
  []
 
 [16] [17] [18]
-Underfull \hbox (badness 10000) in paragraph at lines 403--408
+Underfull \hbox (badness 10000) in paragraph at lines 414--419
 
  []
 
 [19]
-Underfull \hbox (badness 10000) in paragraph at lines 453--456
+Underfull \hbox (badness 10000) in paragraph at lines 464--467
 
  []
 
 
-Overfull \hbox (3.17412pt too wide) in paragraph at lines 465--466
+Overfull \hbox (3.17412pt too wide) in paragraph at lines 476--477
 \OT4/phv/m/it/10.95 DI-RECT, IN-DI-RECT, IN-CI-DEN-TAL, SPE-CIAL, EXEM-PLA-RY, 
 OR CON-
  []
 
 
-Overfull \hbox (1.64856pt too wide) in paragraph at lines 465--466
+Overfull \hbox (1.64856pt too wide) in paragraph at lines 476--477
 \OT4/phv/m/it/10.95 SE-QU-EN-TIAL DA-MA-GES (IN-C-LU-DING, BUT NOT LI-MI-TED TO
 , PRO-
  []
 
 
-Overfull \hbox (7.88388pt too wide) in paragraph at lines 465--466
+Overfull \hbox (7.88388pt too wide) in paragraph at lines 476--477
 \OT4/phv/m/it/10.95 DA-TA, OR PRO-FITS; OR BU-SI-NESS IN-TER-RUP-TION) HO-WE-VE
 R CAU-
  []
 
 [20]
-LaTeX Font Info:    Try loading font information for OMS+phv on input line 470.
+LaTeX Font Info:    Try loading font information for OMS+phv on input line 481.
 
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsphv.fd
 File: omsphv.fd 
 )
 LaTeX Font Info:    Font shape `OMS/phv/m/it' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 470.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 481.
 
 
 LaTeX Font Warning: Font shape `OT4/phv/bx/it' undefined
-(Font)              using `OT4/phv/bx/n' instead on input line 470.
+(Font)              using `OT4/phv/bx/n' instead on input line 481.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 495.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 506.
 [21] [22]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 495.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 506.
  (./praca.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 495.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 495.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 506.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 506.
 Package rerunfilecheck Info: File `praca.out' has not changed.
 (rerunfilecheck)             Checksum: 99246845867C5FCB2E183D7AD7CC48DD;1060.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 495.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 506.
  ) 
 Here is how much of TeX's memory you used:
  8582 strings out of 495024
@@ -974,7 +979,7 @@ Here is how much of TeX's memory you used:
  11486 multiletter control sequences out of 15000+200000
  10471 words of font info for 32 fonts, out of 3000000 for 9000
  34 hyphenation exceptions out of 8191
- 42i,18n,46p,1129b,660s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 42i,18n,46p,840b,660s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plmi.enc}{/usr/share/texliv
 e/texmf-dist/fonts/enc/dvips/pl/pltt.enc}{/usr/share/texlive/texmf-dist/fonts/e
 nc/dvips/pl/plrm.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plitt.en
@@ -985,7 +990,7 @@ nts/type1/public/pl/plmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
 c/pl/plr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plr12.pfb><
 /usr/share/texlive/texmf-dist/fonts/type1/public/pl/plr6.pfb></usr/share/texliv
 e/texmf-dist/fonts/type1/public/pl/pltt10.pfb>
-Output written on praca.pdf (22 pages, 772061 bytes).
+Output written on praca.pdf (22 pages, 772157 bytes).
 PDF statistics:
  372 PDF objects out of 1000 (max. 8388607)
  310 compressed objects within 4 object streams
