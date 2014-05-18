@@ -14,16 +14,17 @@
 \contentsline {subsection}{\numberline {3.5}Implementacja}{11}{subsection.3.5}
 \contentsline {subsubsection}{\numberline {3.5.1}Aplikacja}{11}{subsubsection.3.5.1}
 \contentsline {paragraph}{API}{14}{section*.12}
-\contentsline {paragraph}{Front-end}{14}{section*.13}
+\contentsline {paragraph}{Warden}{14}{section*.13}
+\contentsline {paragraph}{Front-end}{14}{section*.14}
 \contentsline {subsubsection}{\numberline {3.5.2}Worker}{14}{subsubsection.3.5.2}
 \contentsline {subsection}{\numberline {3.6}Obudowa ochronna}{14}{subsection.3.6}
 \contentsline {section}{\numberline {4}Wnioski}{14}{section.4}
 \contentsline {section}{\numberline {5}Licencje Gem\IeC {\'o}w}{15}{section.5}
 \contentsline {subsection}{\numberline {5.1}Tre\IeC {\'s}ci licencji}{15}{subsection.5.1}
-\contentsline {paragraph}{MIT}{15}{section*.14}
-\contentsline {paragraph}{LGPLv3}{16}{section*.15}
-\contentsline {paragraph}{Ruby}{19}{section*.16}
-\contentsline {paragraph}{BSD-3}{20}{section*.17}
+\contentsline {paragraph}{MIT}{15}{section*.15}
+\contentsline {paragraph}{LGPLv3}{16}{section*.16}
+\contentsline {paragraph}{Ruby}{19}{section*.17}
+\contentsline {paragraph}{BSD-3}{20}{section*.18}
 \contentsline {subsection}{\numberline {5.2}Gemy oraz ich licencje}{21}{subsection.5.2}
 \contentsline {section}{\numberline {6}Dodatek A - Capistrano}{22}{section.6}
 \contentsline {section}{\numberline {7}Dodatek B - God}{22}{section.7}

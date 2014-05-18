@@ -190,7 +190,9 @@ W swoim konstuktorze oczekuje obiektów Sinatra dlatego tutaj inicjalizowana jes
 \noindent
 Obiekt klasy Injector jest przekazywany w bloku, gdzie póżniej dostarcza obiektów takich jak \emph{capacitor}, którego klasa jest zdefiniowana w pliku \newline \emph{app/services/components/capacitor.rb}. 
 
-W klasie Injector są definiowane moduły które mają być przeszukane w poszukiwaniu klas, które maja być wstrzykiwane co przedstawia listing \ref{injector}. Nazwy przyjmowane w argumentach metody \emph{takes} oraz nazwy metod wywołanych na obiekcie Injector odpowiadają nazwą plików wstrszykiwanych klas, zakładając że nazwy klas w tych plikach są zgodne z nazwą piku według przyjętych konwencji w programowaniu Ruby.
+W klasie Injector są definiowane moduły które mają być przeszukane w poszukiwaniu klas, które maja być wstrzykiwane co przedstawia listing \ref{injector}. Nazwy przyjmowane w argumentach metody \emph{takes} oraz nazwy metod wywołanych na obiekcie Injector odpowiadają nazwą plików wstrszykiwanych klas. Warunkiem tego jest odpowiednie nazewnictwo klas i plików zgodnie z konwencjami przyjętymi w programowaniu Ruby.
+
+W Ruby przyjęło się nazywanie nazw klas i modułów z dużej litery~CamelCase~a pliki zawierające te klasy powinny mieć taką samą nazwę jak klasa tylko zapisaną w snake\_case z rozszerzeniem *.rb.
 \begin{listing}[H]
 \inputminted[linenos=true]{ruby}{./src/injector.rb}
 \caption{Klasa injector odpowiedzialna za tworzenie obiektów z wykorzystaniem DI}
@@ -198,13 +200,8 @@ $\label{injector}$
 \end{listing}
 \noindent
 Powyższy listing przedstawia jedynie fragment klasy Injector ponieważ jest zbyt długa aby ją całą zamieścić. 
-\newpage
-Pozostałe metody klasy zawierają jedynie obiekty lub nazwy stałych, które są wstrzykiwane. W konstruktorze klasy Injector jest też inicjalizowane GPIO (General Purpose Input Output). \emph{io} jest metodą przedstawioną na listingu \ref{io}.
-\begin{listing}[H]
-\inputminted[linenos=true]{ruby}{./src/io.rb}
-\caption{Klasa Wiringpi}
-$\label{io}$
-\end{listing}
+
+Pozostałe metody klasy zawierają jedynie obiekty lub nazwy stałych, które są wstrzykiwane. W konstruktorze klasy Injector jest też inicjalizowane GPIO (General Purpose Input Output).
 \newpage
 \paragraph{API}
 \paragraph{Warden}
