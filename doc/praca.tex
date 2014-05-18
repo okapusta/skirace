@@ -26,7 +26,7 @@ Obecnie na rynku istnieją podobne systemy do tego, którego budowę ta praca pr
 
 Jako szkielet systemu zostało wybrane Raspberry Pi - platforma komputerowa stworzona przez Raspberry Fundation. W momencie premiery (29 luty 2012) model B użyty w tej pracy miał cenę początkową US\$ 35. Raspberry Pi oparte jest o chip BCM2835 zawierający procesor ARMv6. Urządzenie działa pod kontrolą dystrybucji systemu Linux Raspbian będącą portem Debiana Wheezy koniecznym z powodu braku kompatybilności (oficjalne wydanie Debiana Wheezy na platformę armhf działa jedynie z procesorami ARMv7 lub nowszymi).
 
-Obie aplikacjie (startowa i końcowa) zostały napistane przy użyciu języka Ruby 2.1.0 oraz dla aplikacji startowej stworzony został interface web umożliwiający wprowadzanie zawodników oraz podgląd wynikow, jak równiez import oraz eksport. Napisany został on przy użyciu CoffeeScript oraz biblioteki JavaScript Backbone.js. 
+Obie aplikacjie (startowa i końcowa) zostały napistane przy użyciu języka Ruby 2.1.0 oraz dla aplikacji startowej stworzony został interface web umożliwiający wprowadzanie zawodników oraz podgląd wynikow, jak również import oraz eksport. Napisany został on przy użyciu CoffeeScript oraz biblioteki JavaScript Backbone.js. 
 CoffeeScript jest językiem inspirowanym elegancką składnią Ruby i Pythona, który kompiluje się do JavaScriptu. Backbone.js natomiast zapewnia strukturę aplikacji.
 \newline
 %W momencie pisania kodu aplikacji autor nie zdawał sobie jeszcze sprawy z pewnych dobrych pratyk pisania kodu JavaScript, zatem w kodzie znajdują się błędy, których należy unikać. Z tego powodu ta praca będzie się też starać je pokazać, na czym one polegają i jakie trudności w późniejszym utrzymaniu kodu podowują tak aby czytelnik był ich świadom i sam ich nie popełniał.
@@ -124,7 +124,7 @@ Powyższe listingi umieszczają skompilowane pliki z wyznaczonych ścieżek w fo
 \end{listing}
 \paragraph{Twitter Bootstrap} ~\\
 \newline
-Twitter Bootstrap jest frameworkiem front-end dostarczającym style CSS oraz kod JavaScript, który za zadanie ma przyśpieszenie front-endu aplikacji. Bootstrap dostarcza zestaw klas HTML, które posiadają określone style. W tej pracy wykorzystany został Twitter Bootstrap w wersji drugiej. Aktualna wersja Bootstrapa to 3.1.1.
+Twitter Bootstrap jest frameworkiem front-end dostarczającym style CSS oraz kod JavaScript, który za zadanie ma przyśpieszenie budowę front-endu aplikacji. Bootstrap dostarcza zestaw klas HTML, które posiadają określone style. W tej pracy wykorzystany został Twitter Bootstrap w wersji drugiej. Aktualna wersja Bootstrapa to 3.1.1.
 \paragraph{HAML} ~\\
 \newline
 W projekcie został użyty HAML (HTML Abstraction Markup Language), który sprawia że kod jest przyjemniejszy do pisania i czytania. W HAML używa się jedynie tagów otwierających a o tym jak osadzone są elelemny decyduje indentacja. HAML posiada też skróty na sekcje div o podanym id lub klasie.
@@ -170,9 +170,9 @@ Ten rozdział ma na celu przedstawienie budowy oraz podstaw teoretycznych dział
 \noindent
 W układzie o którym mowa w tym rozdziale resyztor $2.2k \Omega$ działa jako zabezpieczenie przed zbyt dużym napięciem skierowanym na port GPIO. Podłączony jest do fotorezystora, którego rezystancja jest niska kiedy świeci na niego wiązka lasera. Kondensator $1\mu F$ jest ładowany a kiedy przekroczy wartość graniczną rozładowuje się. Działanie to jest wykorzystane w kodzie aplikacji gdzie mierzony jest czas potrzebny na naładowanie kondensatora. Kiedy czas jest krótki znaczy to że na fotorezystor pada wiązka lasera, kiedy się zwiększy znaczy to że laser został przecięty tj. zawodnik przejechał przez start lub metę.
 \subsection{Implementacja}
-Ten rozdział zostanie poświęcony implementacji. Składa się on z dwóch podrozdziałów: Aplikacja, który opisuję budowę aplikacji startowej oraz rozdziału Worker opisującego worker rejestrujący przejechanie mety.
+Ninejszy rozdział zostanie poświęcony implementacji. Składa się on z dwóch podrozdziałów: Aplikacja, który opisuję budowę aplikacji startowej oraz rozdziału Worker opisującego worker rejestrujący przejechanie mety.
 \subsubsection{Aplikacja}
-Tak jak była o tym mowa we wstępie do ninejszej pracy aplikację startową można podzielić na dwa osobne komponenty. Jeden stanowi aplikacja napisana we frameworku Sinatra, która udostępnia API dla aplickacji Front-end do komunikacji z bazą danych. Ona także serwuje skompilowane zasoby oraz dostarcza połączenia z Memcached. W momencie uruchomienia aplikacji jest też tworzony nowy wątek, którego zadaniem jest zarejestrowanie czasu startu oraz ustawienie czasu tego zdarzenia w Memcached co przedstawia listing \ref{thread}.
+Tak jak była o tym mowa we wstępie do ninejszej pracy aplikację startową można podzielić na dwa osobne komponenty. Jeden stanowi aplikacja napisana we frameworku Sinatra, która udostępnia API dla aplikacji Front-end do komunikacji z bazą danych. Ona także serwuje skompilowane zasoby oraz dostarcza połączenia z Memcached. W momencie uruchomienia aplikacji jest też tworzony nowy wątek, którego zadaniem jest zarejestrowanie startu oraz ustawienie czasu tego zdarzenia w Memcached co przedstawia listing \ref{thread}.
 	Aplikacja front-end natomiast dostarcza interface dostępny przez przeglądarke internetową służący to interakcji z back-endem.
 \begin{listing}[H]
 \inputminted[linenos=true]{ruby}{./src/thread.rb}
@@ -180,6 +180,16 @@ Tak jak była o tym mowa we wstępie do ninejszej pracy aplikację startową mo�
 $\label{thread}$
 \end{listing}
 \end{minipage}
+\newpage
+Wykorzystana jest tutaj klasa Injector, będąca klasą gemu \emph{Dependor}, której zadaniem jest budowanie obiektów używających DI przy pomocu dependora w raz z wszelkimi zależnościami. W swoim konstuktorze oczekuje obiektów Sinatra zatem tutaj inicjalizowana jest pustym objektem OpenStruct, który odpowiada na dowolne metody oraz zwraca nil jeżeli nazwa metody wywołanej na rzecz tego obiektu nie zawiera się w Haszu, który został użyty do inicjalizacji. Obiekt klasy Injector jest przekazywany w bloku, gdzie póżniej dostarcza obiektów takich jak \emph{capacitor}, którego klasa jest zdefiniowana w pliku \emph{app/services/components/capacitor.rb}. W klasie Injector są definiowane moduły które mają być przeszukane w poszukiwaniu klas, które maja być wstrzykiwane co przedstawia listing \ref{injector}. Nazwy przyjmowane w argumentach metody \emph{takes} oraz nazwy metod wywołanych na obiekcie Injector odzwierciedlają nazwy plików pod warunkiem że nazwy klas w tych plikach są zgodne z nazwą piku według przyjętych konwencji w programowaniu Ruby.
+\begin{listing}[H]
+\inputminted[linenos=true]{ruby}{./src/injector.rb}
+\caption{Klasa injector odpowiedzialna za tworzenie obiektów z wykorzystaniem DI}
+$\label{injector}$
+\end{listing}
+\noindent
+Powyższy listing przedstawia jedynie fragment klasy Injector ponieważ jest zbyt długa aby ją całą zamieścić. Pozostałe metody klasy zawierają obiekty lub nazwy stałych, które są wstrzykiwane do pozostałych klas.
+\newpage
 \paragraph{API}
 \paragraph{Front-end}
 \subsubsection{Worker}
@@ -449,7 +459,7 @@ Redistribution and use in source and binary forms, with or without modification,
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-\subsection{Gemy}
+\subsection{Gemy oraz ich licencje}
 \begin{itemize}
 \item \textbf{execjs}  MIT
 \item \textbf{haml} MIT
@@ -468,11 +478,12 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 \item \textbf{binding\_of\_caller} MIT
 \item \textbf{pry} MIT
 \item \textbf{warden} MIT
-\item \textbf{bcrypt-ruby} MIT
+\item \textbf{bcrypt-ruby} MITs
 \item \textbf{memcache-client} BSD-3
 \item \textbf{dalli} MIT
 \item \textbf{nokogiri} MIT
 \end{itemize}
 \section{Dodatek A - Capistrano}
-
+\section{Dodatek B - God}
+\section{Dodatek C - YAGI}
 \end{document}
