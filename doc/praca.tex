@@ -13,7 +13,7 @@
 \usepackage{hyperref}
 \usepackage{subcaption}
 \usepackage{graphicx}
-% \setlength{\footskip}{75pt}
+\setlength{\footskip}{60pt}
 \begin{document} 
 \includepdf[pages={1,2}]{first-pages.pdf}
 \tableofcontents
@@ -28,19 +28,22 @@ Jako szkielet systemu zostało wybrane Raspberry Pi - platforma komputerowa stwo
 
 Obie aplikacjie (startowa i końcowa) zostały napistane przy użyciu języka Ruby 2.1.0 oraz dla aplikacji startowej stworzony został interface web umożliwiający wprowadzanie zawodników oraz podgląd wynikow, jak równiez import oraz eksport. Napisany został on przy użyciu CoffeeScript oraz biblioteki JavaScript Backbone.js. 
 CoffeeScript jest językiem inspirowanym elegancką składnią Ruby i Pythona, który kompiluje się do JavaScriptu. Backbone.js natomiast zapewnia strukturę aplikacji.
+\newline
+%W momencie pisania kodu aplikacji autor nie zdawał sobie jeszcze sprawy z pewnych dobrych pratyk pisania kodu JavaScript, zatem w kodzie znajdują się błędy, których należy unikać. Z tego powodu ta praca będzie się też starać je pokazać, na czym one polegają i jakie trudności w późniejszym utrzymaniu kodu podowują tak aby czytelnik był ich świadom i sam ich nie popełniał.
 
-W momencie pisania kodu aplikacji autor nie zdawał sobie jeszcze sprawy z pewnych dobrych pratyk pisania kodu JavaScript, zatem w kodzie znajdują się błędy, których należy unikać. Z tego powodu ta praca będzie się też starać je pokazać, na czym one polegają i jakie trudności w późniejszym utrzymaniu kodu podowują tak aby czytelnik był ich świadom i sam ich nie popełniał.
-\newpage
 \noindent
 W pracy zostały użyte różne \em{gemy}~-~programy i biblioteki managera paczek \emph{RubyGems}, których lista w raz z licencjami zostanie przedstawiona na końcu tej pracy.
 \newline
+
 \noindent
-\newline
 Kompletny kod źródłowy pracy można znaleść pod adresami:
 \newline
 \url{https://github.com/okapusta/skirace}
 \newline
 \url{https://github.com/okapusta/skirace-worker}
+
+\newpage
+
 %\end{minipage}
 \newpage
 \noindent
@@ -162,14 +165,27 @@ Ten rozdział ma na celu przedstawienie budowy oraz podstaw teoretycznych dział
 \includegraphics[scale=0.15]{./img/sensor_bb.png}
 \caption{Sensor}
 \end{figure}
-\newline
+\newpage
+\begin{minipage}{\textwidth}
 \noindent
 W układzie o którym mowa w tym rozdziale resyztor $2.2k \Omega$ działa jako zabezpieczenie przed zbyt dużym napięciem skierowanym na port GPIO. Podłączony jest do fotorezystora, którego rezystancja jest niska kiedy świeci na niego wiązka lasera. Kondensator $1\mu F$ jest ładowany a kiedy przekroczy wartość graniczną rozładowuje się. Działanie to jest wykorzystane w kodzie aplikacji gdzie mierzony jest czas potrzebny na naładowanie kondensatora. Kiedy czas jest krótki znaczy to że na fotorezystor pada wiązka lasera, kiedy się zwiększy znaczy to że laser został przecięty tj. zawodnik przejechał przez start lub metę.
 \subsection{Implementacja}
+Ten rozdział zostanie poświęcony implementacji. Składa się on z dwóch podrozdziałów: Aplikacja, który opisuję budowę aplikacji startowej oraz rozdziału Worker opisującego worker rejestrujący przejechanie mety.
 \subsubsection{Aplikacja}
+Tak jak była o tym mowa we wstępie do ninejszej pracy aplikację startową można podzielić na dwa osobne komponenty. Jeden stanowi aplikacja napisana we frameworku Sinatra, która udostępnia API dla aplickacji Front-end do komunikacji z bazą danych. Ona także serwuje skompilowane zasoby oraz dostarcza połączenia z Memcached. W momencie uruchomienia aplikacji jest też tworzony nowy wątek, którego zadaniem jest zarejestrowanie czasu startu oraz ustawienie czasu tego zdarzenia w Memcached co przedstawia listing \ref{thread}.
+	Aplikacja front-end natomiast dostarcza interface dostępny przez przeglądarke internetową służący to interakcji z back-endem.
+\begin{listing}[H]
+\inputminted[linenos=true]{ruby}{./src/thread.rb}
+\caption{Utworzenie wątku w pliku config.ru}
+$\label{thread}$
+\end{listing}
+\end{minipage}
+\paragraph{API}
+\paragraph{Front-end}
 \subsubsection{Worker}
 \subsection{Obudowa ochronna}
 \section{Wnioski}
+\newpage
 \section{Licencje Gemów}
 \subsection{Treści licencji}
 \paragraph{MIT} ~\\
@@ -370,7 +386,7 @@ Library.
 \end{enumerate}
 \paragraph{Ruby} ~\\
 \newline
-Ruby is copyrighted free software by Yukihiro Matsumoto <matz@netlab.jp>.
+Ruby is copyrighted free software by Yukihiro Matsumoto matz@netlab.jp.
 You can redistribute it and/or modify it under either the terms of the
 2-clause BSDL (see the file BSDL), or the conditions below:
 \begin{enumerate}
