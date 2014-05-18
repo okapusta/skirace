@@ -20,7 +20,7 @@
 \newpage	
 %\begin{minipage}{\linewidth}
 \section{Cel i zakres pracy}
-Przedmiotem niniejszej pracy jest budowa mobilnego systemu pomiaru czasu dla zawodów narciarskich. System składa się z dwóch bramek: startowej oraz końcowej, które wykorzystują wiązke laserową w celu uchwicenia dokładnego momentu przejechania zawodnika przez bramkę. Niniejsza praca będzie się składać z trzech głównych części. Pierwsza z nich poświęcona zostanie architekturze systemu i wykorzystanych technologiach, a w szczególności komunikacji pomiędzy komponentami oraz podstawą teoretycznym działania. Druga część tej pracy zawiera opis implementacji, zaś trzecia część jest poświęcona umieszczeniu systemu w obudowie ochronnej.
+Przedmiotem niniejszej pracy jest budowa mobilnego systemu pomiaru czasu dla zawodów narciarskich. System składa się z dwóch bramek: startowej oraz końcowej, które wykorzystują wiązke laserową w celu uchwycenia dokładnego momentu przejechania zawodnika przez bramkę. Niniejsza praca będzie się składać z trzech głównych części. Pierwsza z nich poświęcona zostanie architekturze systemu i wykorzystanych technologiach, a w szczególności, komunikacji pomiędzy komponentami oraz podstawą teoretycznym działania. Druga część tej pracy zawiera opis implementacji, zaś trzecia część jest poświęcona umieszczeniu systemu w obudowie ochronnej.
 \section{Wstęp}
 Obecnie na rynku istnieją podobne systemy do tego, którego budowę ta praca przedstawia, jednak często kosztują tysiące złotych. Praca ta jest próbą stowrzenia rozwiązania spełniającego podobne zadanie do ww. systemów korzystając z ogólnie dostępnych podzespołów za nie wielkie pieniądze.
 
@@ -149,7 +149,7 @@ Backbone.js jest lekką biblioteką JavaScript nadającą strukturę aplikacją 
 
 W tej pracy został też użyty gem haml\_coffee\_assets pozwalający na pisanie szablonów Backbone w języku HAML z osadzonym CoffeeScriptem (podobnie jak w eRuby). 
 
-Biblioteka Backbone.js stara się odtworzyć to co jest po stronie serwera w modelu MVC na stronę klienta (przeglądarki) i JavaScriptu. Model odzwierciedla zasób na serwerze i jest odpowiednikiem modelu po stronie serwera. Kolekcja jest grupą modeli pobieraną z serwera, na kolekcji zdefiniowane są zdarzenia (eng. \emph{events}), które ponownie renderują widok np. kiedy element zostanie dodany do kolekcji. W Backbone Router odpowiedzialny jest za tłumaczenie adresów URL na widoki oraz za obsługę historii przeglądarki. Widok jest odpowiednikiem kontrolera znanego z Rails. Odpowiada na zdarzenia w oknie przeglądarki takie jak kliknięcie myszką i podejmuje odpowiednie akcje. Szablony natomiast są, w przypadku tej pracy, kodem HAML używanym przez widoki do rendowania treści aplikacji.
+Biblioteka Backbone.js stara się odtworzyć to co jest po stronie serwera w modelu MVC na stronę klienta (przeglądarki) i JavaScriptu. Model odzwierciedla zasób na serwerze i jest odpowiednikiem modelu po stronie serwera. Kolekcja jest grupą modeli pobieraną z serwera. Na kolekcji zdefiniowane są zdarzenia (eng. \emph{events}), które ponownie renderują widok np. kiedy element zostanie dodany do kolekcji. W Backbone Router odpowiedzialny jest za tłumaczenie adresów URL na widoki oraz za obsługę historii przeglądarki. Widok jest odpowiednikiem kontrolera znanego z Rails. Odpowiada na zdarzenia w oknie przeglądarki takie jak kliknięcie myszką i podejmuje odpowiednie akcje. Szablony natomiast są, w przypadku tej pracy, kodem HAML używanym przez widoki do rendowania treści aplikacji.
 \newpage
 \subsection{Komunikacja}
 Oba urządzenia komunikują się ze sobą przy pomocy WiFi w trybie pracy Ad Hoc. Jako karta sieciowa została wybrana karta USB TP-Link TL-WN722N ponieważ posiada antenę o zysku 4dBi, którą można odkręcić oraz zamontować mocniejszą antenę. Poniższy listing przedstawia konfiguracje urządzenia do pracy w trybie Ad Hoc.
@@ -172,8 +172,8 @@ W układzie o którym mowa w tym rozdziale resyztor $2.2k \Omega$ działa jako z
 \subsection{Implementacja}
 Ninejszy rozdział zostanie poświęcony implementacji. Składa się on z dwóch podrozdziałów: Aplikacja, który opisuję budowę aplikacji startowej oraz rozdziału Worker opisującego worker rejestrujący przejechanie mety.
 \subsubsection{Aplikacja}
-Tak jak była o tym mowa we wstępie do ninejszej pracy aplikację startową można podzielić na dwa osobne komponenty. Jeden stanowi aplikacja napisana we frameworku Sinatra, która udostępnia API dla aplikacji Front-end do komunikacji z bazą danych. Ona także serwuje skompilowane zasoby oraz dostarcza połączenia z Memcached. W momencie uruchomienia aplikacji jest też tworzony nowy wątek, którego zadaniem jest zarejestrowanie startu oraz ustawienie czasu tego zdarzenia w Memcached co przedstawia listing \ref{thread}.
-	Aplikacja front-end natomiast dostarcza interface dostępny przez przeglądarke internetową służący to interakcji z back-endem.
+Tak jak była o tym mowa we wstępie do ninejszej pracy aplikację startową można podzielić na dwa osobne komponenty. Jeden stanowi aplikacja napisana we frameworku Sinatra, która udostępnia API dla aplikacji front-end do komunikacji z bazą danych. Ona także serwuje skompilowane zasoby oraz dostarcza połączenia z Memcached. W momencie uruchomienia aplikacji jest też tworzony nowy wątek, którego zadaniem jest zarejestrowanie startu oraz ustawienie czasu tego zdarzenia w Memcached co przedstawia listing \ref{thread}.
+	Aplikacja front-end natomiast dostarcza interfejs dostępny przez przeglądarke internetową służący to interakcji z back-endem.
 \begin{listing}[H]
 \inputminted[linenos=true]{ruby}{./src/thread.rb}
 \caption{Utworzenie wątku w pliku config.ru}
@@ -181,20 +181,26 @@ $\label{thread}$
 \end{listing}
 \end{minipage}
 \newpage
-Wykorzystana jest tutaj klasa Injector, będąca klasą gemu \emph{Dependor}, której zadaniem jest budowanie obiektów używających DI przy pomocu dependora w raz z wszelkimi zależnościami. W swoim konstuktorze oczekuje obiektów Sinatra zatem tutaj inicjalizowana jest pustym objektem OpenStruct, który odpowiada na dowolne metody oraz zwraca nil jeżeli nazwa metody wywołanej na rzecz tego obiektu nie zawiera się w Haszu, który został użyty do inicjalizacji. Obiekt klasy Injector jest przekazywany w bloku, gdzie póżniej dostarcza obiektów takich jak \emph{capacitor}, którego klasa jest zdefiniowana w pliku \emph{app/services/components/capacitor.rb}. W klasie Injector są definiowane moduły które mają być przeszukane w poszukiwaniu klas, które maja być wstrzykiwane co przedstawia listing \ref{injector}. Nazwy przyjmowane w argumentach metody \emph{takes} oraz nazwy metod wywołanych na obiekcie Injector odzwierciedlają nazwy plików pod warunkiem że nazwy klas w tych plikach są zgodne z nazwą piku według przyjętych konwencji w programowaniu Ruby.
+Wykorzystana jest tutaj klasa Injector, będąca klasą gemu \emph{Dependor}, której zadaniem jest budowanie obiektów używających DI przy pomocu dependora w raz z wszelkimi zależnościami. W swoim konstuktorze oczekuje obiektów Sinatra zatem tutaj inicjalizowana jest pustym objektem OpenStruct, który odpowiada na dowolne metody oraz zwraca nil jeżeli nazwa metody wywołanej na rzecz tego obiektu nie zawiera się w Haszu, który został użyty do inicjalizacji. Obiekt klasy Injector jest przekazywany w bloku, gdzie póżniej dostarcza obiektów takich jak \emph{capacitor}, którego klasa jest zdefiniowana w pliku \emph{app/services/components/capacitor.rb}. W klasie Injector są definiowane moduły które mają być przeszukane w poszukiwaniu klas, które maja być wstrzykiwane co przedstawia listing \ref{injector}. Nazwy przyjmowane w argumentach metody \emph{takes} oraz nazwy metod wywołanych na obiekcie Injector są nazwami plików wstrszykiwanych klas pod warunkiem że nazwy klas w tych plikach są zgodne z nazwą piku według przyjętych konwencji w programowaniu Ruby.
 \begin{listing}[H]
 \inputminted[linenos=true]{ruby}{./src/injector.rb}
 \caption{Klasa injector odpowiedzialna za tworzenie obiektów z wykorzystaniem DI}
 $\label{injector}$
 \end{listing}
 \noindent
-Powyższy listing przedstawia jedynie fragment klasy Injector ponieważ jest zbyt długa aby ją całą zamieścić. Pozostałe metody klasy zawierają obiekty lub nazwy stałych, które są wstrzykiwane do pozostałych klas.
+Powyższy listing przedstawia jedynie fragment klasy Injector ponieważ jest zbyt długa aby ją całą zamieścić. Pozostałe metody klasy zawierają obiekty lub nazwy stałych, które są wstrzykiwane. W konstruktorze klasy Injector jest też inicjalizowane GPIO (szesnasta linia powyższego listingu). \emph{io} jest metodą przedstawioną na listingu \ref{io}.
+\begin{listing}[H]
+\inputminted[linenos=true]{ruby}{./src/io.rb}
+\caption{Klasa Wiringpi}
+$\label{io}$
+\end{listing}
 \newpage
 \paragraph{API}
 \paragraph{Front-end}
 \subsubsection{Worker}
 \subsection{Obudowa ochronna}
 \section{Wnioski}
+Autor pracy wyciągnął jedynie jeden wniosek podczas piania tej pracy jak i codziennego utrzymania aplikacji Rails to jest, gem Dependor nie ma racji bytu w aplikacjach, które muszą przejść próbę życia w prawdziwym świecie oraz muszą sie skalować. Gem Dependor, zdaniem autora, powoduje tworzenie zbyt wielu obiektów tej samej klasy co prowadzi do problemów w późniejszym utrzymaniu kodu. Gem Dependor także prowadzi do zaciemnienia kodu z powodu magii, którą wprowadza.
 \newpage
 \section{Licencje Gemów}
 \subsection{Treści licencji}
