@@ -202,6 +202,22 @@ $\label{injector}$
 Powyższy listing przedstawia jedynie fragment klasy Injector ponieważ jest zbyt długa aby ją całą zamieścić. 
 
 Pozostałe metody klasy zawierają jedynie obiekty lub nazwy stałych, które są wstrzykiwane. W konstruktorze klasy Injector jest też inicjalizowane GPIO (General Purpose Input Output).
+
+Obsługę GPIO zapewnia WiringPi-Ruby - wrapper Ruby popularnej biblioteki C WiringPi. W klasie Injector defniuje go metoda pokazana na listingu \ref{io}
+
+\begin{listing}[H]
+\inputminted[linenos=true]{ruby}{./src/io.rb}
+\caption{WiringPi}
+$\label{io}$
+\end{listing}
+\noindent
+Metoda \emph{io} jest wstrzykiwana do klasy RaspberryPi::Gpio, która jest odpowiedzialna za ustawienie odpowiedniego kierunku pinu (INPUT|OUTPUT) oraz napisanie lub pobranie z pinu.
+
+\begin{listing}[H]
+\inputminted[linenos=true]{ruby}{./src/gpio.rb}
+\caption{app/services/rasperry\_pi/gpio.rb}
+$\label{gpio}$
+\end{listing}
 \newpage
 \paragraph{API}
 \paragraph{Warden}
@@ -498,6 +514,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 \item \textbf{dalli} MIT
 \item \textbf{nokogiri} MIT
 \end{itemize}
+\section{Summary}
 \section{Dodatek A - Capistrano}
 \section{Dodatek B - God}
 \section{Dodatek C - YAGI}

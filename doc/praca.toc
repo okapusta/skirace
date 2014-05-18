@@ -26,6 +26,7 @@
 \contentsline {paragraph}{Ruby}{19}{section*.17}
 \contentsline {paragraph}{BSD-3}{20}{section*.18}
 \contentsline {subsection}{\numberline {5.2}Gemy oraz ich licencje}{21}{subsection.5.2}
-\contentsline {section}{\numberline {6}Dodatek A - Capistrano}{22}{section.6}
-\contentsline {section}{\numberline {7}Dodatek B - God}{22}{section.7}
-\contentsline {section}{\numberline {8}Dodatek C - YAGI}{22}{section.8}
+\contentsline {section}{\numberline {6}Summary}{22}{section.6}
+\contentsline {section}{\numberline {7}Dodatek A - Capistrano}{22}{section.7}
+\contentsline {section}{\numberline {8}Dodatek B - God}{22}{section.8}
+\contentsline {section}{\numberline {9}Dodatek C - YAGI}{22}{section.9}
