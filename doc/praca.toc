@@ -20,13 +20,13 @@
 \contentsline {subsection}{\numberline {3.6}Obudowa ochronna}{16}{subsection.3.6}
 \contentsline {section}{\numberline {4}Wnioski}{16}{section.4}
 \contentsline {section}{\numberline {5}Licencje Gem\IeC {\'o}w}{17}{section.5}
-\contentsline {subsection}{\numberline {5.1}Tre\IeC {\'s}ci licencji}{17}{subsection.5.1}
-\contentsline {paragraph}{\numberline {5.1.0.1}MIT}{17}{paragraph.5.1.0.1}
-\contentsline {paragraph}{\numberline {5.1.0.2}LGPLv3}{18}{paragraph.5.1.0.2}
-\contentsline {paragraph}{\numberline {5.1.0.3}Ruby}{21}{paragraph.5.1.0.3}
-\contentsline {paragraph}{\numberline {5.1.0.4}BSD-3}{22}{paragraph.5.1.0.4}
-\contentsline {subsection}{\numberline {5.2}Gemy oraz ich licencje}{23}{subsection.5.2}
-\contentsline {section}{\numberline {6}Summary}{24}{section.6}
-\contentsline {section}{\numberline {7}Dodatek A - Capistrano}{24}{section.7}
-\contentsline {section}{\numberline {8}Dodatek B - God}{24}{section.8}
-\contentsline {section}{\numberline {9}Dodatek C - YAGI}{24}{section.9}
+\contentsline {subsection}{\numberline {5.1}Wykaz gem\IeC {\'o}w}{17}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Tre\IeC {\'s}ci licencji}{19}{subsection.5.2}
+\contentsline {subsubsection}{\numberline {5.2.1}MIT}{19}{subsubsection.5.2.1}
+\contentsline {subsubsection}{\numberline {5.2.2}LGPLv3}{20}{subsubsection.5.2.2}
+\contentsline {subsubsection}{\numberline {5.2.3}Ruby}{23}{subsubsection.5.2.3}
+\contentsline {subsubsection}{\numberline {5.2.4}BSD-3}{24}{subsubsection.5.2.4}
+\contentsline {section}{\numberline {6}Summary}{25}{section.6}
+\contentsline {section}{\numberline {7}Dodatek A - Capistrano}{25}{section.7}
+\contentsline {section}{\numberline {8}Dodatek B - God}{25}{section.8}
+\contentsline {section}{\numberline {9}Dodatek C - YAGI}{25}{section.9}

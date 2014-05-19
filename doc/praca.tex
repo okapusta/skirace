@@ -248,12 +248,13 @@ Klasa w konstruktorze jako argument przyjume obiekt klasy \mbox{MemcacheConnecti
 \caption{Przykład wykorzystania metody fetch.}
 \end{listing}
 \newpage
+\noindent
+Klasa Connections::MemcaheConnection przyjmuje tutaj w metodzie takes symbol \emph{:dalli\_client}, który jest nazwą nazwą metody zawartej w klasie Injector zwracającą klasę \emph{Dalli::Client}.
 \begin{listing}
 \inputminted[linenos=true]{ruby}{./src/memcache.rb}
 \caption{app/services/connections/memcache.rb}
 $\label{mcon}$
 \end{listing}
-Przekazywany tutaj w metodzie takes \emph{:dalli\_client} jest nazwą metody zawartej w klasie Injector zwracającą klasę \emph{Dalli::Client}
 \paragraph{API}
 \paragraph{Warden}
 \paragraph{Front-end}
@@ -263,9 +264,73 @@ Przekazywany tutaj w metodzie takes \emph{:dalli\_client} jest nazwą metody zaw
 Autor pracy wyciągnął jedynie jeden wniosek podczas piania tej pracy jak i codziennego utrzymania aplikacji Rails to jest, gem Dependor nie ma racji bytu w aplikacjach, które muszą przejść próbę życia w prawdziwym świecie oraz mają sie skalować. Gem Dependor, zdaniem autora, powoduje tworzenie zbyt wielu obiektów tej samej klasy co prowadzi do problemów w późniejszym utrzymaniu kodu. Gem Dependor także prowadzi do zaciemnienia kodu z powodu magii, którą wprowadza.
 \newpage
 \section{Licencje Gemów}
+\subsection{Wykaz gemów}
+\begin{itemize}
+\item \textbf{execjs}  \\
+Autorzy: Sam Stephenson, Josh Peek \\
+Licencja: MIT
+\item \textbf{haml} MIT \\
+Autorzy: Hampton Catlin, Nathan Weizenbaum \\
+Licencja: MIT
+\item \textbf{haml\_coffee\_assets} \\
+Autor: Michael Kessler \\
+Licencja: MIT
+\item \textbf{uglifier} \\
+Autor: Ville Lautanala \\
+Licencja: MIT
+\item \textbf{sinatra} \\
+Autorzy: Blake Mizerany, Konstantin Haase \\
+Licencja: MIT 
+\item \textbf{sequel} \\
+Autorzy: Sharon Rosner, Jeremy Evans \\
+Licencja: MIT
+\item \textbf{sprockets} \\
+Autorzy: Sam Stephenson, Josua Peek \\
+Licencja: MIT
+\item \textbf{sprockets-helpers} \\ 
+Autor: Perer Browne \\
+Licencja: MIT
+\item \textbf{dependor-sinatra} \\ 
+Autor: Adam Pohorecki \\
+Licencja: MIT
+\item \textbf{therubyracer} \\ 
+Autor: Charles Lowell \\
+Licencja: MIT
+\item \textbf{wiringpi} GNU LGPLv3
+\item \textbf{thin} \\ 
+Autor: Marc-Andre Cournoyer \\
+Licencja: Ruby
+\item \textbf{sqlite3} \\ 
+Autorzy: Jamis Bluck, Luis Lavena, Aron Patterson \\
+Licencja: BSD-3
+\item \textbf{sass} \\
+Autorzy: Nathan Weizenbaum, Chris Eppstein, Hampton Catlin \\
+Licancja: MIT
+\item \textbf{binding\_of\_caller} \\ 
+Autor: John Mair \\
+Licencja: MIT
+\item \textbf{pry} \\
+Autorzy: John Mair, Conrad Irwin, Ryan Fitzgerald \\
+Licencja: MIT
+\item \textbf{warden} \\ 
+Autor: Daniel Neighman \\
+Licencja: MIT
+\item \textbf{bcrypt-ruby} \\ 
+Autor: Coda Hale \\
+Licencja: MIT
+\item \textbf{memcache-client} \\
+Autorzy: Eric Hodel, Robert Cottler, Mike Perham \\
+Licencja:  BSD-3
+\item \textbf{dalli} \\ 
+Autor: Mike Perham \\
+Licencja: MIT
+\item \textbf{nokogiri} \\ 
+Autorzy: Aaron Patterson, Mike Dalessio, Yoko Harada, Tim Eliott, Akinori MUSHA  \\
+Licencja: MIT
+\end{itemize}
+\newpage
 \subsection{Treści licencji}
-\paragraph{MIT} ~\\
-\newline
+\subsubsection{MIT}
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
 "Software"), to deal in the Software without restriction, including
@@ -285,8 +350,7 @@ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 \newpage
-\paragraph{LGPLv3} ~\\
-\newline
+\subsubsection{LGPLv3}
 Everyone is permitted to copy and distribute verbatim copies of this license document, but changing it is not allowed.
 
 This version of the GNU Lesser General Public License incorporates the terms and conditions of version 3 of the GNU General Public License, supplemented by the additional permissions listed below.
@@ -460,8 +524,7 @@ permanent authorization for you to choose that version for the
 Library.
 
 \end{enumerate}
-\paragraph{Ruby} ~\\
-\newline
+\subsubsection{Ruby}
 Ruby is copyrighted free software by Yukihiro Matsumoto matz@netlab.jp.
 You can redistribute it and/or modify it under either the terms of the
 2-clause BSDL (see the file BSDL), or the conditions below:
@@ -510,8 +573,7 @@ You can redistribute it and/or modify it under either the terms of the
      WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
      PURPOSE.
 \end{enumerate}
-\paragraph{BSD-3} ~\\
-\newline
+\subsubsection{BSD-3}
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 \begin{enumerate}
 
@@ -523,32 +585,6 @@ Redistribution and use in source and binary forms, with or without modification,
 
 \end{enumerate}
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
-
-\subsection{Gemy oraz ich licencje}
-\begin{itemize}
-\item \textbf{execjs}  MIT
-\item \textbf{haml} MIT
-\item \textbf{haml\_coffee\_assets} MIT
-\item \textbf{uglifier} MIT
-\item \textbf{sinatra} MIT
-\item \textbf{sequel} MIT
-\item \textbf{sprockets} MIT
-\item \textbf{sprockets-helpers} MIT
-\item \textbf{dependor-sinatra} MIT
-\item \textbf{therubyracer} MIT
-\item \textbf{wiringpi} GNU LGPLv3
-\item \textbf{thin} Ruby
-\item \textbf{sqlite3} BSD-3
-\item \textbf{sass} MIT
-\item \textbf{binding\_of\_caller} MIT
-\item \textbf{pry} MIT
-\item \textbf{warden} MIT
-\item \textbf{bcrypt-ruby} MIT
-\item \textbf{memcache-client} BSD-3
-\item \textbf{dalli} MIT
-\item \textbf{nokogiri} MIT
-\end{itemize}
 \section{Summary}
 \section{Dodatek A - Capistrano}
 \section{Dodatek B - God}
