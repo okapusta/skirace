@@ -153,7 +153,7 @@ W tej pracy został też użyty gem haml\_coffee\_assets pozwalający na pisanie
 Biblioteka Backbone.js stara się odtworzyć to co jest po stronie serwera w modelu MVC na stronę klienta (przeglądarki) i JavaScriptu. Model odzwierciedla zasób na serwerze i jest odpowiednikiem modelu po stronie serwera. Kolekcja jest grupą modeli pobieraną z serwera. Na kolekcji zdefiniowane są zdarzenia (eng. \emph{events}), które ponownie renderują widok np. kiedy element zostanie dodany do kolekcji. W Backbone Router odpowiedzialny jest za tłumaczenie adresów URL na widoki oraz za obsługę historii przeglądarki. Widok jest odpowiednikiem kontrolera znanego z Rails. Odpowiada na zdarzenia w oknie przeglądarki takie jak kliknięcie myszką i podejmuje odpowiednie akcje. Szablony natomiast są, w przypadku tej pracy, kodem HAML używanym przez widoki do rendowania treści aplikacji.
 \newpage
 \subsection{Komunikacja}
-Oba urządzenia komunikują się ze sobą przy pomocy WiFi w trybie pracy Ad Hoc. Jako karta sieciowa została wybrana karta USB TP-Link TL-WN722N ponieważ posiada antenę o zysku 4dBi, którą można odkręcić oraz zamontować mocniejszą antenę. Poniższy listing przedstawia konfiguracje urządzenia do pracy w trybie Ad Hoc.
+Oba urządzenia komunikują się ze sobą przy pomocy WiFi w trybie pracy Ad Hoc. Jako karta sieciowa została wybrana karta USB TP-Link \mbox{TL-WN722N} ponieważ posiada antenę o zysku 4dBi, którą można odkręcić oraz zamontować mocniejszą antenę. Poniższy listing przedstawia konfiguracje urządzenia do pracy w trybie Ad Hoc.
 \begin{listing}[H]
 \inputminted[linenos=true]{sh}{./src/adhoc}
 \caption{/etc/network/interfaces}
@@ -229,6 +229,17 @@ $\label{capacitor}$
 \end{listing}
 \noindent
 Zadaniem tej klasy jest napisanie wartości LOW na pin w celu rozładowania ładunku na kondensatorze. 
+
+Dzieje się to na początku pętli \emph{while} w wątku z listingu \ref{thread}. Następnie w tej samej pętli \emph{śpimy} przez 1ms oraz odczyt ustawiany jest na zero. W kolejnej pętli \emph{while} pin GPIO jest ustawiany na wejście, pobierana jest z niego wartość a kiedy kondensator przekroczy wartorść graniczną jest zwracany jest odczyt inkrementowany w tej pętli. 
+
+Jeśli jego wartość przekroczy zadany czas potrzebny na naładowanie kondensatora (tutaj próg aktywacji) w Memcached ustawiany jest dokładny czas tego zdarzenia pod kluczem \emph{start\_time}. Odpowiedzialna jest za to klasa CachingService przedstawiona na listingu \ref{caching}.
+\newpage	
+\begin{listing}[H]
+\inputminted[linenos=true]{ruby}{./src/cachingservice.rb}
+\caption{app/services/caching\_service.rb}
+$\label{caching}$
+\end{listing}
+
 \paragraph{API}
 \paragraph{Warden}
 \paragraph{Front-end}
