@@ -994,9 +994,6 @@ Package rerunfilecheck Info: File `praca.out' has not changed.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 558.
  ) 
 Here is how much of TeX's memory you used:
