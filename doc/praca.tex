@@ -14,6 +14,7 @@
 \usepackage{subcaption}
 \usepackage{graphicx}
 \setlength{\footskip}{60pt}
+\setcounter{secnumdepth}{5}
 \begin{document} 
 \includepdf[pages={1,2}]{first-pages.pdf}
 \tableofcontents
@@ -61,12 +62,12 @@ Zadaniem slavea~-~workera~-~jest jedynie pobranie czasu startu z Memcached, obli
 \noindent
 Komunikacjia pomiędzy dwiema bramkami odbywa się poprzez WiFi.
 \subsection{Wybrane technologie}
-\paragraph{Memcached} ~\\
-\newline
+\subsubsection{Memcached}
+\noindent
 Memcached jest to rozproszony system buforowania pamięci podręczniej oryginalnie zaprojektowany na potrzeby serwisu  LiveJournal. Pozwala on na przechowywanie obiektów w pamięci RAM przy pomocy kluczy (key-value store). W aplikacji wykorzystany został w celu przechowania czasów startu i finishu. Serwer Memcached jest uruchomiony tylko na jednej (startowej) bramce, worker natomiast łączy się z cache przy pomocy klienta i może pobierać lub pisać dane do pamięci drugiego urządzenia.
 \newpage
-\paragraph{Dependency Injection} ~\\
-\newline
+\subsubsection{Dependency Injection}
+\noindent
 W ninejszej pracy został wykorzystany wzorzec projektowy \emph{Dependency Injection (DI)} polegający na usuwaniu bespośrednich zależności klas na rzecz \emph{wstrzykiwania} ich w czasie konstruowania obiektu. Do osiągnięcia tego celu i uproszczenia  DI użyty został gem Dependor, udostępniający prosty DSL (\emph{eng. Domain Specific Language}) przeznaczony do tego celu.
 
 Poniżej zamieszczone są listingi przedstawiające normlne wstrzykiwanie zależności w Ruby oraz z wykorzystaniem gemu Dependor.
@@ -90,8 +91,8 @@ Poniżej zamieszczone są listingi przedstawiające normlne wstrzykiwanie zależ
 \end{figure}
 \noindent
 Chociaż Dependency Injection przy użyciu gemu Dependor wydaje się wygodne ten gem należy raczej taktować jako \emph{proof of concept}.
-\paragraph{Sprockets} ~\\
-\newline
+\subsubsection{Sprockets}
+\noindent
 Do kompilacji CoffeeScript oraz szablonów \emph{.hamlc} (\emph{Haml Coffee Assets}) został użyty gem \emph{Sprockets} zawierający preprocessory dla języków takich jak CoffeeScript czy SCSS. Sprockets w środowisku developerskim pozwala na kompilacje assetów (JavaScriptów i CSSów) 'w locie', natomiast w środowisku produkcyjnym assety są prekompilowane. Sprockets pozwala również na minifikacje zasobów to jest zastąpienie nazw funkcji czy zmiennych pojedyńczymi znakami w celu zmiejszenia rozmiaru kodu, który musi zostać pobrany przez przeglądarkę. 
 
 Sprockets działa w kontekście Rack - minimalnego interfejsu dla aplikacji Ruby do komunikacji z popularnymi serwerami WWW. Zasoby serwowane przez sprockets są montowane w pliku \emph{config.ru}, będącym plikiem konfiguracyjnym dla interfejsu Rack poprzez który aplikacja jest uruchamiana. To tutaj tworzony jest wątek rejestrujący przejechanie linii startu oraz tutaj montowana jest ścieżka serwera WWW '/' tak aby pokazywała na aplikację Sinatra. 
@@ -122,11 +123,11 @@ Powyższe listingi umieszczają skompilowane pliki z wyznaczonych ścieżek w fo
 \inputminted[linenos=true]{javascript}{./src/application.css}
 \caption{app/assets/stylesheets/application.css}
 \end{listing}
-\paragraph{Twitter Bootstrap} ~\\
-\newline
+\subsubsection{Twitter Bootstrap}
+\noindent
 Twitter Bootstrap jest frameworkiem front-end dostarczającym style CSS oraz kod JavaScript, który za zadanie ma przyśpieszenie budowę front-endu aplikacji. Bootstrap dostarcza zestaw klas HTML, które posiadają określone style. W tej pracy wykorzystany został Twitter Bootstrap w wersji drugiej. Aktualna wersja Bootstrapa to 3.1.1.
-\paragraph{HAML} ~\\
-\newline
+\subsubsection{HAML}
+\noindent
 W projekcie został użyty HAML (HTML Abstraction Markup Language), który sprawia że kod jest przyjemniejszy do pisania i czytania. W HAML używa się jedynie tagów otwierających a o tym jak osadzone są elelemny decyduje indentacja. HAML posiada też skróty na sekcje div o podanym id lub klasie.
 \begin{figure}[h]
 \centering
@@ -143,8 +144,8 @@ W projekcie został użyty HAML (HTML Abstraction Markup Language), który spraw
 \end{listing}
 \end{subfigure}
 \end{figure}
-\paragraph{Backbone.js} ~\\
-\newline
+\subsubsection{Backbone.js}
+\noindent
 Backbone.js jest lekką biblioteką JavaScript nadającą strukturę aplikacją JavaScript. Typowe użycie tej biblioteki jest to zazwyczaj trio pomiędzy samym backbonem a jQuery i underscore.js.
 
 W tej pracy został też użyty gem haml\_coffee\_assets pozwalający na pisanie szablonów Backbone w języku HAML z osadzonym CoffeeScriptem (podobnie jak w eRuby). 
@@ -168,7 +169,7 @@ Ten rozdział ma na celu przedstawienie budowy oraz podstaw teoretycznych dział
 \newpage
 \begin{minipage}{\textwidth}
 \noindent
-W układzie o którym mowa w tym rozdziale resyztor $2.2k \Omega$ działa jako zabezpieczenie przed zbyt dużym napięciem skierowanym na port GPIO. Podłączony jest do fotorezystora, którego rezystancja jest niska kiedy świeci na niego wiązka lasera. Kondensator $1\mu F$ jest ładowany a kiedy przekroczy wartość graniczną rozładowuje się. Działanie to jest wykorzystane w kodzie aplikacji gdzie mierzony jest czas potrzebny na naładowanie kondensatora. Kiedy czas jest krótki znaczy to że na fotorezystor pada wiązka lasera, kiedy się zwiększy znaczy to że laser został przecięty tj. zawodnik przejechał przez start lub metę.
+W układzie o którym mowa w tym rozdziale resyztor $2.2k \Omega$ działa jako zabezpieczenie przed zbyt dużym napięciem skierowanym na port GPIO. Podłączony jest do fotorezystora, którego rezystancja jest niska kiedy świeci na niego wiązka lasera. Kondensator $1\mu F$ jest ładowany a kiedy przekroczy wartość graniczną wynoszącą około 2V pin GPIO rejestruje wartość HIGH. Działanie to jest wykorzystane w kodzie aplikacji gdzie mierzony jest czas potrzebny na naładowanie kondensatora. Kiedy czas jest krótki znaczy to że na fotorezystor pada wiązka lasera, kiedy się zwiększy znaczy to że laser został przecięty tj. zawodnik przejechał przez start lub metę.
 \subsection{Implementacja}
 Ninejszy rozdział zostanie poświęcony implementacji. Składa się on z dwóch podrozdziałów: Aplikacja, który opisuję budowę aplikacji startowej oraz rozdziału Worker opisującego worker rejestrujący przejechanie mety.
 \subsubsection{Aplikacja}
@@ -192,7 +193,7 @@ Obiekt klasy Injector jest przekazywany w bloku, gdzie póżniej dostarcza obiek
 
 W klasie Injector są definiowane moduły które mają być przeszukane w poszukiwaniu klas, które maja być wstrzykiwane co przedstawia listing \ref{injector}. Nazwy przyjmowane w argumentach metody \emph{takes} oraz nazwy metod wywołanych na obiekcie Injector odpowiadają nazwą plików wstrszykiwanych klas. Warunkiem tego jest odpowiednie nazewnictwo klas i plików zgodnie z konwencjami przyjętymi w programowaniu Ruby.
 
-W Ruby przyjęło się nazywanie nazw klas i modułów z dużej litery~CamelCase~a pliki zawierające te klasy powinny mieć taką samą nazwę jak klasa tylko zapisaną w snake\_case z rozszerzeniem *.rb.
+W Ruby przyjęło się nazywanie nazw klas i modułów z dużej litery \mbox{CamelCase} a pliki zawierające te klasy powinny mieć taką samą nazwę jak klasa tylko zapisaną w snake\_case z rozszerzeniem *.rb.
 \begin{listing}[H]
 \inputminted[linenos=true]{ruby}{./src/injector.rb}
 \caption{Klasa injector odpowiedzialna za tworzenie obiektów z wykorzystaniem DI}
@@ -203,7 +204,7 @@ Powyższy listing przedstawia jedynie fragment klasy Injector ponieważ jest zby
 
 Pozostałe metody klasy zawierają jedynie obiekty lub nazwy stałych, które są wstrzykiwane. W konstruktorze klasy Injector jest też inicjalizowane GPIO (General Purpose Input Output).
 
-Obsługę GPIO zapewnia WiringPi-Ruby - wrapper Ruby popularnej biblioteki C WiringPi. W klasie Injector defniuje go metoda pokazana na listingu \ref{io}
+Obsługę GPIO zapewnia WiringPi-Ruby|wrapper Ruby popularnej biblioteki C WiringPi. W klasie Injector defniuje go metoda pokazana na listingu \ref{io}
 
 \begin{listing}[H]
 \inputminted[linenos=true]{ruby}{./src/io.rb}
@@ -211,14 +212,23 @@ Obsługę GPIO zapewnia WiringPi-Ruby - wrapper Ruby popularnej biblioteki C Wir
 $\label{io}$
 \end{listing}
 \noindent
-Metoda \emph{io} jest wstrzykiwana do klasy RaspberryPi::Gpio, która jest odpowiedzialna za ustawienie odpowiedniego kierunku pinu (INPUT|OUTPUT) oraz napisanie lub pobranie z pinu.
+Metoda \emph{io} jest wstrzykiwana do klasy RaspberryPi::Gpio, która jest odpowiedzialna za ustawienie odpowiedniego kierunku pinu (INPUT|OUTPUT) oraz napisanie lub pobranie z niego.
 
 \begin{listing}[H]
 \inputminted[linenos=true]{ruby}{./src/gpio.rb}
 \caption{app/services/rasperry\_pi/gpio.rb}
 $\label{gpio}$
 \end{listing}
-\newpage
+\newpage	
+\noindent
+Ta sama klasa \ref{gpio} użyta jest w workerze. Jest to jedna z zalet obiektowości a w szczególności dependency injection ponieważ klasa nie ma żadnych bezpośrenich zależności i może być łatwo przeniesiona do innej aplikacji. Klasa \emph{RaspberryPi::Gpio} jest w tej aplikacji użyta jedynie w klasie \emph{Components::Capacitor} \ref{capacitor}.
+\begin{listing}[H]
+\inputminted[linenos=true]{ruby}{./src/capacitor.rb}
+\caption{app/services/components/capacitor.rb}
+$\label{capacitor}$
+\end{listing}
+\noindent
+Zadaniem tej klasy jest napisanie wartości LOW na pin w celu rozładowania ładunku na kondensatorze. 
 \paragraph{API}
 \paragraph{Warden}
 \paragraph{Front-end}

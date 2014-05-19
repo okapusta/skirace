@@ -23,19 +23,6 @@ module Skirace
       end
     end
 
-    def search(hash = nil, key)
-      hash = hash || self 
-      
-      hash.each_pair do |_key, value|
-        next if hash[key]
-        
-        if value.is_a?(::Hash)
-          hash.class[value].search(value, key)
-        end 
-      end
-      hash[key]
-    end
-
     def symbolize_keys!(hash)
       hash.inject({}) do |h, (k, v)|
         h[k.to_sym] = v
