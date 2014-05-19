@@ -230,8 +230,10 @@ $\label{capacitor}$
 \noindent
 Zadaniem tej klasy jest napisanie wartości LOW na pin w celu rozładowania ładunku na kondensatorze. 
 
+\indent 
 Dzieje się to na początku pętli \emph{while} w wątku z listingu \ref{thread}. Następnie w tej samej pętli \emph{śpimy} przez 1ms oraz odczyt ustawiany jest na zero. W kolejnej pętli \emph{while} pin GPIO jest ustawiany na wejście, pobierana jest z niego wartość a kiedy kondensator przekroczy wartorść graniczną jest zwracany jest odczyt inkrementowany w tej pętli. 
 
+\indent 
 Jeśli jego wartość przekroczy zadany czas potrzebny na naładowanie kondensatora (tutaj próg aktywacji) w Memcached ustawiany jest dokładny czas tego zdarzenia pod kluczem \emph{start\_time}. Odpowiedzialna jest za to klasa CachingService przedstawiona na listingu \ref{caching}.
 \newpage	
 \begin{listing}[H]
@@ -239,7 +241,19 @@ Jeśli jego wartość przekroczy zadany czas potrzebny na naładowanie kondensat
 \caption{app/services/caching\_service.rb}
 $\label{caching}$
 \end{listing}
-
+\noindent
+Klasa w konstruktorze jako argument przyjume obiekt klasy \mbox{MemcacheConnection} pokazanej na listingu \ref{mcon}. Metody tej klasy \emph{get} oraz \emph{set} mają oczywiste działanie zatem zostaną pominięte. Warto jednak zwtócić uwagę na metodę fetch która próbuje pobrać wartość z cache a kiedy nic nie znajduje się pod przekazanym kluczem wywołuje metodę \emph{set} ustawiającą klucz wartością zwracaną przez przekazany blok. Przykładowe użycie tej metody przedstawiono poniżej.
+\begin{listing}
+\inputminted[linenos=true]{ruby}{./src/fetch.rb}
+\caption{Przykład wykorzystania metody fetch.}
+\end{listing}
+\newpage
+\begin{listing}
+\inputminted[linenos=true]{ruby}{./src/memcache.rb}
+\caption{app/services/connections/memcache.rb}
+$\label{mcon}$
+\end{listing}
+Przekazywany tutaj w metodzie takes \emph{:dalli\_client} jest nazwą metody zawartej w klasie Injector zwracającą klasę \emph{Dalli::Client}
 \paragraph{API}
 \paragraph{Warden}
 \paragraph{Front-end}
