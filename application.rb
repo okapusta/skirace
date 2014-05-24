@@ -70,11 +70,13 @@ class Skirace::Application < Sinatra::Base
 
     Warden::Strategies.add(:password) do
       def valid?
+        binding.pry
         @params = parse_params
         @params['username'] && @params['password']
       end
 
       def authenticate!
+        binding.pry
         user = injector.user_repository.get_by_username(@params['username'])
 
         if injector.authentication_service.authenticate(user, @params['password']).success
