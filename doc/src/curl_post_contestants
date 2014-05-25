@@ -1,0 +1,9 @@
+curl -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \ 
+  -X POST http://localhost:9292/contestants \
+  -d '{"contestant":
+        {"first_name":"oskar", "last_name":"kapusta"}, 
+       "contest":
+         {"id":"1"}}'  
+  -b cookie
+

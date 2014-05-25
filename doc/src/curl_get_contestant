@@ -1,0 +1,4 @@
+curl -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \ 
+  -X GET http://localhost:9292/contestants/1 \ 
+  -b cookie
