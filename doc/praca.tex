@@ -1,5 +1,7 @@
 \documentclass[11pt,a4paper, twoside]{article}
 \usepackage[top=2.5cm, bottom=2.5cm, left=3.5cm, right=2.5cm]{geometry}
+\usepackage{setspace}
+\setstretch{1.25}
 \usepackage{polski}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
@@ -76,7 +78,6 @@ Komunikacjia pomiędzy dwiema bramkami odbywa się poprzez WiFi.
 \subsection{Wybrane technologie}
 \subsubsection{Memcached}
 Memcached jest to rozproszony system buforowania pamięci podręczniej oryginalnie zaprojektowany na potrzeby serwisu  LiveJournal. Pozwala on na przechowywanie obiektów w pamięci RAM przy pomocy kluczy \mbox{(key-value store)}. W aplikacji wykorzystany został w celu przechowania czasów startu i finishu. Serwer Memcached jest uruchomiony tylko na jednej (startowej) bramce, worker natomiast łączy się z cache przy pomocy klienta i może pobierać lub pisać dane do pamięci drugiego urządzenia.
-\newpage
 \subsubsection{Dependency Injection}
 W ninejszej pracy został wykorzystany wzorzec projektowy \emph{Dependency Injection (DI)} polegający na usuwaniu bespośrednich zależności klas na rzecz \emph{wstrzykiwania} ich w czasie konstruowania obiektu. Do osiągnięcia tego celu i uproszczenia  DI użyty został gem Dependor, udostępniający zestaw metod i modułów przeznaczony do tego celu.
 
@@ -130,7 +131,6 @@ Powyższe listingi umieszczają skompilowane pliki z wyznaczonych ścieżek w fo
 \inputminted[linenos=true]{javascript}{./src/application.css}
 \caption{app/assets/stylesheets/application.css}
 \end{listing}
-\newpage
 \subsubsection{Twitter Bootstrap}
 Twitter Bootstrap jest frameworkiem front-end dostarczającym style CSS oraz kod JavaScript, który za zadanie ma przyśpieszenie budowę front-endu aplikacji. Bootstrap dostarcza zestaw klas HTML, które posiadają określone style. W tej pracy wykorzystany został Twitter Bootstrap w wersji drugiej. Aktualna wersja Bootstrapa to 3.1.1.
 \subsubsection{HAML}
@@ -156,7 +156,6 @@ Backbone.js jest lekką biblioteką JavaScript nadającą strukturę aplikacją 
 W tej pracy został też użyty gem haml\_coffee\_assets pozwalający na pisanie szablonów Backbone w języku HAML z osadzonym CoffeeScriptem (podobnie jak w eRuby). 
 
 Biblioteka Backbone.js stara się odtworzyć to co jest po stronie serwera w modelu MVC na stronę klienta (przeglądarki) i JavaScriptu. Model odzwierciedla zasób na serwerze i jest odpowiednikiem modelu po stronie serwera. Kolekcja jest grupą modeli pobieraną z serwera. Na kolekcji zdefiniowane są zdarzenia (eng. \emph{events}), które ponownie renderują widok np. kiedy element zostanie dodany do kolekcji. W Backbone Router odpowiedzialny jest za tłumaczenie adresów URL na widoki oraz za obsługę historii przeglądarki. Widok jest odpowiednikiem kontrolera znanego z Rails. Odpowiada na zdarzenia w oknie przeglądarki takie jak kliknięcie myszką i podejmuje odpowiednie akcje. Szablony natomiast są, w przypadku tej pracy, kodem HAML używanym przez widoki do rendowania treści aplikacji.
-\newpage
 \subsection{Komunikacja}
 Oba urządzenia komunikują się ze sobą przy pomocy WiFi w trybie pracy Ad Hoc. Jako karta sieciowa została wybrana karta USB TP-Link \mbox{TL-WN722N} ponieważ posiada antenę o zysku 4dBi, którą można odkręcić oraz zamontować mocniejszą antenę. Poniższy listing przedstawia konfiguracje urządzenia do pracy w trybie Ad Hoc.
 \begin{listing}[H]
@@ -166,7 +165,6 @@ Oba urządzenia komunikują się ze sobą przy pomocy WiFi w trybie pracy Ad Hoc
 Plik \emph{/etc/network/interfaces} drugiego urządzenia został skonfigurowany analogicznie. Różni sie on jedynie adresem IP ustawionym na \emph{192.168.1.2}. Urządzenia ustawione w trybie pracy Ad Hoc wykrywają się nawzajem i tworzą sieć o SSID SKIRACE.
 \subsection{Podstawy działania}
 Ten rozdział ma na celu przedstawienie budowy oraz podstaw teoretycznych działania czujnika rejestrującego przecięcie wiązki lasera. Składa sie on za fotorezystora, rezystora oraz kondensatora. Poniższy rysunek przedstawia jego budowę.
-\newline
 \begin{figure}[h]
 \includegraphics[scale=0.15]{./img/sensor_bb.png}
 \caption{Sensor}
@@ -175,6 +173,7 @@ Ten rozdział ma na celu przedstawienie budowy oraz podstaw teoretycznych dział
 \begin{minipage}{\linewidth}
 \noindent
 W układzie o którym mowa w tym rozdziale resyztor $2.2k \Omega$ działa jako zabezpieczenie przed zbyt dużym napięciem skierowanym na port GPIO. Podłączony jest do fotorezystora, którego rezystancja jest niska kiedy świeci na niego wiązka lasera. Kondensator $1\mu F$ jest ładowany a kiedy przekroczy wartość graniczną wynoszącą około 2V pin GPIO rejestruje wartość HIGH. Działanie to jest wykorzystane w kodzie aplikacji gdzie mierzony jest czas potrzebny na naładowanie kondensatora. Kiedy czas jest krótki znaczy to że na fotorezystor pada wiązka lasera, kiedy się zwiększy znaczy to że laser został przecięty tj. zawodnik przejechał przez start lub metę.
+\newpage
 \subsection{Implementacja}
 Ninejszy rozdział zostanie poświęcony implementacji. Składa się on z dwóch podrozdziałów: Aplikacja, który opisuję budowę aplikacji startowej oraz rozdziału Worker opisującego worker rejestrujący przejechanie mety.
 \subsubsection{Aplikacja}
@@ -192,9 +191,6 @@ Wykorzystana tutaj klasa Injector, ma za zadanie budowanie obiektów używający
 
 
 W swoim konstuktorze oczekuje obiektów Sinatra dlatego tutaj inicjalizowana jest pustym objektem OpenStruct. OpenStruct odpowiada na dowolne metody oraz zwraca \emph{nil} jeśli nazwa metody wywołanej na rzecz tego obiektu nie zawiera się w haszu, który został użyty do inicjalizacji. 
-\newline
-\newline
-\noindent
 Obiekt klasy Injector jest przekazywany w bloku, gdzie póżniej dostarcza obiektów takich jak \emph{capacitor}, którego klasa jest zdefiniowana w pliku \newline \emph{app/services/components/capacitor.rb}. 
 
 W klasie Injector są definiowane moduły które mają być przeszukane w poszukiwaniu klas, które maja być wstrzykiwane co przedstawia listing \ref{injector}. Nazwy przyjmowane w argumentach metody \emph{takes} oraz nazwy metod wywołanych na obiekcie Injector odpowiadają nazwą plików wstrszykiwanych klas. Warunkiem tego jest odpowiednie nazewnictwo klas i plików zgodnie z konwencjami przyjętymi w programowaniu Ruby.
@@ -235,12 +231,11 @@ $\label{capacitor}$
 \noindent
 Zadaniem tej klasy jest napisanie wartości LOW na pin w celu rozładowania ładunku na kondensatorze. 
 
-\indent 
+ 
 Dzieje się to na początku pętli \emph{while} w wątku z listingu \ref{thread}. Następnie w tej samej pętli \emph{śpimy} przez 1ms oraz odczyt ustawiany jest na zero. W kolejnej pętli \emph{while} pin GPIO jest ustawiany na wejście, pobierana jest z niego wartość a kiedy kondensator przekroczy wartorść graniczną jest zwracany jest odczyt inkrementowany w tej pętli. 
-
-\indent 
+ 
 Jeśli jego wartość przekroczy zadany czas potrzebny na naładowanie kondensatora (tutaj próg aktywacji) w Memcached ustawiany jest dokładny czas tego zdarzenia pod kluczem \emph{start\_time}. Odpowiedzialna jest za to klasa CachingService przedstawiona na listingu \ref{caching}.
-	
+\newpage
 \begin{listing}[H]
 \inputminted[linenos=true]{ruby}{./src/cachingservice.rb}
 \caption{app/services/caching\_service.rb}
@@ -299,6 +294,15 @@ Użyta tutaj metoda \emph{as\_json} mapuje przekazaną kolekcję na tablicę has
 $\label{as_json}$
 \end{listing}
 
+
+Przekazywana także w bloku metody \emph{post} zmienna contestant\_repository jest obiektem klasy \emph{Repositories::ContestantRepository} mającej za zadanię budowę, zapis oraz pobieranie z bazy zawodników \ref{contestant_repository}. W konstruktorze przyjmuję model zawodnika \emph{app/models/contestant.rb}.
+
+W bloku metody post przekazywane są też zmienne hash i json\_parser metody klasy \emph{Injector} zwracającej stałą JSON, która jest potem użyta do sparsowania ciała rządania HTTP. hash jest obiektem klasy Hash modułu \emph{Skirace}. Klasa ta dziedziczy po Haszu i ma na celu dodanie pomocniczych metod znanych z Rails takich jak użyta tutaj \emph{with\_indifferent\_access} pozwalająca na odwołanie się do klucza haszu przy pomocy stringa lub symbolu. 
+\begin{listing}
+\inputminted{ruby}{../app/services/repositories/contestant_repository.rb}
+\caption{\emph{app/services/repositories/contestant\_repository.rb}}
+$\label{contestant_repository}$
+\end{listing}
 \begin{listing}
 \inputminted{ruby}{../app/routes/contestants.rb}
 \caption{\emph{app/routes/contestants.rb}}
