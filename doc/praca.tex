@@ -1,4 +1,5 @@
 \documentclass[11pt,a4paper, twoside]{article}
+\usepackage[top=2.5cm, bottom=2.5cm, left=3.5cm, right=2.5cm]{geometry}
 \usepackage{polski}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
@@ -24,8 +25,10 @@
 \begin{document} 
 \includepdf[pages={1,2}]{first-pages.pdf}
 \tableofcontents
+
 %\begin{minipage}{\linewidth}
 \newpage
+\cleardoublepage
 \section{Cel i zakres pracy}
 Przedmiotem niniejszej pracy jest budowa mobilnego systemu pomiaru czasu dla zawodów narciarskich. System składa się z dwóch bramek: startowej oraz końcowej, które wykorzystują wiązke laserową w celu uchwycenia dokładnego momentu przejechania zawodnika przez bramkę. 
 
@@ -127,6 +130,7 @@ Powyższe listingi umieszczają skompilowane pliki z wyznaczonych ścieżek w fo
 \inputminted[linenos=true]{javascript}{./src/application.css}
 \caption{app/assets/stylesheets/application.css}
 \end{listing}
+\newpage
 \subsubsection{Twitter Bootstrap}
 Twitter Bootstrap jest frameworkiem front-end dostarczającym style CSS oraz kod JavaScript, który za zadanie ma przyśpieszenie budowę front-endu aplikacji. Bootstrap dostarcza zestaw klas HTML, które posiadają określone style. W tej pracy wykorzystany został Twitter Bootstrap w wersji drugiej. Aktualna wersja Bootstrapa to 3.1.1.
 \subsubsection{HAML}
@@ -168,7 +172,7 @@ Ten rozdział ma na celu przedstawienie budowy oraz podstaw teoretycznych dział
 \caption{Sensor}
 \end{figure}
 \newpage
-\begin{minipage}{\textwidth}
+\begin{minipage}{\linewidth}
 \noindent
 W układzie o którym mowa w tym rozdziale resyztor $2.2k \Omega$ działa jako zabezpieczenie przed zbyt dużym napięciem skierowanym na port GPIO. Podłączony jest do fotorezystora, którego rezystancja jest niska kiedy świeci na niego wiązka lasera. Kondensator $1\mu F$ jest ładowany a kiedy przekroczy wartość graniczną wynoszącą około 2V pin GPIO rejestruje wartość HIGH. Działanie to jest wykorzystane w kodzie aplikacji gdzie mierzony jest czas potrzebny na naładowanie kondensatora. Kiedy czas jest krótki znaczy to że na fotorezystor pada wiązka lasera, kiedy się zwiększy znaczy to że laser został przecięty tj. zawodnik przejechał przez start lub metę.
 \subsection{Implementacja}
@@ -221,7 +225,6 @@ Metoda \emph{io} jest wstrzykiwana do klasy RaspberryPi::Gpio, która jest odpow
 \caption{app/services/rasperry\_pi/gpio.rb}
 $\label{gpio}$
 \end{listing}
-\newpage	
 \noindent
 Ta sama klasa \ref{gpio} użyta jest w workerze. Jest to jedna z zalet obiektowości a w szczególności dependency injection ponieważ klasa nie ma żadnych bezpośrenich zależności i może być łatwo przeniesiona do innej aplikacji. Klasa \emph{RaspberryPi::Gpio} jest w tej aplikacji użyta jedynie w klasie \emph{Components::Capacitor} \ref{capacitor}.
 \begin{listing}[H]
@@ -237,7 +240,7 @@ Dzieje się to na początku pętli \emph{while} w wątku z listingu \ref{thread}
 
 \indent 
 Jeśli jego wartość przekroczy zadany czas potrzebny na naładowanie kondensatora (tutaj próg aktywacji) w Memcached ustawiany jest dokładny czas tego zdarzenia pod kluczem \emph{start\_time}. Odpowiedzialna jest za to klasa CachingService przedstawiona na listingu \ref{caching}.
-\newpage	
+	
 \begin{listing}[H]
 \inputminted[linenos=true]{ruby}{./src/cachingservice.rb}
 \caption{app/services/caching\_service.rb}
@@ -270,7 +273,7 @@ W przypadku udanego logowania serwer odpowiada JSONem
 \inputminted{json}{./src/curl_auth_response}
 \end{listing} 
 \subparagraph{Contestants} ~\\
-W pliku \emph{app/routes/contestants.rb} zawarte są 2 endpointy: \mbox{GET \emph{/contestants/:id}} zwracający zawodnika o podanym id oraz POST \emph{/contestants} służący do tworzenia nowych zawodników.
+W pliku \emph{app/routes/contestants.rb} (listing \ref{contestants}) zawarte są 2 endpointy: \newline\mbox{GET \emph{/contestants/:id}} zwracający zawodnika o podanym id oraz,\newline POST \emph{/contestants} służący do tworzenia nowych zawodników.
 \begin{listing}
 \inputminted{sh}{./src/curl_get_contestant}
 \caption{GET \emph{/contestants/:id}}
@@ -279,18 +282,35 @@ W pliku \emph{app/routes/contestants.rb} zawarte są 2 endpointy: \mbox{GET \emp
 \inputminted{json}{./src/curl_get_contestant_response}
 \caption{Odpowiedź zwracana przez GET \emph{/contestants/1}}
 \end{listing}
+
+Przy tworzeniu zawodnika jest zwracany jedynie kod odpowiedzi HTTP. Jeśli dane są poprawne i zawodnik zostanie zapisany do bazy zwracany jest kod 200 (OK) w przeciwnym wypdaku zwracany jest kod błędu 422 (Unprocessable Entity).
 \newpage
-Przy tworzeniu zawodnika jest zwracany kod odpowiedzi HTTP. Jeśli dane są poprawne i zawodnik zostanie zapisany do bazy zwracany jest kod 200 (OK) w przeciwnym wypdaku zwracany jest kod błędu 422 (Unprocessable Entity).
+%\begin{minipage}{\textwidth}
 \begin{listing}
 \inputminted{sh}{./src/curl_post_contestants}
 \caption{POST \emph{/contestants}}
 \end{listing}
+Do metody get '/contestants/:id' przekazywane są w bloku 2 zmienne: contestant\_presenter oraz cotestant\_repository. contestant\_presenter jest obiektem klasy Presenters::ContestantPresenter, której zadaniem jest prezentacja kolekcji zawodników w formatach JSON, CSV, XML oraz jako Hasz.
+
+Użyta tutaj metoda \emph{as\_json} mapuje przekazaną kolekcję na tablicę haszy oraz wywołuję na zwracanej wartości metodę \emph{to\_json} co przedstawia listing \ref{as_json}.
+\begin{listing}
+\inputminted{ruby}{./src/contestants_as_json.rb}
+\caption{\emph{app/services/presenters/contestant\_presenter.rb}}
+$\label{as_json}$
+\end{listing}
+
+\begin{listing}
+\inputminted{ruby}{../app/routes/contestants.rb}
+\caption{\emph{app/routes/contestants.rb}}
+$\label{contestants}$
+\end{listing}
+%\end{minipage}
+\newpage
 \paragraph{Warden}\label{warden}
 \paragraph{Front-end}
 \subsubsection{Worker}
 \subsection{Obudowa ochronna}
 \section{Wnioski}
-Autor pracy wyciągnął jedynie jeden wniosek podczas piania tej pracy jak i codziennego utrzymania aplikacji Rails to jest, gem Dependor nie ma racji bytu w aplikacjach, które muszą przejść próbę życia w prawdziwym świecie oraz mają sie skalować. Gem Dependor, zdaniem autora, powoduje tworzenie zbyt wielu obiektów tej samej klasy co prowadzi do problemów w późniejszym utrzymaniu kodu. Gem Dependor także prowadzi do zaciemnienia kodu z powodu magii, którą wprowadza.
 \newpage
 \section{Licencje Gemów}
 \subsection{Wykaz gemów}

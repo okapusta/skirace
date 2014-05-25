@@ -8,7 +8,9 @@ class Skirace::Application < Sinatra::Base
   post '/contestants' do |hash, json_parser, contestant_repository|
     env['warden'].authenticate!
     content_type :json
-    params = hash.with_indifferent_access(json_parser.parse(request.body.read))
+    
+    parsed_request = json_parser.parse(request.body.read)
+    params = hash.with_indifferent_access(parsed_request)
     contestant = contestant_repository.build(params)
     if contestant_repository.save(contestant)
       status 200
