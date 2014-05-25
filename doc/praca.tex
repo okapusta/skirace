@@ -16,7 +16,7 @@
 \usepackage{hyperref}
 \usepackage{subcaption}
 \usepackage{graphicx}
-\setlength{\footskip}{60pt}
+\setlength{\footskip}{40pt}
 \setcounter{secnumdepth}{5}
 \makeatletter
 \renewcommand\subparagraph{\@startsection{paragraph}{6}{\z@} %
@@ -163,15 +163,15 @@ Oba urządzenia komunikują się ze sobą przy pomocy WiFi w trybie pracy Ad Hoc
 \caption{/etc/network/interfaces}
 \end{listing}
 Plik \emph{/etc/network/interfaces} drugiego urządzenia został skonfigurowany analogicznie. Różni sie on jedynie adresem IP ustawionym na \emph{192.168.1.2}. Urządzenia ustawione w trybie pracy Ad Hoc wykrywają się nawzajem i tworzą sieć o SSID SKIRACE.
+\newpage
 \subsection{Podstawy działania}
 Ten rozdział ma na celu przedstawienie budowy oraz podstaw teoretycznych działania czujnika rejestrującego przecięcie wiązki lasera. Składa sie on za fotorezystora, rezystora oraz kondensatora. Poniższy rysunek przedstawia jego budowę.
 \begin{figure}[h]
 \includegraphics[scale=0.15]{./img/sensor_bb.png}
 \caption{Sensor}
 \end{figure}
-\newpage
-\begin{minipage}{\linewidth}
-\noindent
+% \begin{minipage}{\linewidth}
+\\\noindent
 W układzie o którym mowa w tym rozdziale resyztor $2.2k \Omega$ działa jako zabezpieczenie przed zbyt dużym napięciem skierowanym na port GPIO. Podłączony jest do fotorezystora, którego rezystancja jest niska kiedy świeci na niego wiązka lasera. Kondensator $1\mu F$ jest ładowany a kiedy przekroczy wartość graniczną wynoszącą około 2V pin GPIO rejestruje wartość HIGH. Działanie to jest wykorzystane w kodzie aplikacji gdzie mierzony jest czas potrzebny na naładowanie kondensatora. Kiedy czas jest krótki znaczy to że na fotorezystor pada wiązka lasera, kiedy się zwiększy znaczy to że laser został przecięty tj. zawodnik przejechał przez start lub metę.
 \newpage
 \subsection{Implementacja}
@@ -184,7 +184,7 @@ Tak jak była o tym mowa we wstępie do ninejszej pracy aplikację startową mo�
 \caption{Utworzenie wątku w pliku config.ru}
 $\label{thread}$
 \end{listing}
-\end{minipage}
+%\end{minipage}
 \newpage
 \noindent
 Wykorzystana tutaj klasa Injector, ma za zadanie budowanie obiektów używających dependency injection w raz z wszelkimi zależnościami przy pomocy gemu Dependor. 
@@ -303,13 +303,34 @@ W bloku metody post przekazywane są też zmienne hash i json\_parser metody kla
 \caption{\emph{app/services/repositories/contestant\_repository.rb}}
 $\label{contestant_repository}$
 \end{listing}
-\begin{listing}
-\inputminted{ruby}{../app/routes/contestants.rb}
-\caption{\emph{app/routes/contestants.rb}}
-$\label{contestants}$
-\end{listing}
-%\end{minipage}
 \newpage
+\clearpage
+\subparagraph{Contests} ~\\
+W pliku \emph{app/routes/contests.rb} znajdują się następujące endpointy:
+\\
+GET \emph{/contests}
+\\
+\noindent
+Zwraca wszystkie zawody z bazy.
+\begin{listing}
+\inputminted{ruby}{./src/get_contests.rb}
+\caption{\emph{app/routes/contests.rb}}
+$\label{contests}$
+\end{listing}
+\begin{listing}
+\inputminted{ruby}{./src/curl_contests}
+\caption{GET \emph{/contests}}
+\end{listing}
+\begin{listing}
+\inputminted{ruby}{./src/curl_contests_resp}
+\caption{JSON response}
+\end{listing}
+%\begin{listing}
+%\inputminted{ruby}{../app/routes/contestants.rb}
+%\caption{\emph{app/routes/contestants.rb}}
+%$\label{contestants}$
+%\end{listing}
+%\end{minipage}
 \paragraph{Warden}\label{warden}
 \paragraph{Front-end}
 \subsubsection{Worker}

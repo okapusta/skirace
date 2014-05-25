@@ -10,24 +10,25 @@
 \contentsline {subsubsection}{\numberline {3.2.5}HAML}{9}{subsubsection.3.2.5}
 \contentsline {subsubsection}{\numberline {3.2.6}Backbone.js}{9}{subsubsection.3.2.6}
 \contentsline {subsection}{\numberline {3.3}Komunikacja}{10}{subsection.3.3}
-\contentsline {subsection}{\numberline {3.4}Podstawy dzia\IeC {\l }ania}{10}{subsection.3.4}
-\contentsline {subsection}{\numberline {3.5}Implementacja}{11}{subsection.3.5}
-\contentsline {subsubsection}{\numberline {3.5.1}Aplikacja}{11}{subsubsection.3.5.1}
-\contentsline {paragraph}{\numberline {3.5.1.1}API}{16}{paragraph.3.5.1.1}
-\contentsline {paragraph}{Contestants}{17}{section*.6}
-\contentsline {paragraph}{\numberline {3.5.1.2}Warden}{19}{paragraph.3.5.1.2}
-\contentsline {paragraph}{\numberline {3.5.1.3}Front-end}{19}{paragraph.3.5.1.3}
-\contentsline {subsubsection}{\numberline {3.5.2}Worker}{19}{subsubsection.3.5.2}
-\contentsline {subsection}{\numberline {3.6}Obudowa ochronna}{19}{subsection.3.6}
-\contentsline {section}{\numberline {4}Wnioski}{19}{section.4}
-\contentsline {section}{\numberline {5}Licencje Gem\IeC {\'o}w}{20}{section.5}
-\contentsline {subsection}{\numberline {5.1}Wykaz gem\IeC {\'o}w}{20}{subsection.5.1}
-\contentsline {subsection}{\numberline {5.2}Tre\IeC {\'s}ci licencji}{23}{subsection.5.2}
-\contentsline {subsubsection}{\numberline {5.2.1}MIT}{23}{subsubsection.5.2.1}
-\contentsline {subsubsection}{\numberline {5.2.2}LGPLv3}{24}{subsubsection.5.2.2}
-\contentsline {subsubsection}{\numberline {5.2.3}Ruby}{27}{subsubsection.5.2.3}
-\contentsline {subsubsection}{\numberline {5.2.4}BSD-3}{28}{subsubsection.5.2.4}
-\contentsline {section}{\numberline {6}Summary}{28}{section.6}
-\contentsline {section}{\numberline {7}Dodatek A - Capistrano}{28}{section.7}
-\contentsline {section}{\numberline {8}Dodatek B - God}{28}{section.8}
-\contentsline {section}{\numberline {9}Dodatek C - YAGI}{28}{section.9}
+\contentsline {subsection}{\numberline {3.4}Podstawy dzia\IeC {\l }ania}{11}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.5}Implementacja}{12}{subsection.3.5}
+\contentsline {subsubsection}{\numberline {3.5.1}Aplikacja}{12}{subsubsection.3.5.1}
+\contentsline {paragraph}{\numberline {3.5.1.1}API}{17}{paragraph.3.5.1.1}
+\contentsline {paragraph}{Contestants}{18}{section*.6}
+\contentsline {paragraph}{Contests}{21}{section*.7}
+\contentsline {paragraph}{\numberline {3.5.1.2}Warden}{21}{paragraph.3.5.1.2}
+\contentsline {paragraph}{\numberline {3.5.1.3}Front-end}{21}{paragraph.3.5.1.3}
+\contentsline {subsubsection}{\numberline {3.5.2}Worker}{21}{subsubsection.3.5.2}
+\contentsline {subsection}{\numberline {3.6}Obudowa ochronna}{21}{subsection.3.6}
+\contentsline {section}{\numberline {4}Wnioski}{21}{section.4}
+\contentsline {section}{\numberline {5}Licencje Gem\IeC {\'o}w}{22}{section.5}
+\contentsline {subsection}{\numberline {5.1}Wykaz gem\IeC {\'o}w}{22}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Tre\IeC {\'s}ci licencji}{24}{subsection.5.2}
+\contentsline {subsubsection}{\numberline {5.2.1}MIT}{24}{subsubsection.5.2.1}
+\contentsline {subsubsection}{\numberline {5.2.2}LGPLv3}{25}{subsubsection.5.2.2}
+\contentsline {subsubsection}{\numberline {5.2.3}Ruby}{28}{subsubsection.5.2.3}
+\contentsline {subsubsection}{\numberline {5.2.4}BSD-3}{29}{subsubsection.5.2.4}
+\contentsline {section}{\numberline {6}Summary}{29}{section.6}
+\contentsline {section}{\numberline {7}Dodatek A - Capistrano}{29}{section.7}
+\contentsline {section}{\numberline {8}Dodatek B - God}{29}{section.8}
+\contentsline {section}{\numberline {9}Dodatek C - YAGI}{29}{section.9}
