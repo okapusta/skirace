@@ -325,6 +325,61 @@ $\label{contests}$
 \inputminted{ruby}{./src/curl_contests_resp}
 \caption{JSON response}
 \end{listing}
+Zmienna contest\_presenter przekazana w bloku jest obiektem klasy \emph{Presenters::ContestPresenter} zawieającej jedynie metodę \emph{as\_json} działającą analogicznie do metody o tej samej nazwie klasy \emph{Presenters::ContestantPresenter} przedstawionej wcześniej.
+
+\indent contest\_repository jest tutaj obiektem klasy \emph{Repositories::ContestRepository}. Metoda all najpierw sprawdza czy w bazie znajdują się zawody metodą \emph{any?} Jeśli w bazie danych istniją zawody są one zwracane w przeciwnym wypadku wywoływana jest prywatna metoda \emph{create\_default} \ref{contest_create_default}.
+\begin{listing}
+\inputminted{ruby}{./src/contest_create_default.rb}
+\caption{\emph{app/services/repositories/contest\_repository.rb}}
+$\label{contest_create_default}$
+\end{listing}
+\newpage
+\noindent
+GET \emph{/contests/public}
+\\
+\noindent
+Jeśli publicznie udustępnianie zawodów jest włączone zwrócony zostanie JSON zawiezający id i nazwę zawodów oraz listę zawodników \ref{public_contest_on} w przeciwnym wypadku zwrócony zostanie JSON z odpowiedzią \emph{no-public-contests} oraz statusem HTTP 404 (Not Found) \ref{public_contest_off}.
+\begin{listing}
+\inputminted{ruby}{./src/get_contest_public.rb}
+\caption{\emph{app/routes/contests.rb}}
+$\label{get_contest_public}$
+\end{listing}
+\begin{listing}
+\inputminted{ruby}{./src/curl_public_contest}
+\caption{GET \emph{/contests/public}}
+\end{listing}
+\newpage
+%\begin{minipage}[c]{\textwidth}
+\begin{listing}
+\inputminted{ruby}{./src/curl_public_contest_on}
+\caption{Publiczne udostępnianie zadodów włączone}
+$\label{public_contest_on}$
+\end{listing}
+\begin{listing}
+\inputminted{ruby}{./src/curl_public_contest_off}
+\caption{Publiczne udostępnianie zadodów wyłączone}
+$\label{public_contest_off}$
+\end{listing}
+\noindent
+GET \emph{/contests/:id/contestants}
+\\
+\noindent
+Zwraca listę zawodników dla zawodów o przekazanym id.
+\begin{listing}
+\inputminted{ruby}{./src/contest_contestants.rb}
+\caption{\emph{app/routes/contests.rb}}
+\end{listing}
+\begin{listing}
+\inputminted{ruby}{./src/curl_contest_contestants}
+\caption{GET \emph{/contests/1/contestants}}
+\end{listing}
+\\
+\begin{listing}
+\inputminted{json}{./src/curl_contest_contestants_response}
+\caption{Odpowiedź JSON}
+\end{listing}
+%\end{minipage}
+\newpage
 %\begin{listing}
 %\inputminted{ruby}{../app/routes/contestants.rb}
 %\caption{\emph{app/routes/contestants.rb}}
