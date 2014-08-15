@@ -41,6 +41,7 @@ GEM
     rack (1.5.2)
     rack-protection (1.5.1)
       rack
+    rake (10.3.2)
     ref (1.0.5)
     sass (3.2.12)
     sequel (4.4.0)
@@ -71,6 +72,7 @@ GEM
     warden (1.2.3)
       rack (>= 1.0)
     wiringpi (1.1.0)
+    yui-compressor (0.12.0)
 
 PLATFORMS
   ruby
@@ -86,6 +88,7 @@ DEPENDENCIES
   memcache-client
   nokogiri
   pry
+  rake
   sass
   sequel
   sinatra
@@ -97,3 +100,4 @@ DEPENDENCIES
   uglifier
   warden
   wiringpi
+  yui-compressor

@@ -1,7 +1,9 @@
 require './application'
 
-map Skirace::Application.assets_prefix do
-  run Skirace::Application.sprockets
+unless ENV['RACK_ENV'] == 'production'
+  map Skirace::Application.assets_prefix do
+      run Skirace::Application.sprockets
+  end
 end
 
 map '/' do

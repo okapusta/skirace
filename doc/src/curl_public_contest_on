@@ -1,12 +1,11 @@
 {
   "id":1,"name":"Zakopane 2014",
-  "contestants":[
+  "contestants": [
     {
       "contest_id":1,
       "first_name":"Kamil",
       "last_name":"Wójcik",
       "end_time":null
-    },
-    ...
+    }, ...
   ]
 }

@@ -1,10 +1,10 @@
-//= require jquery-1.10.2.min
-//= require jquery.ui.widget
-//= require jquery.fileupload
-//= require jquery.cookie
-//= require bootstrap.min
-//= require underscore-min
-//= require backbone-min
+//= require ./vendor/jquery-1.10.2.min
+//= require ./vendor/jquery.ui.widget
+//= require ./vendor/jquery.fileupload
+//= require ./vendor/jquery.cookie
+//= require ./vendor/bootstrap.min
+//= require ./vendor/underscore-min
+//= require ./vendor/backbone-min
 //= require hamlcoffee
 //= require app
 //= require_tree ./lib

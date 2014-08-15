@@ -28,12 +28,8 @@ class Skirace::Application < Sinatra::Base
   set :assets_prefix, '/assets'
   set :assets_path, File.join(public_folder, assets_prefix)
   
-  set :sprockets, Sprockets::Environment.new(root)
-  
-  unless  Dir[File.expand_path('../public/assets/*', __FILE__)].first.match(/application/)
-    set :precompile, [ /\w+\.(?!js\.coffee).+/, /application\.js$/ ]
-  end
-
+  set :sprockets, Sprockets::Environment.new(root)  
+  set :precompile, [ /\w+\.(?!js\.coffee).+/, /application\.js$/ ]
   set :digest_assets, true
      
  
@@ -111,6 +107,10 @@ class Skirace::Application < Sinatra::Base
       config.digest      = digest_assets
       config.public_path = public_folder
     end
+  end
+
+  def production?
+    ENV['RACK_ENV'] == 'production'
   end
 
   get '/' do
