@@ -3,6 +3,8 @@
 //= require ./vendor/jquery.fileupload
 //= require ./vendor/jquery.cookie
 //= require ./vendor/bootstrap.min
+//= require ./vendor/jquery.cookie
+//= require ./vendor/bootstrap.min
 //= require ./vendor/underscore-min
 //= require ./vendor/backbone-min
 //= require hamlcoffee
