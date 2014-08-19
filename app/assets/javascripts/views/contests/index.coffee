@@ -30,5 +30,8 @@ class Skirace.Views.Contests.Index extends Backbone.View
     current_contest =
       name: target.text()
       id: target.attr('value')
-    @client_storage.set('current_contest', JSON.stringify(current_contest))
+
+    if @model.set_current_contest
+      @client_storage.set('current_contest', JSON.stringify(current_contest))
+    
     window.location.reload()

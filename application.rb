@@ -12,7 +12,7 @@ module Uploaders; end
 module Parsers; end
 module Skirace; end
   
-auto_load_paths = %w(../app/**/*.rb ../lib/**/*.rb).each do |path|
+auto_load_paths = %w(../config/initializers/*.rb ../app/**/*.rb ../lib/**/*.rb).each do |path|
   Dir[File.expand_path(path, __FILE__)].each do |file|
     next if file.include?('routes')
 
@@ -22,6 +22,8 @@ end
     
 class Skirace::Application < Sinatra::Base
   
+  register Skirace::StartingLine
+
   set :static, :enable
   set :views, Proc.new { File.join(root, "app", "views") }
   set :public_folder, File.join(root, "public")
@@ -30,9 +32,9 @@ class Skirace::Application < Sinatra::Base
   
   set :sprockets, Sprockets::Environment.new(root)  
   set :precompile, [ /\w+\.(?!js\.coffee).+/, /application\.js$/ ]
-  set :digest_assets, true
+  
+  set :digest_assets, production?
      
- 
   helpers do
     include ApplicationHelper
     include Sprockets::Helpers
@@ -129,3 +131,4 @@ require_relative 'app/routes/import'
 require_relative 'app/routes/settings'
 require_relative 'app/routes/contests'
 require_relative 'app/routes/contestants'
+require_relative 'app/routes/api/endtime'

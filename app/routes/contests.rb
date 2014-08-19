@@ -30,4 +30,8 @@ class Skirace::Application < Sinatra::Base
       status 422
     end
   end
+
+  put '/contests/current' do |contest_repository|
+    
+  end
 end

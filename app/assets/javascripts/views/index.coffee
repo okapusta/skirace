@@ -24,7 +24,10 @@ class Skirace.Views.IndexView extends Backbone.View
         success: (data) ->
             (exports ? this ).contests = -> data.models
             
-            new Skirace.Views.Contests.Index({contests: contests()})
+            new Skirace.Views.Contests.Index
+              contests: contests()
+              model: Skirace.Models.Contest
+              
             new Skirace.Views.Contestants.Index({contestants: args.contestants.fetch()})
         })
     else
