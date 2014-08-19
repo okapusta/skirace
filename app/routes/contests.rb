@@ -31,7 +31,7 @@ class Skirace::Application < Sinatra::Base
     end
   end
 
-  put '/contests/current' do |contest_repository|
-    
+  put '/contests/current' do |caching_service|
+    caching_service.set('current_contest', params['id'])
   end
 end

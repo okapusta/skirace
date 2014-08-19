@@ -26,7 +26,7 @@ class Skirace.Views.IndexView extends Backbone.View
             
             new Skirace.Views.Contests.Index
               contests: contests()
-              model: Skirace.Models.Contest
+              model: new Skirace.Models.Contest()
               
             new Skirace.Views.Contestants.Index({contestants: args.contestants.fetch()})
         })

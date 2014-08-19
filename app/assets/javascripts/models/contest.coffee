@@ -5,7 +5,10 @@ class Skirace.Models.Contest extends Backbone.Model
 
   validate: (attrs, options) ->
     if (attrs.name == '')
-      return 'Zawody musza miec nazwe
+      return 'Zawody musza miec nazwe'
 
   set_current_contest: (contest_id) ->
-    $.ajax
+    $.ajax "#{@urlRoot}/current",
+      type: 'PUT',
+      dataType: 'json',
+      data: { id: contest_id }

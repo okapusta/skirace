@@ -13,6 +13,7 @@ class Skirace.Views.Contests.Index extends Backbone.View
     @current_contest = @client_storage.get('current_contest')
     @option_selected = JSON.parse(@current_contest) unless @current_contest == undefined 
     @contests = args.contests
+    @model = args.model
     @render()
 
   render: ->
@@ -30,8 +31,8 @@ class Skirace.Views.Contests.Index extends Backbone.View
     current_contest =
       name: target.text()
       id: target.attr('value')
-
-    if @model.set_current_contest
+    
+    if @model.set_current_contest(current_contest.id)
       @client_storage.set('current_contest', JSON.stringify(current_contest))
     
     window.location.reload()
