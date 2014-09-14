@@ -7,12 +7,25 @@ set :deploy_to, '/home/app/skirace'
 
 namespace :deploy do
 
-  desc 'Restart application'
-  task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      execute "cd #{current_path} && rvmsudo bundle exec rackup"
+  desc 'Create log file'
+  task :logs do
+    on roles(:app) do
+      unless File.exists?(File.join(current_path, 'log', 'application.log'))
+        execute "cd #{current_path} && mkdir log"
+        execute "cd #{current_path} && touch log/application.log"
+      end
     end
   end
 
+  desc 'Restart application'
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      begin; execute "killall ruby"; rescue; end
+
+      execute "cd #{current_path} && RACK_ENV=production rvmsudo bundle exec rackup"
+    end
+  end
+
+  after :publishing, :logs
   after :publishing, :restart
 end
