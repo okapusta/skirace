@@ -4,6 +4,8 @@ lock '3.2.1'
 set :application, 'skirace'
 set :repo_url, 'git@192.168.1.138:skirace.git'
 set :deploy_to, '/home/app/skirace'
+set :deafult_env, { path: '.rvm/rubies/ruby-2.1.0/bin/:$PATH' }
+set :rvm_type, :user
 
 namespace :deploy do
 
