@@ -4,17 +4,20 @@ lock '3.2.1'
 set :application, 'skirace'
 set :repo_url, 'git@192.168.1.138:skirace.git'
 set :deploy_to, '/home/app/skirace'
-set :rack_env, :production
 
 namespace :deploy do
 
-  desc 'Create log file'
+  desc 'Symlink db'
+  task :db do
+    on roles(:app) do
+      execute "ln -s #{shared_path}/db/database.sqlite #{current_path}/db/database.sqlite"
+    end
+  end
+
+  desc 'Symlink log file'
   task :logs do
     on roles(:app) do
-      unless File.exists?(File.join(current_path, 'log', 'application.log'))
-        execute "cd #{current_path} && mkdir log"
-        execute "cd #{current_path} && touch log/application.log"
-      end
+      execute "ln -s #{shared_path}/log #{current_path}/log"
     end
   end
 
@@ -30,7 +33,7 @@ namespace :deploy do
       execute command
     end
   end
-
+  after :publishing, :db 
   after :publishing, :logs
   after :publishing, :restart
 end
