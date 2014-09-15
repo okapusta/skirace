@@ -4,8 +4,7 @@ lock '3.2.1'
 set :application, 'skirace'
 set :repo_url, 'git@192.168.1.138:skirace.git'
 set :deploy_to, '/home/app/skirace'
-set :deafult_env, { path: '.rvm/rubies/ruby-2.1.0/bin/:$PATH' }
-set :rvm_type, :user
+set :rack_env, :production
 
 namespace :deploy do
 
@@ -22,9 +21,13 @@ namespace :deploy do
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
-      begin; execute "killall ruby"; rescue; end
-
-      execute "cd #{current_path} && RACK_ENV=production rvmsudo bundle exec rackup"
+      begin; execute "sudo killall -s SIGKILL ruby"; rescue; end;
+      command = <<-CMD
+        cd #{current_path} && \
+        source ~/.rvm/scripts/rvm && \
+        rvmsudo bundle exec rackup -D -E production
+      CMD
+      execute command
     end
   end
 
