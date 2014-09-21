@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.6.24)  1 JUN 2014 16:08
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.6.24)  21 SEP 2014 13:05
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -699,7 +699,7 @@ LaTeX Info: Redefining \nameref on input line 27.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 
-<first-pages.pdf, id=103, page=1, 597.23125pt x 845.1575pt>
+<first-pages.pdf, id=91, page=1, 597.23125pt x 845.1575pt>
 File: first-pages.pdf Graphic file (type pdf)
 
 <use first-pages.pdf, page 1>
@@ -726,7 +726,7 @@ Package pdftex.def Info: first-pages.pdf, page1 used on input line 28.
  [1
 
  <./first-pages.pdf>]
-<first-pages.pdf, id=150, page=2, 597.23125pt x 845.1575pt>
+<first-pages.pdf, id=138, page=2, 597.23125pt x 845.1575pt>
 File: first-pages.pdf Graphic file (type pdf)
 
 <use first-pages.pdf, page 2>
@@ -788,7 +788,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 69--71
 
  []
 
-<./img/asdasd.png, id=201, 759.83875pt x 319.1925pt>
+<./img/asdasd.png, id=186, 759.83875pt x 319.1925pt>
 File: ./img/asdasd.png Graphic file (type png)
  <use ./img/asdasd.png>
 Package pdftex.def Info: ./img/asdasd.png used on input line 73.
@@ -857,15 +857,11 @@ runsystem(pygmentize -l javascript -f latex -F tokenmerge            -P linenos
 (./praca.out.pyg)
 runsystem(rm praca.out.pyg)...executed.
 
-
-Underfull \vbox (badness 6173) has occurred while \output is active []
-
  [8]
 runsystem(pygmentize -l haml -f latex -F tokenmerge            -P linenos -P "v
 erboptions= " -o praca.out.pyg ./src/example.haml)...executed.
 
-
-(./praca.out.pyg)
+ (./praca.out.pyg)
 runsystem(rm praca.out.pyg)...executed.
 
 runsystem(pygmentize -l html -f latex -F tokenmerge             -P "verboptions
@@ -874,15 +870,14 @@ runsystem(pygmentize -l html -f latex -F tokenmerge             -P "verboptions
  (./praca.out.pyg)
 runsystem(rm praca.out.pyg)...executed.
 
- [9]
 runsystem(pygmentize -l sh -f latex -F tokenmerge            -P linenos -P "ver
 boptions= " -o praca.out.pyg ./src/adhoc)...executed.
 
  (./praca.out.pyg)
 runsystem(rm praca.out.pyg)...executed.
 
- [10]
-<./img/sensor_bb.png, id=236, 1373.13pt x 1079.53313pt>
+
+[9] [10] <./img/sensor_bb.png, id=221, 1373.13pt x 1079.53313pt>
 File: ./img/sensor_bb.png Graphic file (type png)
 
 <use ./img/sensor_bb.png>
@@ -1101,42 +1096,51 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [23]
+runsystem(pygmentize -l ruby -f latex -F tokenmerge             -P "verboptions
+= " -o praca.out.pyg ./src/warden_strategy.rb)...executed.
+
+ (./praca.out.pyg)
+runsystem(rm praca.out.pyg)...executed.
+
 runsystem(pygmentize -l coffee -f latex -F tokenmerge             -P "verboptio
 ns= " -o praca.out.pyg ../app/assets/javascripts/app.coffee)...executed.
 
  (./praca.out.pyg)
 runsystem(rm praca.out.pyg)...executed.
 
+
+Underfull \vbox (badness 3895) has occurred while \output is active []
+
  [24]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 414.
+[25]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 421.
 
-
-(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+ (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 414.
- [25] [26]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 739.
- [27]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 739.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 421.
+ [26] [27]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 743.
 
-(./praca.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 739.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 739.
+[28]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 743.
+ (./praca.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 743.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 743.
 Package rerunfilecheck Info: File `praca.out' has not changed.
-(rerunfilecheck)             Checksum: 7E76B6243275813BA09E8680C8C3BEF9;1460.
+(rerunfilecheck)             Checksum: E5AC50C24A0C97003A598930A28D0CDC;1299.
 
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 739.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 743.
  ) 
 Here is how much of TeX's memory you used:
- 9100 strings out of 495024
- 136654 string characters out of 3181154
- 236872 words of memory out of 3000000
- 11956 multiletter control sequences out of 15000+200000
+ 9099 strings out of 495024
+ 136649 string characters out of 3181154
+ 237922 words of memory out of 3000000
+ 11954 multiletter control sequences out of 15000+200000
  12017 words of font info for 35 fonts, out of 3000000 for 9000
  34 hyphenation exceptions out of 8191
  42i,18n,46p,840b,657s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1152,10 +1156,10 @@ r/share/texlive/texmf-dist/fonts/type1/public/pl/plr10.pfb></usr/share/texlive/
 texmf-dist/fonts/type1/public/pl/plr6.pfb></usr/share/texlive/texmf-dist/fonts/
 type1/public/pl/plti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl
 /pltt10.pfb>
-Output written on praca.pdf (27 pages, 796542 bytes).
+Output written on praca.pdf (28 pages, 795077 bytes).
 PDF statistics:
- 417 PDF objects out of 1000 (max. 8388607)
- 349 compressed objects within 4 object streams
- 93 named destinations out of 1000 (max. 500000)
- 228 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 408 PDF objects out of 1000 (max. 8388607)
+ 339 compressed objects within 4 object streams
+ 92 named destinations out of 1000 (max. 500000)
+ 204 words of extra memory for PDF output out of 10000 (max. 10000000)
 

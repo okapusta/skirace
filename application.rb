@@ -75,7 +75,7 @@ class Skirace::Application < Sinatra::Base
       def authenticate!
         user = injector.user_repository.get_by_username(@params['username'])
 
-        if injector.authentication_service.authenticate(user, @params['password']).success
+        if injector.authentication_service.authenticate(user, @params['password'])
           success!(user)
         else
           fail!
@@ -85,7 +85,7 @@ class Skirace::Application < Sinatra::Base
       private
 
         def injector
-          @injector ||= Injector.new(OpenStruct.new(params: @params))
+          @injector ||= Injector.new
         end
 
         def parse_params

@@ -1,9 +1,7 @@
 module Skirace
   module StartingLine
     def self.registered(app)
-      injector = Injector.new(OpenStruct.new({}))
-      
-      # thread = Thread.new(injector) do |i|
+      # Thread.new(Injector.new) do |i|
       #   while true
       #     reading = 0
       #     i.capacitor.discharge(i.options.capacitor.pin)
@@ -13,6 +11,7 @@ module Skirace
       #     end
 
       #     if reading > i.options.activation_threshold
+      #       injector.contastant_repository.set_start_time
       #     end
 
       #     sleep i.options.measurement_accuracy

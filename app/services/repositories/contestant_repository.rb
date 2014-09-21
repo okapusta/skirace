@@ -16,6 +16,14 @@ class Repositories::ContestantRepository
   end
 
   def get(id)
-    db_contestant.where(id: id)
+    db_contestant.where(id: id).first
+  end
+
+  def last(options = {start_time_at: nil})
+    db_contestant.where(options).last
+  end
+
+  def set_start_time
+    last.update(start_time_at: Time.now)
   end
 end 

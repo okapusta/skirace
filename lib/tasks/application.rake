@@ -1,7 +1,7 @@
 namespace :application do
   
   def my_injector
-    @injector = Injector.new(OpenStruct.new(params: nil))
+    @injector = Injector.new
   end
   
   desc "Create default admin user"

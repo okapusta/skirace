@@ -13,7 +13,7 @@ class Injector
                   ::Components
 
   def initialize(objects = nil)
-    sinatra_objects(objects)
+    sinatra_objects(objects) if objects
 
     # io.wiringPiSetup
   end

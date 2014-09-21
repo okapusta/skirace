@@ -15,7 +15,7 @@ module Sequel
       private
 
         def injector
-          @injector ||= Injector.new(OpenStruct.new(params: nil))
+          @injector ||= Injector.new
         end
 
         def error_messages

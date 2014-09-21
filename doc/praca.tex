@@ -396,9 +396,15 @@ Tworzy nowe zawody.
 %$\label{contestants}$
 %\end{listing}
 %\end{minipage}
-\paragraph{Warden}\label{warden}
+\paragraph{Warden}\label{warden} ~\\
+W celu autentykacji użytkowników aplikacji został wykorzystany gem Warden będący oprogramowaniem pośredniczącym (\emph{eng. middleware}) dla aplikacji Rack. Warden wstrzykuje \emph{leniwy obiekt} (który jest inicjalizowany tylko wtedy kiedy zajdzie na niego zapotrzebowanie) do env['warden']. Pozwala on np. na sprawdzenie czy użytkownik jest zalogowany env['warden'].authenticated? Warden pozwala na definiowanie strategii autentykowania użytkowników. Każda ze zdefiniowanych strategii będzie próbowała zautentykować użytkownika aplikacji aż któraś z nich się powiedzie. Strategie autentykacji, która została użyta w tym projekcie przedstawia listing \ref{strategy}.
+\begin{listing}
+\inputminted{ruby}{./src/warden_strategy.rb}
+\caption{Strategia autentykacji}
+$\label{strategy}$
+\end{listing}
 \paragraph{Front-end} ~\\
-Inerface apllikacji, tak jak była to tym mowa we wstępie, został napisany przy pomocy Backbone.js. Aplikacja frontend jest inicjalizowana ostatnią linią listingu \ref{aplication-js}. Obiekty plikacji oraz funkcja inicjalizująca ją są zawarte w pliku \emph{app.coffee} przedstawionym na listingu \ref{app-coffee}.
+Inerface apllikacji, tak jak była to tym mowa we wstępie, został napisany przy pomocy Backbone.js. Aplikacja frontend jest inicjalizowana ostatnią linią listingu \ref{aplication-js}. Obiekty plikacji oraz funkcja inicjalizująca ją są zawarte w pliku \emph{app.coffee} przedstawionym na listingu \ref{app-coffee}. 
 \begin{listing}
 \inputminted{coffee}{../app/assets/javascripts/app.coffee}
 \caption{app/assets/javascripts/app.coffee}
@@ -406,6 +412,7 @@ $\label{app-coffee}$
 \end{listing}
 \subsubsection{Worker}
 \subsection{Obudowa ochronna}
+Obudowa urządzenia została wykonana ze skrzynek izolacyjnych D25 montowancyh na rurach kanalizacyjncyh PP 50/1000 mm przy pomocy opasek zaciskowych. W skrzynkach znajduje się RaspberryPI przykręcone do wygiętego fragmentu opakowania na płyty CD na warstwie ochronnej wycinku karimaty, koszyczek na 6 baterii AA dostarczający zasilanie oraz układ UBEC - przetwornica impulsowa - redukująca napięcie z baterri do 5V 3A dla bramki startowej, oraz 5V 5A dla bramki końcowej.
 \section{Wnioski}
 \newpage
 \section{Licencje Gemów}
@@ -733,7 +740,4 @@ Redistribution and use in source and binary forms, with or without modification,
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 \fi
 \section{Summary}
-\section{Dodatek A - Capistrano}
-\section{Dodatek B - God}
-\section{Dodatek C - YAGI}
 \end{document}
