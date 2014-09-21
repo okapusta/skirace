@@ -77,4 +77,8 @@ class Injector
   def dalli_client
     Dalli::Client
   end
+
+  def time
+    Time
+  end
 end
