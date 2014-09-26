@@ -1,18 +1,22 @@
-require './application'
+module Skirace
+  module StartingLine
+    def self.registered(app)
+      Thread.new(Injector.new) do |i|
+        while true
+          reading = 0
+          i.capacitor.discharge(i.options.capacitor.pin)
 
-t = Thread.new(Injector.new(OpenStruct.new({}))) do |injector|
-  while true
-    injector.capacitor.discharge(injector.options.capacitor.pin)      
-    sleep 0.01; reading = 0;
+          while i.gpio.read(i.options.capacitor.pin) == LOW
+            reading +=1
+          end
 
-    while injector.gpio.read(injector.options.capacitor.pin) == LOW
-     reading += 1
-    end
+          if reading > i.options.activation_threshold
+            injector.contastant_repository.set_start_time
+          end
 
-    if reading > injector.options.activation_threshold
-      injector.caching_service.set('start_time', Time.now)
+          sleep i.options.measurement_accuracy
+        end
+      end
     end
   end
 end
-t.abort_on_exception = true
-

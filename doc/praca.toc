@@ -9,7 +9,7 @@
 \contentsline {subsubsection}{\numberline {3.2.4}Twitter Bootstrap}{9}{subsubsection.3.2.4}
 \contentsline {subsubsection}{\numberline {3.2.5}HAML}{9}{subsubsection.3.2.5}
 \contentsline {subsubsection}{\numberline {3.2.6}Backbone.js}{9}{subsubsection.3.2.6}
-\contentsline {subsection}{\numberline {3.3}Komunikacja}{9}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.3}Komunikacja}{10}{subsection.3.3}
 \contentsline {subsection}{\numberline {3.4}Podstawy dzia\IeC {\l }ania}{11}{subsection.3.4}
 \contentsline {subsection}{\numberline {3.5}Implementacja}{12}{subsection.3.5}
 \contentsline {subsubsection}{\numberline {3.5.1}Aplikacja}{12}{subsubsection.3.5.1}

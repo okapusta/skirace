@@ -2,7 +2,7 @@
 lock '3.2.1'
 
 set :application, 'skirace'
-set :repo_url, 'git@192.168.1.138:skirace.git'
+set :repo_url, 'git@192.168.10.3:skirace.git'
 set :deploy_to, '/home/app/skirace'
 
 namespace :deploy do

@@ -24,6 +24,8 @@
 	{0.0001pt \@plus -1ex \@minus -.2ex} %
 	{\normalfont\normalsize}}
 \makeatother
+\usepackage{chngcntr}
+\counterwithin{subfigure}{figure}
 \begin{document} 
 \includepdf[pages={1,2}]{first-pages.pdf}
 \tableofcontents
@@ -36,11 +38,11 @@ Przedmiotem niniejszej pracy jest budowa mobilnego systemu pomiaru czasu dla zaw
 
 Niniejsza praca będzie się składać z trzech głównych części. Pierwsza z nich poświęcona zostanie architekturze systemu i wykorzystanych technologiach, a w szczególności, komunikacji pomiędzy komponentami oraz podstawą teoretycznym działania. Druga część tej pracy zawiera opis implementacji, zaś trzecia część jest poświęcona umieszczeniu systemu w obudowie ochronnej.
 \section{Wstęp}
-Obecnie na rynku istnieją podobne systemy do tego, którego budowę ta praca przedstawia, jednak często kosztują tysiące złotych. Praca ta jest próbą stowrzenia rozwiązania spełniającego podobne zadanie do ww. systemów korzystając z ogólnie dostępnych podzespołów za nie wielkie pieniądze.
+Obecnie na rynku istnieją podobne systemy do tego, którego budowę ta praca przedstawia, jednak często kosztują tysiące złotych. Praca ta jest próbą stowrzenia rozwiązania spełniającego podobne zadanie do ww. systemów korzystając z ogólnie dostępnych podzespołów.
 
 Jako szkielet systemu zostało wybrane Raspberry Pi - platforma komputerowa stworzona przez Raspberry Fundation. W momencie premiery (29 luty 2012) model B użyty w tej pracy miał cenę początkową US\$ 35. Raspberry Pi oparte jest o chip BCM2835 zawierający procesor ARMv6. Urządzenie działa pod kontrolą dystrybucji systemu Linux Raspbian będącą portem Debiana Wheezy koniecznym z powodu braku kompatybilności (oficjalne wydanie Debiana Wheezy na platformę armhf działa jedynie z procesorami ARMv7 lub nowszymi).
 
-Obie aplikacjie (startowa i końcowa) zostały napistane przy użyciu języka Ruby 2.1.0 oraz dla aplikacji startowej stworzony został interface web umożliwiający wprowadzanie zawodników oraz podgląd wynikow, jak również import oraz eksport. Napisany został on przy użyciu CoffeeScript oraz biblioteki JavaScript Backbone.js. 
+Obie aplikacjie (startowa i końcowa) zostały napistane przy użyciu języka Ruby 2.1.0 oraz dla aplikacji startowej stworzony został interface web umożliwiający wprowadzanie zawodników oraz podgląd wyników, jak również import oraz eksport. Napisany został on przy użyciu CoffeeScript oraz biblioteki JavaScript Backbone.js. 
 CoffeeScript jest językiem inspirowanym elegancką składnią Ruby i Pythona, który kompiluje się do JavaScriptu. Backbone.js natomiast zapewnia strukturę aplikacji.
 %\newline
 %W momencie pisania kodu aplikacji autor nie zdawał sobie jeszcze sprawy z pewnych dobrych pratyk pisania kodu JavaScript, zatem w kodzie znajdują się błędy, których należy unikać. Z tego powodu ta praca będzie się też starać je pokazać, na czym one polegają i jakie trudności w późniejszym utrzymaniu kodu podowują tak aby czytelnik był ich świadom i sam ich nie popełniał.
@@ -51,7 +53,7 @@ W pracy zostały użyte różne \emph{gemy}~-~programy i biblioteki managera pac
 \newline
 
 \noindent
-Kompletny kod źródłowy pracy można znaleść pod adresami:
+Kompletny kod źródłowy pracy można znaleźć pod adresami:
 \newline
 \url{https://github.com/okapusta/skirace}
 \newline
@@ -64,9 +66,9 @@ Kompletny kod źródłowy pracy można znaleść pod adresami:
 \noindent
 \section{Realizacja tematu}
 \subsection{Architektura}
-System którego ta praca dotyczy został zbudowany w myśl modelu master/slave gdzie mastertem jest aplikacja początkowa. To tam znajduje się interface, baza danych oraz serwer Memcached. W momencie uruchomienia aplikacji, oprócz startu serwera serwującego aplikację WEB tworzony jest nowy wątek zawierający event loop, który rejestruje przecięcie wiązki lasera, a kiedy to sie stanie ustawia godzinę tego zdarzenia w cache.
+System którego ta praca dotyczy został zbudowany w myśl modelu master/slave gdzie masterem jest aplikacja początkowa. To tam znajduje się interface, baza danych oraz serwer Memcached. W momencie uruchomienia aplikacji, oprócz startu serwera serwującego aplikację WEB tworzony jest nowy wątek zawierający event loop, który rejestruje przecięcie wiązki lasera, a kiedy to sie stanie, ustawia godzinę tego zdarzenia w bazie danych.
 
-Zadaniem slavea~-~workera~-~jest jedynie pobranie czasu startu z Memcached, obliczenie czasu końcowego oraz wypisanie go na ekranie LCD linii końcowej w momencie finishu.
+Zadaniem workera jest zarejestrowanie przecięcia limii mety a kiedy to sie sanie worker wysyła rządanie POST do aplikacji startowej, która w podpwiedzi zwraca obliczony końcowy czas oraz imie i nazwisko zawodnika wyświetlane na LCD.
 \newline
 
 \begin{figure}[ht]
@@ -77,7 +79,7 @@ Zadaniem slavea~-~workera~-~jest jedynie pobranie czasu startu z Memcached, obli
 Komunikacjia pomiędzy dwiema bramkami odbywa się poprzez WiFi.
 \subsection{Wybrane technologie}
 \subsubsection{Memcached}
-Memcached jest to rozproszony system buforowania pamięci podręczniej oryginalnie zaprojektowany na potrzeby serwisu  LiveJournal. Pozwala on na przechowywanie obiektów w pamięci RAM przy pomocy kluczy \mbox{(key-value store)}. W aplikacji wykorzystany został w celu przechowania czasów startu i finishu. Serwer Memcached jest uruchomiony tylko na jednej (startowej) bramce, worker natomiast łączy się z cache przy pomocy klienta i może pobierać lub pisać dane do pamięci drugiego urządzenia.
+Memcached jest to rozproszony system buforowania pamięci podręczniej oryginalnie zaprojektowany na potrzeby serwisu  LiveJournal. Pozwala on na przechowywanie obiektów w pamięci RAM przy pomocy kluczy \mbox{(key-value store)}. W aplikacji wykorzystany został w celu przechowania id aktualnego wyścigu.
 \subsubsection{Dependency Injection}
 W ninejszej pracy został wykorzystany wzorzec projektowy \emph{Dependency Injection (DI)} polegający na usuwaniu bespośrednich zależności klas na rzecz \emph{wstrzykiwania} ich w czasie konstruowania obiektu. Do osiągnięcia tego celu i uproszczenia  DI użyty został gem Dependor, udostępniający zestaw metod i modułów przeznaczony do tego celu.
 
@@ -135,7 +137,7 @@ $\label{aplication-js}$
 \subsubsection{Twitter Bootstrap}
 Twitter Bootstrap jest frameworkiem front-end dostarczającym style CSS oraz kod JavaScript, który za zadanie ma przyśpieszenie budowę front-endu aplikacji. Bootstrap dostarcza zestaw klas HTML, które posiadają określone style. W tej pracy wykorzystany został Twitter Bootstrap w wersji drugiej. Aktualna wersja Bootstrapa to 3.1.1.
 \subsubsection{HAML}
-W projekcie został użyty HAML (HTML Abstraction Markup Language), który sprawia że kod jest przyjemniejszy do pisania i czytania. W HAML używa się jedynie tagów otwierających a o tym jak osadzone są elelemny decyduje indentacja. HAML posiada też skróty na sekcje div o podanym id lub klasie.
+W projekcie został użyty HAML (HTML Abstraction Markup Language), który sprawia że kod jest przyjemniejszy do pisania i czytania. W HAML używa się jedynie tagów otwierających a o tym jak osadzone są elementy decyduje indentacja. HAML posiada też skróty na sekcje div o podanym id lub klasie.
 \begin{figure}[H]
 \centering
 \begin{subfigure}[t]{0.45\textwidth}
@@ -151,38 +153,40 @@ W projekcie został użyty HAML (HTML Abstraction Markup Language), który spraw
 \end{listing}
 \end{subfigure}
 \end{figure}
+$\label{haml}$
+Powyższe listingi przedstawiają przykładowy kod HAML oraz HTML do którego on się kompiluje.
 \subsubsection{Backbone.js}
 Backbone.js jest lekką biblioteką JavaScript nadającą strukturę aplikacją JavaScript. Typowe użycie tej biblioteki jest to zazwyczaj trio pomiędzy samym backbonem a jQuery i underscore.js.
 
 W tej pracy został też użyty gem haml\_coffee\_assets pozwalający na pisanie szablonów Backbone w języku HAML z osadzonym CoffeeScriptem (podobnie jak w eRuby). 
 
-Biblioteka Backbone.js stara się odtworzyć to co jest po stronie serwera w modelu MVC na stronę klienta (przeglądarki) i JavaScriptu. Model odzwierciedla zasób na serwerze i jest odpowiednikiem modelu po stronie serwera. Kolekcja jest grupą modeli pobieraną z serwera. Na kolekcji zdefiniowane są zdarzenia (eng. \emph{events}), które ponownie renderują widok np. kiedy element zostanie dodany do kolekcji. W Backbone Router odpowiedzialny jest za tłumaczenie adresów URL na widoki oraz za obsługę historii przeglądarki. Widok jest odpowiednikiem kontrolera znanego z Rails. Odpowiada na zdarzenia w oknie przeglądarki takie jak kliknięcie myszką i podejmuje odpowiednie akcje. Szablony natomiast są, w przypadku tej pracy, kodem HAML używanym przez widoki do rendowania treści aplikacji.
+Biblioteka Backbone.js stara się odtworzyć to co jest po stronie serwera w modelu MVC na stronę klienta (przeglądarki) i JavaScriptu. Model odzwierciedla zasób na serwerze i jest odpowiednikiem modelu po stronie serwera. Kolekcja jest grupą modeli pobieraną z serwera. Na kolekcji zdefiniowane są zdarzenia (eng. \emph{events}), które ponownie renderują widok np. kiedy element zostanie dodany do kolekcji. W Backbone Router odpowiedzialny jest za tłumaczenie adresów URL na widoki oraz za obsługę historii przeglądarki. Widok jest odpowiednikiem kontrolera znanego z Rails. Odpowiada na zdarzenia w oknie przeglądarki takie jak kliknięcie myszką i podejmuje odpowiednie akcje. Szablony natomiast są, w przypadku tej pracy, kodem HAML używanym przez widoki do renderowania treści aplikacji.
 \subsection{Komunikacja}
 Oba urządzenia komunikują się ze sobą przy pomocy WiFi w trybie pracy Ad Hoc. Jako karta sieciowa została wybrana karta USB TP-Link \mbox{TL-WN722N} ponieważ posiada antenę o zysku 4dBi, którą można odkręcić oraz zamontować mocniejszą antenę. Poniższy listing przedstawia konfiguracje urządzenia do pracy w trybie Ad Hoc.
 \begin{listing}[H]
 \inputminted[linenos=true]{sh}{./src/adhoc}
 \caption{/etc/network/interfaces}
 \end{listing}
-Plik \emph{/etc/network/interfaces} drugiego urządzenia został skonfigurowany analogicznie. Różni sie on jedynie adresem IP ustawionym na \emph{192.168.1.2}. Urządzenia ustawione w trybie pracy Ad Hoc wykrywają się nawzajem i tworzą sieć o SSID SKIRACE.
+Plik \emph{/etc/network/interfaces} drugiego urządzenia został skonfigurowany analogicznie. Różni sie on jedynie adresem IP ustawionym na \emph{192.168.10.2}. Urządzenia ustawione w trybie pracy Ad Hoc wykrywają się nawzajem i tworzą sieć o SSID SKIRACE.
 \newpage
 \subsection{Podstawy działania}
-Ten rozdział ma na celu przedstawienie budowy oraz podstaw teoretycznych działania czujnika rejestrującego przecięcie wiązki lasera. Składa sie on za fotorezystora, rezystora oraz kondensatora. Poniższy rysunek przedstawia jego budowę.
+Ten rozdział ma na celu przedstawienie budowy oraz podstaw teoretycznych działania czujnika rejestrującego przecięcie wiązki lasera. Składa sie on z fotorezystora, rezystora oraz kondensatora. Poniższy rysunek przedstawia jego budowę.
 \begin{figure}[h]
 \includegraphics[scale=0.15]{./img/sensor_bb.png}
 \caption{Sensor}
 \end{figure}
 % \begin{minipage}{\linewidth}
 \\\noindent
-W układzie o którym mowa w tym rozdziale resyztor $2.2k \Omega$ działa jako zabezpieczenie przed zbyt dużym napięciem skierowanym na port GPIO. Podłączony jest do fotorezystora, którego rezystancja jest niska kiedy świeci na niego wiązka lasera. Kondensator $1\mu F$ jest ładowany a kiedy przekroczy wartość graniczną wynoszącą około 2V pin GPIO rejestruje wartość HIGH. Działanie to jest wykorzystane w kodzie aplikacji gdzie mierzony jest czas potrzebny na naładowanie kondensatora. Kiedy czas jest krótki znaczy to że na fotorezystor pada wiązka lasera, kiedy się zwiększy znaczy to że laser został przecięty tj. zawodnik przejechał przez start lub metę.
+W układzie o którym mowa w tym rozdziale rezystor $2.2k \Omega$ działa jako zabezpieczenie przed zbyt dużym napięciem skierowanym na port GPIO. Podłączony jest do fotorezystora, którego rezystancja jest niska kiedy świeci na niego wiązka lasera. Kondensator $1\mu F$ jest ładowany a kiedy przekroczy wartość graniczną wynoszącą około 2V pin GPIO rejestruje wartość HIGH. Działanie to jest wykorzystane w kodzie aplikacji gdzie mierzony jest czas potrzebny na naładowanie kondensatora. Kiedy czas jest krótki znaczy to że na fotorezystor pada wiązka lasera, kiedy się zwiększy znaczy to że laser został przecięty tj. zawodnik przejechał przez start lub metę.
 \newpage
 \subsection{Implementacja}
 Ninejszy rozdział zostanie poświęcony implementacji. Składa się on z dwóch podrozdziałów: Aplikacja, który opisuję budowę aplikacji startowej oraz rozdziału Worker opisującego worker rejestrujący przejechanie mety.
 \subsubsection{Aplikacja}
-Tak jak była o tym mowa we wstępie do ninejszej pracy aplikację startową można podzielić na dwa osobne komponenty. Jeden stanowi aplikacja napisana we frameworku Sinatra, która udostępnia API dla aplikacji front-end do komunikacji z bazą danych. Ona także serwuje skompilowane zasoby oraz dostarcza połączenia z Memcached. W momencie uruchomienia aplikacji jest też tworzony nowy wątek, którego zadaniem jest zarejestrowanie startu oraz ustawienie czasu tego zdarzenia w Memcached co przedstawia listing \ref{thread}.
-	Aplikacja front-end natomiast dostarcza interfejs dostępny przez przeglądarke internetową służący to interakcji z back-endem.
+Tak jak była o tym mowa we wstępie do ninejszej pracy aplikację startową można podzielić na dwa osobne komponenty. Jeden stanowi aplikacja napisana we frameworku Sinatra, która udostępnia API dla aplikacji front-end do komunikacji z bazą danych. Ona także serwuje skompilowane zasoby. W momencie uruchomienia aplikacji jest też tworzony nowy wątek, którego zadaniem jest zarejestrowanie startu. 
+	Aplikacja front-end natomiast dostarcza interfejs dostępny przez przeglądarke internetową służący do interakcji z back-endem.
 \begin{listing}[H]
 \inputminted[linenos=true]{ruby}{./src/thread.rb}
-\caption{Utworzenie wątku w pliku config.ru}
+\caption{Wątek rejestrujący przejechanie mety}
 $\label{thread}$
 \end{listing}
 %\end{minipage}
@@ -191,10 +195,10 @@ $\label{thread}$
 Wykorzystana tutaj klasa Injector, ma za zadanie budowanie obiektów używających dependency injection w raz z wszelkimi zależnościami przy pomocy gemu Dependor. 
 
 
-W swoim konstuktorze oczekuje obiektów Sinatra dlatego tutaj inicjalizowana jest pustym objektem OpenStruct. OpenStruct odpowiada na dowolne metody oraz zwraca \emph{nil} jeśli nazwa metody wywołanej na rzecz tego obiektu nie zawiera się w haszu, który został użyty do inicjalizacji. 
-Obiekt klasy Injector jest przekazywany w bloku, gdzie póżniej dostarcza obiektów takich jak \emph{capacitor}, którego klasa jest zdefiniowana w pliku \newline \emph{app/services/components/capacitor.rb}. 
+% W swoim konstuktorze oczekuje obiektów Sinatra dlatego tutaj inicjalizowana jest pustym objektem OpenStruct. OpenStruct odpowiada na dowolne metody oraz zwraca \emph{nil} jeśli nazwa metody wywołanej na rzecz tego obiektu nie zawiera się w haszu, który został użyty do inicjalizacji. 
+Obiekt klasy Injector jest 	przekazywany w bloku, gdzie póżniej dostarcza obiektów takich jak \emph{capacitor}, którego klasa jest zdefiniowana w pliku \newline \emph{app/services/components/capacitor.rb}. 
 
-W klasie Injector są definiowane moduły które mają być przeszukane w poszukiwaniu klas, które maja być wstrzykiwane co przedstawia listing \ref{injector}. Nazwy przyjmowane w argumentach metody \emph{takes} oraz nazwy metod wywołanych na obiekcie Injector odpowiadają nazwą plików wstrszykiwanych klas. Warunkiem tego jest odpowiednie nazewnictwo klas i plików zgodnie z konwencjami przyjętymi w programowaniu Ruby.
+W klasie Injector są definiowane moduły które mają być przeszukane w poszukiwaniu klas, które maja być wstrzykiwane co przedstawia listing \ref{injector}. Nazwy przyjmowane w argumentach metody \emph{takes} oraz nazwy metod wywołanych na obiekcie Injector odpowiadają nazwom plików wstrszykiwanych klas. Warunkiem tego jest odpowiednie nazewnictwo klas i plików zgodnie z konwencjami przyjętymi w programowaniu Ruby.
 
 W Ruby przyjęło się nazywanie nazw klas i modułów z dużej litery \mbox{CamelCase} a pliki zawierające te klasy powinny mieć taką samą nazwę jak klasa tylko zapisaną w snake\_case z rozszerzeniem *.rb.
 \begin{listing}[H]
@@ -233,7 +237,7 @@ $\label{capacitor}$
 Zadaniem tej klasy jest napisanie wartości LOW na pin w celu rozładowania ładunku na kondensatorze. 
 
  
-Dzieje się to na początku pętli \emph{while} w wątku z listingu \ref{thread}. Następnie w tej samej pętli \emph{śpimy} przez 1ms oraz odczyt ustawiany jest na zero. W kolejnej pętli \emph{while} pin GPIO jest ustawiany na wejście, pobierana jest z niego wartość a kiedy kondensator przekroczy wartorść graniczną jest zwracany jest odczyt inkrementowany w tej pętli. 
+Dzieje się to na początku pętli \emph{while} w wątku z listingu \ref{thread}. Następnie w tej samej pętli \emph{śpimy} przez 1ms oraz odczyt ustawiany jest na zero. W kolejnej pętli \emph{while} pin GPIO jest ustawiany na wejście, pobierana jest z niego wartość a kiedy kondensator przekroczy wartość graniczną jest zwracany jest odczyt inkrementowany w tej pętli. 
  
 Jeśli jego wartość przekroczy zadany czas potrzebny na naładowanie kondensatora (tutaj próg aktywacji) w Memcached ustawiany jest dokładny czas tego zdarzenia pod kluczem \emph{start\_time}. Odpowiedzialna jest za to klasa CachingService przedstawiona na listingu \ref{caching}.
 \newpage
@@ -243,7 +247,7 @@ Jeśli jego wartość przekroczy zadany czas potrzebny na naładowanie kondensat
 $\label{caching}$
 \end{listing}
 \noindent
-Klasa w konstruktorze jako argument przyjume obiekt klasy \mbox{MemcacheConnection} pokazanej na listingu \ref{mcon}. Metody tej klasy \emph{get} oraz \emph{set} mają oczywiste działanie zatem zostaną pominięte. Warto jednak zwtócić uwagę na metodę fetch która próbuje pobrać wartość z cache a kiedy nic nie znajduje się pod przekazanym kluczem wywołuje metodę \emph{set} ustawiającą klucz wartością zwracaną przez przekazany blok. Przykładowe użycie tej metody przedstawiono poniżej.
+Klasa w konstruktorze jako argument przyjume obiekt klasy \mbox{MemcacheConnection} pokazanej na listingu \ref{mcon}. Metody tej klasy \emph{get} oraz \emph{set} mają oczywiste działanie zatem zostaną pominięte. Warto jednak zwrócić uwagę na metodę fetch która próbuje pobrać wartość z cache a kiedy nic nie znajduje się pod przekazanym kluczem wywołuje metodę \emph{set} ustawiającą klucz wartością zwracaną przez przekazany blok. Przykładowe użycie tej metody przedstawiono poniżej.
 \begin{listing}
 \inputminted[linenos=true]{ruby}{./src/fetch.rb}
 \caption{Przykład wykorzystania metody fetch.}
@@ -259,7 +263,7 @@ $\label{mcon}$
 \paragraph{API} ~\\
 API dla aplikacji Backbone (interfejsu) zostało napisane we frameworku Sinatra. Framework ten został  zaprojektowany do pisania niewielkich, lekkich aplikacji web i został wybrany ponieważ autor uznał że Ruby on Rails (najpopularnieszy framework Ruby) jest zbyt rozbudowany i uruchomienie aplikacji RoR na RaspberryPi mogło by zużyć zbyt wiele zasobów urządzenia. Sama aplikacja Sinatra uruchamiana jest na porcie 9292. Z tego powodu znajuję się za proxy | serwerem Nginx, który przekierowuje zapytania przychodzące na port 80 na aplikację.
 
-Typowo aplikacjia Sinatra składa się z jednej klasy. W celu wprowadzenia ładu i składu autor zdecydował się ją rozbić na miejsze pliki. Jako pierwszy załączany jest plik \emph{application.rb}, który min. zawiera deklarację modułów, konfigurację Sprockets oraz konfigurację Warden, która zostanie omówiona w rozdziale \ref{warden}. Na końcu załączane są pozostałe piliki zawierające poszczególne end-pointy, które monkey patchują klasę. Znajdują się w folderze \emph{app/routes} i zostaną przedstawione poniżej przy pomocy zapytań curl i odpowiedzi. W celu autentykacji najpierw jest POSTowany login. Potem możemy autentykować się przy pomocy cookie. 
+Typowo aplikacjia Sinatra składa się z jednej klasy. W celu wprowadzenia porządku autor zdecydował się ją rozbić na miejsze pliki. Jako pierwszy załączany jest plik \emph{application.rb}, który min. zawiera deklarację modułów, konfigurację Sprockets oraz konfigurację Warden, która zostanie omówiona w rozdziale \ref{warden}. Na końcu załączane są pozostałe piliki zawierające poszczególne end-pointy, które monkey patchują klasę. Znajdują się w folderze \emph{app/routes} i zostaną przedstawione poniżej przy pomocy zapytań curl i odpowiedzi. W celu autentykacji najpierw wykonane jest rządanie POST z login oraz hasłem. Potem możemy autentykować się przy pomocy cookie. 
 \begin{listing}
 \inputminted{sh}{./src/curl_auth}
 \end{listing}
@@ -269,7 +273,7 @@ W przypadku udanego logowania serwer odpowiada JSONem
 \inputminted{json}{./src/curl_auth_response}
 \end{listing} 
 \subparagraph{Contestants} ~\\
-W pliku \emph{app/routes/contestants.rb} (listing \ref{contestants}) zawarte są 2 endpointy: \newline\mbox{GET \emph{/contestants/:id}} zwracający zawodnika o podanym id oraz,\newline POST \emph{/contestants} służący do tworzenia nowych zawodników.
+W pliku \emph{app/routes/contestants.rb} zawarte są 2 endpointy: \newline\mbox{GET \emph{/contestants/:id}} zwracający zawodnika o podanym id oraz,\newline POST \emph{/contestants} służący do tworzenia nowych zawodników.
 \begin{listing}
 \inputminted{sh}{./src/curl_get_contestant}
 \caption{GET \emph{/contestants/:id}}
@@ -279,16 +283,16 @@ W pliku \emph{app/routes/contestants.rb} (listing \ref{contestants}) zawarte są
 \caption{Odpowiedź zwracana przez GET \emph{/contestants/1}}
 \end{listing}
 
-Przy tworzeniu zawodnika jest zwracany jedynie kod odpowiedzi HTTP. Jeśli dane są poprawne i zawodnik zostanie zapisany do bazy zwracany jest kod 200 (OK) w przeciwnym wypdaku zwracany jest kod błędu 422 (Unprocessable Entity).
+Przy tworzeniu zawodnika jest zwracany jedynie kod odpowiedzi HTTP. Jeśli dane są poprawne i zawodnik zostanie zapisany do bazy zwracany jest kod 200 (OK) w przeciwnym wypadku zwracany jest kod błędu 422 (Unprocessable Entity).
 \newpage
 %\begin{minipage}{\textwidth}
 \begin{listing}
 \inputminted{sh}{./src/curl_post_contestants}
 \caption{POST \emph{/contestants}}
 \end{listing}
-Do metody get '/contestants/:id' przekazywane są w bloku 2 zmienne: contestant\_presenter oraz cotestant\_repository. contestant\_presenter jest obiektem klasy Presenters::ContestantPresenter, której zadaniem jest prezentacja kolekcji zawodników w formatach JSON, CSV, XML oraz jako Hasz.
+Do metody get '/contestants/:id' przekazywane są w bloku dwie zmienne: contestant\_presenter oraz cotestant\_repository. contestant\_presenter jest obiektem klasy Presenters::ContestantPresenter, której zadaniem jest prezentacja kolekcji zawodników w formatach JSON, CSV, XML oraz jako Hasz.
 
-Użyta tutaj metoda \emph{as\_json} mapuje przekazaną kolekcję na tablicę haszy oraz wywołuję na zwracanej wartości metodę \emph{to\_json} co przedstawia listing \ref{as_json}.
+Użyta tutaj metoda \emph{as\_json} mapuje przekazaną kolekcję na tablicę haszy oraz wywołuje na zwracanej wartości metodę \emph{to\_json} co przedstawia listing \ref{as_json}.
 \begin{listing}
 \inputminted{ruby}{./src/contestants_as_json.rb}
 \caption{\emph{app/services/presenters/contestant\_presenter.rb}}
@@ -296,9 +300,9 @@ $\label{as_json}$
 \end{listing}
 
 
-Przekazywana także w bloku metody \emph{post} zmienna contestant\_repository jest obiektem klasy \emph{Repositories::ContestantRepository} mającej za zadanię budowę, zapis oraz pobieranie z bazy zawodników \ref{contestant_repository}. W konstruktorze przyjmuję model zawodnika \emph{app/models/contestant.rb}.
+Przekazywana także w bloku metody \emph{post} zmienna contestant\_repository jest obiektem klasy \emph{Repositories::ContestantRepository} mającej za zadanie budowę, zapis oraz pobieranie z bazy zawodników \ref{contestant_repository}. W konstruktorze przyjmuję model zawodnika \emph{app/models/contestant.rb}.
 
-W bloku metody post przekazywane są też zmienne hash i json\_parser metody klasy \emph{Injector} zwracającej stałą JSON, która jest potem użyta do sparsowania ciała rządania HTTP. hash jest obiektem klasy Hash modułu \emph{Skirace}. Klasa ta dziedziczy po Haszu i ma na celu dodanie pomocniczych metod znanych z Rails takich jak użyta tutaj \emph{with\_indifferent\_access} pozwalająca na odwołanie się do klucza haszu przy pomocy stringa lub symbolu. 
+W bloku metody post przekazywane są też zmienne hash i json\_parser metody klasy \emph{Injector} zwracającej stałą JSON, która jest potem użyta do sparsowania ciała żądania HTTP. hash jest obiektem klasy Hash modułu \emph{Skirace}. Klasa ta dziedziczy po Haszu i ma na celu dodanie pomocniczych metod znanych z Rails takich jak użyta tutaj \emph{with\_indifferent\_access} pozwalająca na odwołanie się do klucza haszu przy pomocy stringa lub symbolu. 
 
 Takie podejście zostało wybrane ponieważ autor uważa że monkey patchowanie klas należących do \emph{Ruby core} jest czymś czego nie powinno się robić. 
 \begin{listing}
@@ -330,7 +334,7 @@ $\label{contests}$
 \end{listing}
 Zmienna contest\_presenter przekazana w bloku jest obiektem klasy \emph{Presenters::ContestPresenter} zawieającej jedynie metodę \emph{as\_json} działającą analogicznie do metody o tej samej nazwie klasy \emph{Presenters::ContestantPresenter} przedstawionej wcześniej.
 
-\indent contest\_repository jest tutaj obiektem klasy \emph{Repositories::ContestRepository}. Metoda all najpierw sprawdza czy w bazie znajdują się zawody metodą \emph{any?} Jeśli w bazie danych istniją zawody są one zwracane w przeciwnym wypadku wywoływana jest prywatna metoda \emph{create\_default} \ref{contest_create_default}.
+\indent contest\_repository jest tutaj obiektem klasy \emph{Repositories::ContestRepository}. Metoda all najpierw sprawdza czy w bazie znajdują się zawody metodą \emph{any?} Jeśli w bazie danych istnieją zawody są one zwracane w przeciwnym wypadku wywoływana jest prywatna metoda \emph{create\_default} (\ref{contest_create_default}).
 \begin{listing}
 \inputminted{ruby}{./src/contest_create_default.rb}
 \caption{\emph{app/services/repositories/contest\_repository.rb}}
@@ -341,7 +345,7 @@ $\label{contest_create_default}$
 GET \emph{/contests/public}
 \\
 \noindent
-Jeśli publicznie udustępnianie zawodów jest włączone zwrócony zostanie JSON zawiezający id i nazwę zawodów oraz listę zawodników \ref{public_contest_on} w przeciwnym wypadku zwrócony zostanie JSON z odpowiedzią \emph{no-public-contests} oraz statusem HTTP 404 (Not Found) \ref{public_contest_off}.
+Jeśli publicznie udostępnianie zawodów jest włączone zwrócony zostanie JSON zawierający id i nazwę zawodów oraz listę zawodników \ref{public_contest_on} w przeciwnym wypadku zwrócony zostanie JSON z odpowiedzią \emph{no-public-contests} oraz statusem HTTP 404 (Not Found) \ref{public_contest_off}.
 \begin{listing}
 \inputminted{ruby}{./src/get_contest_public.rb}
 \caption{\emph{app/routes/contests.rb}}
@@ -355,12 +359,12 @@ $\label{get_contest_public}$
 %\begin{minipage}[c]{\textwidth}
 \begin{listing}
 \inputminted{json}{./src/curl_public_contest_on}
-\caption{Publiczne udostępnianie zadodów włączone}
+\caption{Publiczne udostępnianie zawodów włączone}
 $\label{public_contest_on}$
 \end{listing}
 \begin{listing}
 \inputminted{json}{./src/curl_public_contest_off}
-\caption{Publiczne udostępnianie zadodów wyłączone}
+\caption{Publiczne udostępnianie zawodów wyłączone}
 $\label{public_contest_off}$
 \end{listing}
 \noindent
@@ -404,9 +408,9 @@ W celu autentykacji użytkowników aplikacji został wykorzystany gem Warden bę
 $\label{strategy}$
 \end{listing}
 \paragraph{Front-end} ~\\
-Inerface apllikacji, tak jak była to tym mowa we wstępie, został napisany przy pomocy Backbone.js. Aplikacja frontend jest inicjalizowana ostatnią linią listingu \ref{aplication-js}. Obiekty plikacji oraz funkcja inicjalizująca ją są zawarte w pliku \emph{app.coffee} przedstawionym na listingu \ref{app-coffee}. 
+Inerface apllikacji, tak jak była to tym mowa we wstępie, został napisany przy pomocy Backbone.js. Aplikacja frontend jest inicjalizowana ostatnią linią listingu \ref{aplication-js}. Obiekty aplikacji oraz funkcja inicjalizująca ją są zawarte w pliku \emph{app.coffee} przedstawionym na listingu \ref{app-coffee}. 
 \begin{listing}
-\inputminted{coffee}{../app/assets/javascripts/app.coffee}
+\inputminted{coffee}{./src/app.coffee}
 \caption{app/assets/javascripts/app.coffee}
 $\label{app-coffee}$
 \end{listing}
