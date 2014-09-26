@@ -11,7 +11,7 @@ module Skirace
           end
 
           if reading > i.options.activation_threshold
-            injector.contastant_repository.set_start_time
+            i.contastant_repository.set_start_time
           end
 
           sleep i.options.measurement_accuracy
