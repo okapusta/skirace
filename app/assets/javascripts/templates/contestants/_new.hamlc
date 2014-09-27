@@ -6,5 +6,4 @@
     .contestant
       %label{for: 'last_name'} Nazwisko
       %input#last_name{type: 'text', name: 'last_name'}
-    .contestant
-      %input{type: 'button', value: 'Dodaj', class: 'btn btn-primary submit'}
+    %input{type: 'button', value: 'Dodaj', class: 'btn btn-primary submit'}

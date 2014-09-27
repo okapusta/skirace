@@ -31,8 +31,9 @@ html, body {
 
 #new-contestant-form,
 #new-contest-form {
-  margin-left: 12.5%;
-  padding: 1em;
+  margin-left: auto;
+  margin-right: auto;
+  width: 65%;
 }
 
 form label, form input {
@@ -96,8 +97,8 @@ label {
 }
 
 input[type=submit].btn {
-  margin-top: 0;
-  float: left;
+  margin-top: -10px;
+  // float: left;
   display: inline-block;
 }
 
@@ -114,4 +115,8 @@ input[type=radio] {
   margin-left: auto;
   text-align: center;
   width: 80%;
+}
+
+#new-contestant-form input {
+  margin-top: -10px;
 }

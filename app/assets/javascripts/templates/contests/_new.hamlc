@@ -1,6 +1,6 @@
 %form{id: 'new-contest-form', name: 'contest', action: '/contest', method: 'post'}
   %fieldset
-    .contestant
+    .contest
       %label{for: 'name'} Nazwa
       %input{type: 'text', name: 'name'}
-    %input{type: 'submit', value: 'Stworz', class: 'btn btn-primary'}
+      %input{type: 'submit', value: 'Stworz', class: 'btn btn-primary'}
