@@ -7,7 +7,7 @@ Sequel.migration do
       String :last_name, null: false
       DateTime :start_time_at
       DateTime :end_time_at
-      DateTime :end_time
+      String :end_time
     end
   end
 
