@@ -15,7 +15,7 @@ class Uploaders::ImportUploader
       when 'json'
         json_parser.parse(tempfile.read)
       when 'xml'
-        xml_parser(tempfile.read) 
+        xml_parser.parse(tempfile.read) 
       when 'csv'
         csv_parser.parse(tempfile.read)
       else

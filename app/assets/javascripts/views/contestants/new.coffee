@@ -5,7 +5,7 @@ class Skirace.Views.Contestants.New extends Backbone.View
   el: $ '#new-contestant-form'
 
   events:
-    "submit form" : "create"
+    "click .submit" : "create"
   
   initialize: (args) ->
     @contestant = new Skirace.Models.Contestant()

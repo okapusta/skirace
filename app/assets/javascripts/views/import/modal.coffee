@@ -7,6 +7,7 @@ class Skirace.Views.Import.Modal extends Backbone.View
 
   events:
    'click #import' : 'import'
+   'click .modal-close' : 'close'
 
   initialize: ->
     @render()
@@ -15,4 +16,8 @@ class Skirace.Views.Import.Modal extends Backbone.View
     $(@el).append @template
 
   import: ->
-    $(@importForm).submit()
+    $(@importForm).submit ->
+      window.location.reload()
+
+  close: ->
+    $('.import-modal').remove()

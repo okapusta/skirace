@@ -38,11 +38,11 @@ class Injector
     JSON
   end
 
-  def xml_parser
+  def xml
     Nokogiri::XML
   end
 
-  def csv_parser
+  def csv
     CSV
   end
 
