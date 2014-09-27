@@ -120,3 +120,7 @@ input[type=radio] {
 #new-contestant-form input {
   margin-top: -10px;
 }
+
+.navbar-inner a.brand {
+  font-size: 18px;
+} 

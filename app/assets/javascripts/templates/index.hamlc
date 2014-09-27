@@ -27,7 +27,6 @@
             %i.fa.fa-cog
         %li.signout
           %a#signout{href: '#signout'}
-            Wylogowanie
             %i.fa.fa-sign-out
     - else
       %ul.nav.pull-right
