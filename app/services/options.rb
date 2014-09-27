@@ -21,7 +21,7 @@ class Options
   end
 
   def activation_threshold
-    2
+    1.5
   end
 
   def measurement_accuracy
