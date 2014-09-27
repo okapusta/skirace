@@ -1,5 +1,5 @@
 class Repositories::ContestantRepository
-  takes :db_contestant, :time_service, :time
+  takes :db_contestant, :time_service, :time, :caching_service
 
   def build(params)
     contestant = db_contestant.new(params[:contestant])
@@ -20,6 +20,9 @@ class Repositories::ContestantRepository
   end
 
   def first(options = {start_time_at: nil})
+    current_contest = caching_service.get('current_contest')
+    options.merge!({contest_id: current_contest}) if current_contest
+    
     db_contestant.where(options).order(:id).first
   end
 
