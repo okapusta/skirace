@@ -1,0 +1,4 @@
+curl -H 'Content-Type: application/json' \
+-H 'Accept: application/json' \ 
+-X POST http://localhost:9292/contests \
+-d '{"name":"Zawody"}' -b cookie --verbose

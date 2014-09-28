@@ -17,10 +17,14 @@
 \contentsline {paragraph}{Contestants}{18}{section*.6}
 \contentsline {paragraph}{Contests}{21}{section*.7}
 \contentsline {paragraph}{\numberline {3.5.1.2}Warden}{24}{paragraph.3.5.1.2}
-\contentsline {paragraph}{\numberline {3.5.1.3}Front-end}{25}{paragraph.3.5.1.3}
-\contentsline {subsubsection}{\numberline {3.5.2}Worker}{25}{subsubsection.3.5.2}
-\contentsline {subsection}{\numberline {3.6}Obudowa ochronna}{25}{subsection.3.6}
-\contentsline {section}{\numberline {4}Wnioski}{25}{section.4}
-\contentsline {section}{\numberline {5}Licencje Gem\IeC {\'o}w}{26}{section.5}
-\contentsline {subsection}{\numberline {5.1}Wykaz gem\IeC {\'o}w}{26}{subsection.5.1}
-\contentsline {section}{\numberline {6}Summary}{28}{section.6}
+\contentsline {paragraph}{\numberline {3.5.1.3}Front-end}{26}{paragraph.3.5.1.3}
+\contentsline {subsubsection}{\numberline {3.5.2}Worker}{26}{subsubsection.3.5.2}
+\contentsline {subsection}{\numberline {3.6}Obudowa ochronna}{28}{subsection.3.6}
+\contentsline {section}{\numberline {4}Licencje Gem\IeC {\'o}w}{29}{section.4}
+\contentsline {subsection}{\numberline {4.1}Wykaz gem\IeC {\'o}w}{29}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Tre\IeC {\'s}ci licencji}{31}{subsection.4.2}
+\contentsline {subsubsection}{\numberline {4.2.1}MIT}{31}{subsubsection.4.2.1}
+\contentsline {subsubsection}{\numberline {4.2.2}LGPLv3}{32}{subsubsection.4.2.2}
+\contentsline {subsubsection}{\numberline {4.2.3}Ruby}{35}{subsubsection.4.2.3}
+\contentsline {subsubsection}{\numberline {4.2.4}BSD-3}{36}{subsubsection.4.2.4}
+\contentsline {section}{\numberline {5}Summary}{37}{section.5}

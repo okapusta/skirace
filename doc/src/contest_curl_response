@@ -1,0 +1,20 @@
+* About to connect() to localhost port 9292 (#0)
+*   Trying 127.0.0.1...
+* Connected to localhost (127.0.0.1) port 9292 (#0)
+> POST /contests HTTP/1.1
+> User-Agent: curl/7.29.0
+> Host: localhost:9292
+> Cookie: rack.session=99fdd50ac10222cbf9f8c8f7b63e12c97093d7525ff7da70a8487aafb997c2a2
+> Content-Type: application/json
+> Accept: application/json
+> Content-Length: 17
+> 
+* upload completely sent off: 17 out of 17 bytes
+< HTTP/1.1 200 OK
+< Content-Type: application/json;charset=utf-8
+< Content-Length: 0
+< X-Content-Type-Options: nosniff
+< Connection: keep-alive
+< Server: thin 1.5.1 codename Straight Razor
+< 
+* Connection #0 to host localhost left intact

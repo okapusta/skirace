@@ -25,6 +25,7 @@
 	{\normalfont\normalsize}}
 \makeatother
 \usepackage{chngcntr}
+\usepackage{float}
 \counterwithin{subfigure}{figure}
 \begin{document} 
 \includepdf[pages={1,2}]{first-pages.pdf}
@@ -124,7 +125,7 @@ Wykorzystane tutaj zmienne klasowe (\emph{assets\_prefix}, \emph{sprockets}) apl
 \caption{Przeszukiwane foldery}
 \end{listing}
 \noindent
-Powyższe listingi umieszczają skompilowane pliki z wyznaczonych ścieżek w folderze \emph{public/assets} pod nazwami \emph{application.js} oraz \emph{application.css}. Pliki te zawierają jedynie assety załączone poleceniem \emph{require} w plikach app/assets/javascripts/application.js i app/assets/stylesheets/application.css.
+Powyższe listingi umieszczają skompilowane pliki z wyznaczonych ścieżek w folderze \emph{public/assets} pod nazwami \emph{application.js} oraz \emph{application.css}. Pliki te zawierają jedynie assety załączone poleceniem \emph{require} w plikach app/assets/javascripts/application.js i \newline app/assets/stylesheets/application.css.
 \begin{listing}[H]
 \inputminted[linenos=true]{javascript}{./src/application.js}
 \caption{app/assets/javascripts/application.js}
@@ -300,7 +301,7 @@ $\label{as_json}$
 \end{listing}
 
 
-Przekazywana także w bloku metody \emph{post} zmienna contestant\_repository jest obiektem klasy \emph{Repositories::ContestantRepository} mającej za zadanie budowę, zapis oraz pobieranie z bazy zawodników \ref{contestant_repository}. W konstruktorze przyjmuję model zawodnika \emph{app/models/contestant.rb}.
+Przekazywana także w bloku metody \emph{post} zmienna contestant\_repository jest obiektem klasy \emph{Repositories::ContestantRepository} mającej za zadanie budowę, zapis oraz pobieranie z bazy zawodników \ref{contestant_repository}. W konstruktorze przyjmuję między innymi model zawodnika. %\newline\emph{app/models/contestant.rb}.
 
 W bloku metody post przekazywane są też zmienne hash i json\_parser metody klasy \emph{Injector} zwracającej stałą JSON, która jest potem użyta do sparsowania ciała żądania HTTP. hash jest obiektem klasy Hash modułu \emph{Skirace}. Klasa ta dziedziczy po Haszu i ma na celu dodanie pomocniczych metod znanych z Rails takich jak użyta tutaj \emph{with\_indifferent\_access} pozwalająca na odwołanie się do klucza haszu przy pomocy stringa lub symbolu. 
 
@@ -376,24 +377,41 @@ Zwraca listę zawodników dla zawodów o przekazanym id.
 \inputminted{ruby}{./src/contest_contestants.rb}
 \caption{\emph{app/routes/contests.rb}}
 \end{listing}
-\begin{listing}
+\begin{listing}[H]
 \inputminted{ruby}{./src/curl_contest_contestants}
 \caption{GET \emph{/contests/1/contestants}}
 \end{listing}
-\\
-\begin{listing}
+% \\
+\begin{listing}[H]
 \inputminted{json}{./src/curl_contest_contestants_response}
 \caption{Odpowiedź JSON}
 \end{listing}
 %\end{minipage}
-\\
-\noindent
+% \\
+% \newpage
+% \noindent
 POST \emph{/contests}
 \\
 \noindent
 Tworzy nowe zawody.
-
-\newpage
+\begin{listing}[H]
+\inputminted{ruby}{./src/contest_curl}
+\caption{POST \emph{/contests}}
+\end{listing}
+\noindent
+Ten endpoint odpowiada jedynie kodem statusu HTTP 200 (OK) jeśli utworzenie nowych zawodów się powiedzie oraz 422 (Unprocessable entity) w przeciwnym wypadku.
+\newline
+\newline
+\noindent
+PUT \emph{/contests/current}
+\\
+\noindent
+Ma na celu ustawianie aktualnie wybranych zawodów w Memcached. Podobnie jak powyższy endpoint zwraca jedynie w odpowiedzi kod statusu.
+\begin{listing}[H]
+\inputminted{ruby}{./src/curl_current_contest}
+\caption{PUT \emph{/contests/current}}
+\end{listing}
+% TODO: MOAR ENDPOINTS
 %\begin{listing}
 %\inputminted{ruby}{../app/routes/contestants.rb}
 %\caption{\emph{app/routes/contestants.rb}}
@@ -402,22 +420,40 @@ Tworzy nowe zawody.
 %\end{minipage}
 \paragraph{Warden}\label{warden} ~\\
 W celu autentykacji użytkowników aplikacji został wykorzystany gem Warden będący oprogramowaniem pośredniczącym (\emph{eng. middleware}) dla aplikacji Rack. Warden wstrzykuje \emph{leniwy obiekt} (który jest inicjalizowany tylko wtedy kiedy zajdzie na niego zapotrzebowanie) do env['warden']. Pozwala on np. na sprawdzenie czy użytkownik jest zalogowany env['warden'].authenticated? Warden pozwala na definiowanie strategii autentykowania użytkowników. Każda ze zdefiniowanych strategii będzie próbowała zautentykować użytkownika aplikacji aż któraś z nich się powiedzie. Strategie autentykacji, która została użyta w tym projekcie przedstawia listing \ref{strategy}.
-\begin{listing}
-\inputminted{ruby}{./src/warden_strategy.rb}
+
+\begin{listing}[H]
+\inputminted[linenos=true]{ruby}{./src/warden_strategy.rb}
 \caption{Strategia autentykacji}
 $\label{strategy}$
 \end{listing}
+\newpage
 \paragraph{Front-end} ~\\
 Inerface apllikacji, tak jak była to tym mowa we wstępie, został napisany przy pomocy Backbone.js. Aplikacja frontend jest inicjalizowana ostatnią linią listingu \ref{aplication-js}. Obiekty aplikacji oraz funkcja inicjalizująca ją są zawarte w pliku \emph{app.coffee} przedstawionym na listingu \ref{app-coffee}. 
-\begin{listing}
-\inputminted{coffee}{./src/app.coffee}
+\begin{listing}[H]
+\inputminted{js}{./src/app.coffee}
 \caption{app/assets/javascripts/app.coffee}
 $\label{app-coffee}$
 \end{listing}
+
 \subsubsection{Worker}
+Worker o którym była mowa we wstępie do niniejszej pracy rejestruje przejechanie linii mety. Został on napisany w całości w języku Ruby jako \emph{gem} - program managera paczek RubyGems. Po zainstalowaniu w systemie dostarcza on komendy \emph{skirace-worker}, która go uruchamia.
+
+
+Po uruchominiu startuje pętlę pobierającą wartość z czujnika a w momencie przejechania mety wysyła rządanie POST do aplikacji startowej oraz w odpowiedzi otrzymuje imię, nazwisko i czas końcowy zawodnika oraz wyświetla je na wyświetlaczu LCD zgodnym ze standardem HD44780. Strukturę oraz informacje o gemie definiuje plik \emph{skirace-worker.gemspec}, który zawiera klasę ze specyfikacją.
+
+Plikiem wykonywalnym gemu jest skrypt Ruby, który załącza plik \emph{lib/skirace\_worker.rb} zawierający definicje modułów workera. Dadaje on też kolejne pliki oraz klasy a następnie uruchamia worker (\ref{binary}). 
+
+\begin{listing}
+\inputminted[linenos=true]{ruby}{./src/binary}
+\caption{bin/skirace-worker}
+$\label{binary}$
+\end{listing}
+
+
+
+\newpage
 \subsection{Obudowa ochronna}
 Obudowa urządzenia została wykonana ze skrzynek izolacyjnych D25 montowancyh na rurach kanalizacyjncyh PP 50/1000 mm przy pomocy opasek zaciskowych. W skrzynkach znajduje się RaspberryPI przykręcone do wygiętego fragmentu opakowania na płyty CD na warstwie ochronnej wycinku karimaty, koszyczek na 6 baterii AA dostarczający zasilanie oraz układ UBEC - przetwornica impulsowa - redukująca napięcie z baterri do 5V 3A dla bramki startowej, oraz 5V 5A dla bramki końcowej.
-\section{Wnioski}
 \newpage
 \section{Licencje Gemów}
 \subsection{Wykaz gemów}
@@ -485,7 +521,7 @@ Autorzy: Aaron Patterson, Mike Dalessio, Yoko Harada, Tim Eliott, Akinori MUSHA 
 Licencja: MIT
 \end{itemize}
 \newpage
-\iffalse
+
 \subsection{Treści licencji}
 \subsubsection{MIT}
 Permission is hereby granted, free of charge, to any person obtaining
@@ -742,6 +778,6 @@ Redistribution and use in source and binary forms, with or without modification,
 
 \end{enumerate}
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-\fi
+\newpage
 \section{Summary}
 \end{document}
