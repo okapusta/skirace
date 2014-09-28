@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.6.24)  28 SEP 2014 13:51
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.6.24)  28 SEP 2014 15:14
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1164,15 +1164,15 @@ AR PUR-PO-SE AND
  []
 
 [31] [32] [33] [34] [35] [36]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 838.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 849.
  [37]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 838.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 849.
  (./praca.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 838.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 838.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 849.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 849.
 Package rerunfilecheck Info: File `praca.out' has not changed.
 (rerunfilecheck)             Checksum: 484805465DB42E7196BB51F4140CBA4B;1917.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 838.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 849.
  ) 
 Here is how much of TeX's memory you used:
  9208 strings out of 495024
@@ -1194,7 +1194,7 @@ r/share/texlive/texmf-dist/fonts/type1/public/pl/plr10.pfb></usr/share/texlive/
 texmf-dist/fonts/type1/public/pl/plr6.pfb></usr/share/texlive/texmf-dist/fonts/
 type1/public/pl/plti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl
 /pltt10.pfb>
-Output written on praca.pdf (37 pages, 2105575 bytes).
+Output written on praca.pdf (37 pages, 2108034 bytes).
 PDF statistics:
  554 PDF objects out of 1000 (max. 8388607)
  473 compressed objects within 5 object streams
