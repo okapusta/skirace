@@ -455,13 +455,42 @@ Plikiem wykonywalnym gemu jest skrypt Ruby, który załącza plik \emph{lib/skir
 $\label{binary}$
 \end{listing}
 
-Tak samo jak w aplikacji startowej w workerze również został wykorzystany wzorzec projektowy Dependency Injection. Obiekt klasy Injector jest inicjalizowany w klasie \emph{SkiraceWorker::Runner} (\ref{runner}), która zawiera 2 publiczne metody klasowe (statyczne). Klasa \emph{Injector} dostarcza obiektu klasy \emph{Worker}, która posiada metodę \emph{work} mającą analogiczne działanie do pętli z aplikacji startowej rejestrującej przecięcie wiązki laser na starcie (\ref{thread}).
+Tak samo jak w aplikacji startowej w workerze również został wykorzystany wzorzec projektowy Dependency Injection. Obiekt klasy Injector jest inicjalizowany w klasie \emph{SkiraceWorker::Runner} (\ref{runner}), która zawiera 2 publiczne metody klasowe (statyczne). Klasa \emph{Injector} dostarcza obiektu klasy \emph{Worker}, która posiada metodę \emph{work} mającą analogiczne działanie do pętli z aplikacji startowej rejestrującej przecięcie wiązki lasera na starcie (\ref{thread}).
 
 \begin{listing}
 \inputminted[linenos=true]{ruby}{./src/runner.rb}
 \caption{lib/skirace\_worker/runner.rb}
 $\label{runner}$
 \end{listing}
+
+Za wysłanie żądania do aplikaci startowej jest odpowiedzialna klasa \emph{Connections::Application} (\ref{application-connection}). Jest ono skierowane do endpointu aplikacji \emph{/api/endtime}. Przykładowe zapytanie do API przedstawione jest na listingach \ref{api-req} oraz \ref{api-resp}.
+
+\begin{listing}[H]
+\inputminted[linenos=true]{ruby}{./src/app-conn.rb}
+\caption{lib/skirace\_worker/connections/application.rb}
+$\label{application-connection}$
+\end{listing}
+
+\begin{listing}[H]
+\inputminted{ruby}{./src/api-req}
+\caption{Żądanie wysyłane po przejechaniu mety}
+$\label{api-req}$
+\end{listing}
+
+\begin{listing}[H]
+\inputminted{json}{./src/api-resp}
+\caption{Odpowiedź API}
+$\label{api-resp}$
+\end{listing}
+
+Odpowiedź API (\ref{api-resp}) jest następnie parsowana oraz formatowana przez klasę \emph{Formatter (\ref{formatter})} a następnie wyświetlana na wyświetlaczu LCD.
+
+\begin{listing}
+\inputminted[linenos=true]{ruby}{./src/formatter.rb}
+\caption{lib/skirace\_worker/formatter.rb}
+$\label{formatter}$
+\end{listing}
+
 
 \newpage
 \subsection{Obudowa ochronna}

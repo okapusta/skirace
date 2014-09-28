@@ -1,0 +1,3 @@
+curl -X POST http://localhost:9292/api/endtime \
+  -d "end_time=2014-09-28 12:54:57 +0200"
+
