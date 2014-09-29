@@ -1,7 +1,7 @@
 Skirace
 =======
 
-Application for my BS degree in Computer Engineering.
+Application for my BSc degree in Computer Engineering.
 
 How to run
 ----------
