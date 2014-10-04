@@ -32,7 +32,9 @@ class Repositories::ContestantRepository
 
   def set_end_time(end_time_at)
     contestant  = first("start_time_at is not null and end_time is null")
-    end_time = time_service.format(time.parse(end_time_at) - contestant.start_time_at)
+    end_time = time_service.format(
+      time.parse(end_time_at) - contestant.start_time_at
+      )
 
     contestant.update(end_time_at: end_time_at, end_time: end_time)
     

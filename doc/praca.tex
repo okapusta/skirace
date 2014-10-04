@@ -81,7 +81,7 @@ Kompletny kod źródłowy pracy można znaleźć pod adresami:
 \item \label{req:export} Możliwość exportu danych do komputera
 \end{enumerate}
 \subsection{Koncepcja wykonania}
-System pomiaru czasu został wymyślony tak aby jego budowa była prosta. Składa się on z dwóch identycznie wykonancyh bramek. Obie bramki składają się z urządzenia Raspberry Pi oraz modułu laserowego zamontowancyh na rurach kanalizacyjnych. Wiązka laserowa jest użyta w celu uchwycenia momentu przejechania bramki. Pada ona na fotorezystor, którego rezystancja jest niska kiedy jest oświetlony. Fakt ten został wykorzystany w układzie pomiarowym, który składa się jeszcze z kondensatora oraz rezystora. Kondensator jest ładowany i mierzony jest czas potrzebny na jego nałądowanie. Kiedy jest wyższy niż zadana wartość graniczna znaczy to że wiązka została przecięta. Taka budowa oraz użyte materiały i podzespoły zapewniają pierwsze trzy wymagania.
+System pomiaru czasu został wymyślony tak aby jego budowa była prosta. Składa się on z dwóch identycznie wykonancyh bramek. Obie bramki składają się z urządzenia Raspberry Pi oraz modułu laserowego zamontowancyh na rurach kanalizacyjnych. Wiązka laserowa jest użyta w celu uchwycenia momentu przejechania bramki. Pada ona na fotorezystor, którego rezystancja jest niska kiedy jest oświetlony. Fakt ten został wykorzystany w układzie pomiarowym, który składa się jeszcze z kondensatora oraz rezystora. Kondensator jest ładowany i mierzony jest czas potrzebny na jego nałądowanie. Kiedy jest wyższy niż zadana wartość graniczna znaczy to że wiązka została przecięta. Taka budowa oraz użyte materiały i podzespoły spełniają pierwsze trzy wymagania.
 
 Aby spełnić czwarte wymaganie obie bramki komunikują się przy użyciu WiFi. Do Raspberry Pi podłączona jest karta WiFi a system skonfigurowany jest tak aby obie bramki wykryły się nawzajem i utworzyły śieć o SSID Skirace.
 
@@ -89,9 +89,69 @@ Wymagania \ref{req:entry} oraz \ref{req:export} zostały spełnione poprzez stwo
 
 Aby umożliwić natychmiastowy odczyt wyniku po przejechaniu mety (\ref{req:lcd}) bramka końcowa została wyposażona w wyświetlacz LCD, na którym pokazywane są imię oraz nazwisko zawodnika oraz jego czas. 
 
-Ostanie wymaganie (\ref{req:two}) spełnione jest w samym kodzie obsługującym działanie aplikacji startowej. W momencie przejechania mety zawsze brany jest z bazy danych pierwszy zawodnik, który ma ustawiony czas startowy a nie posiada czasu końcowego. 
+Ostanie wymaganie (\ref{req:two}) spełnione jest w kodzie obsługującym działanie aplikacji startowej. W momencie przejechania mety zawsze brany jest z bazy danych pierwszy zawodnik, który ma ustawiony czas startowy a nie posiada czasu końcowego. 
 \subsection{Budowa systemu}
 \subsection{Sposób obsługi}
+Urządzenie składa się z czterech elementów~|~startowego, końcowego oraz dwóch zawierających moduły laserowe. Aby z niego korzystać należy utworzyć dwie bramki wbijając je w śnieg tak aby wiązka lasera z częsci zawierającej moduł laserowy padała na czujnik znajdujący się w otworze wywierconym na bramce z systemem. Laser uruchamiany jest przełącznikiem znajdującym się na górze rur zawierających go. Po uruchomieniu wiązki laserowej i nakierowaniu jej na fotorezystor zależy uruchomić urządzenie przełącznikiem znajdującym się z boku skrzynki przymocowanej do elementu bramki.
+
+Przed rozpoczęciem korzystania z systemu znależy utworzyć nowy wyścig oraz wprowadzić zawodników korzystając z interfejsu web lub konsoli aplikacji. W tym celu trzeba połączyć się z siecią bezprzewodową Skirace oraz otworzyć w przeglądarce internetowej aplikację znajdującą się pod adresem \emph{192.168.10.1}. Następnie należy zalogować się w aplikacji klikając na ikonę kłódki (\ref{login}) znajdującą się w prawym górnym rogu paska nawigacyjnego interfejsu używając do logowania użytkownika \emph{admin} oraz hasła \emph{password}.
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.3]{./img/login.png}
+\caption{Logowanie}
+$\label{login}$
+\end{figure}
+\noindent
+Jeśli w bazie danych nie isnieją zawody zostaną utworzone domyślne o nazwie \emph{Default}. Aby utworzyć nowe zawody należy kliknąć na odnośnik \emph{Nowe zawody} w pasku nawigacyjnym aplikacji (\ref{new-contest}). 	
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.3]{./img/new-contest.png}
+\caption{Nowe zawody}
+$\label{new-contest}$
+\end{figure}
+\noindent
+Następnie należy wybrać nowo utworzone zawody z menu rozwijanego znajdującego się przed przyciskiem \emph{Nowe zaowdy} (\ref{dropdown}).
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.3]{./img/dropdown.png}
+\caption{Wybór zawodów}
+$\label{dropdown}$
+\end{figure}
+\noindent
+W celu dodania nowego zawodnika należy wybrać \emph{Nowy zawodnik} (\ref{new-contestant}). Zostanie on dodany do aktualnie wybranych zawodów (\ref{new-contestant-created}).
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.3]{./img/newcontestant.png}
+\caption{Dodanie nowego zawodnika}
+$\label{new-contestant}$
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.3]{./img/newcontestant-created.png}
+\caption{Nowy zawodnik}
+$\label{new-contestant-created}$
+\end{figure}
+\noindent
+Import (\ref{import}) oraz eksport (\ref{export}) zawodników można wykonać w jednym z trzech obsługiwanych formatów: XML, CSV oraz JSON. W przypdaku eksportu eksportowani są zawodnicy w raz z czasami. Podczas importu można użyć wyeksportowanego pliku, jednak podczas parsowania czasy zawodników zostaną pominięte.
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.3]{./img/import.png}
+\caption{Import}
+$\label{import}$
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.3]{./img/export.png}
+\caption{Eksport}
+$\label{export}$
+\end{figure}
+\noindent
+Ostatnią z funkcjonalności aplikacji web są ustawienia gdzie można włączyć publiczne udostępnianie zawodów (pokazanie wyników zawodników bez logowania). W ustawieniach znajduje się też zarządzanie użytkownikami aplikacji.
+\\
+\\
+\noindent
+Ostatnia z ikon w pasku nawigacyjnym służy do wylogowania z systemu.
+\newpage
 \section{Realizacja tematu}
 \subsection{Architektura}
 System którego ta praca dotyczy został zbudowany w myśl modelu master/slave gdzie masterem jest aplikacja początkowa. To tam znajduje się interface, baza danych oraz serwer Memcached. W momencie uruchomienia aplikacji, oprócz startu serwera serwującego aplikację WEB tworzony jest nowy wątek zawierający event loop, który rejestruje przecięcie wiązki lasera, a kiedy to sie stanie, ustawia godzinę tego zdarzenia w bazie danych.

@@ -23,15 +23,7 @@
                   - for contest in @contests
                     %option{value: contest.get('id')}= contest.get 'name'
 
-            %fieldset
-              %p
-                %label{for: 'multi-contest-lbl'} Dwóch zawodników
-                %input#multi-contest-lbl{type: 'checkbox', name: 'multi_contest'}
-              %p#multi-contest.hide
-                Wprowadz odstęp czsasowy 
-                %input{type: 'text', name: 'time_interval'}
-                lub
-                %input.btn.btn-info{value: 'Rozpocznij przejazd testowy'}
+            
         .tab-pane#user-settings
           %p Ustawienia użytkowników
           %hr
@@ -40,14 +32,10 @@
             %thead
               %tr
                 %th Login
-                %th Admin
             %tbody.table
               - for user in @users
                 %tr
                   %td= user.get 'login'
-                  %td
-                    - if user.get('role') == 1
-                      %i.fa.fa-check-circle  
           %form#user-form{action: '/users'}
             %fieldset
               %p
@@ -56,9 +44,6 @@
               %p
                 %label{for: 'password'} Hasło
                 %input#password{type: 'password', name: 'password'}
-              %p
-                %label{for: 'admin'} Admin
-                %input#admin{type: 'checkbox', name: 'admin'}
               %br
               %p
                 %input#user-add.btn{type: 'submit', value: 'Dodaj'}            

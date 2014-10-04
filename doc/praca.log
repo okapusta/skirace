@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.6.24)  4 OCT 2014 12:02
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.6.24)  4 OCT 2014 14:39
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -787,18 +787,73 @@ LaTeX Font Info:    Try loading font information for OT4+cmtt on input line 62.
 (/usr/share/texlive/texmf-dist/tex/latex/polski/ot4cmtt.fd
 File: ot4cmtt.fd 2008/02/24 v1.2.1 Font defs for fonts PL (MW)
 ) [5] [6]
-Underfull \hbox (badness 10000) in paragraph at lines 99--101
+<./img/login.png, id=270, 1277.77374pt x 480.79625pt>
+File: ./img/login.png Graphic file (type png)
+ <use ./img/login.png>
+Package pdftex.def Info: ./img/login.png used on input line 100.
+(pdftex.def)             Requested size: 383.33508pt x 144.23997pt.
+
+<./img/new-contest.png, id=272, 1328.965pt x 383.4325pt>
+File: ./img/new-contest.png Graphic file (type png)
+
+<use ./img/new-contest.png>
+Package pdftex.def Info: ./img/new-contest.png used on input line 108.
+(pdftex.def)             Requested size: 398.69258pt x 115.03062pt.
+
+<./img/dropdown.png, id=274, 1260.71pt x 327.2225pt>
+File: ./img/dropdown.png Graphic file (type png)
+ <use ./img/dropdown.png>
+Package pdftex.def Info: ./img/dropdown.png used on input line 116.
+(pdftex.def)             Requested size: 378.21593pt x 98.1675pt.
+
+[7 <./img/login.png (PNG copy)> <./img/new-contest.png (PNG copy)>]
+<./img/newcontestant.png, id=284, 1227.58624pt x 374.39874pt>
+File: ./img/newcontestant.png Graphic file (type png)
+
+<use ./img/newcontestant.png>
+Package pdftex.def Info: ./img/newcontestant.png used on input line 124.
+(pdftex.def)             Requested size: 368.27872pt x 112.32048pt.
+
+<./img/newcontestant-created.png, id=285, 1181.41376pt x 245.91875pt>
+File: ./img/newcontestant-created.png Graphic file (type png)
+
+<use ./img/newcontestant-created.png>
+Package pdftex.def Info: ./img/newcontestant-created.png used on input line 130
+.
+(pdftex.def)             Requested size: 354.42686pt x 73.77618pt.
+
+<./img/import.png, id=288, 1199.48125pt x 340.27126pt>
+File: ./img/import.png Graphic file (type png)
+ <use ./img/import.png>
+Package pdftex.def Info: ./img/import.png used on input line 138.
+(pdftex.def)             Requested size: 359.84715pt x 102.08215pt.
+
+<./img/export.png, id=289, 1181.41376pt x 344.28625pt>
+File: ./img/export.png Graphic file (type png)
+ <use ./img/export.png>
+Package pdftex.def Info: ./img/export.png used on input line 144.
+(pdftex.def)             Requested size: 354.42686pt x 103.28667pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [8 <./img/dropdown.png (PNG copy)> <./img/newcontestant.png (PNG copy)> <./img
+/newcontestant-created.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 148--154
 
  []
 
-<./img/asdasd.png, id=269, 759.83875pt x 319.1925pt>
+[9 <./img/import.png (PNG copy)> <./img/export.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 159--161
+
+ []
+
+<./img/asdasd.png, id=303, 759.83875pt x 319.1925pt>
 File: ./img/asdasd.png Graphic file (type png)
  <use ./img/asdasd.png>
-Package pdftex.def Info: ./img/asdasd.png used on input line 103.
+Package pdftex.def Info: ./img/asdasd.png used on input line 163.
 (pdftex.def)             Requested size: 379.91844pt x 159.59586pt.
 
-[7 <./img/asdasd.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 114--116
+Underfull \hbox (badness 10000) in paragraph at lines 174--176
 
  []
 
@@ -819,6 +874,7 @@ runsystem(pygmentize -l ruby -f latex -F tokenmerge             -P "verboptions
  (./praca.out.pyg)
 runsystem(rm praca.out.pyg)...executed.
 
+ [10 <./img/asdasd.png>]
 runsystem(pygmentize -l ruby -f latex -F tokenmerge            -P linenos -P "v
 erboptions= " -o praca.out.pyg ./src/sprockets_mount.rb)...executed.
 
@@ -826,14 +882,14 @@ erboptions= " -o praca.out.pyg ./src/sprockets_mount.rb)...executed.
 runsystem(rm praca.out.pyg)...executed.
 
 Package hyperref Info: bookmark level for unknown listing defaults to 0 on inpu
-t line 141.
+t line 201.
 runsystem(pygmentize -l ruby -f latex -F tokenmerge            -P linenos -P "v
 erboptions= " -o praca.out.pyg ./src/sprockets_config.rb)...executed.
 
  (./praca.out.pyg)
 runsystem(rm praca.out.pyg)...executed.
 
- [8]
+[11]
 runsystem(pygmentize -l ruby -f latex -F tokenmerge            -P linenos -P "v
 erboptions= " -o praca.out.pyg ./src/sprockets_asset_paths.rb)...executed.
 
@@ -843,8 +899,7 @@ runsystem(rm praca.out.pyg)...executed.
 runsystem(pygmentize -l javascript -f latex -F tokenmerge            -P linenos
  -P "verboptions= " -o praca.out.pyg ./src/application.js)...executed.
 
-
-(./praca.out.pyg)
+ (./praca.out.pyg)
 runsystem(rm praca.out.pyg)...executed.
 
 runsystem(pygmentize -l javascript -f latex -F tokenmerge            -P linenos
@@ -853,10 +908,7 @@ runsystem(pygmentize -l javascript -f latex -F tokenmerge            -P linenos
  (./praca.out.pyg)
 runsystem(rm praca.out.pyg)...executed.
 
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [9]
+ [12]
 runsystem(pygmentize -l haml -f latex -F tokenmerge            -P linenos -P "v
 erboptions= " -o praca.out.pyg ./src/example.haml)...executed.
 
@@ -870,28 +922,27 @@ runsystem(pygmentize -l html -f latex -F tokenmerge             -P "verboptions
  (./praca.out.pyg)
 runsystem(rm praca.out.pyg)...executed.
 
- [10]
 runsystem(pygmentize -l sh -f latex -F tokenmerge            -P linenos -P "ver
 boptions= " -o praca.out.pyg ./src/adhoc)...executed.
 
  (./praca.out.pyg)
 runsystem(rm praca.out.pyg)...executed.
 
- [11]
-<./img/sensor_bb.png, id=317, 1373.13pt x 1079.53313pt>
+ [13] [14]
+<./img/sensor_bb.png, id=341, 1373.13pt x 1079.53313pt>
 File: ./img/sensor_bb.png Graphic file (type png)
 
 <use ./img/sensor_bb.png>
-Package pdftex.def Info: ./img/sensor_bb.png used on input line 204.
+Package pdftex.def Info: ./img/sensor_bb.png used on input line 264.
 (pdftex.def)             Requested size: 205.96062pt x 161.92297pt.
- [12 <./img/sensor_bb.png>]
+ [15 <./img/sensor_bb.png>]
 runsystem(pygmentize -l ruby -f latex -F tokenmerge            -P linenos -P "v
 erboptions= " -o praca.out.pyg ./src/thread.rb)...executed.
 
  (./praca.out.pyg)
 runsystem(rm praca.out.pyg)...executed.
 
- [13]
+ [16]
 runsystem(pygmentize -l ruby -f latex -F tokenmerge            -P linenos -P "v
 erboptions= " -o praca.out.pyg ./src/injector.rb)...executed.
 
@@ -905,7 +956,7 @@ erboptions= " -o praca.out.pyg ./src/io.rb)...executed.
  (./praca.out.pyg)
 runsystem(rm praca.out.pyg)...executed.
 
- [14]
+ [17]
 runsystem(pygmentize -l ruby -f latex -F tokenmerge            -P linenos -P "v
 erboptions= " -o praca.out.pyg ./src/gpio.rb)...executed.
 
@@ -921,8 +972,8 @@ runsystem(rm praca.out.pyg)...executed.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [15]
-[16]
+ [18]
+[19]
 runsystem(pygmentize -l sh -f latex -F tokenmerge             -P "verboptions= 
 " -o praca.out.pyg ./src/curl_auth)...executed.
 
@@ -935,7 +986,7 @@ runsystem(pygmentize -l json -f latex -F tokenmerge             -P "verboptions
  (./praca.out.pyg)
 runsystem(rm praca.out.pyg)...executed.
 
- [17]
+ [20]
 runsystem(pygmentize -l sh -f latex -F tokenmerge             -P "verboptions= 
 " -o praca.out.pyg ./src/curl_get_contestant)...executed.
 
@@ -956,7 +1007,7 @@ runsystem(pygmentize -l sh -f latex -F tokenmerge             -P "verboptions=
 runsystem(rm praca.out.pyg)...executed.
 
 
-Overfull \hbox (1.08646pt too wide) in paragraph at lines 320--328
+Overfull \hbox (1.08646pt too wide) in paragraph at lines 380--388
 \OT4/cmr/m/n/10.95 stant[]repository. con-te-stant[]presenter jest obiek-tem kl
 a-sy Pre-sen-ters::ContestantPresenter,
  []
@@ -971,7 +1022,7 @@ runsystem(rm praca.out.pyg)...executed.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[18]
+[21]
 runsystem(pygmentize -l ruby -f latex -F tokenmerge             -P "verboptions
 = " -o praca.out.pyg ../app/services/repositories/contestant_repository.rb)...e
 xecuted.
@@ -983,7 +1034,7 @@ runsystem(rm praca.out.pyg)...executed.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[19] [20]
+[22] [23]
 runsystem(pygmentize -l ruby -f latex -F tokenmerge             -P "verboptions
 = " -o praca.out.pyg ./src/get_contests.rb)...executed.
 
@@ -1013,7 +1064,7 @@ runsystem(rm praca.out.pyg)...executed.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[21
+[24
 
 ]
 runsystem(pygmentize -l ruby -f latex -F tokenmerge             -P "verboptions
@@ -1028,7 +1079,7 @@ runsystem(pygmentize -l ruby -f latex -F tokenmerge             -P "verboptions
  (./praca.out.pyg)
 runsystem(rm praca.out.pyg)...executed.
 
- [22]
+ [25]
 runsystem(pygmentize -l json -f latex -F tokenmerge             -P "verboptions
 = " -o praca.out.pyg ./src/curl_public_contest_on)...executed.
 
@@ -1063,7 +1114,7 @@ runsystem(rm praca.out.pyg)...executed.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [23]
+ [26]
 runsystem(pygmentize -l ruby -f latex -F tokenmerge             -P "verboptions
 = " -o praca.out.pyg ./src/contest_curl)...executed.
 
@@ -1078,7 +1129,7 @@ runsystem(pygmentize -l ruby -f latex -F tokenmerge             -P "verboptions
 runsystem(rm praca.out.pyg)...executed.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 434--446
+Underfull \hbox (badness 10000) in paragraph at lines 494--506
 
  []
 
@@ -1088,7 +1139,7 @@ erboptions= " -o praca.out.pyg ./src/warden_strategy.rb)...executed.
 (./praca.out.pyg)
 runsystem(rm praca.out.pyg)...executed.
 
- [24] [25]
+ [27] [28]
 runsystem(pygmentize -l js -f latex -F tokenmerge             -P "verboptions= 
 " -o praca.out.pyg ./src/app.coffee)...executed.
 
@@ -1096,13 +1147,13 @@ runsystem(pygmentize -l js -f latex -F tokenmerge             -P "verboptions=
 runsystem(rm praca.out.pyg)...executed.
 
 
-<./img/interface.png, id=424, 1204.5pt x 364.36125pt>
+<./img/interface.png, id=443, 1204.5pt x 364.36125pt>
 File: ./img/interface.png Graphic file (type png)
 
 <use ./img/interface.png>
-Package pdftex.def Info: ./img/interface.png used on input line 471.
+Package pdftex.def Info: ./img/interface.png used on input line 531.
 (pdftex.def)             Requested size: 421.58131pt x 127.52834pt.
- [26 <./img/interface.png (PNG copy)>]
+ [29 <./img/interface.png (PNG copy)>]
 runsystem(pygmentize -l ruby -f latex -F tokenmerge            -P linenos -P "v
 erboptions= " -o praca.out.pyg ./src/binary)...executed.
 
@@ -1117,7 +1168,7 @@ erboptions= " -o praca.out.pyg ./src/runner.rb)...executed.
 runsystem(rm praca.out.pyg)...executed.
 
 
-Overfull \hbox (26.96721pt too wide) in paragraph at lines 498--499
+Overfull \hbox (26.96721pt too wide) in paragraph at lines 558--559
 []\OT4/cmr/m/n/10.95 Za wy-sªa-nie »¡-da-nia do apli-ka-ci star-to-wej jest od-
 po-wie-dzial-na kla-sa \OT4/cmr/m/it/10.95 Con-nec-tions::Application
  []
@@ -1128,7 +1179,7 @@ erboptions= " -o praca.out.pyg ./src/app-conn.rb)...executed.
 (./praca.out.pyg)
 runsystem(rm praca.out.pyg)...executed.
 
- [27]
+ [30]
 runsystem(pygmentize -l ruby -f latex -F tokenmerge             -P "verboptions
 = " -o praca.out.pyg ./src/api-req)...executed.
 
@@ -1148,125 +1199,61 @@ erboptions= " -o praca.out.pyg ./src/formatter.rb)...executed.
 runsystem(rm praca.out.pyg)...executed.
 
 
-[28] <./img/device.jpg, id=456, 2256.43pt x 4015.0pt>
+[31] <./img/device.jpg, id=473, 2256.43pt x 4015.0pt>
 File: ./img/device.jpg Graphic file (type jpg)
  <use ./img/device.jpg>
-Package pdftex.def Info: ./img/device.jpg used on input line 533.
+Package pdftex.def Info: ./img/device.jpg used on input line 593.
 (pdftex.def)             Requested size: 225.65622pt x 401.52353pt.
 
-[29 <./img/device.jpg>]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 542.
+[32 <./img/device.jpg>]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 602.
 
  (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 542.
- [30] [31]
-Overfull \hbox (2.37979pt too wide) in paragraph at lines 619--626
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 602.
+ [33] [34]
+Overfull \hbox (2.37979pt too wide) in paragraph at lines 679--686
 \OT4/cmr/m/n/10.95 RAN-TIES OF MER-CHAN-TA-BI-LI-TY, FIT-NESS FOR A PAR-TI-CU-L
 AR PUR-PO-SE AND
  []
 
-[32] [33] [34] [35] [36] [37]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 875.
- [38]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 875.
+[35] [36] [37] [38] [39] [40]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 935.
+ [41]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 935.
  (./praca.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 875.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 875.
-
-
-Package rerunfilecheck Warning: File `praca.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `praca.out':
-(rerunfilecheck)             Before: E300B754EA577109C6522D7D9F0E9C49;2186
-(rerunfilecheck)             After:  A76A5B2331A6FD2248F74164C8EF0A96;2200.
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 875.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 935.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 935.
+Package rerunfilecheck Info: File `praca.out' has not changed.
+(rerunfilecheck)             Checksum: 1DE00637B3BC98894CA470A8C35AC8CF;2202.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 935.
  ) 
 Here is how much of TeX's memory you used:
- 9247 strings out of 495024
- 138556 string characters out of 3181154
- 238922 words of memory out of 3000000
- 11997 multiletter control sequences out of 15000+200000
+ 9281 strings out of 495024
+ 139284 string characters out of 3181154
+ 240237 words of memory out of 3000000
+ 12032 multiletter control sequences out of 15000+200000
  12017 words of font info for 35 fonts, out of 3000000 for 9000
  34 hyphenation exceptions out of 8191
  42i,18n,46p,842b,657s stack positions out of 5000i,500n,10000p,200000b,50000s
-pdfTeX warning (dest): name{section.6} has been referenced but does not exist
-, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.5.2.4} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.5.2.3} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.5.2.2} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.5.2.1} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.5.2} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.5.1} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.4.6} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.4.5.2} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{paragraph.4.5.1.3} has been referenced but does not
- exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{paragraph.4.5.1.2} has been referenced but does not
- exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{paragraph.4.5.1.1} has been referenced but does not
- exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.4.5.1} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.4.5} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.4.4} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.4.3} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.4.2.6} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.4.2.5} has been referenced but does n
-ot exist, replaced by a fixed one
-
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plmi.enc}{/usr/share/texlive/
-texmf-dist/fonts/enc/dvips/pl/plitt.enc}{/usr/share/texlive/texmf-dist/fonts/en
-c/dvips/pl/plrm.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/pltt.enc}
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plit.enc}</usr/share/texlive/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/pl/plbx10.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/pl/plbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/pli
-tt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plmi10.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/pl/plr10.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/public/pl/plr6.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/pl/plti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/p
-ltt10.pfb>
-Output written on praca.pdf (38 pages, 1871013 bytes).
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plmi.enc}{/usr/share/texliv
+e/texmf-dist/fonts/enc/dvips/pl/plitt.enc}{/usr/share/texlive/texmf-dist/fonts/
+enc/dvips/pl/plrm.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/pltt.en
+c}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plit.enc}</usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/pl/plbx10.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/pl/plbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/p
+litt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plmi10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/pl/plr10.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/public/pl/plr6.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/pl/plti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl
+/pltt10.pfb>
+Output written on praca.pdf (41 pages, 2043850 bytes).
 PDF statistics:
- 616 PDF objects out of 1000 (max. 8388607)
- 533 compressed objects within 6 object streams
- 180 named destinations out of 1000 (max. 500000)
- 318 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 630 PDF objects out of 1000 (max. 8388607)
+ 537 compressed objects within 6 object streams
+ 172 named destinations out of 1000 (max. 500000)
+ 353 words of extra memory for PDF output out of 10000 (max. 10000000)
 

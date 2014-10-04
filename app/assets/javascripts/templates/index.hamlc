@@ -25,6 +25,7 @@
           %a#settings{href: 'javascript:void(0)'}
             Ustawienia
             %i.fa.fa-cog
+        %li.divider-vertical
         %li.signout
           %a#signout{href: '#signout'}
             %i.fa.fa-sign-out

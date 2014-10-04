@@ -1,5 +1,6 @@
 #!/bin/bash
 echo "Usage:"
-echo "Contestant.create(first_name: 'joe', last_name: 'doe')"
+echo "c = Contest.create(name: 'New contest')"
+echo "Contestant.create(first_name: 'joe', last_name: 'doe', contest_id: c.id)"
 
 irb -r ./application
