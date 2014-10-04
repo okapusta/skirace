@@ -39,15 +39,17 @@
 Przedmiotem niniejszej pracy jest budowa mobilnego systemu pomiaru czasu dla zawodów narciarskich. System składa się z dwóch bramek: startowej oraz końcowej, które wykorzystują wiązke laserową w celu uchwycenia dokładnego momentu przejechania zawodnika przez bramkę. 
 
 Niniejsza praca będzie się składać z trzech głównych części. Pierwsza z nich poświęcona zostanie architekturze systemu i wykorzystanych technologiach, a w szczególności, komunikacji pomiędzy komponentami oraz podstawą teoretycznym działania. Druga część tej pracy zawiera opis implementacji, zaś trzecia część jest poświęcona umieszczeniu systemu w obudowie ochronnej.
-\section{Wstęp}
-Obecnie na rynku istnieją podobne systemy do tego, którego budowę ta praca przedstawia, jednak często kosztują tysiące złotych. Praca ta jest próbą stowrzenia rozwiązania spełniającego podobne zadanie do ww. systemów korzystając z ogólnie dostępnych podzespołów.
 
-Jako szkielet systemu zostało wybrane Raspberry Pi - platforma komputerowa stworzona przez Raspberry Fundation. W momencie premiery (29 luty 2012) model B użyty w tej pracy miał cenę początkową US\$ 35. Raspberry Pi oparte jest o chip BCM2835 zawierający procesor ARMv6. Urządzenie działa pod kontrolą dystrybucji systemu Linux Raspbian będącą portem Debiana Wheezy koniecznym z powodu braku kompatybilności (oficjalne wydanie Debiana Wheezy na platformę armhf działa jedynie z procesorami ARMv7 lub nowszymi).
+\section{Wstęp}
+Obecnie na rynku istnieją systemy podobne do tego, którego budowę ta praca przedstawia, jednak często kosztują tysiące złotych. Praca ta jest próbą stowrzenia rozwiązania spełniającego podobne zadanie do ww. systemów korzystając z ogólnie dostępnych podzespołów.
+
+Jako szkielet systemu zostało wybrane Raspberry Pi - platforma komputerowa stworzona przez Raspberry Pi Fundation. W momencie premiery (29 luty 2012) model B użyty w tej pracy miał cenę początkową US\$ 35. Raspberry Pi oparte jest o chip BCM2835 zawierający procesor ARMv6. Urządzenie działa pod kontrolą dystrybucji systemu Linux Raspbian będącą zoptymalizowaną wersją Debiana Wheezy dla procesorów ARMv6.
 
 Obie aplikacjie (startowa i końcowa) zostały napistane przy użyciu języka Ruby 2.1.0 oraz dla aplikacji startowej stworzony został interface web umożliwiający wprowadzanie zawodników oraz podgląd wyników, jak również import oraz eksport. Napisany został on przy użyciu CoffeeScript oraz biblioteki JavaScript Backbone.js. 
 CoffeeScript jest językiem inspirowanym elegancką składnią Ruby i Pythona, który kompiluje się do JavaScriptu. Backbone.js natomiast zapewnia strukturę aplikacji.
 %\newline
-%W momencie pisania kodu aplikacji autor nie zdawał sobie jeszcze sprawy z pewnych dobrych pratyk pisania kodu JavaScript, zatem w kodzie znajdują się błędy, których należy unikać. Z tego powodu ta praca będzie się też starać je pokazać, na czym one polegają i jakie trudności w późniejszym utrzymaniu kodu podowują tak aby czytelnik był ich świadom i sam ich nie popełniał.
+%W momencie pisania kodu aplikacji autor nie zdawał sobie jeszcze sprawy z peOdporny na trudne warunki atmosferyczne
+%\item Lekkiwnych dobrych pratyk pisania kodu JavaScript, zatem w kodzie znajdują się błędy, których należy unikać. Z tego powodu ta praca będzie się też starać je pokazać, na czym one polegają i jakie trudności w późniejszym utrzymaniu kodu podowują tak aby czytelnik był ich świadom i sam ich nie popełniał.
 \newline
 \newline
 \noindent
@@ -66,11 +68,35 @@ Kompletny kod źródłowy pracy można znaleźć pod adresami:
 %\end{minipage}
 \newpage
 \noindent
+\subsection{Założenia dotyczące systemu}
+% System będący przedmiotem tej pracy powinien spełniać następujące wymagania:
+\begin{enumerate}
+\item Odporny na trudne warunki atmosferyczne
+\item Lekki
+\item Autonomiczny
+\item Bezprzewodowy
+\item \label{req:entry} Możliwość wprowadzania zawodników na starcie
+\item \label{req:two} Możliwość pomiaru czasu dla dwóch zawodników jednocześnie
+\item \label{req:lcd} Możliwość odczytu czasu po minięciu mety 
+\item \label{req:export} Możliwość exportu danych do komputera
+\end{enumerate}
+\subsection{Koncepcja wykonania}
+System pomiaru czasu został wymyślony tak aby jego budowa była prosta. Składa się on z dwóch identycznie wykonancyh bramek. Obie bramki składają się z urządzenia Raspberry Pi oraz modułu laserowego zamontowancyh na rurach kanalizacyjnych. Wiązka laserowa jest użyta w celu uchwycenia momentu przejechania bramki. Pada ona na fotorezystor, którego rezystancja jest niska kiedy jest oświetlony. Fakt ten został wykorzystany w układzie pomiarowym, który składa się jeszcze z kondensatora oraz rezystora. Kondensator jest ładowany i mierzony jest czas potrzebny na jego nałądowanie. Kiedy jest wyższy niż zadana wartość graniczna znaczy to że wiązka została przecięta. Taka budowa oraz użyte materiały i podzespoły zapewniają pierwsze trzy wymagania.
+
+Aby spełnić czwarte wymaganie obie bramki komunikują się przy użyciu WiFi. Do Raspberry Pi podłączona jest karta WiFi a system skonfigurowany jest tak aby obie bramki wykryły się nawzajem i utworzyły śieć o SSID Skirace.
+
+Wymagania \ref{req:entry} oraz \ref{req:export} zostały spełnione poprzez stworzenie interfejsu webowego uruchamiangeo na bramce startowej. Aby z niego korzystać należy posiadać laptop oraz połączyć się z siecią Skirace, a następnie odwiedzić adres bramki (\emph{192.168.10.1}). Alternatywną metodą wprowadzania zawodników jest użycie konsoli aplikacji. W tym celu należy się zalogować używając SSH do urządzenia na konto użytkownika app, posługując się hasłem skirace2014 lub kluczem publicznym. Następnie należy wejść do folderu \emph{/home/app/skirace/current} oraz poleceniem \emph{rvmsudo bundle exec script/console} uruchmić konsolę. 
+
+Aby umożliwić natychmiastowy odczyt wyniku po przejechaniu mety (\ref{req:lcd}) bramka końcowa została wyposażona w wyświetlacz LCD, na którym pokazywane są imię oraz nazwisko zawodnika oraz jego czas. 
+
+Ostanie wymaganie (\ref{req:two}) spełnione jest w samym kodzie obsługującym działanie aplikacji startowej. W momencie przejechania mety zawsze brany jest z bazy danych pierwszy zawodnik, który ma ustawiony czas startowy a nie posiada czasu końcowego. 
+\subsection{Budowa systemu}
+\subsection{Sposób obsługi}
 \section{Realizacja tematu}
 \subsection{Architektura}
 System którego ta praca dotyczy został zbudowany w myśl modelu master/slave gdzie masterem jest aplikacja początkowa. To tam znajduje się interface, baza danych oraz serwer Memcached. W momencie uruchomienia aplikacji, oprócz startu serwera serwującego aplikację WEB tworzony jest nowy wątek zawierający event loop, który rejestruje przecięcie wiązki lasera, a kiedy to sie stanie, ustawia godzinę tego zdarzenia w bazie danych.
 
-Zadaniem workera jest zarejestrowanie przecięcia linii mety a kiedy to sie sanie worker wysyła rządanie POST do aplikacji startowej, która w podpwiedzi zwraca obliczony końcowy czas oraz imie i nazwisko zawodnika wyświetlane na LCD.
+Zadaniem workera jest zarejestrowanie przecięcia linii mety. Worker wysyła rządanie POST do aplikacji startowej, która w odpowiedzi zwraca obliczony końcowy czas oraz imie i nazwisko zawodnika wyświetlane na LCD.
 \newline
 
 \begin{figure}[ht]
