@@ -130,3 +130,13 @@ input[type=radio] {
   border-right: 1px solid #ffffff;
   border-left: 1px solid #c0c0c0;
 } 
+
+/*.navbar .nav {
+  float: left;
+}
+*/
+a#signout {
+  padding: 0;
+  margin-right: 0;
+  padding-top: 10px;
+}
