@@ -22,7 +22,7 @@ end
     
 class Skirace::Application < Sinatra::Base
   
-  # register Skirace::StartingLine
+  register Skirace::StartingLine
 
   set :static, :enable
   set :views, Proc.new { File.join(root, "app", "views") }
