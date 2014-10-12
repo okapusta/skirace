@@ -108,6 +108,57 @@ $\label{laser-1}$
 \end{center}
 \end{figure}
 \newpage
+Bramka startowa podobnie jak moduły laserowe składa się z rury PCV z zaślepką, jednakże z powodu rozmiaru użytych elementów (m.in. RaspberryPi) przymocowana jest do niej skrzynka izolacyjna zawierająca urzadzenie oraz zasilanie. RaspberryPi w środku skrzynki jest przykręcone do wygiętego fragmentu opakowania na płyty CD śróbami imbusowymi 2x10mm. Ma to na celu podzielenie przestrzeni skrzynki izolacyjnej, tak aby koszyczek z bateriamii AA nie nachodził na system komputerowy. Dodatkowo pomiędzy Raspberry oraz wygiętym pudełkiem znajduje się wycinek karimaty zapewniajacy ochronę dla lutów znajdujących się pod spodem Maliny (\ref{skrzynka-in}).
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.08]{./img/insides1.jpg}
+\caption{Wnętrze urządzenia}
+$\label{skrzynka-in}$
+\end{center}
+\end{figure}
+Urządzenie pomiarowe znajduję się natomiast w srodku rury PCV. Elementy sensora zostały zamocowane na połowie płytki prototypowej. Całość urządzenia pomiarowego jest przymocowana do rury PCV przy pomocy dwóch śrób. Rozdział \ref{sensor} poświęcony jest działaniu sensora, dlatego jego budowa zostanie tutaj pominięta.
+
+Bramka końcowa posiada budowę analogiczną do bramki startowej, jednak dodatkowo została wyposażona w wyświetlacz LCD pokazujący czas zawodnika na mecie. Rysunek \ref{lcd} pokazuje sposób podłączenia go do GPIO, natomiast rysunek \ref{both} przedstawia obydwie bramki. 
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.125]{./img/lcd_bb.png}
+\caption{Podłączenie LCD}
+$\label{lcd}$
+\end{center}
+\end{figure}
+Poniższa tabela (\ref{lcd-pins}) przedstawia rozpiskę pinów wyświetlacza LCD oraz porty GPIO do których są podłączone. Wejścia +5V oraz GND wyświetlacza zostały podłączone bezpośrednio do źródła zasilania.
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{ | l | l | l | l | }
+\hline
+Numer pinu LCD & Nazwa pinu LCD & Number pinu GPIO & Nazwa pinu GPIO \\ \hline
+1 & GND & | &  | \\ \hline
+2 & +5V & | &  | \\ \hline
+3 & GND & | &  | \\ \hline
+4 & RS &  26 & GPIO7 \\ \hline
+5 & RW (GND) & | & | \\ \hline 
+6 & E & 24 & GPIO8 \\ \hline
+11 & DB4 & 22 & GPIO25 \\ \hline
+12 & DB5 & 18 & GPIO24 \\ \hline
+13 & DB6 & 16 & GPIO23 \\ \hline
+14 & DB7 & 12 & GPIO18 \\ \hline
+15 & LED +5V & | & | \\ \hline
+16 & LED GND & | & | \\ \hline
+\end{tabular}
+\end{center}
+\caption{Rozpiska pinów LCD}
+$\label{lcd-pins}$
+\end{table}
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.06]{./img/start-front.jpg}
+\includegraphics[scale=0.06]{./img/start-in.jpg}
+\includegraphics[scale=0.06]{./img/finish.jpg}
+\caption{Bramki}
+$\label{both}$
+\end{center}
+\end{figure}
+\newpage
 \subsection{Architektura}
 System którego ta praca dotyczy został zbudowany w myśl modelu master/slave gdzie masterem jest aplikacja początkowa. To tam znajduje się interface, baza danych oraz serwer Memcached. W momencie uruchomienia aplikacji, oprócz startu serwera serwującego aplikację WEB tworzony jest nowy wątek zawierający event loop, który rejestruje przecięcie wiązki lasera, a kiedy to sie stanie, ustawia godzinę tego zdarzenia w bazie danych.
 
@@ -213,7 +264,7 @@ Oba urządzenia komunikują się ze sobą przy pomocy WiFi w trybie pracy Ad Hoc
 \end{listing}
 Plik \emph{/etc/network/interfaces} drugiego urządzenia został skonfigurowany analogicznie. Różni sie on jedynie adresem IP ustawionym na \emph{192.168.10.2}. Urządzenia ustawione w trybie pracy Ad Hoc wykrywają się nawzajem i tworzą sieć o SSID SKIRACE.
 \newpage
-\subsection{Podstawy działania}
+\subsection{Podstawy działania}\label{sensor}
 Ten rozdział ma na celu przedstawienie budowy oraz podstaw teoretycznych działania czujnika rejestrującego przecięcie wiązki lasera. Składa sie on z fotorezystora, rezystora oraz kondensatora. Poniższy rysunek przedstawia jego budowę.
 \begin{figure}[h]
 \includegraphics[scale=0.15]{./img/sensor_bb.png}
