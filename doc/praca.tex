@@ -44,10 +44,10 @@ Niniejsza praca będzie się składać z trzech głównych części. Pierwsza z 
 \section{Wstęp}
 Obecnie na rynku istnieją systemy podobne do tego, którego budowę ta praca przedstawia, jednak często kosztują tysiące złotych. Praca ta jest próbą stowrzenia rozwiązania spełniającego podobne zadanie do ww. systemów korzystając z ogólnie dostępnych podzespołów, za nie wielkie pieniądze.
 
-Jako szkielet systemu zostało wybrane Raspberry Pi - platforma komputerowa stworzona przez Raspberry Pi Fundation. W momencie premiery (29 luty 2012) model B użyty w tej pracy miał cenę początkową US\$ 35. Raspberry Pi oparte jest o chip BCM2835 zawierający procesor ARMv6. Urządzenie działa pod kontrolą dystrybucji systemu Linux Raspbian będącą zoptymalizowaną wersją Debiana Wheezy dla procesorów ARMv6.
+Jako szkielet systemu zostało wybrane Raspberry Pi - platforma komputerowa stworzona przez Raspberry Pi Fundation. W momencie premiery (29 luty 2012) model B użyty w tej pracy miał cenę początkową US\$ 35. Raspberry Pi oparte jest o chip BCM2835 zawierający procesor ARMv6. Urządzenie działa pod kontrolą dystrybucji systemu Linux Raspbian będącą zoptymalizowaną wersją dystrybucji Debiana Wheezy dla procesorów ARMv6.
 
-Obie aplikacjie (startowa i końcowa) zostały napistane przy użyciu języka Ruby 2.1.0 oraz dla aplikacji startowej stworzony został interface web umożliwiający wprowadzanie zawodników oraz podgląd wyników, jak również import oraz eksport. Napisany został on przy użyciu CoffeeScript oraz biblioteki JavaScript Backbone.js. 
-CoffeeScript jest językiem inspirowanym elegancką składnią Ruby i Pythona, który kompiluje się do JavaScriptu. Backbone.js natomiast zapewnia strukturę aplikacji.
+Obie aplikacjie (startowa i końcowa) zostały napistane przy użyciu języka Ruby 2.1.0 oraz dla aplikacji startowej stworzony został interface web umożliwiający wprowadzanie zawodników oraz podgląd wyników, jak również import oraz eksport. Napisany został on przy użyciu języka CoffeeScript oraz biblioteki JavaScript Backbone.js. 
+CoffeeScript jest językiem inspirowanym elegancką składnią Ruby, który kompiluje się do JavaScriptu. Backbone.js natomiast zapewnia strukturę aplikacji.
 %\newline
 %W momencie pisania kodu aplikacji autor nie zdawał sobie jeszcze sprawy z peOdporny na trudne warunki atmosferyczne
 %\item Lekkiwnych dobrych pratyk pisania kodu JavaScript, zatem w kodzie znajdują się błędy, których należy unikać. Z tego powodu ta praca będzie się też starać je pokazać, na czym one polegają i jakie trudności w późniejszym utrzymaniu kodu podowują tak aby czytelnik był ich świadom i sam ich nie popełniał.
@@ -126,6 +126,7 @@ Bramka końcowa posiada budowę analogiczną do bramki startowej, jednak dodatko
 $\label{lcd}$
 \end{center}
 \end{figure}
+
 Poniższa tabela (\ref{lcd-pins}) przedstawia rozpiskę pinów wyświetlacza LCD oraz porty GPIO do których są podłączone. Wejścia +5V oraz GND zostały podłączone bezpośrednio do źródła zasilania.
 \begin{table}[H]
 \begin{center}
@@ -149,6 +150,7 @@ Numer pinu LCD & Nazwa pinu LCD & Number pinu GPIO & Nazwa pinu GPIO \\ \hline
 \caption{Rozpiska pinów LCD}
 $\label{lcd-pins}$
 \end{table}
+
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale=0.06]{./img/start-front.jpg}
@@ -158,6 +160,7 @@ $\label{lcd-pins}$
 $\label{both}$
 \end{center}
 \end{figure}
+
 \newpage
 \subsection{Architektura}
 System którego ta praca dotyczy został zbudowany w myśl modelu master/slave gdzie masterem jest aplikacja początkowa. To tam znajduje się interface, baza danych oraz serwer Memcached. W momencie uruchomienia aplikacji, oprócz startu serwera serwującego aplikację WEB tworzony jest nowy wątek zawierający event loop, który rejestruje przecięcie wiązki lasera, a kiedy to sie stanie, ustawia godzinę tego zdarzenia w bazie danych.
