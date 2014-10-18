@@ -18,8 +18,8 @@
 \contentsline {subsection}{\numberline {3.7}Implementacja}{17}{subsection.3.7}
 \contentsline {subsubsection}{\numberline {3.7.1}Aplikacja}{17}{subsubsection.3.7.1}
 \contentsline {paragraph}{\numberline {3.7.1.1}API}{21}{paragraph.3.7.1.1}
-\contentsline {paragraph}{Contestants}{22}{section*.11}
-\contentsline {paragraph}{Contests}{25}{section*.12}
+\contentsline {subparagraph}{\numberline {3.7.1.1.1}Contestants}{22}{subparagraph.3.7.1.1.1}
+\contentsline {subparagraph}{\numberline {3.7.1.1.2}Contests}{25}{subparagraph.3.7.1.1.2}
 \contentsline {paragraph}{\numberline {3.7.1.2}Warden}{28}{paragraph.3.7.1.2}
 \contentsline {paragraph}{\numberline {3.7.1.3}Front-end}{30}{paragraph.3.7.1.3}
 \contentsline {subsubsection}{\numberline {3.7.2}Worker}{31}{subsubsection.3.7.2}

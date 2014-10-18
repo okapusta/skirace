@@ -17,13 +17,26 @@
 \usepackage{subcaption}
 \usepackage{graphicx}
 \setlength{\footskip}{40pt}
-\setcounter{secnumdepth}{5}
-\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{6}
+\setcounter{tocdepth}{6}
+\if false
 \makeatletter
 \renewcommand\subparagraph{\@startsection{paragraph}{6}{\z@} %
 	{-3.25ex\@plus -1ex \@minus -.2ex} %
 	{0.0001pt \@plus -1ex \@minus -.2ex} %
 	{\normalfont\normalsize}}
+\makeatother
+\fi
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
+                                     {0.0001pt \@plus .2ex}%
+                                     {\normalfont\normalsize\bfseries}}
+\renewcommand\subparagraph{\@startsection{subparagraph}{5}{\z@}%
+                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
+                                     {0.0001pt \@plus .2ex}%
+                                     {\normalfont\normalsize\bfseries}}
 \makeatother
 \usepackage{chngcntr}
 \usepackage{float}
@@ -44,9 +57,9 @@ Niniejsza praca będzie się składać z trzech głównych części. Pierwsza z 
 \section{Wstęp}
 Obecnie na rynku istnieją systemy podobne do tego, którego budowę ta praca przedstawia, jednak często kosztują tysiące złotych. Praca ta jest próbą stowrzenia rozwiązania spełniającego podobne zadanie do ww. systemów korzystając z ogólnie dostępnych podzespołów, za nie wielkie pieniądze.
 
-Jako szkielet systemu zostało wybrane Raspberry Pi - platforma komputerowa stworzona przez Raspberry Pi Fundation. W momencie premiery (29 luty 2012) model B użyty w tej pracy miał cenę początkową US\$ 35. Raspberry Pi oparte jest o chip BCM2835 zawierający procesor ARMv6. Urządzenie działa pod kontrolą dystrybucji systemu Linux Raspbian będącą zoptymalizowaną wersją dystrybucji Debiana Wheezy dla procesorów ARMv6.
+Jako szkielet systemu zostało wybrane Raspberry Pi | platforma komputerowa stworzona przez Raspberry Pi Fundation. W momencie premiery (29 luty 2012) model B użyty w tej pracy miał cenę początkową US\$ 35. Raspberry Pi oparte jest o chip BCM2835 zawierający procesor ARMv6. Urządzenie działa pod kontrolą dystrybucji systemu Linux Raspbian będącą zoptymalizowaną wersją dystrybucji Debiana Wheezy dla procesorów ARMv6.
 
-Obie aplikacjie (startowa i końcowa) zostały napistane przy użyciu języka Ruby 2.1.0 oraz dla aplikacji startowej stworzony został interface web umożliwiający wprowadzanie zawodników oraz podgląd wyników, jak również import oraz eksport. Napisany został on przy użyciu języka CoffeeScript oraz biblioteki JavaScript Backbone.js. 
+Obie aplikacjie (startowa i końcowa) zostały napistane przy użyciu języka Ruby 2.1.0 oraz dla aplikacji startowej stworzony został interfejs web umożliwiający wprowadzanie zawodników, podgląd wyników, oraz import oraz eksport. Napisany został on przy użyciu języka CoffeeScript oraz biblioteki JavaScript Backbone.js. 
 CoffeeScript jest językiem inspirowanym elegancką składnią Ruby, który kompiluje się do JavaScriptu. Backbone.js natomiast zapewnia strukturę aplikacji.
 %\newline
 %W momencie pisania kodu aplikacji autor nie zdawał sobie jeszcze sprawy z peOdporny na trudne warunki atmosferyczne
@@ -54,7 +67,7 @@ CoffeeScript jest językiem inspirowanym elegancką składnią Ruby, który komp
 \newline
 \newline
 \noindent
-W pracy zostały użyte różne \emph{gemy}~-~programy i biblioteki menadżera paczek \emph{RubyGems}, których lista w raz z licencjami zostanie przedstawiona na końcu tej pracy.
+W pracy zostały użyte różne \emph{gemy}~|~programy i biblioteki menadżera paczek \emph{RubyGems}, których lista w raz z licencjami zostanie przedstawiona na końcu tej pracy.
 \newline
 
 \noindent
@@ -89,11 +102,11 @@ System pomiaru czasu został wymyślony tak aby jego budowa była prosta. Skład
 
 Aby spełnić czwarte wymaganie obie bramki komunikują się przy użyciu WiFi. Do Raspberry Pi podłączona jest karta WiFi a system skonfigurowany jest tak aby obie bramki wykryły się nawzajem i utworzyły śieć o SSID Skirace.
 
-Wymagania \ref{req:entry} oraz \ref{req:export} zostały spełnione poprzez stworzenie interfejsu webowego uruchamiangeo na bramce startowej. Aby z niego korzystać należy posiadać laptop oraz połączyć się z siecią Skirace, a następnie odwiedzić adres bramki (\emph{192.168.10.1}). Alternatywną metodą wprowadzania zawodników jest użycie konsoli aplikacji. W tym celu należy się zalogować używając SSH do urządzenia na konto użytkownika app, posługując się hasłem skirace2014 lub kluczem publicznym. Następnie należy wejść do folderu \emph{/home/app/skirace/current} oraz poleceniem \emph{rvmsudo bundle exec script/console} uruchmić konsolę. 
+Wymagania \ref{req:entry} oraz \ref{req:export} zostały spełnione poprzez stworzenie interfejsu webowego uruchamiangeo na bramce startowej. Aby z niego korzystać należy posiadać laptop oraz połączyć się z siecią Skirace, a następnie odwiedzić adres bramki (\emph{192.168.10.1}). Alternatywną metodą wprowadzania zawodników jest użycie konsoli aplikacji. W tym celu należy się zalogować używając SSH do urządzenia na konto użytkownika app, posługując się hasłem skirace2014 lub kluczem publicznym. Następnie należy wejść do folderu \emph{/home/app/skirace/current} oraz poleceniem \emph{rvmsudo bundle exec script/console} uruchomić konsolę. 
 
-Aby umożliwić natychmiastowy odczyt wyniku po przejechaniu mety (\ref{req:lcd}) bramka końcowa została wyposażona w wyświetlacz LCD, na którym pokazywane są imię oraz nazwisko zawodnika oraz jego czas. 
+Aby umożliwić natychmiastowy odczyt wyniku po przejechaniu mety (\ref{req:lcd}) bramka końcowa została wyposażona w wyświetlacz LCD, na którym pokazywane są imię i nazwisko zawodnika oraz jego czas. 
 
-Ostanie wymaganie (\ref{req:two}) spełnione jest w kodzie obsługującym działanie aplikacji startowej. W momencie przejechania mety zawsze brany jest z bazy danych pierwszy zawodnik, który ma ustawiony czas startowy a nie posiada czasu końcowego. Rozwiązanie to zakłada że zawodnicy nie wyprzedzą się podczas zjzdu.
+Ostanie wymaganie (\ref{req:two}) spełnione jest w kodzie obsługującym działanie aplikacji startowej. W momencie przejechania mety zawsze brany jest pierwszy zawodnik, który ma ustawiony czas startowy a nie posiada czasu końcowego. Rozwiązanie to zakłada że zawodnicy nie wyprzedzą się podczas zjzdu.
 \subsection{Budowa systemu}
 System pomiaru czasu składa się z czterech części. Tworzą one bramki, przez które zawodnik musi przejechać. Bramki zostały wykonane z rur kanalizacychnych aby urządzenie było lekkie i można było je łatwo wbić w śnieg. Kielichy rur nie zostały ucięte aby dało się je zatkać z góry zaślepką. Jako pierwszą autor przedstawi budowę elementu bramki, która zawiera moduł laserowy. Jest ona taka sama dla bramki startowej oraz końcowej.
 
