@@ -108,7 +108,7 @@ $\label{laser-1}$
 \end{center}
 \end{figure}
 \newpage
-Bramka startowa podobnie jak moduły laserowe składa się z rury PCV z zaślepką, jednakże z powodu rozmiaru użytych elementów (m.in. RaspberryPi) przymocowana jest do niej skrzynka izolacyjna zawierająca urzadzenie oraz zasilanie. RaspberryPi w środku skrzynki jest przykręcone do wygiętego fragmentu opakowania na płyty CD śróbami imbusowymi 2x10mm. Ma to na celu podzielenie przestrzeni skrzynki izolacyjnej, tak aby koszyczek z bateriamii AA nie nachodził na system komputerowy. Dodatkowo pomiędzy Raspberry oraz wygiętym pudełkiem znajduje się wycinek karimaty zapewniajacy ochronę dla lutów znajdujących się pod spodem Maliny (\ref{skrzynka-in}).
+Bramka startowa podobnie jak moduły laserowe składa się z rury PCV z zaślepką, jednakże z powodu rozmiaru użytych elementów (m.in. RaspberryPi) przymocowana jest do niej skrzynka izolacyjna zawierająca urzadzenie oraz zasilanie. RaspberryPi w środku skrzynki jest przykręcone do wygiętego fragmentu opakowania na płyty CD śróbami imbusowymi 2x10mm. Ma to na celu podzielenie przestrzeni skrzynki izolacyjnej, tak aby koszyczek z bateriamii AA nie nachodził na system komputerowy. Dodatkowo pomiędzy Raspberry oraz wygiętym pudełkiem znajduje się wycinek karimaty zapewniajacy ochronę dla lutów znajdujących się pod spodem. (\ref{skrzynka-in}).
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale=0.08]{./img/insides1.jpg}
@@ -127,7 +127,7 @@ $\label{lcd}$
 \end{center}
 \end{figure}
 
-Poniższa tabela (\ref{lcd-pins}) przedstawia rozpiskę pinów wyświetlacza LCD oraz porty GPIO do których są podłączone. Wejścia +5V oraz GND zostały podłączone bezpośrednio do źródła zasilania.
+Tabela (\ref{lcd-pins}) przedstawia rozpiskę pinów wyświetlacza LCD oraz porty GPIO do których są podłączone. Wejścia +5V oraz GND zostały podłączone bezpośrednio do źródła zasilania.
 \begin{table}[H]
 \begin{center}
 \begin{tabular}{ | l | l | l | l | }
@@ -163,9 +163,9 @@ $\label{both}$
 
 \newpage
 \subsection{Architektura}
-System którego ta praca dotyczy został zbudowany w myśl modelu master/slave gdzie masterem jest aplikacja początkowa. To tam znajduje się interface, baza danych oraz serwer Memcached. W momencie uruchomienia aplikacji, oprócz startu serwera serwującego aplikację WEB tworzony jest nowy wątek zawierający event loop, który rejestruje przecięcie wiązki lasera, a kiedy to sie stanie, ustawia godzinę tego zdarzenia w bazie danych.
+System pomiaru czasu został zbudowany w myśl modelu master/slave gdzie masterem jest aplikacja początkowa. Udostępnia ona interface web służący do wprowadzania zawodników. Bramka startowa zawiera również bazę danych oraz serwer Memcached. W momencie uruchomienia aplikacji startowej, oprócz startu serwera serwującego aplikację WEB, tworzony jest nowy wątek, który rejestruje przecięcie wiązki lasera. Kiedy to sie stanie, ustawia on dokładną godzinę tego zdarzenia w bazie danych.
 
-Zadaniem workera jest zarejestrowanie przecięcia linii mety. Worker wysyła rządanie POST do aplikacji startowej, która w odpowiedzi zwraca obliczony końcowy czas oraz imie i nazwisko zawodnika wyświetlane na LCD.
+Zadaniem workera jest zarejestrowanie przecięcia linii mety. Worker wysyła rządanie POST do aplikacji startowej, która w odpowiedzi zwraca obliczony czas końcowy oraz imie i nazwisko zawodnika wyświetlane na LCD.
 \newline
 
 \begin{figure}[ht]
@@ -175,12 +175,14 @@ Zadaniem workera jest zarejestrowanie przecięcia linii mety. Worker wysyła rz�
 \noindent
 Komunikacjia pomiędzy dwiema bramkami odbywa się poprzez WiFi.
 \subsection{Wybrane technologie}
+\subsubsection{Nginx}
+Aplikacja startowa jest uruchamiana na porcie \emph{9292} dlatego został użyty serwer Nginx (\emph{czyt. engine-x}), który działa jako proxy (serwer pośredniczący), przekierowujący rządania przychodzące na port 80 do aplikacji startowej.
 \subsubsection{Memcached}
-Memcached jest to rozproszony system buforowania pamięci podręczniej oryginalnie zaprojektowany na potrzeby serwisu  LiveJournal. Pozwala on na przechowywanie obiektów w pamięci RAM przy pomocy kluczy \mbox{(key-value store)}. W aplikacji wykorzystany został w celu przechowania id aktualnego wyścigu.
+Memcached jest to rozproszony system buforowania pamięci podręczniej oryginalnie zaprojektowany na potrzeby serwisu  LiveJournal. Pozwala on na przechowywanie obiektów w pamięci RAM przy pomocy kluczy \mbox{(key-value store)}. W aplikacji wykorzystany został w celu przechowania id aktualnego wyścigu oraz sesji użytkownika.
 \subsubsection{Dependency Injection}
-W ninejszej pracy został wykorzystany wzorzec projektowy \emph{Dependency Injection (DI)} polegający na usuwaniu bespośrednich zależności klas na rzecz \emph{wstrzykiwania} ich w czasie konstruowania obiektu. Do osiągnięcia tego celu i uproszczenia  DI użyty został gem Dependor, udostępniający zestaw metod i modułów przeznaczony do tego celu.
+W ninejszej pracy został wykorzystany wzorzec projektowy \emph{Dependency Injection (DI)} polegający na usuwaniu bespośrednich zależności klas na rzecz \emph{wstrzykiwania} ich w czasie konstruowania obiektu. W celu uproszczenia  DI został użyty gem Dependor, który udostępnia zestaw metod przeznaczonych do tego celu.
 
-Poniżej zamieszczone są listingi przedstawiające normlne wstrzykiwanie zależności w Ruby oraz z wykorzystaniem gemu Dependor.
+Poniżej zamieszczone są listingi przedstawiające normalne wstrzykiwanie zależności w Ruby oraz z wykorzystaniem gemu Dependor.
 \newline
 
 
@@ -200,17 +202,17 @@ Poniżej zamieszczone są listingi przedstawiające normlne wstrzykiwanie zależ
 \end{subfigure}
 \end{figure}
 \subsubsection{Sprockets}
-Do kompilacji CoffeeScript oraz szablonów \emph{.hamlc} (\emph{Haml Coffee Assets}) został użyty gem \emph{Sprockets} zawierający preprocessory dla języków takich jak CoffeeScript czy SCSS. Sprockets w środowisku developerskim pozwala na kompilacje assetów (JavaScriptów i CSSów) 'w locie', natomiast w środowisku produkcyjnym assety są prekompilowane. Sprockets pozwala również na minifikacje zasobów to jest zastąpienie nazw funkcji czy zmiennych pojedyńczymi znakami w celu zmiejszenia rozmiaru kodu, który musi zostać pobrany przez przeglądarkę. 
+Do kompilacji CoffeeScript oraz szablonów \emph{.hamlc} (\emph{Haml Coffee Assets}) został użyty gem \emph{Sprockets} zawierający preprocessory dla języków takich jak CoffeeScript czy SCSS. Sprockets w środowisku developerskim pozwala na kompilacje assetów (JavaScriptów i CSSów) 'w locie', natomiast w środowisku produkcyjnym assety są prekompilowane. Sprockets pozwala również na minifikacje zasobów | to jest zastąpienie nazw funkcji czy zmiennych pojedyńczymi znakami w celu zmiejszenia rozmiaru kodu, który musi zostać pobrany przez przeglądarkę. 
 
-Sprockets działa w kontekście Rack - minimalnego interfejsu dla aplikacji Ruby do komunikacji z popularnymi serwerami WWW. Zasoby serwowane przez sprockets są montowane w pliku \emph{config.ru}, będącym plikiem konfiguracyjnym dla interfejsu Rack poprzez który aplikacja jest uruchamiana. Tutaj  montowana jest ścieżka serwera WWW '/' tak aby pokazywała na aplikację Sinatra. 
+Sprockets działa w kontekście Rack | minimalnego interfejsu dla aplikacji Ruby do komunikacji z popularnymi serwerami WWW. Zasoby serwowane przez sprockets są montowane w pliku \emph{config.ru}, będącym plikiem konfiguracyjnym dla interfejsu Rack poprzez który aplikacja jest uruchamiana. Tutaj  montowana jest ścieżka serwera WWW '/' tak aby pokazywała na aplikację Sinatra. 
 \noindent
 Samo sprockets jest montowane w następujący sposób:
 \begin{listing}[H]
 \inputminted[linenos=true]{ruby}{./src/sprockets_mount.rb}
 \caption{config.ru}
 \end{listing}
-\noindent
-Wykorzystane tutaj zmienne klasowe (\emph{assets\_prefix}, \emph{sprockets}) aplikacji są definiowane w pliku \emph{application.rb} zawierającym klasę aplikacji Sinatra.
+%\noindent
+Wykorzystane tutaj zmienne klasowe (\emph{assets\_prefix}, \emph{sprockets}) aplikacji są definiowane w pliku \emph{application.rb}.
 \begin{listing}[H]
 \inputminted[linenos=true]{ruby}{./src/sprockets_config.rb}
 \caption{Ustawienie zmiennych Sprockets}
@@ -220,7 +222,7 @@ Wykorzystane tutaj zmienne klasowe (\emph{assets\_prefix}, \emph{sprockets}) apl
 \inputminted[linenos=true]{ruby}{./src/sprockets_asset_paths.rb}
 \caption{Przeszukiwane foldery}
 \end{listing}
-\noindent
+%\noindent
 Powyższe listingi umieszczają skompilowane pliki z wyznaczonych ścieżek w folderze \emph{public/assets} pod nazwami \emph{application.js} oraz \emph{application.css}. Pliki te zawierają jedynie assety załączone poleceniem \emph{require} w plikach app/assets/javascripts/application.js (\ref{aplication-js}) i \newline app/assets/stylesheets/application.css (\ref{application-css}).
 \begin{listing}[H]
 \inputminted[linenos=true]{javascript}{./src/application.js}
@@ -233,7 +235,7 @@ $\label{aplication-js}$
 $\label{application-css}$
 \end{listing}
 \subsubsection{Twitter Bootstrap}
-Twitter Bootstrap jest frameworkiem front-end dostarczającym style CSS oraz kod JavaScript, który za zadanie ma przyśpieszenie budowę front-endu aplikacji. Bootstrap dostarcza zestaw klas HTML, które posiadają określone style. W tej pracy wykorzystany został Twitter Bootstrap w wersji drugiej. Aktualna wersja Bootstrapa to 3.1.1.
+Twitter Bootstrap jest frameworkiem front-end dostarczającym style CSS oraz kod JavaScript, który za zadanie ma przyśpieszenie budowy interfejsów. Bootstrap dostarcza zestaw klas HTML, które posiadają określone style. W tej pracy wykorzystany został Twitter Bootstrap w wersji drugiej. Aktualna wersja Bootstrapa to 3.1.1.
 \subsubsection{HAML}
 W projekcie został użyty HAML (HTML Abstraction Markup Language), który sprawia że kod jest przyjemniejszy do pisania i czytania. W HAML używa się jedynie tagów otwierających a o tym jak osadzone są elementy decyduje indentacja. HAML posiada też skróty na sekcje div o podanym id lub klasie.
 \begin{figure}[H]
@@ -252,30 +254,34 @@ W projekcie został użyty HAML (HTML Abstraction Markup Language), który spraw
 \end{subfigure}
 \end{figure}
 $\label{haml}$
-Powyższe listingi przedstawiają przykładowy kod HAML oraz HTML do którego się kompiluje.
+%Powyższe listingi przedstawiają przykładowy kod HAML oraz HTML do którego się kompiluje.
 \subsubsection{Backbone.js}
-Backbone.js jest lekką biblioteką JavaScript nadającą strukturę aplikacją. Typowe użycie tej biblioteki jest to zazwyczaj trio pomiędzy samym backbonem a jQuery i underscore.js.
-
-W tej pracy został też użyty gem \emph{haml\_coffee\_assets} pozwalający na pisanie szablonów Backbone w języku HAML z osadzonym CoffeeScriptem (podobnie jak w eRuby). 
-
+Backbone.js jest lekką biblioteką JavaScript nadającą strukturę aplikacją.
 Biblioteka Backbone.js stara się odtworzyć to co jest po stronie serwera w modelu MVC na stronę klienta (przeglądarki) i JavaScriptu. Model odzwierciedla zasób na serwerze i jest odpowiednikiem modelu po stronie serwera. Kolekcja jest grupą modeli pobieraną z serwera. Na kolekcji zdefiniowane są zdarzenia (eng. \emph{events}), które ponownie renderują widok np. kiedy element zostanie dodany do kolekcji. W Backbone Router odpowiedzialny jest za tłumaczenie adresów URL na widoki oraz za obsługę historii przeglądarki. Widok jest odpowiednikiem kontrolera znanego z Rails. Odpowiada na zdarzenia w oknie przeglądarki takie jak kliknięcie myszką i podejmuje odpowiednie akcje. Szablony natomiast są, w przypadku tej pracy, kodem HAML używanym przez widoki do renderowania treści aplikacji.
 \subsection{Komunikacja}
-Oba urządzenia komunikują się ze sobą przy pomocy WiFi w trybie pracy Ad Hoc. Jako karta sieciowa została wybrana karta USB TP-Link \mbox{TL-WN722N} ponieważ posiada antenę o zysku 4dBi, którą można odkręcić oraz zamontować mocniejszą antenę. Poniższy listing przedstawia konfiguracje urządzenia do pracy w trybie Ad Hoc.
+Oba urządzenia komunikują się ze sobą przy pomocy WiFi w trybie pracy Ad Hoc. Jako kartę sieciową została wybrana karta USB TP-Link \mbox{TL-WN722N}. Posiada ona odkręcaną antenę o zysku 4dBi. Pozwala to na zamocowanie anteny o większej mocy. Poniższy listing przedstawia konfiguracje urządzenia do pracy w trybie Ad Hoc.
 \begin{listing}[H]
 \inputminted[linenos=true]{sh}{./src/adhoc}
 \caption{/etc/network/interfaces}
 \end{listing}
-Plik \emph{/etc/network/interfaces} drugiego urządzenia został skonfigurowany analogicznie. Różni sie on jedynie adresem IP ustawionym na \emph{192.168.10.2}. Urządzenia ustawione w trybie pracy Ad Hoc wykrywają się nawzajem i tworzą sieć o SSID SKIRACE.
+Plik \emph{/etc/network/interfaces} drugiego urządzenia został skonfigurowany analogicznie. Różni sie jedynie adresem IP ustawionym na \emph{192.168.10.2}. Urządzenia ustawione w trybie pracy Ad Hoc wykrywają się nawzajem i tworzą sieć o SSID SKIRACE.
 \newpage
 \subsection{Podstawy działania}\label{sensor}
-Ten rozdział ma na celu przedstawienie budowy oraz podstaw teoretycznych działania czujnika rejestrującego przecięcie wiązki lasera. Składa sie on z fotorezystora, rezystora oraz kondensatora. Poniższy rysunek przedstawia jego budowę.
+Układ pomiarowy jest prostym obwodem RC. Składa się on z fotorezystora, rezystora oraz kondensatora. Rezystor $2.2k \Omega$ działa jako zabezpieczenie przed zbyt dużym napięciem skierowanym na port GPIO. Podłączony jest do fotorezystora, którego rezystancja jest niska kiedy pada na niego wiązka lasera. Kondensator $1\mu F$ jest ładowany a kiedy przekroczy wartość graniczną wynoszącą około 2V pin GPIO rejestruje wartość HIGH.
+% Ten rozdział ma na celu przedstawienie budowy oraz podstaw teoretycznych działania czujnika rejestrującego przecięcie wiązki lasera. Składa sie on z fotorezystora, rezystora oraz kondensatora. Poniższy rysunek przedstawia jego budowę.
 \begin{figure}[h]
+\begin{center}
 \includegraphics[scale=0.15]{./img/sensor_bb.png}
 \caption{Sensor}
+\end{center}
 \end{figure}
 % \begin{minipage}{\linewidth}
-\\\noindent
-W układzie o którym mowa w tym rozdziale rezystor $2.2k \Omega$ działa jako zabezpieczenie przed zbyt dużym napięciem skierowanym na port GPIO. Podłączony jest do fotorezystora, którego rezystancja jest niska kiedy świeci na niego wiązka lasera. Kondensator $1\mu F$ jest ładowany a kiedy przekroczy wartość graniczną wynoszącą około 2V pin GPIO rejestruje wartość HIGH. Działanie to jest wykorzystane w kodzie aplikacji gdzie mierzony jest czas potrzebny na naładowanie kondensatora. Kiedy czas jest krótki znaczy to że na fotorezystor pada wiązka lasera, kiedy się zwiększy znaczy to że laser został przecięty tj. zawodnik przejechał przez start lub metę.
+\\
+Działanie to jest wykorzystane w aplikacji gdzie mierzony jest czas potrzebny na naładowanie kondensatora do 63,2\% napięcia źródła zasilania. Czas ten nosi nazwą stałej czasu. Dla układu RC wyraża się ona wzorem \ref{tc}. 
+\begin{equation}\label{tc}
+	\tau = RC
+\end{equation}
+Kiedy jest on krótki znaczy to że na fotorezystor pada wiązka lasera, kiedy się zwiększy znaczy to że laser został przecięty tj. zawodnik przejechał przez start lub metę. 
 \newpage
 \subsection{Implementacja}
 Ninejszy rozdział zostanie poświęcony implementacji. Składa się on z dwóch podrozdziałów: Aplikacja, który opisuję budowę aplikacji startowej oraz rozdziału Worker opisującego worker rejestrujący przejechanie mety.
