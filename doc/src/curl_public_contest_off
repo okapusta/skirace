@@ -1,1 +1,4 @@
-{"response":"no-public-contests","status":404}
+{
+  "response": "no-public-contests",
+  "status": 404
+}
