@@ -23,7 +23,7 @@ module Skirace
             file.write(e.backtrace.join("\n"))
           end
         end
-      end.run
+      end
     end
   end
 end
