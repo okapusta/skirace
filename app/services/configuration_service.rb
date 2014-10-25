@@ -36,10 +36,14 @@ class ConfigurationService
     end
 
     def application_config
-      '../../../config/**/*.yml'
+      "#{current_path}/config/**/*.yml"
     end
 
     def config_root
       'skirace'
+    end
+
+    def current_path
+      ENV['PWD'] || ENV['BUNDLE_GEMFILE'].gsub('Gemfile','')
     end
 end
