@@ -1,6 +1,6 @@
 require './application'
 
-Skirace::StartingLine.new(ENV['PWD'])
+Skirace::StartingLine.new(ENV['PWD'] || ENV['BUNDLE_GEMFILE'].gsub('Gemfile',''))
 
 unless ENV['RACK_ENV'] == 'production'
   map Skirace::Application.assets_prefix do
