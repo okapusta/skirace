@@ -22,8 +22,6 @@ end
     
 class Skirace::Application < Sinatra::Base
   
-  include Skirace::StartingLine
-
   set :static, :enable
   set :views, Proc.new { File.join(root, "app", "views") }
   set :public_folder, File.join(root, "public")
