@@ -1,5 +1,5 @@
 class ConfigurationService
-  takes :yaml, :file, :dir, :hash
+  takes :yaml, :file, :dir, :hash, :current_path
 
   def get(include_root = false, default_namespace = 'application')
     config = hash.dup
@@ -41,9 +41,5 @@ class ConfigurationService
 
     def config_root
       'skirace'
-    end
-
-    def current_path
-      ENV['PWD'] || ENV['BUNDLE_GEMFILE'].gsub('Gemfile','')
     end
 end

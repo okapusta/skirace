@@ -81,4 +81,8 @@ class Injector
   def time
     Time
   end
+
+  def current_path
+    ENV['BUNDLE_GEMFILE'].gsub('Gemfile','')
+  end
 end
