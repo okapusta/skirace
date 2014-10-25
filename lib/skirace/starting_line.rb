@@ -1,8 +1,8 @@
 module Skirace
   class StartingLine
-    def initialize(env)
+    def initialize(path)
       Thread.new(Injector.new) do |i|
-        file = File.open(File.join('log','reading.log'), "a")
+        file = File.open(File.join(path, 'log','reading.log'), "a")
 
         while true
           begin

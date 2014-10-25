@@ -1,6 +1,6 @@
 require './application'
 
-Skirace::StartingLine.new(ENV['RACK_ENV'])
+Skirace::StartingLine.new(ENV['PWD'])
 
 unless ENV['RACK_ENV'] == 'production'
   map Skirace::Application.assets_prefix do
