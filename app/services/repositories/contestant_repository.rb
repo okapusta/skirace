@@ -46,6 +46,6 @@ class Repositories::ContestantRepository
   private
 
   def current_contest
-    caching_service.get('current_contest') || db_contest.last
+    caching_service.get('current_contest') || db_contest.last.id
   end
 end 
