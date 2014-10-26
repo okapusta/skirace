@@ -26,7 +26,7 @@ class Repositories::ContestantRepository
   end
 
   def set_start_time
-    contestant = first || db_contestant.create(contest_id: current_contest)
+    contestant = first || db_contestant.create
 
     contestant.update(start_time_at: Time.now)
   end
