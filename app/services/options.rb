@@ -7,13 +7,15 @@ class Options
   end
 
   def memcache_server
-    configuration_service.get_config[:memcache_server]
+    'localhost:11211'
   end
 
   def memcache_client
-    hash.symbolize_keys!(
-      configuration_service.get_config[:memcache_options]
-      )
+    {
+      namespace: 'skirace',
+      compress: true,
+      expires_in: 300
+    }
   end
 
   def password_cost
