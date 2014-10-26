@@ -10,7 +10,7 @@ module Skirace
             while i.gpio.read(i.options.capacitor.pin) == LOW
               reading +=1
             end
-            p reading
+
             if reading > i.options.activation_threshold
               i.contestant_repository.set_start_time
             end
