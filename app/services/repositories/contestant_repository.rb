@@ -20,7 +20,7 @@ class Repositories::ContestantRepository
   end
 
   def first(options = {start_time_at: nil})
-    options.merge!({contest_id: current_contest})
+    options.merge!({contest_id: current_contest}) if current_contest
     
     db_contestant.where(options).order(:id).first
   end
@@ -46,6 +46,6 @@ class Repositories::ContestantRepository
   private
 
   def current_contest
-    caching_service.get('current_contest') || db_contest.last.id
+    caching_service.get('current_contest')
   end
 end 
