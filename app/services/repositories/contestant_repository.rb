@@ -26,7 +26,7 @@ class Repositories::ContestantRepository
   end
 
   def set_start_time
-    contestant = first || db_contestant.create
+    contestant = first || create_default
 
     contestant.update(start_time_at: Time.now)
   end
@@ -47,5 +47,14 @@ class Repositories::ContestantRepository
 
   def current_contest
     caching_service.get('current_contest')
+  end
+
+  def create_default
+    unless time.now - db_contestant.last.start_time_at > 5
+      db_contestant.create
+    end
+  # rescure from undefined method start_time_at for nil class
+  rescue
+    db_contestant.create
   end
 end 

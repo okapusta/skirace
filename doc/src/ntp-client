@@ -1,0 +1,8 @@
+# Point to our network's master time server
+server 192.168.10.1
+
+restrict default ignore
+restrict 127.0.0.1
+restrict 192.168.10.1 mask 255.255.255.255 nomodify notrap noquery
+
+driftfile /var/lib/ntp/drift
