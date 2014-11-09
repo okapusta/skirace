@@ -43,7 +43,7 @@
 \section{Cel i zakres pracy}
 Przedmiotem niniejszej pracy jest budowa mobilnego systemu pomiaru czasu dla zawodów narciarskich. System składa się z dwóch bramek: startowej oraz końcowej, które wykorzystują wiązke laserową w celu uchwycenia dokładnego momentu przejechania zawodnika przez bramkę. 
 
-Niniejsza praca będzie się składać z trzech głównych części. Pierwsza z nich poświęcona zostanie architekturze systemu i wykorzystanych technologiach, a w szczególności, komunikacji pomiędzy komponentami oraz podstawą teoretycznym działania. Druga część tej pracy zawiera opis implementacji, zaś trzecia część jest poświęcona umieszczeniu systemu w obudowie ochronnej.
+Niniejsza praca będzie się składać z trzech głównych części. Pierwsza z nich poświęcona zostanie budowie systemu, druga część tej pracy zawiera opis implementacji, zaś trzecia część jest poświęcona obsłudze systemu.
 
 \section{Wstęp}
 Obecnie na rynku istnieją systemy podobne do tego, którego budowę ta praca przedstawia, jednak często kosztują tysiące złotych. Praca ta jest próbą stowrzenia rozwiązania spełniającego podobne zadanie do ww. systemów korzystając z ogólnie dostępnych podzespołów, za nie wielkie pieniądze.
@@ -136,7 +136,7 @@ Tabela (\ref{lcd-pins}) przedstawia rozpiskę pinów wyświetlacza LCD oraz port
 \begin{center}
 \begin{tabular}{ | l | l | l | l | }
 \hline
-Numer pinu LCD & Nazwa pinu LCD & Number pinu GPIO & Nazwa pinu GPIO \\ \hline
+Numer pinu LCD & Nazwa pinu LCD & Numer pinu GPIO & Nazwa pinu GPIO \\ \hline
 1 & GND & | &  | \\ \hline
 2 & +5V & | &  | \\ \hline
 3 & GND & | &  | \\ \hline
@@ -179,6 +179,8 @@ Zadaniem workera jest zarejestrowanie przecięcia linii mety. Kiedy zostanie ona
 \noindent
 Komunikacjia pomiędzy dwiema bramkami odbywa się poprzez WiFi.
 \subsection{Wybrane technologie}
+\subsection{NTP}
+Urządzenie Raspberry Pi po odłączeniu zasilania nie zapamiętuje czasu dlatego w celu jego synchronizacji pomiędzy bramkami został wykorzystany protokół NTP (\emph{eng. Network Time Protocol}). Na bramce startowej jest uruchomiony serwer NTP który ustawiony jest tak aby korzystał z czasu systemowego bramki, natomiast bramka końcowa podczas uruchomienia systemu pobiera czas z bramki startowej. Dokładna data nie ma tu znaczenia, ważne są jedynie taka sama godzina, minuta i sekunda na obu bramkach.
 \subsubsection{Nginx}
 Aplikacja startowa jest uruchamiana na porcie \emph{9292} dlatego został użyty serwer Nginx (\emph{czyt. engine-x}), który działa jako proxy (serwer pośredniczący), przekierowujący rządania przychodzące na port 80 do aplikacji startowej.
 \subsubsection{Memcached}
@@ -269,7 +271,7 @@ Oba urządzenia komunikują się ze sobą przy pomocy WiFi w trybie pracy Ad Hoc
 \caption{/etc/network/interfaces}
 \end{listing}
 Plik \emph{/etc/network/interfaces} drugiego urządzenia został skonfigurowany analogicznie. Różni sie jedynie adresem IP ustawionym na \emph{192.168.10.2}. Urządzenia ustawione w trybie pracy Ad Hoc wykrywają się nawzajem i tworzą sieć o SSID SKIRACE.
-\newpage
+%\newpage
 \subsection{Układ pomiarowy}\label{sensor}
 Układ pomiarowy jest prostym obwodem RC. Składa się on z fotorezystora, rezystora oraz kondensatora. Rezystor $2.2k \Omega$ działa jako zabezpieczenie przed zbyt dużym napięciem skierowanym na port GPIO. Podłączony jest do fotorezystora, którego rezystancja jest niska kiedy pada na niego wiązka lasera. Kondensator $1\mu F$ jest ładowany a kiedy przekroczy wartość graniczną wynoszącą około 2V pin GPIO rejestruje wartość HIGH.
 % Ten rozdział ma na celu przedstawienie budowy oraz podstaw teoretycznych działania czujnika rejestrującego przecięcie wiązki lasera. Składa sie on z fotorezystora, rezystora oraz kondensatora. Poniższy rysunek przedstawia jego budowę.

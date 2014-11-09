@@ -6,23 +6,24 @@
 \contentsline {subsection}{\numberline {3.2}Budowa systemu}{7}{subsection.3.2}
 \contentsline {subsection}{\numberline {3.3}Architektura}{11}{subsection.3.3}
 \contentsline {subsection}{\numberline {3.4}Wybrane technologie}{11}{subsection.3.4}
-\contentsline {subsubsection}{\numberline {3.4.1}Nginx}{11}{subsubsection.3.4.1}
-\contentsline {subsubsection}{\numberline {3.4.2}Memcached}{11}{subsubsection.3.4.2}
-\contentsline {subsubsection}{\numberline {3.4.3}Dependency Injection}{11}{subsubsection.3.4.3}
-\contentsline {subsubsection}{\numberline {3.4.4}Sprockets}{12}{subsubsection.3.4.4}
-\contentsline {subsubsection}{\numberline {3.4.5}Twitter Bootstrap}{14}{subsubsection.3.4.5}
-\contentsline {subsubsection}{\numberline {3.4.6}HAML}{14}{subsubsection.3.4.6}
-\contentsline {subsubsection}{\numberline {3.4.7}Backbone.js}{14}{subsubsection.3.4.7}
-\contentsline {subsection}{\numberline {3.5}Komunikacja}{15}{subsection.3.5}
-\contentsline {subsection}{\numberline {3.6}Uk\IeC {\l }ad pomiarowy}{16}{subsection.3.6}
-\contentsline {subsection}{\numberline {3.7}Implementacja}{17}{subsection.3.7}
-\contentsline {subsubsection}{\numberline {3.7.1}Aplikacja}{17}{subsubsection.3.7.1}
-\contentsline {paragraph}{\numberline {3.7.1.1}API}{21}{paragraph.3.7.1.1}
-\contentsline {subparagraph}{\numberline {3.7.1.1.1}Contestants}{22}{subparagraph.3.7.1.1.1}
-\contentsline {subparagraph}{\numberline {3.7.1.1.2}Contests}{24}{subparagraph.3.7.1.1.2}
-\contentsline {paragraph}{\numberline {3.7.1.2}Warden}{27}{paragraph.3.7.1.2}
-\contentsline {paragraph}{\numberline {3.7.1.3}Front-end}{29}{paragraph.3.7.1.3}
-\contentsline {subsubsection}{\numberline {3.7.2}Worker}{30}{subsubsection.3.7.2}
+\contentsline {subsection}{\numberline {3.5}NTP}{11}{subsection.3.5}
+\contentsline {subsubsection}{\numberline {3.5.1}Nginx}{11}{subsubsection.3.5.1}
+\contentsline {subsubsection}{\numberline {3.5.2}Memcached}{12}{subsubsection.3.5.2}
+\contentsline {subsubsection}{\numberline {3.5.3}Dependency Injection}{12}{subsubsection.3.5.3}
+\contentsline {subsubsection}{\numberline {3.5.4}Sprockets}{12}{subsubsection.3.5.4}
+\contentsline {subsubsection}{\numberline {3.5.5}Twitter Bootstrap}{14}{subsubsection.3.5.5}
+\contentsline {subsubsection}{\numberline {3.5.6}HAML}{14}{subsubsection.3.5.6}
+\contentsline {subsubsection}{\numberline {3.5.7}Backbone.js}{15}{subsubsection.3.5.7}
+\contentsline {subsection}{\numberline {3.6}Komunikacja}{15}{subsection.3.6}
+\contentsline {subsection}{\numberline {3.7}Uk\IeC {\l }ad pomiarowy}{16}{subsection.3.7}
+\contentsline {subsection}{\numberline {3.8}Implementacja}{17}{subsection.3.8}
+\contentsline {subsubsection}{\numberline {3.8.1}Aplikacja}{17}{subsubsection.3.8.1}
+\contentsline {paragraph}{\numberline {3.8.1.1}API}{21}{paragraph.3.8.1.1}
+\contentsline {subparagraph}{\numberline {3.8.1.1.1}Contestants}{22}{subparagraph.3.8.1.1.1}
+\contentsline {subparagraph}{\numberline {3.8.1.1.2}Contests}{24}{subparagraph.3.8.1.1.2}
+\contentsline {paragraph}{\numberline {3.8.1.2}Warden}{27}{paragraph.3.8.1.2}
+\contentsline {paragraph}{\numberline {3.8.1.3}Front-end}{29}{paragraph.3.8.1.3}
+\contentsline {subsubsection}{\numberline {3.8.2}Worker}{30}{subsubsection.3.8.2}
 \contentsline {section}{\numberline {4}Spos\IeC {\'o}b obs\IeC {\l }ugi}{32}{section.4}
 \contentsline {section}{\numberline {5}Licencje Gem\IeC {\'o}w}{35}{section.5}
 \contentsline {subsection}{\numberline {5.1}Wykaz gem\IeC {\'o}w}{35}{subsection.5.1}
