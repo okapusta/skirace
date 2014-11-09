@@ -2,6 +2,8 @@ require './application'
 
 Skirace::StartingLine.new(ENV['PWD'] || ENV['BUNDLE_GEMFILE'].gsub('Gemfile',''))
 
+Skirace::DatabaseCleaner.invoke
+
 unless ENV['RACK_ENV'] == 'production'
   map Skirace::Application.assets_prefix do
     run Skirace::Application.sprockets

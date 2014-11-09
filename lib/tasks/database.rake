@@ -13,4 +13,11 @@ namespace :db do
   task :drop do 
   	%x(rm -f db/database.sqlite)
   end
+
+  desc "Restore clean state"
+  task :clean_state do
+    ['db:drop', 'db:migrate'].each do |task|
+      Rake::Task[task].invoke
+    end
+  end
 end
