@@ -170,7 +170,7 @@ $\label{both}$
 \subsection{Architektura}
 System pomiaru czasu został zbudowany w myśl modelu master/slave gdzie masterem jest aplikacja początkowa. Udostępnia ona interface web służący do wprowadzania zawodników. Bramka startowa zawiera również bazę danych oraz serwer Memcached. W momencie uruchomienia aplikacji startowej, oprócz startu serwera serwującego aplikację WEB, tworzony jest nowy wątek, który rejestruje przecięcie wiązki lasera. Kiedy to sie stanie, ustawia on dokładną godzinę tego zdarzenia w bazie danych.
 
-Zadaniem workera jest zarejestrowanie przecięcia linii mety. Kiedy zostanie ona przekroczona worker wysyła rządanie POST do aplikacji startowej, która w odpowiedzi zwraca obliczony czas końcowy oraz imie i nazwisko zawodnika wyświetlane na LCD.
+Zadaniem workera jest zarejestrowanie przecięcia linii mety. W momencie jej przekroczenia worker wysyła rządanie POST do aplikacji startowej, która w odpowiedzi zwraca obliczony czas końcowy oraz imie i nazwisko zawodnika wyświetlane na LCD.
 \newline
 
 \begin{figure}[ht]
@@ -265,6 +265,7 @@ $\label{haml}$
 \subsubsection{Backbone.js}
 Backbone.js jest lekką biblioteką JavaScript nadającą strukturę aplikacją.
 Biblioteka Backbone.js stara się odtworzyć to co jest po stronie serwera w modelu MVC na stronę klienta (przeglądarki) i JavaScriptu. Model odzwierciedla zasób na serwerze i jest odpowiednikiem modelu po stronie serwera. Kolekcja jest grupą modeli pobieraną z serwera. Na kolekcji zdefiniowane są zdarzenia (eng. \emph{events}), które ponownie renderują widok np. kiedy element zostanie dodany do kolekcji. W Backbone Router odpowiedzialny jest za tłumaczenie adresów URL na widoki oraz za obsługę historii przeglądarki. Widok jest odpowiednikiem kontrolera znanego z Rails. Odpowiada na zdarzenia w oknie przeglądarki takie jak kliknięcie myszką i podejmuje odpowiednie akcje. Szablony natomiast są, w przypadku tej pracy, kodem HAML używanym przez widoki do renderowania treści aplikacji.
+\newpage
 \subsection{Komunikacja}
 Oba urządzenia komunikują się ze sobą przy pomocy WiFi w trybie pracy Ad Hoc. Jako kartę sieciową została wybrana karta USB TP-Link \mbox{TL-WN722N}. Posiada ona odkręcaną antenę o zysku 4dBi. Pozwala to na zamocowanie anteny o większej mocy. Poniższy listing przedstawia konfiguracje urządzenia do pracy w trybie Ad Hoc.
 \begin{listing}[H]
