@@ -185,7 +185,7 @@ Urządzenie Raspberry Pi po odłączeniu zasilania nie zapamiętuje czasu dlateg
 \subsubsection{Nginx}
 Aplikacja startowa jest uruchamiana na porcie \emph{9292} dlatego został użyty serwer Nginx (\emph{czyt. engine-x}), który działa jako proxy (serwer pośredniczący), przekierowujący rządania przychodzące na port 80 do aplikacji startowej.
 \subsubsection{Memcached}
-Memcached jest to rozproszony system buforowania pamięci podręczniej oryginalnie zaprojektowany na potrzeby serwisu  LiveJournal. Pozwala on na przechowywanie obiektów w pamięci RAM przy pomocy kluczy \mbox{(key-value store)}. W aplikacji wykorzystany został w celu przechowania id aktualnego wyścigu oraz sesji użytkownika.
+Memcached jest to rozproszony system buforowania pamięci podręczniej oryginalnie zaprojektowany na potrzeby serwisu  LiveJournal. Pozwala on na przechowywanie obiektów w pamięci RAM przy pomocy kluczy \mbox{(\emph{key-value store})}. W aplikacji wykorzystany został w celu przechowania id aktualnego wyścigu oraz sesji użytkownika.
 \subsubsection{Dependency Injection}
 W ninejszej pracy został wykorzystany wzorzec projektowy \emph{Dependency Injection (DI)} polegający na usuwaniu bespośrednich zależności klas na rzecz \emph{wstrzykiwania} ich w czasie konstruowania obiektu. W celu uproszczenia  DI został użyty gem Dependor, który udostępnia zestaw metod przeznaczonych do tego celu.
 
