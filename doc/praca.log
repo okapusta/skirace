@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.6.24)  11 NOV 2014 18:49
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.6.24)  11 NOV 2014 19:13
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -702,7 +702,7 @@ LaTeX Info: Redefining \nameref on input line 37.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 
-<first-pages.pdf, id=31, page=1, 597.23125pt x 845.1575pt>
+<first-pages.pdf, id=155, page=1, 597.23125pt x 845.1575pt>
 File: first-pages.pdf Graphic file (type pdf)
 
 <use first-pages.pdf, page 1>
@@ -729,7 +729,7 @@ Package pdftex.def Info: first-pages.pdf, page1 used on input line 38.
  [1
 
  <./first-pages.pdf>]
-<first-pages.pdf, id=80, page=2, 597.23125pt x 845.1575pt>
+<first-pages.pdf, id=205, page=2, 597.23125pt x 845.1575pt>
 File: first-pages.pdf Graphic file (type pdf)
 
 <use first-pages.pdf, page 2>
@@ -744,7 +744,29 @@ File: first-pages.pdf Graphic file (type pdf)
 <use first-pages.pdf, page 2>
 Package pdftex.def Info: first-pages.pdf, page2 used on input line 38.
 (pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
- [2 <./first-pages.pdf>] (./praca.toc)
+ [2 <./first-pages.pdf>] (./praca.toc
+LaTeX Font Info:    Try loading font information for OML+plm on input line 3.
+
+(/usr/share/texlive/texmf-dist/tex/latex/polski/omlplm.fd
+File: omlplm.fd 2008/02/24 v1.2.1 Font defs for fonts PL (MW)
+)
+LaTeX Font Info:    Try loading font information for OMS+plsy on input line 3.
+
+(/usr/share/texlive/texmf-dist/tex/latex/polski/omsplsy.fd
+File: omsplsy.fd 2008/02/24 v1.2.1 Font defs for fonts PL (MW)
+)
+LaTeX Font Info:    Try loading font information for OMX+plex on input line 3.
+
+(/usr/share/texlive/texmf-dist/tex/latex/polski/omxplex.fd
+File: omxplex.fd 2008/02/24 v1.2.1 Font defs for fonts PL (MW)
+)
+LaTeX Font Info:    External font `plex10' loaded for size
+(Font)              <10.95> on input line 3.
+LaTeX Font Info:    External font `plex10' loaded for size
+(Font)              <8> on input line 3.
+LaTeX Font Info:    External font `plex10' loaded for size
+(Font)              <6> on input line 3.
+)
 \tf@toc=\write6
 \openout6 = `praca.toc'.
 
@@ -764,53 +786,26 @@ LaTeX Font Info:    Try loading font information for OT4+cmtt on input line 68.
 
 (/usr/share/texlive/texmf-dist/tex/latex/polski/ot4cmtt.fd
 File: ot4cmtt.fd 2008/02/24 v1.2.1 Font defs for fonts PL (MW)
-)
-LaTeX Font Info:    Try loading font information for OML+plm on input line 68.
-
-(/usr/share/texlive/texmf-dist/tex/latex/polski/omlplm.fd
-File: omlplm.fd 2008/02/24 v1.2.1 Font defs for fonts PL (MW)
-)
-LaTeX Font Info:    Try loading font information for OMS+plsy on input line 68.
-
-
-(/usr/share/texlive/texmf-dist/tex/latex/polski/omsplsy.fd
-File: omsplsy.fd 2008/02/24 v1.2.1 Font defs for fonts PL (MW)
-)
-LaTeX Font Info:    Try loading font information for OMX+plex on input line 68.
-
-
-(/usr/share/texlive/texmf-dist/tex/latex/polski/omxplex.fd
-File: omxplex.fd 2008/02/24 v1.2.1 Font defs for fonts PL (MW)
-)
-LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <10.95> on input line 68.
-LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <8> on input line 68.
-LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <6> on input line 68.
- [5] [6] [7]
-<./img/laser2.jpg, id=128, 1927.2pt x 2569.6pt>
+) [5] [6] [7]
+<./img/laser2.jpg, id=291, 1927.2pt x 2569.6pt>
 File: ./img/laser2.jpg Graphic file (type jpg)
  <use ./img/laser2.jpg>
 Package pdftex.def Info: ./img/laser2.jpg used on input line 109.
 (pdftex.def)             Requested size: 192.7313pt x 256.97505pt.
 
-<./img/laser1.jpg, id=129, 1927.2pt x 2569.6pt>
+<./img/laser1.jpg, id=292, 1927.2pt x 2569.6pt>
 File: ./img/laser1.jpg Graphic file (type jpg)
  <use ./img/laser1.jpg>
 Package pdftex.def Info: ./img/laser1.jpg used on input line 110.
 (pdftex.def)             Requested size: 192.7313pt x 256.97505pt.
  [8 <./img/laser2.jpg> <./img/laser1.jpg>]
-<./img/insides1.jpg, id=136, 2569.6pt x 1927.2pt>
+<./img/insides1.jpg, id=299, 2569.6pt x 1927.2pt>
 File: ./img/insides1.jpg Graphic file (type jpg)
  <use ./img/insides1.jpg>
 Package pdftex.def Info: ./img/insides1.jpg used on input line 119.
 (pdftex.def)             Requested size: 205.5722pt x 154.17915pt.
 
-
-LaTeX Warning: Reference `sensor' on page 9 undefined on input line 124.
-
-<./img/lcd_bb.png, id=139, 1088.56688pt x 1000.48781pt>
+<./img/lcd_bb.png, id=303, 1088.56688pt x 1000.48781pt>
 File: ./img/lcd_bb.png Graphic file (type png)
  <use ./img/lcd_bb.png>
 Package pdftex.def Info: ./img/lcd_bb.png used on input line 129.
@@ -819,19 +814,19 @@ Package pdftex.def Info: ./img/lcd_bb.png used on input line 129.
 Underfull \vbox (badness 1502) has occurred while \output is active []
 
  [9 <./img/insides1.jpg> <./img/lcd_bb.png>]
-<./img/start-front.jpg, id=151, 1927.2pt x 2569.6pt>
+<./img/start-front.jpg, id=314, 1927.2pt x 2569.6pt>
 File: ./img/start-front.jpg Graphic file (type jpg)
 
 <use ./img/start-front.jpg>
 Package pdftex.def Info: ./img/start-front.jpg used on input line 161.
 (pdftex.def)             Requested size: 115.62701pt x 154.16934pt.
- <./img/start-in.jpg, id=152, 1927.2pt x 2569.6pt>
+ <./img/start-in.jpg, id=315, 1927.2pt x 2569.6pt>
 File: ./img/start-in.jpg Graphic file (type jpg)
 
 <use ./img/start-in.jpg>
 Package pdftex.def Info: ./img/start-in.jpg used on input line 162.
 (pdftex.def)             Requested size: 115.62701pt x 154.16934pt.
- <./img/finish.jpg, id=153, 1927.2pt x 2569.6pt>
+ <./img/finish.jpg, id=316, 1927.2pt x 2569.6pt>
 File: ./img/finish.jpg Graphic file (type jpg)
 
 <use ./img/finish.jpg>
@@ -842,7 +837,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 173--175
 
  []
 
-<./img/asdasd.png, id=160, 759.83875pt x 319.1925pt>
+<./img/asdasd.png, id=323, 759.83875pt x 319.1925pt>
 File: ./img/asdasd.png Graphic file (type png)
  <use ./img/asdasd.png>
 Package pdftex.def Info: ./img/asdasd.png used on input line 177.
@@ -891,17 +886,9 @@ erboptions= " -o praca.out.pyg ./src/sprockets_asset_paths.rb)...executed.
  (./praca.out.pyg)
 runsystem(rm praca.out.pyg)...executed.
 
-
-
-LaTeX Warning: Reference `aplication-js' on page 13 undefined on input line 233
-.
-
-
-LaTeX Warning: Reference `application-css' on page 13 undefined on input line 2
-33.
-
 runsystem(pygmentize -l javascript -f latex -F tokenmerge            -P linenos
  -P "verboptions= " -o praca.out.pyg ./src/application.js)...executed.
+
 
 (./praca.out.pyg)
 runsystem(rm praca.out.pyg)...executed.
@@ -940,24 +927,21 @@ boptions= " -o praca.out.pyg ./src/adhoc)...executed.
  (./praca.out.pyg)
 runsystem(rm praca.out.pyg)...executed.
 
- <./img/sensor_bb.png, id=203, 1373.13pt x 1079.53313pt>
+ <./img/sensor_bb.png, id=358, 1373.13pt x 1079.53313pt>
 File: ./img/sensor_bb.png Graphic file (type png)
 
 <use ./img/sensor_bb.png>
 Package pdftex.def Info: ./img/sensor_bb.png used on input line 282.
 (pdftex.def)             Requested size: 205.96062pt x 161.92297pt.
-
-
-LaTeX Warning: Reference `tc' on page 16 undefined on input line 288.
-
-[16 <./img/sensor_bb.png>] [17]
+ [16 <./img/sensor_bb.png>] [17]
 runsystem(pygmentize -l ruby -f latex -F tokenmerge            -P linenos -P "v
 erboptions= " -o praca.out.pyg ./src/thread.rb)...executed.
 
  (./praca.out.pyg)
 runsystem(rm praca.out.pyg)...executed.
 
- [18]
+
+[18]
 Underfull \hbox (badness 7944) in paragraph at lines 311--312
 []\OT4/cmr/m/n/10.95 Obiekt kla-sy In-jec-tor jest prze-ka-zy-wa-ny w blo-ku, g
 dzie pó»-niej do-star-
@@ -969,23 +953,16 @@ Underfull \hbox (badness 6510) in paragraph at lines 311--312
 T4/cmr/m/n/10.95 , któ-re-go kla-sa jest zde-fi-nio-wa-na w pli-ku
  []
 
-
-LaTeX Warning: Reference `injector' on page 19 undefined on input line 313.
-
 runsystem(pygmentize -l ruby -f latex -F tokenmerge            -P linenos -P "v
 erboptions= " -o praca.out.pyg ./src/injector.rb)...executed.
 
 (./praca.out.pyg)
 runsystem(rm praca.out.pyg)...executed.
 
-
-
-LaTeX Warning: Reference `io' on page 19 undefined on input line 324.
-
 runsystem(pygmentize -l ruby -f latex -F tokenmerge            -P linenos -P "v
 erboptions= " -o praca.out.pyg ./src/io.rb)...executed.
 
-(./praca.out.pyg)
+ (./praca.out.pyg)
 runsystem(rm praca.out.pyg)...executed.
 
  [19]
@@ -995,34 +972,21 @@ erboptions= " -o praca.out.pyg ./src/gpio.rb)...executed.
  (./praca.out.pyg)
 runsystem(rm praca.out.pyg)...executed.
 
-
-
-LaTeX Warning: Reference `gpio' on page 20 undefined on input line 340.
-
-
-LaTeX Warning: Reference `capacitor' on page 20 undefined on input line 340.
-
 runsystem(pygmentize -l ruby -f latex -F tokenmerge            -P linenos -P "v
 erboptions= " -o praca.out.pyg ./src/capacitor.rb)...executed.
 
-(./praca.out.pyg)
+ (./praca.out.pyg)
 runsystem(rm praca.out.pyg)...executed.
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [20]
-
-LaTeX Warning: Reference `thread' on page 21 undefined on input line 350.
-
 [21]
-
-LaTeX Warning: Reference `warden' on page 22 undefined on input line 379.
-
 runsystem(pygmentize -l sh -f latex -F tokenmerge             -P "verboptions= 
 " -o praca.out.pyg ./src/curl_auth)...executed.
 
-(./praca.out.pyg)
+ (./praca.out.pyg)
 runsystem(rm praca.out.pyg)...executed.
 
 runsystem(pygmentize -l json -f latex -F tokenmerge             -P "verboptions
@@ -1041,7 +1005,8 @@ runsystem(rm praca.out.pyg)...executed.
 runsystem(pygmentize -l json -f latex -F tokenmerge             -P "verboptions
 = " -o praca.out.pyg ./src/curl_get_contestant_response)...executed.
 
- (./praca.out.pyg)
+
+(./praca.out.pyg)
 runsystem(rm praca.out.pyg)...executed.
 
 
@@ -1066,9 +1031,6 @@ Underfull \hbox (badness 1117) in paragraph at lines 401--409
 \OT4/cmr/m/n/10.95 da-ne s¡ po-praw-ne i za-wod-nik zo-sta-nie za-pi-sa-ny do b
 a-zy zwra-ca-ny jest kod 200
  []
-
-
-LaTeX Warning: Reference `as_json' on page 23 undefined on input line 410.
 
 runsystem(pygmentize -l ruby -f latex -F tokenmerge             -P "verboptions
 = " -o praca.out.pyg ./src/contestants_as_json.rb)...executed.
@@ -1104,10 +1066,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 430--451
 
  []
 
-
-LaTeX Warning: Reference `contest_create_default' on page 25 undefined on input
- line 452.
-
 runsystem(pygmentize -l ruby -f latex -F tokenmerge             -P "verboptions
 = " -o praca.out.pyg ./src/contest_create_default.rb)...executed.
 
@@ -1121,18 +1079,10 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 [25
 
 ]
-
-LaTeX Warning: Reference `public_contest_on' on page 26 undefined on input line
- 463.
-
-
-LaTeX Warning: Reference `public_contest_off' on page 26 undefined on input lin
-e 463.
-
 runsystem(pygmentize -l ruby -f latex -F tokenmerge             -P "verboptions
 = " -o praca.out.pyg ./src/get_contest_public.rb)...executed.
 
-(./praca.out.pyg)
+ (./praca.out.pyg)
 runsystem(rm praca.out.pyg)...executed.
 
 runsystem(pygmentize -l ruby -f latex -F tokenmerge             -P "verboptions
@@ -1151,14 +1101,14 @@ runsystem(rm praca.out.pyg)...executed.
 runsystem(pygmentize -l json -f latex -F tokenmerge             -P "verboptions
 = " -o praca.out.pyg ./src/curl_public_contest_off)...executed.
 
- (./praca.out.pyg)
+
+(./praca.out.pyg)
 runsystem(rm praca.out.pyg)...executed.
 
 runsystem(pygmentize -l ruby -f latex -F tokenmerge             -P "verboptions
 = " -o praca.out.pyg ./src/contest_contestants.rb)...executed.
 
-
-(./praca.out.pyg)
+ (./praca.out.pyg)
 runsystem(rm praca.out.pyg)...executed.
 
 runsystem(pygmentize -l ruby -f latex -F tokenmerge             -P "verboptions
@@ -1195,9 +1145,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 515--527
 
  []
 
-
-LaTeX Warning: Reference `strategy' on page 28 undefined on input line 536.
-
 [28]
 runsystem(pygmentize -l ruby -f latex -F tokenmerge            -P linenos -P "v
 erboptions= " -o praca.out.pyg ./src/warden_strategy.rb)...executed.
@@ -1206,61 +1153,32 @@ erboptions= " -o praca.out.pyg ./src/warden_strategy.rb)...executed.
 runsystem(rm praca.out.pyg)...executed.
 
  [29]
-
-LaTeX Warning: Reference `aplication-js' on page 30 undefined on input line 545
-.
-
-
-LaTeX Warning: Reference `app-coffee' on page 30 undefined on input line 545.
-
-
-LaTeX Warning: Reference `iface' on page 30 undefined on input line 545.
-
 runsystem(pygmentize -l js -f latex -F tokenmerge             -P "verboptions= 
 " -o praca.out.pyg ./src/app.coffee)...executed.
 
-(./praca.out.pyg)
+ (./praca.out.pyg)
 runsystem(rm praca.out.pyg)...executed.
 
- <./img/interface.png, id=299, 1204.5pt x 364.36125pt>
+
+<./img/interface.png, id=461, 1204.5pt x 364.36125pt>
 File: ./img/interface.png Graphic file (type png)
 
 <use ./img/interface.png>
 Package pdftex.def Info: ./img/interface.png used on input line 552.
 (pdftex.def)             Requested size: 421.58131pt x 127.52834pt.
  [30 <./img/interface.png (PNG copy)>] [31]
-
-LaTeX Warning: Reference `binary' on page 32 undefined on input line 566.
-
 runsystem(pygmentize -l ruby -f latex -F tokenmerge            -P linenos -P "v
 erboptions= " -o praca.out.pyg ./src/binary)...executed.
 
+
 (./praca.out.pyg)
 runsystem(rm praca.out.pyg)...executed.
-
-
-
-LaTeX Warning: Reference `runner' on page 32 undefined on input line 574.
-
-
-LaTeX Warning: Reference `thread' on page 32 undefined on input line 574.
 
 runsystem(pygmentize -l ruby -f latex -F tokenmerge            -P linenos -P "v
 erboptions= " -o praca.out.pyg ./src/runner.rb)...executed.
 
-(./praca.out.pyg)
+ (./praca.out.pyg)
 runsystem(rm praca.out.pyg)...executed.
-
-
-
-LaTeX Warning: Reference `application-connection' on page 32 undefined on input
- line 582.
-
-
-LaTeX Warning: Reference `api-req' on page 32 undefined on input line 582.
-
-
-LaTeX Warning: Reference `api-resp' on page 32 undefined on input line 582.
 
 
 Underfull \hbox (badness 1721) in paragraph at lines 582--583
@@ -1287,65 +1205,41 @@ runsystem(pygmentize -l json -f latex -F tokenmerge             -P "verboptions
  (./praca.out.pyg)
 runsystem(rm praca.out.pyg)...executed.
 
-
-
-LaTeX Warning: Reference `api-resp' on page 33 undefined on input line 602.
-
-
-LaTeX Warning: Reference `formatter' on page 33 undefined on input line 602.
-
 runsystem(pygmentize -l ruby -f latex -F tokenmerge            -P linenos -P "v
 erboptions= " -o praca.out.pyg ./src/formatter.rb)...executed.
 
-(./praca.out.pyg)
+ (./praca.out.pyg)
 runsystem(rm praca.out.pyg)...executed.
 
- [33]
 
-LaTeX Warning: Reference `login' on page 34 undefined on input line 612.
-
-<./img/login.png, id=328, 1277.77374pt x 480.79625pt>
+[33] <./img/login.png, id=496, 1277.77374pt x 480.79625pt>
 File: ./img/login.png Graphic file (type png)
- <use ./img/login.png>
+
+<use ./img/login.png>
 Package pdftex.def Info: ./img/login.png used on input line 615.
 (pdftex.def)             Requested size: 383.33508pt x 144.23997pt.
-
-
-LaTeX Warning: Reference `new-contest' on page 34 undefined on input line 620.
-
-<./img/new-contest.png, id=329, 1328.965pt x 383.4325pt>
+ <./img/new-contest.png, id=498, 1328.965pt x 383.4325pt>
 File: ./img/new-contest.png Graphic file (type png)
 
 <use ./img/new-contest.png>
 Package pdftex.def Info: ./img/new-contest.png used on input line 623.
 (pdftex.def)             Requested size: 398.69258pt x 115.03062pt.
 
-
-LaTeX Warning: Reference `dropdown' on page 34 undefined on input line 628.
-
-<./img/dropdown.png, id=330, 1260.71pt x 327.2225pt>
+<./img/dropdown.png, id=500, 1260.71pt x 327.2225pt>
 File: ./img/dropdown.png Graphic file (type png)
  <use ./img/dropdown.png>
 Package pdftex.def Info: ./img/dropdown.png used on input line 631.
 (pdftex.def)             Requested size: 378.21593pt x 98.1675pt.
 
 [34 <./img/login.png (PNG copy)> <./img/new-contest.png (PNG copy)>]
-
-LaTeX Warning: Reference `new-contestant' on page 35 undefined on input line 63
-6.
-
-
-LaTeX Warning: Reference `new-contestant-created' on page 35 undefined on input
- line 636.
-
-<./img/newcontestant.png, id=338, 1227.58624pt x 374.39874pt>
+<./img/newcontestant.png, id=509, 1227.58624pt x 374.39874pt>
 File: ./img/newcontestant.png Graphic file (type png)
 
 <use ./img/newcontestant.png>
 Package pdftex.def Info: ./img/newcontestant.png used on input line 639.
 (pdftex.def)             Requested size: 368.27872pt x 112.32048pt.
 
-<./img/newcontestant-created.png, id=339, 1181.41376pt x 245.91875pt>
+<./img/newcontestant-created.png, id=510, 1181.41376pt x 245.91875pt>
 File: ./img/newcontestant-created.png Graphic file (type png)
 
 <use ./img/newcontestant-created.png>
@@ -1353,19 +1247,13 @@ Package pdftex.def Info: ./img/newcontestant-created.png used on input line 645
 .
 (pdftex.def)             Requested size: 354.42686pt x 73.77618pt.
 
-
-LaTeX Warning: Reference `import' on page 35 undefined on input line 650.
-
-
-LaTeX Warning: Reference `export' on page 35 undefined on input line 650.
-
-<./img/import.png, id=340, 1199.48125pt x 340.27126pt>
+<./img/import.png, id=513, 1199.48125pt x 340.27126pt>
 File: ./img/import.png Graphic file (type png)
  <use ./img/import.png>
 Package pdftex.def Info: ./img/import.png used on input line 653.
 (pdftex.def)             Requested size: 359.84715pt x 102.08215pt.
 
-<./img/export.png, id=341, 1181.41376pt x 344.28625pt>
+<./img/export.png, id=514, 1181.41376pt x 344.28625pt>
 File: ./img/export.png Graphic file (type png)
  <use ./img/export.png>
 Package pdftex.def Info: ./img/export.png used on input line 659.
@@ -1390,35 +1278,22 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 686.
  [37] [38] [39]
 [40] [41] [42] [43] [44] [45]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1033.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1034.
  [46]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1033.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1034.
  (./praca.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1033.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1033.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1034.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1034.
 
-
-
-Package rerunfilecheck Warning: File `praca.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `praca.out':
-(rerunfilecheck)             Before: 63583E2B9B54D5EFF3C6F3476895C743;355
-(rerunfilecheck)             After:  81D6670381DEDFA67B5922634B0BAA6D;2399.
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1033.
+Package rerunfilecheck Info: File `praca.out' has not changed.
+(rerunfilecheck)             Checksum: 81D6670381DEDFA67B5922634B0BAA6D;2399.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1034.
  ) 
 Here is how much of TeX's memory you used:
- 9312 strings out of 495024
- 139664 string characters out of 3181154
- 237648 words of memory out of 3000000
- 12038 multiletter control sequences out of 15000+200000
+ 9344 strings out of 495024
+ 140245 string characters out of 3181154
+ 241505 words of memory out of 3000000
+ 12069 multiletter control sequences out of 15000+200000
  12017 words of font info for 35 fonts, out of 3000000 for 9000
  34 hyphenation exceptions out of 8191
  42i,18n,46p,945b,649s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1434,10 +1309,10 @@ r/share/texlive/texmf-dist/fonts/type1/public/pl/plr10.pfb></usr/share/texlive/
 texmf-dist/fonts/type1/public/pl/plr6.pfb></usr/share/texlive/texmf-dist/fonts/
 type1/public/pl/plti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl
 /pltt10.pfb>
-Output written on praca.pdf (46 pages, 3347179 bytes).
+Output written on praca.pdf (46 pages, 3353015 bytes).
 PDF statistics:
- 540 PDF objects out of 1000 (max. 8388607)
- 436 compressed objects within 5 object streams
- 193 named destinations out of 1000 (max. 500000)
- 159 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 707 PDF objects out of 1000 (max. 8388607)
+ 601 compressed objects within 7 object streams
+ 194 named destinations out of 1000 (max. 500000)
+ 407 words of extra memory for PDF output out of 10000 (max. 10000000)
 

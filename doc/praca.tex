@@ -376,7 +376,7 @@ $\label{mcon}$
 \paragraph{API} ~\\
 \indent API dla aplikacji Backbone (interfejsu) zostało napisane we frameworku Sinatra. Framework ten został  zaprojektowany do pisania niewielkich, lekkich aplikacji web i został wybrany ponieważ autor uznał że Ruby on Rails (najpopularnieszy framework Ruby) jest zbyt rozbudowany i uruchomienie aplikacji RoR na RaspberryPi mogło by zużyć zbyt wiele zasobów urządzenia. Sama aplikacja Sinatra uruchamiana jest na porcie 9292. Z tego powodu znajuję się za proxy | serwerem Nginx, który przekierowuje zapytania przychodzące na port 80 na aplikację.
 
-Typowo aplikacjia Sinatra składa się z jednej klasy. W celu wprowadzenia porządku autor zdecydował się ją rozbić na miejsze pliki. Jako pierwszy załączany jest plik \emph{application.rb}, który min. zawiera deklarację modułów, konfigurację Sprockets oraz konfigurację Warden, która zostanie omówiona w rozdziale \ref{warden}. Na końcu załączane są pozostałe piliki zawierające poszczególne end-pointy, które dodają kolejne metody do klasy. Znajdują się w folderze \emph{app/routes} i zostaną przedstawione poniżej przy pomocy zapytań curl i odpowiedzi. W celu autentykacji najpierw wykonane jest rządanie POST z loginem oraz hasłem. Potem możemy autentykować się przy pomocy ciasteczka. 
+Typowo aplikacjia Sinatra składa się z jednej klasy. W celu wprowadzenia porządku autor zdecydował się ją rozbić na miejsze pliki. Jako pierwszy załączany jest plik \emph{application.rb}, który min. zawiera deklarację modułów, konfigurację Sprockets oraz konfigurację Warden, która zostanie omówiona w rozdziale \ref{warden}. Na końcu załączane są pozostałe piliki zawierające poszczególne end-pointy, które dodają kolejne metody do klasy. Znajdują się w folderze \emph{app/routes} i zostaną przedstawione poniżej przy pomocy zapytań curl i odpowiedzi. W celu autentykacji najpierw wykonane jest rządanie POST z loginem oraz hasłem. Potem możemy autentykować się przy pomocy ciasteczka (\emph{cookie}). 
 \begin{listing}
 \inputminted{sh}{./src/curl_auth}
 \end{listing}
@@ -449,7 +449,7 @@ $\label{contests}$
 \end{listing}
 Zmienna contest\_presenter przekazana w bloku jest obiektem klasy \emph{Presenters::ContestPresenter} zawieającej jedynie metodę \emph{as\_json} działającą analogicznie do metody o tej samej nazwie klasy \emph{Presenters::ContestantPresenter} przedstawionej wcześniej.
 
-\indent Contest\_repository jest tutaj obiektem klasy \emph{Repositories::ContestRepository}. Metoda all najpierw sprawdza czy w bazie znajdują się zawody metodą \emph{any?} Jeśli w bazie danych istnieją zawody to są one zwracane w przeciwnym wypadku wywoływana jest prywatna metoda \emph{create\_default} (\ref{contest_create_default}).
+\indent Contest\_repository jest tutaj obiektem klasy \emph{Repositories::ContestRepository}. Metoda \emph{all} najpierw sprawdza czy w bazie znajdują się zawody metodą \emph{any?} Jeśli w bazie danych istnieją zawody to są one zwracane w przeciwnym wypadku wywoływana jest prywatna metoda \emph{create\_default} (\ref{contest_create_default}).
 \begin{listing}
 \inputminted{ruby}{./src/contest_create_default.rb}
 \caption{\emph{app/services/repositories/contest\_repository.rb}}
@@ -1015,6 +1015,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 \item \url{http://haml.info/docs.html}
 \item \url{http://backbonejs.org/}
 \item \url{http://www.raspberrypi.org/}
+\item \url{http://wiringpi.com/}
 \end{enumerate}
 \newpage
 \addtocontents{toc}{\protect\enlargethispage{\baselineskip}}
