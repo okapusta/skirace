@@ -42,7 +42,7 @@
 \newpage
 \cleardoublepage
 \section{Cel i zakres pracy}
-Przedmiotem niniejszej pracy jest budowa mobilnego systemu pomiaru czasu dla zawodów narciarskich. System składa się z dwóch bramek: startowej oraz końcowej, które wykorzystują wiązke laserową w celu uchwycenia dokładnego momentu przejechania zawodnika przez bramkę. 
+Przedmiotem niniejszej pracy jest budowa mobilnego systemu pomiaru czasu dla zawodów narciarskich. System składa się z dwóch bramek: startowej oraz końcowej, które wykorzystują wiązkę laserową w celu uchwycenia dokładnego momentu przejechania zawodnika przez bramkę. 
 
 Niniejsza praca będzie się składać z trzech głównych części. Pierwsza z nich poświęcona zostanie budowie systemu, druga część tej pracy zawiera opis implementacji, zaś trzecia część jest poświęcona obsłudze systemu.
 
@@ -76,7 +76,7 @@ Kompletny kod źródłowy pracy można znaleźć pod adresami:
 \noindent
 \subsection{Założenia dotyczące systemu}
 % System będący przedmiotem tej pracy powinien spełniać następujące wymagania:
-Przed systemem, będącym celem tej pracy, stawia się szereg wymagań dotyczących jego funkcjonalności oraz budowy. Wymgania te zostały przedstawione poniżej, natomiast w rozdziale \ref{concept} autor przedstawi jak użyte materiały oraz technologie je spełniają.
+Przed systemem, będącym celem tej pracy, stawia się szereg wymagań dotyczących jego funkcjonalności oraz budowy. Wymagania te zostały przedstawione poniżej, natomiast w rozdziale \ref{concept} autor przedstawi jak użyte materiały oraz technologie je spełniają.
 \begin{enumerate}
 \item Odporny na trudne warunki atmosferyczne
 \item Lekki
@@ -94,7 +94,7 @@ System pomiaru czasu został wymyślony tak aby jego budowa była prosta. Skład
 
 Aby spełnić czwarte wymaganie obie bramki komunikują się przy użyciu WiFi. Do Raspberry Pi podłączona jest karta WiFi a system skonfigurowany jest tak aby obie bramki wykryły się nawzajem i utworzyły śieć o SSID Skirace.
 
-Wymagania \ref{req:entry} oraz \ref{req:export} zostały spełnione poprzez stworzenie interfejsu webowego uruchamiangeo na bramce startowej. Aby z niego korzystać należy posiadać laptop oraz połączyć się z siecią Skirace, a następnie odwiedzić adres bramki (\emph{192.168.10.1}). Alternatywną metodą wprowadzania zawodników jest użycie konsoli aplikacji. W tym celu należy się zalogować używając SSH do urządzenia na konto użytkownika app, posługując się hasłem skirace2014 lub kluczem publicznym. Następnie należy wejść do folderu \emph{/home/app/skirace/current} oraz poleceniem \emph{rvmsudo bundle exec script/console} uruchomić konsolę. 
+Wymagania \ref{req:entry} oraz \ref{req:export} zostały spełnione poprzez stworzenie interfejsu webowego uruchamianego na bramce startowej. Aby z niego korzystać należy posiadać laptop oraz połączyć się z siecią Skirace, a następnie odwiedzić adres bramki (\emph{192.168.10.1}). Alternatywną metodą wprowadzania zawodników jest użycie konsoli aplikacji. W tym celu należy się zalogować używając SSH do urządzenia na konto użytkownika app, posługując się hasłem skirace2014 lub kluczem publicznym. Następnie należy wejść do folderu \emph{/home/app/skirace/current} oraz poleceniem \emph{rvmsudo bundle exec script/console} uruchomić konsolę. 
 
 Aby umożliwić natychmiastowy odczyt wyniku po przejechaniu mety (\ref{req:lcd}) bramka końcowa została wyposażona w wyświetlacz LCD, na którym pokazywane są imię i nazwisko zawodnika oraz jego czas. 
 
@@ -113,7 +113,7 @@ $\label{laser-1}$
 \end{center}
 \end{figure}
 \newpage
-Bramka startowa podobnie jak moduły laserowe składa się z rury PCV z zaślepką, jednakże z powodu rozmiaru użytych elementów (m.in. RaspberryPi) przymocowana jest do niej skrzynka izolacyjna zawierająca urzadzenie oraz zasilanie. RaspberryPi w środku skrzynki jest przykręcone do wygiętego fragmentu opakowania na płyty CD śróbami imbusowymi 2x10mm. Ma to na celu podzielenie przestrzeni skrzynki izolacyjnej, tak aby koszyczek z bateriamii AA nie nachodził na system komputerowy. Dodatkowo pomiędzy Raspberry oraz wygiętym pudełkiem znajduje się wycinek karimaty zapewniajacy ochronę dla lutów znajdujących się pod spodem. (\ref{skrzynka-in}).
+Bramka startowa podobnie jak moduły laserowe składa się z rury PCV z zaślepką, jednakże z powodu rozmiaru użytych elementów (m.in. RaspberryPi) przymocowana jest do niej skrzynka izolacyjna zawierająca urzadzenie oraz zasilanie. RaspberryPi w środku skrzynki jest przykręcone do wygiętego fragmentu opakowania na płyty CD śrubami imbusowymi 2x10mm. Ma to na celu podzielenie przestrzeni skrzynki izolacyjnej, tak aby koszyczek z bateriamii AA nie nachodził na system komputerowy. Dodatkowo pomiędzy Raspberry oraz wygiętym pudełkiem znajduje się wycinek karimaty zapewniajacy ochronę dla lutów znajdujących się pod spodem. (\ref{skrzynka-in}).
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale=0.08]{./img/insides1.jpg}
@@ -121,7 +121,7 @@ Bramka startowa podobnie jak moduły laserowe składa się z rury PCV z zaślepk
 $\label{skrzynka-in}$
 \end{center}
 \end{figure}
-Urządzenie pomiarowe znajduję się natomiast w srodku rury PCV. Elementy sensora zostały zamocowane na połowie płytki prototypowej. Całość urządzenia pomiarowego jest przymocowana do rury PCV przy pomocy dwóch śrób. Rozdział \ref{sensor} poświęcony jest działaniu sensora, dlatego jego budowa zostanie tutaj pominięta.
+Urządzenie pomiarowe znajduje się natomiast w srodku rury PCV. Elementy sensora zostały zamocowane na połowie płytki prototypowej. Całość urządzenia pomiarowego jest przymocowana do rury PCV przy pomocy dwóch śrub. Rozdział \ref{sensor} poświęcony jest działaniu sensora, dlatego jego budowa zostanie tutaj pominięta.
 
 Bramka końcowa posiada budowę analogiczną do bramki startowej, jednak dodatkowo została wyposażona w wyświetlacz LCD pokazujący czas zawodnika na mecie. Rysunek \ref{lcd} pokazuje sposób podłączenia go do GPIO, natomiast rysunek \ref{both} przedstawia obydwie bramki. 
 \begin{figure}[H]
@@ -132,7 +132,7 @@ $\label{lcd}$
 \end{center}
 \end{figure}
 
-Tabela (\ref{lcd-pins}) przedstawia rozpiskę pinów wyświetlacza LCD oraz porty GPIO do których są podłączone. Wejścia +5V oraz GND zostały podłączone bezpośrednio do źródła zasilania.
+Tabela (\ref{lcd-pins}) prezentuje rozpiskę pinów wyświetlacza LCD oraz porty GPIO do których są podłączone. Wejścia +5V oraz GND zostały podłączone bezpośrednio do źródła zasilania.
 \begin{table}[H]
 \begin{center}
 \begin{tabular}{ | l | l | l | l | }
@@ -168,9 +168,9 @@ $\label{both}$
 
 \newpage
 \subsection{Architektura}
-System pomiaru czasu został zbudowany w myśl modelu master/slave gdzie masterem jest aplikacja początkowa. Udostępnia ona interface web służący do wprowadzania zawodników. Bramka startowa zawiera również bazę danych oraz serwer Memcached. W momencie uruchomienia aplikacji startowej, oprócz startu serwera serwującego aplikację WEB, tworzony jest nowy wątek, który rejestruje przecięcie wiązki lasera. Kiedy to sie stanie, ustawia on dokładną godzinę tego zdarzenia w bazie danych.
+System pomiaru czasu został zbudowany w myśl modelu master/slave gdzie masterem jest aplikacja początkowa. Udostępnia ona interface web służący do wprowadzania zawodników. Bramka startowa zawiera również bazę danych oraz serwer Memcached. W momencie uruchomienia aplikacji startowej, oprócz startu serwera serwującego aplikację WEB, tworzony jest nowy wątek, który rejestruje przecięcie wiązki lasera. Kiedy to się stanie, ustawia on dokładną godzinę tego zdarzenia w bazie danych.
 
-Zadaniem workera jest zarejestrowanie przecięcia linii mety. W momencie jej przekroczenia worker wysyła rządanie POST do aplikacji startowej, która w odpowiedzi zwraca obliczony czas końcowy oraz imie i nazwisko zawodnika wyświetlane na LCD.
+Zadaniem workera jest zarejestrowanie przecięcia linii mety. W momencie jej przekroczenia worker wysyła żądanie POST do aplikacji startowej, która w odpowiedzi zwraca obliczony czas końcowy oraz imię i nazwisko zawodnika wyświetlane na LCD.
 \newline
 
 \begin{figure}[ht]
@@ -295,7 +295,7 @@ Kiedy jest on krótki znaczy to że na fotorezystor pada wiązka lasera, kiedy s
 %Ninejszy rozdział zostanie poświęcony implementacji. Składa się on z dwóch podrozdziałów: Aplikacja, który opisuję budowę aplikacji startowej oraz rozdziału Worker opisującego worker rejestrujący przejechanie mety.
 \subsubsection{Aplikacja}
 Tak jak była o tym mowa we wstępie do ninejszej pracy aplikację startową można podzielić na dwa osobne komponenty. Jeden stanowi aplikacja napisana we frameworku Sinatra, która udostępnia API dla aplikacji front-end do komunikacji z bazą danych. Ona także serwuje skompilowane zasoby. W momencie uruchomienia aplikacji jest też tworzony nowy wątek, którego zadaniem jest zarejestrowanie startu. 
-	Aplikacja front-end natomiast dostarcza interfejs dostępny przez przeglądarke internetową służący do interakcji z back-endem.
+	Aplikacja front-end natomiast dostarcza interfejs dostępny przez przeglądarkę internetową służący do interakcji z back-endem.
 \begin{listing}[H]
 \inputminted[linenos=true]{ruby}{./src/thread.rb}
 \caption{Wątek rejestrujący przejechanie mety}
@@ -304,13 +304,13 @@ $\label{thread}$
 %\end{minipage}
 \newpage
 %\noindent
-Wykorzystana tutaj klasa Injector, ma za zadanie budowanie obiektów używających dependency injection w raz z wszelkimi zależnościami przy pomocy gemu Dependor. 
+Wykorzystana tutaj klasa Injector, ma za zadanie budowanie obiektów używających dependency injection wraz z wszelkimi zależnościami przy pomocy gemu Dependor. 
 
 
 % W swoim konstuktorze oczekuje obiektów Sinatra dlatego tutaj inicjalizowana jest pustym objektem OpenStruct. OpenStruct odpowiada na dowolne metody oraz zwraca \emph{nil} jeśli nazwa metody wywołanej na rzecz tego obiektu nie zawiera się w haszu, który został użyty do inicjalizacji. 
 Obiekt klasy Injector jest 	przekazywany w bloku, gdzie póżniej dostarcza obiektów takich jak \emph{capacitor}, którego klasa jest zdefiniowana w pliku \emph{app/services/components/capacitor.rb}. 
 
-W klasie Injector są definiowane moduły które mają być przeszukane w poszukiwaniu klas, które wykorzystują DI co przedstawia listing \ref{injector}. Nazwy przyjmowane w argumentach metody \emph{takes} oraz nazwy metod wywołanych na obiekcie Injector odpowiadają nazwom plików wstrszykiwanych klas. Warunkiem tego jest odpowiednie nazewnictwo klas i plików zgodnie z konwencjami przyjętymi w programowaniu Ruby.
+W klasie Injector są definiowane moduły które mają być przeszukane w poszukiwaniu klas, które wykorzystują DI, co przedstawia listing \ref{injector}. Nazwy przyjmowane w argumentach metody \emph{takes} oraz nazwy metod wywołanych na obiekcie Injector odpowiadają nazwom plików wstrszykiwanych klas. Warunkiem tego jest odpowiednie nazewnictwo klas i plików zgodnie z konwencjami przyjętymi w programowaniu Ruby.
 
 W Ruby przyjęło się nazywanie nazw klas i modułów z dużej litery \mbox{CamelCase} a pliki zawierające te klasy powinny mieć taką samą nazwę jak klasa tylko zapisaną w snake\_case z rozszerzeniem *.rb.
 \begin{listing}[H]
@@ -609,7 +609,7 @@ $\label{formatter}$
 \section{Sposób obsługi}
 Urządzenie składa się z czterech elementów~|~startowego, końcowego oraz dwóch zawierających moduły laserowe. Aby z niego korzystać należy utworzyć dwie bramki wbijając je w śnieg tak aby wiązka lasera z częsci zawierającej moduł laserowy padała na czujnik znajdujący się w otworze wywierconym na bramce z systemem. Laser uruchamiany jest przełącznikiem znajdującym się na górze rur zawierających go. Po uruchomieniu wiązki laserowej i nakierowaniu jej na fotorezystor zależy uruchomić urządzenie przełącznikiem znajdującym się z boku skrzynki przymocowanej do elementu bramki.
 
-Przed rozpoczęciem korzystania z systemu znależy utworzyć nowy wyścig oraz wprowadzić zawodników korzystając z interfejsu web lub konsoli aplikacji. W tym celu trzeba połączyć się z siecią bezprzewodową Skirace oraz otworzyć w przeglądarce internetowej aplikację znajdującą się pod adresem \emph{192.168.10.1}. Następnie należy zalogować się w aplikacji klikając na ikonę kłódki (\ref{login}) znajdującą się w prawym górnym rogu paska nawigacyjnego interfejsu używając do logowania użytkownika \emph{admin} oraz hasła \emph{password}.
+Przed rozpoczęciem korzystania z systemu należy utworzyć nowy wyścig oraz wprowadzić zawodników korzystając z interfejsu web lub konsoli aplikacji. W tym celu trzeba połączyć się z siecią bezprzewodową Skirace oraz otworzyć w przeglądarce internetowej aplikację znajdującą się pod adresem \emph{192.168.10.1}. Następnie należy zalogować się w aplikacji klikając na ikonę kłódki (\ref{login}) znajdującą się w prawym górnym rogu paska nawigacyjnego interfejsu używając do logowania użytkownika \emph{admin} oraz hasła \emph{password}.
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.3]{./img/login.png}
@@ -647,7 +647,7 @@ $\label{new-contestant}$
 $\label{new-contestant-created}$
 \end{figure}
 \noindent
-Import (\ref{import}) oraz eksport (\ref{export}) zawodników można wykonać w jednym z trzech obsługiwanych formatów: XML, CSV oraz JSON. W przypdaku eksportu eksportowani są zawodnicy w raz z czasami. Podczas importu można użyć wyeksportowanego pliku, jednak podczas parsowania czasy zawodników zostaną pominięte.
+Import (\ref{import}) oraz eksport (\ref{export}) zawodników można wykonać w jednym z trzech obsługiwanych formatów: XML, CSV oraz JSON. W przypdaku eksportu eksportowani są zawodnicy wraz z czasami. Podczas importu można użyć wyeksportowanego pliku, jednak podczas parsowania czasy zawodników zostaną pominięte.
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.3]{./img/import.png}
