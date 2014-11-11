@@ -34,4 +34,5 @@
 \contentsline {subsubsection}{\numberline {5.2.3}Ruby}{42}{subsubsection.5.2.3}
 \contentsline {subsubsection}{\numberline {5.2.4}BSD-3}{43}{subsubsection.5.2.4}
 \contentsline {section}{\numberline {6}Bibliografia}{44}{section.6}
+\enlargethispage {\baselineskip }
 \contentsline {section}{\numberline {7}Summary}{45}{section.7}
