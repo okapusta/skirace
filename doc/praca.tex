@@ -33,6 +33,7 @@
 \usepackage{float}
 %\usepackage{siunitx}
 \counterwithin{subfigure}{figure}
+\usepackage{hyperref}
 \begin{document}\sloppy
 \includepdf[pages={1,2}]{first-pages.pdf}
 \tableofcontents
@@ -179,7 +180,7 @@ Zadaniem workera jest zarejestrowanie przecięcia linii mety. Kiedy zostanie ona
 \noindent
 Komunikacjia pomiędzy dwiema bramkami odbywa się poprzez WiFi.
 \subsection{Wybrane technologie}
-\subsection{NTP}
+\subsubsection{NTP}
 Urządzenie Raspberry Pi po odłączeniu zasilania nie zapamiętuje czasu dlatego w celu jego synchronizacji pomiędzy bramkami został wykorzystany protokół NTP (\emph{eng. Network Time Protocol}). Na bramce startowej jest uruchomiony serwer NTP który ustawiony jest tak aby korzystał z czasu systemowego bramki, natomiast bramka końcowa podczas uruchomienia systemu pobiera czas z bramki startowej. Dokładna data nie ma tu znaczenia, ważne są jedynie taka sama godzina, minuta i sekunda na obu bramkach.
 \subsubsection{Nginx}
 Aplikacja startowa jest uruchamiana na porcie \emph{9292} dlatego został użyty serwer Nginx (\emph{czyt. engine-x}), który działa jako proxy (serwer pośredniczący), przekierowujący rządania przychodzące na port 80 do aplikacji startowej.
@@ -551,6 +552,9 @@ $\label{app-coffee}$
 \caption{Interface}
 $\label{iface}$
 \end{figure}
+\newpage
+\paragraph{Czyszczenie bazy danych} ~\\
+W związku z tym że urządzenie posiada ograniczoną ilość przestrzeni dyskowej na karcie SD (4GB) przy każdym uruchomieniu aplikacji startowej sprawdzany jest rozmiar bazy danych. Jeśli przekrczy on 1GB jest ona usuwana oraz tworzona nowa.
 \newpage
 \subsubsection{Worker}
 Worker o którym była mowa we wstępie do niniejszej pracy rejestruje przejechanie linii mety. Został on napisany w całości w języku Ruby jako \emph{gem} - program menadżera paczek RubyGems. Po zainstalowaniu w systemie dostarcza on komendy \emph{skirace-worker}, która go uruchamia.
@@ -998,6 +1002,18 @@ Redistribution and use in source and binary forms, with or without modification,
 
 \end{enumerate}
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+\newpage
+\section{Bibliografia}
+\begin{enumerate}
+\item Ruby. Programowanie | David Flanagan, Yukihiro Matsumoto \\ ISBN 978-83-246-1767-8
+\item Practical Object-Oriented Design in Ruby: An Agile Primer \\ Addison-Wesley Professional Ruby Series \\ ISBN 978-03-217-2133-4 
+\item HD44780U (LCD-II) | Dot Matrix Liquid Crystal Display Controller / Driver \\ ADE-207-272(Z) \\ Rev. 0.0
+\item \url{http://nginx.org/en/docs/}
+\item \url{http://code.google.com/p/memcached/wiki/NewStart}
+\item \url{http://getbootstrap.com/}
+\item \url{http://haml.info/docs.html}
+\item \url{http://backbonejs.org/}
+\end{enumerate}
 \newpage
 \section{Summary}
 	Subject of this paper is mobile timing system for skiing competitions. It consists of two gates that use laser beam to capture precise moment of crossing them by the contestant. Device which is subject of this paper was designed using widely available components. As backbone of this system  Raspberry Pi was chosen. It's a cheap computer platform developed by Raspberry Pi Foundation that operates under control of Raspbian operating system – fork of Debian Wheezy GNU/Linux distribution.  Gates communicate using wireless WiFi network working in Ad-Hoc mode and create network with ssid SKIRACE.

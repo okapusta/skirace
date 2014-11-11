@@ -25,23 +25,11 @@ class Skirace::DatabaseCleaner
 
       def create_default_user
         unless User.any?
-          injector.user_repository.build({
-            'username' => 'admin', 
-            'password' => 'password'
-            }, 1).save
+          injector.user_repository.build({ 'username' => 'admin', 
+            'password' => 'password'}, 1).save
         end
       end
 
-      def injector
-        Injector.new
-      end
-
-      def shared_location
-        "/home/app/skirace/shared"
-      end
-
-      def current_location
-        "/home/app/skirace/current"
-      end
+      (...)
   end
 end
