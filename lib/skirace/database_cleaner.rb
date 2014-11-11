@@ -15,8 +15,9 @@ class Skirace::DatabaseCleaner
         File.size(File.join('db','database.sqlite')) / 10**6.to_f
       end
 
-      # TODO: code
       def symlink_database
+        %x(mv #{current_location}/db/database.sqlite #{shared_location}/db/database.sqlite)
+        %x(ln -s #{shared_location}/db/database.sqlite #{current_location}/db/database.sqlite)
       end
 
       def create_default_user
@@ -27,6 +28,14 @@ class Skirace::DatabaseCleaner
 
       def injector
         Injector.new
+      end
+
+      def shared_location
+        "/home/app/skirace/shared"
+      end
+
+      def current_location
+        "/home/app/skirace/current"
       end
   end
 end

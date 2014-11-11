@@ -50,10 +50,10 @@ class Repositories::ContestantRepository
   end
 
   def create_default
-    unless time.now - db_contestant.last.start_time_at > 5
+    if time.now - db_contestant.last.start_time_at > 5
       db_contestant.create
     end
-  # rescure from undefined method start_time_at for nil class
+  # rescue from undefined method start_time_at for nil class
   rescue
     db_contestant.create
   end
