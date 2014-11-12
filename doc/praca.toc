@@ -26,13 +26,15 @@
 \contentsline {paragraph}{\numberline {3.7.1.4}Czyszczenie bazy danych}{31}{paragraph.3.7.1.4}
 \contentsline {subsubsection}{\numberline {3.7.2}Worker}{32}{subsubsection.3.7.2}
 \contentsline {section}{\numberline {4}Spos\IeC {\'o}b obs\IeC {\l }ugi}{34}{section.4}
-\contentsline {section}{\numberline {5}Licencje Gem\IeC {\'o}w}{37}{section.5}
-\contentsline {subsection}{\numberline {5.1}Wykaz gem\IeC {\'o}w}{37}{subsection.5.1}
-\contentsline {subsection}{\numberline {5.2}Tre\IeC {\'s}ci licencji}{39}{subsection.5.2}
-\contentsline {subsubsection}{\numberline {5.2.1}MIT}{39}{subsubsection.5.2.1}
-\contentsline {subsubsection}{\numberline {5.2.2}LGPLv3}{40}{subsubsection.5.2.2}
-\contentsline {subsubsection}{\numberline {5.2.3}Ruby}{43}{subsubsection.5.2.3}
-\contentsline {subsubsection}{\numberline {5.2.4}BSD-3}{44}{subsubsection.5.2.4}
-\contentsline {section}{\numberline {6}Bibliografia}{45}{section.6}
+\contentsline {subsection}{\numberline {4.1}U\IeC {\.z}ycie urz\IeC {\k a}dzenia bez wprowadzania zawodnik\IeC {\'o}w}{36}{subsection.4.1}
+\contentsline {section}{\numberline {5}Podsumowanie}{37}{section.5}
+\contentsline {section}{\numberline {6}Dodatek A - Licencje Gem\IeC {\'o}w}{38}{section.6}
+\contentsline {subsection}{\numberline {6.1}Wykaz gem\IeC {\'o}w}{38}{subsection.6.1}
+\contentsline {subsection}{\numberline {6.2}Tre\IeC {\'s}ci licencji}{40}{subsection.6.2}
+\contentsline {subsubsection}{\numberline {6.2.1}MIT}{40}{subsubsection.6.2.1}
+\contentsline {subsubsection}{\numberline {6.2.2}LGPLv3}{41}{subsubsection.6.2.2}
+\contentsline {subsubsection}{\numberline {6.2.3}Ruby}{44}{subsubsection.6.2.3}
+\contentsline {subsubsection}{\numberline {6.2.4}BSD-3}{45}{subsubsection.6.2.4}
+\contentsline {section}{\numberline {7}Bibliografia}{46}{section.7}
 \enlargethispage {\baselineskip }
-\contentsline {section}{\numberline {7}Summary}{46}{section.7}
+\contentsline {section}{\numberline {8}Summary}{47}{section.8}
