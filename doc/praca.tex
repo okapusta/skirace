@@ -44,14 +44,13 @@
 \section{Cel i zakres pracy}
 Przedmiotem niniejszej pracy jest budowa mobilnego systemu pomiaru czasu dla zawodów narciarskich. System składa się z dwóch bramek: startowej oraz końcowej, które wykorzystują wiązkę laserową w celu uchwycenia dokładnego momentu przejechania zawodnika przez bramkę. 
 
-Niniejsza praca będzie się składać z trzech głównych części. Pierwsza z nich poświęcona zostanie budowie systemu, druga część tej pracy zawiera opis implementacji, zaś trzecia część jest poświęcona obsłudze systemu.
+Niniejsza praca będzie się składać z trzech głównych części. Pierwsza z nich poświęcona zostanie budowie systemu, druga część tej pracy zawiera opis implementacji oprogramowania, zaś trzecia część jest poświęcona obsłudze systemu.
 
-\section{Wstęp}
-Obecnie na rynku istnieją systemy podobne do tego, którego budowę ta praca przedstawia, jednak często kosztują tysiące złotych. Praca ta jest próbą stowrzenia rozwiązania spełniającego podobne zadanie do ww. systemów korzystając z ogólnie dostępnych podzespołów, za nie wielkie pieniądze.
+\section{Wstęp}Obecnie na rynku istnieją systemy podobne do zbudowanego w ramach niniejszej pracy, jednak często kosztują tysiące złotych. Zadanie podjęte w ramach niniejszego projektu przewidjuje zbudowanie w opraciu o ogólnie dostępne elementy systemu oferującego podobną funkcjonalność przy zdecydowanie niższych kosztach.
 
-Jako szkielet systemu zostało wybrane Raspberry Pi | platforma komputerowa stworzona przez Raspberry Pi Fundation. W momencie premiery (29 luty 2012) model B użyty w tej pracy miał cenę początkową US\$ 35. Raspberry Pi oparte jest o chip BCM2835 zawierający procesor ARMv6. Urządzenie działa pod kontrolą dystrybucji systemu Linux Raspbian będącą zoptymalizowaną wersją dystrybucji Debiana Wheezy dla procesorów ARMv6.
+Jako szkielet systemu zostało wybrane Raspberry Pi | platforma komputerowa stworzona przez Raspberry Pi Fundation. W momencie premiery (29 lutego 2012) model B użyty w tej pracy miał cenę początkową US\$ 35. Raspberry Pi oparte jest o chip BCM2835 zawierający procesor ARMv6. Urządzenie działa pod kontrolą dystrybucji systemu Linux Raspbian będącą zoptymalizowaną wersją dystrybucji Debiana Wheezy dla procesorów ARMv6.
 
-Obie aplikacjie (startowa i końcowa) zostały napistane przy użyciu języka Ruby 2.1.0 oraz dla aplikacji startowej stworzony został interfejs web umożliwiający wprowadzanie zawodników, podgląd wyników, import oraz eksport. Napisany został on przy użyciu języka CoffeeScript oraz biblioteki JavaScript Backbone.js. 
+Obie aplikacjie (startowa i końcowa) zostały napistane przy użyciu języka Ruby 2.1.0. Dodatkowo, dla aplikacji startowej stworzono interfejs web umożliwiający wprowadzanie zawodników, podgląd wyników, import oraz eksport. Napisany został on przy użyciu języka CoffeeScript oraz biblioteki JavaScript Backbone.js. 
 CoffeeScript jest językiem inspirowanym elegancką składnią Ruby, który kompiluje się do JavaScriptu. Backbone.js natomiast zapewnia strukturę aplikacji.
 %\newline
 %W momencie pisania kodu aplikacji autor nie zdawał sobie jeszcze sprawy z peOdporny na trudne warunki atmosferyczne
@@ -59,7 +58,7 @@ CoffeeScript jest językiem inspirowanym elegancką składnią Ruby, który komp
 \newline
 \newline
 \noindent
-W pracy zostały użyte różne \emph{gemy}~|~programy i biblioteki menadżera paczek \emph{RubyGems}, których lista w raz z licencjami zostanie przedstawiona na końcu tej pracy.
+W pracy zostały użyte różne \emph{gemy}~|~programy i biblioteki menadżera paczek \emph{RubyGems}, których lista w raz z licencjami znajduję się na końcu tej pracy.
 \newline
 
 \noindent
@@ -76,33 +75,36 @@ Kompletny kod źródłowy pracy można znaleźć pod adresami:
 \noindent
 \subsection{Założenia dotyczące systemu}
 % System będący przedmiotem tej pracy powinien spełniać następujące wymagania:
-Przed systemem, będącym celem tej pracy, stawia się szereg wymagań dotyczących jego funkcjonalności oraz budowy. Wymagania te zostały przedstawione poniżej, natomiast w rozdziale \ref{concept} autor przedstawi jak użyte materiały oraz technologie je spełniają.
+Przed systemem, będącym celem tej pracy, stawia się szereg wymagań dotyczących jego funkcjonalności oraz budowy:
+
 \begin{enumerate}
-\item Odporny na trudne warunki atmosferyczne
-\item Lekki
-\item Autonomiczny
-\item Bezprzewodowy
-\item \label{req:entry} Możliwość wprowadzania zawodników na starcie
+\item Odporność na trudne warunki atmosferyczne, oraz niskie temparatury
+\item Lekkość
+\item Autonomiczność (nieprzerwany czas pracy przez conajmniej kilka godzin)
+\item Bezprzewodowość komunikacji
+\item \label{req:entry} Możliwość wprowadzania listy zawodników na starcie
 \item \label{req:two} Możliwość pomiaru czasu dla dwóch zawodników jednocześnie
 \item \label{req:lcd} Możliwość odczytu czasu po minięciu mety 
-\item \label{req:export} Możliwość exportu danych do komputera
+\item \label{req:export} Możliwość eksportu danych do komputera
 \end{enumerate}
+\noindent
+W dalszej części pracy przedstawiono, jak powyższe wymagania zostały spełnione.
 \newpage
 \section{Realizacja tematu}
 \subsection{Koncepcja wykonania}\label{concept}
-System pomiaru czasu został wymyślony tak aby jego budowa była prosta. Składa się on z dwóch identycznie wykonancyh bramek. Obie bramki składają się z urządzenia Raspberry Pi oraz modułu laserowego zamontowancyh na rurach kanalizacyjnych. Wiązka laserowa jest użyta w celu uchwycenia momentu przejechania bramki. Pada ona na fotorezystor, którego rezystancja jest niska kiedy jest oświetlony. Fakt ten został wykorzystany w układzie pomiarowym, który składa się jeszcze z kondensatora oraz rezystora. Kondensator jest ładowany i mierzony jest czas potrzebny na jego naładowanie. Kiedy jest wyższy niż zadana wartość graniczna znaczy to że wiązka została przecięta. Taka budowa oraz użyte materiały i podzespoły spełniają pierwsze trzy wymagania.
+System pomiaru czasu został zaprojektowany tak aby jego budowa była prosta. Składa się on z dwóch identycznie wykonancyh bramek. Obie bramki składają się z urządzenia Raspberry Pi oraz modułu laserowego zamontowancyh na rurach z tworzywa sztucznego, które stanowią konstrukcję nośną i umożliwiają zamontowanie systemu w pokrywie śnieżnej, różniących się jedynie oprogramowaniem. Wiązka laserowa służy do uchwycenia momentu przejechania bramki. Pada ona na fotorezystor, którego rezystancja jest niska kiedy jest oświetlony. Fakt ten został wykorzystany w układzie pomiarowym, który składa się jeszcze z kondensatora oraz rezystora. Kondensator jest ładowany i mierzony jest czas potrzebny na jego naładowanie. Kiedy jest wyższy niż zadana wartość graniczna znaczy to że wiązka została przecięta. Taka budowa oraz, użyte materiały i podzespoły, spełniają pierwsze trzy wymagania.
 
-Aby spełnić czwarte wymaganie obie bramki komunikują się przy użyciu WiFi. Do Raspberry Pi podłączona jest karta WiFi a system skonfigurowany jest tak aby obie bramki wykryły się nawzajem i utworzyły śieć o SSID Skirace.
+Aby spełnić czwarte wymaganie (wymienione w rozdziale \ref{communication}) obie bramki komunikują się przy użyciu WiFi. Do Raspberry Pi podłączona jest karta WiFi a system skonfigurowany jest tak, aby obie bramki wykryły się nawzajem i utworzyły śieć, o SSID Skirace.
 
 Wymagania \ref{req:entry} oraz \ref{req:export} zostały spełnione poprzez stworzenie interfejsu webowego uruchamianego na bramce startowej. Aby z niego korzystać należy posiadać laptop oraz połączyć się z siecią Skirace, a następnie odwiedzić adres bramki (\emph{192.168.10.1}). Alternatywną metodą wprowadzania zawodników jest użycie konsoli aplikacji. W tym celu należy się zalogować używając SSH do urządzenia na konto użytkownika app, posługując się hasłem skirace2014 lub kluczem publicznym. Następnie należy wejść do folderu \emph{/home/app/skirace/current} oraz poleceniem \emph{rvmsudo bundle exec script/console} uruchomić konsolę. 
 
-Aby umożliwić natychmiastowy odczyt wyniku po przejechaniu mety (\ref{req:lcd}) bramka końcowa została wyposażona w wyświetlacz LCD, na którym pokazywane są imię i nazwisko zawodnika oraz jego czas. 
+Aby umożliwić natychmiastowy odczyt wyniku po przejechaniu mety (\ref{req:lcd}) bramka końcowa posiada w wyświetlacz LCD, na którym pokazywane są imię i nazwisko zawodnika oraz czas jego czas jego zjazdu. 
 
 Ostanie wymaganie (\ref{req:two}) spełnione jest w kodzie obsługującym działanie aplikacji startowej. W momencie przejechania mety zawsze brany jest pierwszy zawodnik, który ma ustawiony czas startowy a nie posiada czasu końcowego. Rozwiązanie to zakłada że zawodnicy nie wyprzedzą się podczas zjazdu.
 \subsection{Budowa systemu}
-System pomiaru czasu składa się z czterech części. Tworzą one bramki, przez które zawodnik musi przejechać. Bramki zostały wykonane z rur kanalizacychnych aby urządzenie było lekkie i można było je łatwo wbić w śnieg. Kielichy rur nie zostały ucięte aby dało się je zatkać z góry zaślepką. Jako pierwszą autor przedstawi budowę elementu bramki, która zawiera moduł laserowy. Jest ona taka sama dla bramki startowej oraz końcowej.
+System pomiaru czasu składa się z czterech elementów. Tworzą one dwie bramki, przez które zawodnik musi przejechać. Bramki zamontowano na rurach, które zapewniają lekkość i możliwość wbicia w śnieg. Kielichy rur nie zostały ucięte aby dało się je zatkać z góry zaślepką. Jako pierwszy przedstawię budowę elementu zawierającego moduł laserowy. Jest on identyczny dla obydwu bramek.
 
-Element zawierający moduł laserowy składa się z rury PCV, która stanowi obudowę ochronną dla elementów elektrycznych znajdujących się w środku. Stanowi też podporę oraz zapewnia odpowiednią wysokość dla lasera, taką żeby mógł on trafić w fotorezystor znajdujący się w otworze elementów odpowiedzialych za pomiar czasu. Wiązkę laserową zapewnia moduł laserowy składający się z diody laserowej oraz rezystora zapobiegającego spaleniu diody. Emituje on wiązkę laserową o długości fali 650nm. Moduł zasilany jest z koszyczka na 6 baterii AA przymocowanego z tyłu obodowy (\ref{laser-1}). Napięcie dostarczane z baterii jest redukowane do 3.3V przez przetwornicę impulsową (układ UBEC). Koszyczek zamontowany z tyłu obudowy przymocowany jest opaską zaciskową w niewielkim wycięciu zapewniającym podporę. Laser jest uruchamiany przełącznikiem znajdującym się u góry. 
+Element zawierający moduł laserowy składa się z rury PCV, która stanowi obudowę ochronną dla elementów elektrycznych znajdujących się w środku. Stanowi też podporę oraz zapewnia odpowiednią wysokość dla lasera, taką żeby wiązka laserowa mogła trafić w fotorezystor znajdujący się w otworze elementów odpowiedzialych za pomiar czasu. Wiązkę laserową zapewnia moduł laserowy składający się z diody laserowej oraz rezystora zapobiegającego spaleniu diody. Emituje on wiązkę laserową o długości fali 650nm. Moduł zasilany jest z koszyczka na 6 baterii AA przymocowanego z tyłu obodowy (\ref{laser-1}). Napięcie dostarczane z baterii jest redukowane do 3.3V przez przetwornicę impulsową (układ UBEC). Koszyczek zamontowany z tyłu obudowy przymocowany jest opaską zaciskową w niewielkim wycięciu zapewniającym podporę. Laser jest uruchamiany przełącznikiem znajdującym się u góry. 
 
 \begin{figure}[H]
 \begin{center}
@@ -121,7 +123,7 @@ Bramka startowa podobnie jak moduły laserowe składa się z rury PCV z zaślepk
 $\label{skrzynka-in}$
 \end{center}
 \end{figure}
-Urządzenie pomiarowe znajduje się natomiast w srodku rury PCV. Elementy sensora zostały zamocowane na połowie płytki prototypowej. Całość urządzenia pomiarowego jest przymocowana do rury PCV przy pomocy dwóch śrub. Rozdział \ref{sensor} poświęcony jest działaniu sensora, dlatego jego budowa zostanie tutaj pominięta.
+Urządzenie pomiarowe znajduje się natomiast w srodku rury PCV. Elementy sensora zostały zamocowane na połowie płytki prototypowej. Całość urządzenia pomiarowego jest przymocowana do rury PCV za pomocą dwóch śrub. Rozdział \ref{sensor} poświęcony jest działaniu sensora, dlatego jego budowa zostanie tutaj pominięta.
 
 Bramka końcowa posiada budowę analogiczną do bramki startowej, jednak dodatkowo została wyposażona w wyświetlacz LCD pokazujący czas zawodnika na mecie. Rysunek \ref{lcd} pokazuje sposób podłączenia go do GPIO, natomiast rysunek \ref{both} przedstawia obydwie bramki. 
 \begin{figure}[H]
@@ -132,7 +134,7 @@ $\label{lcd}$
 \end{center}
 \end{figure}
 
-Tabela (\ref{lcd-pins}) prezentuje rozpiskę pinów wyświetlacza LCD oraz porty GPIO do których są podłączone. Wejścia +5V oraz GND zostały podłączone bezpośrednio do źródła zasilania.
+Tabela (\ref{lcd-pins}) prezentuje przyporządkowanie pinów wyświetlacza LCD oraz porty GPIO do których są podłączone. Wejścia +5V oraz GND zostały podłączone bezpośrednio do źródła zasilania.
 \begin{table}[H]
 \begin{center}
 \begin{tabular}{ | l | l | l | l | }
@@ -167,7 +169,7 @@ $\label{both}$
 \end{figure}
 
 \newpage
-\subsection{Architektura}
+\subsection{Architektura systemu}
 System pomiaru czasu został zbudowany w myśl modelu master/slave gdzie masterem jest aplikacja początkowa. Udostępnia ona interface web służący do wprowadzania zawodników. Bramka startowa zawiera również bazę danych oraz serwer Memcached. W momencie uruchomienia aplikacji startowej, oprócz startu serwera serwującego aplikację WEB, tworzony jest nowy wątek, który rejestruje przecięcie wiązki lasera. Kiedy to się stanie, ustawia on dokładną godzinę tego zdarzenia w bazie danych.
 
 Zadaniem workera jest zarejestrowanie przecięcia linii mety. W momencie jej przekroczenia worker wysyła żądanie POST do aplikacji startowej, która w odpowiedzi zwraca obliczony czas końcowy oraz imię i nazwisko zawodnika wyświetlane na LCD.
@@ -183,9 +185,9 @@ Komunikacjia pomiędzy dwiema bramkami odbywa się poprzez WiFi.
 \subsubsection{NTP}
 Urządzenie Raspberry Pi po odłączeniu zasilania nie zapamiętuje czasu dlatego w celu jego synchronizacji pomiędzy bramkami został wykorzystany protokół NTP (\emph{eng. Network Time Protocol}). Na bramce startowej jest uruchomiony serwer NTP który ustawiony jest tak aby korzystał z czasu systemowego bramki, natomiast bramka końcowa podczas uruchomienia systemu pobiera czas z bramki startowej. Dokładna data nie ma tu znaczenia, ważne są jedynie taka sama godzina, minuta i sekunda na obu bramkach.
 \subsubsection{Nginx}
-Aplikacja startowa jest uruchamiana na porcie \emph{9292} dlatego został użyty serwer Nginx (\emph{czyt. engine-x}), który działa jako proxy (serwer pośredniczący), przekierowujący rządania przychodzące na port 80 do aplikacji startowej.
+Aplikacja startowa jest uruchamiana na porcie \emph{9292} dlatego został użyty serwer Nginx (\emph{czyt. engine-x}), który działa jako proxy (serwer pośredniczący), przekierowujący żądania przychodzące na port 80 do aplikacji startowej.
 \subsubsection{Memcached}
-Memcached jest to rozproszony system buforowania pamięci podręczniej oryginalnie zaprojektowany na potrzeby serwisu  LiveJournal. Pozwala on na przechowywanie obiektów w pamięci RAM przy pomocy kluczy \mbox{(\emph{key-value store})}. W aplikacji wykorzystany został w celu przechowania id aktualnego wyścigu oraz sesji użytkownika.
+Memcached jest to rozproszony system buforowania pamięci podręczniej oryginalnie zaprojektowany na potrzeby serwisu  LiveJournal. Pozwala on na przechowywanie obiektów w pamięci RAM za pomocą kluczy \mbox{(\emph{key-value store})}. W aplikacji wykorzystany został w celu przechowania id aktualnego wyścigu oraz sesji użytkownika.
 \subsubsection{Dependency Injection}
 W ninejszej pracy został wykorzystany wzorzec projektowy \emph{Dependency Injection (DI)} polegający na usuwaniu bespośrednich zależności klas na rzecz \emph{wstrzykiwania} ich w czasie konstruowania obiektu. W celu uproszczenia  DI został użyty gem Dependor, który udostępnia zestaw metod przeznaczonych do tego celu.
 
@@ -244,7 +246,7 @@ $\label{application-css}$
 \subsubsection{Twitter Bootstrap}
 Twitter Bootstrap jest frameworkiem front-end dostarczającym style CSS oraz kod JavaScript, który za zadanie ma przyśpieszenie budowy interfejsów. Bootstrap dostarcza zestaw klas HTML, które posiadają określone style. W tej pracy wykorzystany został Twitter Bootstrap w wersji drugiej. Aktualna wersja Bootstrapa to 3.1.1.
 \subsubsection{HAML}
-W projekcie został użyty HAML (HTML Abstraction Markup Language), który sprawia że kod jest przyjemniejszy do pisania i czytania. W HAML używa się jedynie tagów otwierających a o tym jak osadzone są elementy decyduje indentacja. HAML posiada też skróty na sekcje div o podanym id lub klasie.
+W projekcie został użyty HAML (HTML Abstraction Markup Language), który sprawia że kod jest przyjemniejszy do pisania i czytania. W HAML używa się jedynie tagów otwierających a o tym, jak osadzone są elementy, decyduje indentacja. HAML posiada też skróty na sekcje div o podanym id lub klasie. Poniższe listingi przedstawiają porównaine HAML z HTML.
 \begin{figure}[H]
 \centering
 \begin{subfigure}[t]{0.45\textwidth}
@@ -263,11 +265,11 @@ W projekcie został użyty HAML (HTML Abstraction Markup Language), który spraw
 $\label{haml}$
 %Powyższe listingi przedstawiają przykładowy kod HAML oraz HTML do którego się kompiluje.
 \subsubsection{Backbone.js}
-Backbone.js jest lekką biblioteką JavaScript nadającą strukturę aplikacją.
-Biblioteka Backbone.js stara się odtworzyć to co jest po stronie serwera w modelu MVC na stronę klienta (przeglądarki) i JavaScriptu. Model odzwierciedla zasób na serwerze i jest odpowiednikiem modelu po stronie serwera. Kolekcja jest grupą modeli pobieraną z serwera. Na kolekcji zdefiniowane są zdarzenia (eng. \emph{events}), które ponownie renderują widok np. kiedy element zostanie dodany do kolekcji. W Backbone Router odpowiedzialny jest za tłumaczenie adresów URL na widoki oraz za obsługę historii przeglądarki. Widok jest odpowiednikiem kontrolera znanego z Rails. Odpowiada na zdarzenia w oknie przeglądarki takie jak kliknięcie myszką i podejmuje odpowiednie akcje. Szablony natomiast są, w przypadku tej pracy, kodem HAML używanym przez widoki do renderowania treści aplikacji.
+Backbone.js jest lekką biblioteką JavaScript nadającą strukturę aplikacji odpowiednią strukturę.
+Biblioteka Backbone.js stara się odtworzyć to co jest po stronie serwera w modelu MVC na stronie klienta (przeglądarki) i JavaScriptu, model odzwierciedla zasób na serwerze i jest odpowiednikiem modelu po stronie serwera. Kolekcja jest grupą modeli pobieraną z serwera. Na kolekcji zdefiniowane są zdarzenia (eng. \emph{events}), które ponownie renderują widok np. kiedy element zostanie dodany do kolekcji. W Backbone Router odpowiedzialny jest za tłumaczenie adresów URL na widoki oraz za obsługę historii przeglądarki. Widok jest odpowiednikiem kontrolera znanego z Rails. Odpowiada na zdarzenia w oknie przeglądarki takie jak kliknięcie myszką i podejmuje odpowiednie akcje. Szablony natomiast są, w przypadku tej pracy, kodem HAML używanym przez widoki do renderowania treści aplikacji.
 \newpage
-\subsection{Komunikacja}
-Oba urządzenia komunikują się ze sobą przy pomocy WiFi w trybie pracy Ad Hoc. Jako kartę sieciową została wybrana karta USB TP-Link \mbox{TL-WN722N}. Posiada ona odkręcaną antenę o zysku 4dBi. Pozwala to na zamocowanie anteny o większej mocy. Poniższy listing przedstawia konfiguracje urządzenia do pracy w trybie Ad Hoc.
+\subsection{Komunikacja}\label{communication}
+Bramki komunikują się ze pomiędzy bramkami przy pomocy WiFi w trybie pracy Ad Hoc. na kartę sieciową wybrano USB TP-Link \mbox{TL-WN722N}. Posiada ona odkręcaną antenę o zysku 4dBi. Pozwala to na zamocowanie anteny o większej mocy. Poniższy listing przedstawia konfiguracje urządzenia do pracy w trybie Ad Hoc.
 \begin{listing}[H]
 \inputminted[linenos=true]{sh}{./src/adhoc}
 \caption{/etc/network/interfaces}
@@ -289,7 +291,7 @@ Działanie to jest wykorzystane w aplikacji gdzie mierzony jest czas potrzebny n
 \begin{equation}\label{tc}
 	\tau = RC
 \end{equation}
-Kiedy jest on krótki znaczy to że na fotorezystor pada wiązka lasera, kiedy się zwiększy znaczy to że laser został przecięty tj. zawodnik przejechał przez start lub metę. 
+Kiedy jest on krótki znaczy to że na fotorezystor pada wiązka lasera, kiedy się zwiększy znaczy to że promień lasera został przerwany tj. zawodnik przejechał przez start lub metę. 
 \newpage
 \subsection{Implementacja}
 %Ninejszy rozdział zostanie poświęcony implementacji. Składa się on z dwóch podrozdziałów: Aplikacja, który opisuję budowę aplikacji startowej oraz rozdziału Worker opisującego worker rejestrujący przejechanie mety.
@@ -308,7 +310,7 @@ Wykorzystana tutaj klasa Injector, ma za zadanie budowanie obiektów używający
 
 
 % W swoim konstuktorze oczekuje obiektów Sinatra dlatego tutaj inicjalizowana jest pustym objektem OpenStruct. OpenStruct odpowiada na dowolne metody oraz zwraca \emph{nil} jeśli nazwa metody wywołanej na rzecz tego obiektu nie zawiera się w haszu, który został użyty do inicjalizacji. 
-Obiekt klasy Injector jest 	przekazywany w bloku, gdzie póżniej dostarcza obiektów takich jak \emph{capacitor}, którego klasa jest zdefiniowana w pliku \emph{app/services/components/capacitor.rb}. 
+Obiekt klasy Injector jest 	przekazywany w bloku gdzie póżniej dostarcza obiektów takich jak \emph{capacitor}, którego klasa jest zdefiniowana w pliku \emph{app/services/components/capacitor.rb}. 
 
 W klasie Injector są definiowane moduły które mają być przeszukane w poszukiwaniu klas, które wykorzystują DI, co przedstawia listing \ref{injector}. Nazwy przyjmowane w argumentach metody \emph{takes} oraz nazwy metod wywołanych na obiekcie Injector odpowiadają nazwom plików wstrszykiwanych klas. Warunkiem tego jest odpowiednie nazewnictwo klas i plików zgodnie z konwencjami przyjętymi w programowaniu Ruby.
 
@@ -376,7 +378,7 @@ $\label{mcon}$
 \paragraph{API} ~\\
 \indent API dla aplikacji Backbone (interfejsu) zostało napisane we frameworku Sinatra. Framework ten został  zaprojektowany do pisania niewielkich, lekkich aplikacji web i został wybrany ponieważ autor uznał że Ruby on Rails (najpopularnieszy framework Ruby) jest zbyt rozbudowany i uruchomienie aplikacji RoR na RaspberryPi mogło by zużyć zbyt wiele zasobów urządzenia. Sama aplikacja Sinatra uruchamiana jest na porcie 9292. Z tego powodu znajuję się za proxy | serwerem Nginx, który przekierowuje zapytania przychodzące na port 80 na aplikację.
 
-Typowo aplikacjia Sinatra składa się z jednej klasy. W celu wprowadzenia porządku autor zdecydował się ją rozbić na miejsze pliki. Jako pierwszy załączany jest plik \emph{application.rb}, który min. zawiera deklarację modułów, konfigurację Sprockets oraz konfigurację Warden, która zostanie omówiona w rozdziale \ref{warden}. Na końcu załączane są pozostałe piliki zawierające poszczególne end-pointy, które dodają kolejne metody do klasy. Znajdują się w folderze \emph{app/routes} i zostaną przedstawione poniżej przy pomocy zapytań curl i odpowiedzi. W celu autentykacji najpierw wykonane jest rządanie POST z loginem oraz hasłem. Potem możemy autentykować się przy pomocy ciasteczka (\emph{cookie}). 
+Typowo aplikacjia Sinatra składa się z jednej klasy. W celu wprowadzenia porządku autor zdecydował się ją rozbić na miejsze pliki. Jako pierwszy załączany jest plik \emph{application.rb}, który min. zawiera deklarację modułów, konfigurację Sprockets oraz konfigurację Warden, która zostanie omówiona w rozdziale \ref{warden}. Na końcu załączane są pozostałe piliki zawierające poszczególne end-pointy, które dodają kolejne metody do klasy. Znajdują się w folderze \emph{app/routes} i zostaną przedstawione poniżej przy pomocy zapytań curl i odpowiedzi. W celu autentykacji najpierw wykonane jest rządanie POST z loginem oraz hasłem. Potem możemy autentykować się za pomocą ciasteczka (\emph{cookie}). 
 \begin{listing}
 \inputminted{sh}{./src/curl_auth}
 \end{listing}
@@ -398,10 +400,10 @@ W pliku \emph{app/routes/contestants.rb} zawarte są 2 endpointy: \\\newline\mbo
 \caption{Odpowiedź zwracana przez GET \emph{/contestants/1}}
 \end{listing}
 
-Przy tworzeniu zawodnika jest zwracany jedynie kod odpowiedzi HTTP. Jeśli dane są poprawne i zawodnik zostanie zapisany do bazy zwracany jest kod 200 (OK) w przeciwnym wypadku zwracany jest kod błędu 422 (Unprocessable Entity).
+Przy tworzeniu rokordu zawodnika jest zwracany jedynie kod odpowiedzi HTTP. Jeśli dane są poprawne i zawodnik zostanie zapisany do bazy zwracany jest kod 200 (OK) w przeciwnym wypadku zwracany jest kod błędu 422 (Unprocessable Entity).
 % \newpage
 %\begin{minipage}{\textwidth}
-\begin{listing}
+\begin{listing}[H]
 \inputminted{sh}{./src/curl_post_contestants}
 \caption{POST \emph{/contestants}}
 \end{listing}
@@ -417,7 +419,7 @@ $\label{as_json}$
 
 Przekazywana także w bloku metody \emph{post} zmienna contestant\_repository jest obiektem klasy \emph{Repositories::ContestantRepository} mającej za zadanie budowę, zapis oraz pobieranie z bazy zawodników. W konstruktorze przyjmuję między innymi model zawodnika. %\newline\emph{app/models/contestant.rb}.
 
-W bloku metody post przekazywane są też zmienne hash i json\_parser metody klasy \emph{Injector} zwracającej stałą JSON, która jest potem użyta do sparsowania ciała żądania HTTP. Hash jest obiektem klasy Hash modułu \emph{Skirace}. Klasa ta dziedziczy po Haszu i ma na celu dodanie pomocniczych metod znanych z Rails takich jak użyta tutaj \emph{with\_indifferent\_access} pozwalająca na odwołanie się do klucza haszu przy pomocy stringa lub symbolu. 
+W bloku metody post przekazywane są też zmienne hash i json\_parser metody klasy \emph{Injector} zwracającej stałą JSON, która jest potem użyta do sparsowania ciała żądania HTTP. Hash jest obiektem klasy Hash modułu \emph{Skirace}. Klasa ta dziedziczy po Haszu i ma na celu dodanie pomocniczych metod znanych z Rails takich jak użyta tutaj \emph{with\_indifferent\_access} pozwalająca na odwołanie się do klucza haszu za pomocą lub symbolu. 
 
 %Takie podejście zostało wybrane ponieważ autor uważa że monkey patchowanie klas należących do \emph{Ruby core} jest czymś czego nie powinno się robić. 
 %\begin{listing}
@@ -460,7 +462,7 @@ $\label{contest_create_default}$
 GET \emph{/contests/public}
 \\
 \noindent
-Jeśli publicznie udostępnianie zawodów jest włączone zwrócony zostanie JSON zawierający id i nazwę zawodów oraz listę zawodników \ref{public_contest_on} w przeciwnym wypadku zwrócony zostanie JSON z odpowiedzią \emph{no-public-contests} oraz statusem HTTP 404 (Not Found) \ref{public_contest_off}.
+Jeśli publicznie udostępnianie zawodów jest włączone zwrócony zostanie JSON zawierający id i nazwę zawodów oraz listę zawodników \ref{public_contest_on} w przeciwnym wypadku zwrócony zostanie JSON z odpowiedzią \emph{no-public-contests}. W przeciwnym wypadku statusem HTTP 404 (Not Found) \ref{public_contest_off}.
 \begin{listing}
 \inputminted{ruby}{./src/get_contest_public.rb}
 \caption{\emph{app/routes/contests.rb}}
@@ -542,7 +544,7 @@ $\label{strategy}$
 \end{listing}
 \newpage
 \paragraph{Front-end} ~\\
-Inerface apllikacji, tak jak była o tym mowa we wstępie, został napisany przy pomocy Backbone.js. Aplikacja frontend jest inicjalizowana ostatnią linią listingu \ref{aplication-js}. Obiekty aplikacji oraz funkcja inicjalizująca ją są zawarte w pliku \emph{app.coffee} przedstawionym na listingu \ref{app-coffee}. Rysunek \ref{iface} przedstawia jego wygląd.
+Inerface apllikacji, tak jak była o tym mowa we wstępie, został napisany za pomocą Backbone.js. Aplikacja frontend jest inicjalizowana ostatnią linią listingu \ref{aplication-js}. Obiekty aplikacji oraz funkcja inicjalizująca ją są zawarte w pliku \emph{app.coffee} przedstawionym na listingu \ref{app-coffee}. Rysunek \ref{iface} przedstawia jego wygląd.
 \begin{listing}[H]
 \inputminted{js}{./src/app.coffee}
 \caption{app/assets/javascripts/app.coffee}
@@ -550,12 +552,12 @@ $\label{app-coffee}$
 \end{listing}
 \begin{figure}[ht]
 \includegraphics[scale=0.35]{./img/interface.png}
-\caption{Interface}
+\caption{Interface aplikacji}
 $\label{iface}$
 \end{figure}
 \newpage
 \paragraph{Czyszczenie bazy danych} ~\\
-W związku z tym że urządzenie posiada ograniczoną ilość przestrzeni dyskowej na karcie SD (4GB) przy każdym uruchomieniu aplikacji startowej sprawdzany jest rozmiar bazy danych. Jeśli przekrczy on 1GB jest ona usuwana oraz tworzona nowa.
+W związku z tym że urządzenie posiada ograniczoną ilość przestrzeni dyskowej na karcie SD (4GB), przy każdym uruchomieniu aplikacji startowej, sprawdzany jest rozmiar bazy danych. Jeśli przekrczy on 1GB jest ona usuwana oraz tworzona nowa.
 \newpage
 \subsubsection{Worker}
 Worker o którym była mowa we wstępie do niniejszej pracy rejestruje przejechanie linii mety. Został on napisany w całości w języku Ruby jako \emph{gem} - program menadżera paczek RubyGems. Po zainstalowaniu w systemie dostarcza on komendy \emph{skirace-worker}, która go uruchamia.
@@ -607,7 +609,7 @@ Odpowiedź API (\ref{api-resp}) jest następnie parsowana oraz formatowana przez
 $\label{formatter}$
 \end{listing}
 \section{Sposób obsługi}
-Urządzenie składa się z czterech elementów~|~startowego, końcowego oraz dwóch zawierających moduły laserowe. Aby z niego korzystać należy utworzyć dwie bramki wbijając je w śnieg tak aby wiązka lasera z częsci zawierającej moduł laserowy padała na czujnik znajdujący się w otworze wywierconym na bramce z systemem. Laser uruchamiany jest przełącznikiem znajdującym się na górze rur zawierających go. Po uruchomieniu wiązki laserowej i nakierowaniu jej na fotorezystor zależy uruchomić urządzenie przełącznikiem znajdującym się z boku skrzynki przymocowanej do elementu bramki.
+Urządzenie składa się z czterech elementów~|~startowego, końcowego oraz dwóch zawierających moduły laserowe. Aby z niego korzystać należy utworzyć dwie bramki, wbijając je w śnieg, tak aby wiązka lasera z częsci zawierającej moduł laserowy padała na czujnik znajdujący się w otworze wywierconym na elemencie z systemem. Laser uruchamiany jest przełącznikiem znajdującym się na górze rur zawierających go. Po uruchomieniu wiązki laserowej i nakierowaniu jej na fotorezystor zależy uruchomić urządzenie przełącznikiem znajdującym się z boku skrzynki przymocowanej do elementu bramki.
 
 Przed rozpoczęciem korzystania z systemu należy utworzyć nowy wyścig oraz wprowadzić zawodników korzystając z interfejsu web lub konsoli aplikacji. W tym celu trzeba połączyć się z siecią bezprzewodową Skirace oraz otworzyć w przeglądarce internetowej aplikację znajdującą się pod adresem \emph{192.168.10.1}. Następnie należy zalogować się w aplikacji klikając na ikonę kłódki (\ref{login}) znajdującą się w prawym górnym rogu paska nawigacyjnego interfejsu używając do logowania użytkownika \emph{admin} oraz hasła \emph{password}.
 \begin{figure}[H]
@@ -680,16 +682,18 @@ $\label{device}$
 \end{figure}
 \fi
 \subsection{Użycie urządzenia bez wprowadzania zawodników}
-Aby pokazać imię oraz nazwisko zawodnika na mecie warunkiem koniecznym jest użycie powyższych instrukcji, jednak istnieje możliwość pomiaru czasu bez wprowadznia listy zawodników. Po przejechaniu linii startu, kiedy nie ma utworzonych w bazie zawodników, tworzeni są domyślni bez imienia, nazwiska oraz wyścigu. Pozwala to na szybkie sesje treningowe, jednak takich zawodników nie da się eksportować do pliku w celu analizy wyników.
+Aby pokazać imię oraz nazwisko zawodnika na mecie warunkiem koniecznym jest użycie powyższych instrukcji, jednak istnieje możliwość pomiaru czasu bez wprowadznia listy zawodników. Po przejechaniu linii startu, kiedy nie ma utworzonych w bazie zawodników, tworzeni są domyślni bez imienia, nazwiska oraz wyścigu. Pozwala to na szybkie sesje treningowe, jednak takich zawodników nie da się eksportować do pliku w celu analizy wyników. W takim trybie pracy urządzenia nie jest potrzebny komputer.
 \newpage
 \section{Podsumowanie}
-W wielu, jeśli nie we wszystkich, znanych systemach pomiaru czasu w zawodach narciarskich bramka startowa nie wykorzystuje wiązki laserowej w celu uchwycenia przejazdu startu. W większości rozwiązań zawodnik, na starcie, trąca nogami tyczkę, która rejestruje start. Pozwala to na dokładniejszy pomiar czasu, ponieważ dzięki dopracowanej technice startu zawodnik może uzyskać lepszy czas.
+W wielu, jeśli nie we wszystkich, znanych systemach pomiaru czasu w zawodach narciarskich bramka startowa nie wykorzystuje wiązki laserowej w celu uchwycenia przejazdu startu. W większości rozwiązań zawodnik, na starcie, trąca nogami poprzeczkę, która rejestruje start. Pozwala to na dokładniejszy pomiar czasu, ponieważ dzięki dopracowanej technice startu zawodnik może uzyskać lepszy czas.
 
 Użyte w tej pracy rozwiązanie, tj. użycie wiązki laserowej na starcie upraszcza budowę urządzenia oraz redukuje koszty budowy. Zastosowanie takiej budowy praktycznie uniemożliwa uzyskanie dobrego startu z miejsca przez zawodnika, ponieważ istnieje ryzyko że mógłby on przypadkowo przeciąć wiązke laserową np. kijkiem. Jednak z uwagi na niewielkie koszty budowy oraz zakładając start z dojazdu, urządzenie to jest idealne do celów treningowych.
 
-Urządzenie można by dodatkowo wyposażyć w dodatkową bramkę, a raczej jedynie system z wyświetlaczem LCD, który można postawić w pewnej odległości od linii mety. Pozwoliło by to na łatwiejsze odczytanie czasu zjazdu | tj. zawodnik nie musiał by podchodzić do linii mety po zatrzymaniu się żeby poznać swój czas.
+Olbrzymią część wydatków stanowi samo Raspberry Pi | użyty w tej pracy model B kosztuje teraz około 150 PLN. Reszta podzespołów to rury PCV oraz elementy tanie i łatwo dostępne w każdym sklepie elektronicznym. Koszt budowy jednej bramki wacha się w przedziale od 400-500 PLN.
 
-Jako kolejne uproszczenie działania można by wyliczyć jeszcze użycie klawiatury numerycznej podłączonej na starcie, przez którą zawodnik mogłby wprowadzać swój numer startowy. Wyeliminowało by to potrzebę ustalania kolejności zjazdu, oraz wcześniejszego wprowadzania wszytkich zawodników.
+Urządzenie można by dodatkowo wyposażyć w dodatkową bramkę, a raczej jedynie system z wyświetlaczem LCD, który można postawić w pewnej odległości od linii mety. Pozwoliłoby to na łatwiejsze odczytanie czasu zjazdu | tj. zawodnik nie musiał by podchodzić do linii mety po zatrzymaniu się żeby poznać swój czas.
+
+Jako kolejne uproszczenie działania można by zaproponować jeszcze użycie klawiatury numerycznej podłączonej na starcie, przez którą zawodnik mogłby wprowadzać swój numer startowy. Wyeliminowałoby to potrzebę ustalania kolejności zjazdu, oraz wcześniejszego wprowadzania wszytkich zawodników.
 \newpage
 \section{Dodatek A - Licencje Gemów}
 \subsection{Wykaz gemów}
@@ -1017,8 +1021,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 \newpage
 \section{Bibliografia}
 \begin{enumerate}
-\item Ruby. Programowanie | David Flanagan, Yukihiro Matsumoto \\ ISBN 978-83-246-1767-8
-\item Practical Object-Oriented Design in Ruby: An Agile Primer \\ Addison-Wesley Professional Ruby Series \\ ISBN 978-03-217-2133-4 
+\item Ruby. Programowanie | David Flanagan, Yukihiro Matsumoto \\ O'Reilly, 2008-11-18 \\ ISBN 978-83-246-1767-8 
+\item Practical Object-Oriented Design in Ruby: An Agile Primer \\  Addison-Wesley Professional, 1st edition \\ September 15, 2012 \\ ISBN 978-03-217-2133-4 
 \item HD44780U (LCD-II) | Dot Matrix Liquid Crystal Display Controller / Driver \\ ADE-207-272(Z) \\ Rev. 0.0
 \item \url{http://nginx.org/en/docs/}
 \item \url{http://code.google.com/p/memcached/wiki/NewStart}
@@ -1030,16 +1034,16 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 \end{enumerate}
 \newpage
 \addtocontents{toc}{\protect\enlargethispage{\baselineskip}}
-\section{Summary}
-	Subject of this paper is mobile timing system for skiing competitions. It consists of two gates that use laser beam to capture precise moment of crossing them by the contestant. Device which is subject of this paper was designed using widely available components. As backbone of this system  Raspberry Pi was chosen. It's a cheap computer platform developed by Raspberry Pi Foundation that operates under control of Raspbian operating system – fork of Debian Wheezy GNU/Linux distribution.  Gates communicate using wireless WiFi network working in Ad-Hoc mode and create network with ssid SKIRACE.
+\section{Abstract}
+	The subject of this work is a mobile timing system for skiing competitions, or training. It consists of two gates that use laser beam to capture precise moment of crossing them by the contestant. Device which is subject of this paper was designed using widely available components. As backbone of this system  Raspberry Pi was chosen. It's a cheap computer platform developed by Raspberry Pi Foundation that operates under control of Raspbian operating system – fork of Debian Wheezy GNU/Linux distribution.  Gates communicate using wireless WiFi network working in Ad-Hoc mode and create network with ssid SKIRACE.
 	
-	Both applications were written using Ruby 2.1.0 programming language. Starting application is built around Sinatra – micro framework designed for small-scale web applications and has additional web interface, written in CoffeeScript, that provides functionalities like creating contests or entering contestants. To give structure to  front-end application Backbone.js was used – a lightweight JavaScript library that tries to reflect back-end  MVC model into browser window.  Sinatra application listens on port 9292 so Nginx was used – a reverse proxy server that redirects incoming requests on port 80 to back-end.
+	Both applications have been written using Ruby 2.1.0 programming language. Starting application is built around Sinatra – micro framework designed for small-scale web applications and has additional web interface, written in CoffeeScript, that provides functionalities like creating contests or entering contestants. To give structure to  front-end application Backbone.js has been used – a lightweight JavaScript library that tries to reflect back-end  MVC model into browser window.  Sinatra application listens on port 9292 so Nginx is used – a reverse proxy server that redirects incoming requests on port 80 to back-end.
 	
-	Finish line worker was built as gem – program of RubyGems package manager. When installed in the system it provides an executable that runs  loop which measures time necessary to charge the capacitor. When capacitor is charged worker registers HIGH value on GPIO pin and makes request to starting application with exact time of this event. When that happens starting application sets end time in database and responds with name, surname and time of first contestant that hasn't have end time set. Response is then parsed and displayed on  LCD  screen.
+	Finish line worker has been built as a gem – program of RubyGems package manager. When installed in the system it provides an executable that runs  loop that measures time necessary to charge the capacitor. When capacitor is charged worker registers HIGH value on GPIO pin and makes request to starting application with exact time of this event. When it happens starting application sets end time in database and responds with name, surname and time of first contestant that hasn't have end time set. Response is then parsed and displayed on  LCD  screen.
 	
-	Similar mechanism was employed in starting application to register time of crossing starting line. Most of classes, mainly responsible for GIPO, were copied from worker and closed in module included in main application file. When module is registered it starts a new thread that sets start time in database when beam  is crossed.
+	Similar mechanism has been employed in starting application to register time of crossing starting line. Most of classes, mainly responsible for GIPO, are copied from worker and closed in module included in the main application file. When module is registered it starts a new thread that sets start time in database when beam  is crossed.
 	
-	This paper consists of three main parts. Subject of first of them is system architecture and different technologies that were employed in application, and in particular, communication between them and theoretical basis. Second part contains description of implementation of both applications and the third one covers putting system in protective casing.
+	This work consists of three main parts. Subject of first of them is the system architecture and different technologies that have been employed in application, and in particular, communication between them and theoretical basis. Second part contains description of implementation of both applications and the third one covers putting system in protective casing.
 	
-	At the very end of this paper author presented list off all gems that were used in both applications with their authors and licenses.
+	At the very end of the work the author presented a list off all gems that have been used in both applications with their authors and licenses.
 \end{document}

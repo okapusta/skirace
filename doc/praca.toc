@@ -4,7 +4,7 @@
 \contentsline {section}{\numberline {3}Realizacja tematu}{7}{section.3}
 \contentsline {subsection}{\numberline {3.1}Koncepcja wykonania}{7}{subsection.3.1}
 \contentsline {subsection}{\numberline {3.2}Budowa systemu}{7}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}Architektura}{11}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.3}Architektura systemu}{11}{subsection.3.3}
 \contentsline {subsection}{\numberline {3.4}Wybrane technologie}{11}{subsection.3.4}
 \contentsline {subsubsection}{\numberline {3.4.1}NTP}{11}{subsubsection.3.4.1}
 \contentsline {subsubsection}{\numberline {3.4.2}Nginx}{11}{subsubsection.3.4.2}
@@ -37,4 +37,4 @@
 \contentsline {subsubsection}{\numberline {6.2.4}BSD-3}{45}{subsubsection.6.2.4}
 \contentsline {section}{\numberline {7}Bibliografia}{46}{section.7}
 \enlargethispage {\baselineskip }
-\contentsline {section}{\numberline {8}Summary}{47}{section.8}
+\contentsline {section}{\numberline {8}Abstract}{47}{section.8}

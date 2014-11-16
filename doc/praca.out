@@ -4,7 +4,7 @@
 \BOOKMARK [1][-]{section.3}{Realizacja tematu}{}% 4
 \BOOKMARK [2][-]{subsection.3.1}{Koncepcja wykonania}{section.3}% 5
 \BOOKMARK [2][-]{subsection.3.2}{Budowa systemu}{section.3}% 6
-\BOOKMARK [2][-]{subsection.3.3}{Architektura}{section.3}% 7
+\BOOKMARK [2][-]{subsection.3.3}{Architektura systemu}{section.3}% 7
 \BOOKMARK [2][-]{subsection.3.4}{Wybrane technologie}{section.3}% 8
 \BOOKMARK [3][-]{subsubsection.3.4.1}{NTP}{subsection.3.4}% 9
 \BOOKMARK [3][-]{subsubsection.3.4.2}{Nginx}{subsection.3.4}% 10
@@ -36,4 +36,4 @@
 \BOOKMARK [3][-]{subsubsection.6.2.3}{Ruby}{subsection.6.2}% 36
 \BOOKMARK [3][-]{subsubsection.6.2.4}{BSD-3}{subsection.6.2}% 37
 \BOOKMARK [1][-]{section.7}{Bibliografia}{}% 38
-\BOOKMARK [1][-]{section.8}{Summary}{}% 39
+\BOOKMARK [1][-]{section.8}{Abstract}{}% 39
